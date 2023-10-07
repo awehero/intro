@@ -43,10 +43,11 @@ var map = {
     },
     physics_update: function() {},
    render_update: function() {
-        if (controls.space) {
-            a.msg_set("Spam space bar to create your own dodo galaxy!");
-            wait(1);
-            a.msg_del();
+        if (controls.left) {
+            scene.clearColor = new BABYLON.Color3.FromHexString("#0000ff");
+        }
+        if (controls.right) {
+            scene.clearColor = new BABYLON.Color3.FromHexString("#ff00ff");
         }
     }
 }
