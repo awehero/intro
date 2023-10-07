@@ -43,11 +43,8 @@ var map = {
     },
     physics_update: function() {},
    render_update: function() {
-        if (controls.left) {
-            scene.clearColor = new BABYLON.Color3.FromHexString("#0000ff");
-        }
-        if (controls.right) {
-            scene.clearColor = new BABYLON.Color3.FromHexString("#ff00ff");
+        if (controls.space) {
+            speed = default_speed * 2;
         }
     }
 }
