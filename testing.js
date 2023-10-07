@@ -22,7 +22,7 @@ var map = {
         switch (this.section_id) {
         case 0:
             if (PX < -10) {
-                scene.clearColor = new BABYLON.Color3.FromHexString("#ff0000");
+                scene.clearColor = new BABYLON.Color3.FromHexString("#var randomColor = Math.floor(Math.random()*16777215).toString(16);");
                 this.section_id += 1
             }
             break;
@@ -41,5 +41,9 @@ var map = {
         a.re('E0', [0, 1, -20], [0, 0, 0], [1, 1, 1]);
     },
     physics_update: function() {},
-    render_update: function() {}
+   render_update: function() {
+        if (controls.space) {
+            
+        }
+    }
 }
