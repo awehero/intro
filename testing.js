@@ -39,7 +39,7 @@ var map = {
         this.section_id = 0;
         a.re('P0', [0, 3, -30], [0, 0, 0], [2, 2, 2]);
         a.re('P1', [0, 0, -20], [0, 0, 0], [100, 0.5, 40]);
-        a.re('E0', [0, 1, -20], [0, 0, 0], [1, 1, 1]);
+        a.re('E0', [10, 10, -20], [0, 0, 0], [1, 1, 1]);
     },
     physics_update: function() {},
    render_update: function() {
