@@ -44,7 +44,7 @@ var map = {
    render_update: function() {
         if (controls.space) {
             a.msg_set("Spam space bar to create your own dodo galaxy!");
-            wait(5000);
+            await wait(5000);
             a.msg_del();
         }
     }
