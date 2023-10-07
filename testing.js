@@ -13,7 +13,7 @@ var map = {
         a.u('E0');
         cc.set_monkey("gravity", new BABYLON.Vector3(null,-1.8,null));
         cc.set_monkey("speed", 0.2);
-        cc.set_monkey("steer", 1.03);
+        cc.set_monkey("steer", 0.03);
         cc.refresh();
     },
     section_id: 0,
