@@ -43,7 +43,7 @@ var map = {
     physics_update: function() {},
    render_update: function() {
         if (controls.space) {
-            
+            a.msg_set("Spam space bar to create your own dodo galaxy!");
         }
     }
 }
