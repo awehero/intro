@@ -6,13 +6,14 @@ var map = {
     init: function() {
         a.p([0, 3, -30], [0, 0, 0], [2, 2, 2], "1", 0, 1, 0.6, false, false, false, false);
         a.p([0, 0, -20], [0, 0, 0], [100, 0.5, 40], "1", 0, 0, 0.6, false, false, false, false);
-        a.e([0, 1, -20]);
+        a.e([1, 1, -20]);
     },
     post: function() {
         a.u('P0');
         a.u('E0');
         cc.set_monkey("gravity", new BABYLON.Vector3(null,-1.8,null));
         cc.set_monkey("speed", 0.2);
+        cc.set_monkey("cameraDownAngle", 90.0 * Math.PI / 180);
         cc.set_monkey("steer", 0.03);
         cc.refresh();
     },
