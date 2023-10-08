@@ -24,6 +24,8 @@ var map = {
     render_update: function() {
         if (controls.space) {
             speed = default_speed * 1;
+        }
+        if (controls.down) {
             speed = default_speed * 0;
         }
     }
