@@ -80,3 +80,4 @@ var map = {
         if (controls.down) {
             speed = default_speed * 0;
         }}
+}
