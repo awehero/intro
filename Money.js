@@ -73,14 +73,5 @@ var map = {
         a.re('E0', [0, 10, -20], [0, 0, 0], [1, 1, 1]);
     },
     physics_update: function() {},
-    render_update: function() {
-    let PX = player.position.x;
-    var Money = PX;
-      if (Money > 0) {
-          a.msg_set("Yay!");
-        }
-      if (Money < 0) {
-          a.msg_del();
-      }}
-    console.log(Money);
+    render_update: function() {}
 }
