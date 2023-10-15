@@ -2,7 +2,7 @@ var map = {
     title: "Test Map V8",
     song: "env2",
     maker: "Ice dodo map maker",
-    spawn: [0, 0.5, 0],
+    spawn: [0, 1, 0],
     init: function() {
         a.p([0, -0.25, -79.99965], [0, 0, 0], [1000, 0.5, 320], "18a500", 0, 0, 0.6, false, true, false, false);
         a.p([0, 0, -135.99958], [0, 0, 0], [2, 0.5, 10], "1dc400", 0, 0, 0.0, false, false, false, false);
