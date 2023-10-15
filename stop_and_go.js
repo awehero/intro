@@ -60,7 +60,7 @@ var map = {
         case 4:
             if (PZ < -100.99986) {
                 a.cam_cr(90.0);
-                a.jh(1.0);
+                a.jh(1.5);
                 steer = default_steer * 0.0;
                 rotation = 0.0 * Math.PI / 180;
                 this.section_id += 1
