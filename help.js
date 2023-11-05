@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $.get("www.example.com/index.php", function(data) {
+    $.get("https://icedodo.onionfist.com/info?mapId=boat_bounce", function(data) {
         console.log(data)
     }) ;
 });
