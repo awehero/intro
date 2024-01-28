@@ -9,7 +9,7 @@ var map = {
     },
     post: function() {
         const randomColor = Math.floor(Math.random()*16777215).toString(16);
-        cc.set_monkey("scene.clearColor", new BABYLON.Color3.FromHexString("#" + randomColor);
+        cc.set_monkey("scene.clearColor", new BABYLON.Color3.FromHexString("#" + randomColor));
         cc.set_monkey("speed", default_speed * 0);
         cc.set_monkey("steer", 0.03);
         cc.refresh();
