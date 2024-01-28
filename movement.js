@@ -8,14 +8,8 @@ var map = {
         a.e([0, 10, -20]);
     },
     post: function() {
-        var hi = Math.random();
-        if (hi <= 0.5) {
-            hi = "#ff0000";
-        }
-        if (hi >= 0.49) {
-            hi ="#ffff00";
-        }
-        cc.set_monkey("scene.clearColor", new BABYLON.Color3.FromHexString(hi);
+        const randomColor = Math.floor(Math.random()*16777215).toString(16);
+        cc.set_monkey("scene.clearColor", new BABYLON.Color3.FromHexString("#" + randomColor);
         cc.set_monkey("speed", default_speed * 0);
         cc.set_monkey("steer", 0.03);
         cc.refresh();
