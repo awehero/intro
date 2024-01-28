@@ -23,7 +23,7 @@ var map = {
     physics_update: function() {},
     render_update: function() {
         if (controls.space) {
-            speed = default_speed * 1;
+            speed = default_speed * Math.random();
         }
         if (controls.down) {
             speed = default_speed * 0;
