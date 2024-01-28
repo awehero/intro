@@ -26,7 +26,6 @@ var map = {
         a.u('P1');
         a.u('P13');
         cc.set_monkey("scene.clearColor", new BABYLON.Color3.FromHexString("#ffffff"));
-        cc.set_monkey("cameraDownAngle", 90 * Math.PI / 180);
         cc.set_monkey("speed", default_speed * 0);
         cc.set_monkey("steer", 0.03);
         cc.refresh();
