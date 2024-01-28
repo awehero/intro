@@ -4,12 +4,11 @@ var map = {
     maker: "Ice dodo map maker",
     spawn: [0, 0.5, 0],
     init: function() {
-        a.p([0, 0, -20], [0, 0, 0], [100, 0.5, 100], "1", 0, 0, 0.6, false, false, false, false);
+        a.p([0, 0, -20], [0, 0, 0], [100, 0.5, 100], Math.floor(Math.random()*1000000), 0, 0, 0.6, false, false, false, false);
         a.e([0, 10, -20]);
     },
     post: function() {
-        const randomColor = Math.floor(Math.random()*16777215).toString(16);
-        cc.set_monkey("scene.clearColor", new BABYLON.Color3.FromHexString("#" + randomColor));
+        cc.set_monkey("scene.clearColor", new BABYLON.Color3.FromHexString("#ffffff"));
         cc.set_monkey("speed", default_speed * 0);
         cc.set_monkey("steer", 0.03);
         cc.refresh();
