@@ -4,7 +4,7 @@ var map = {
     maker: "Ice dodo map maker",
     spawn: [0, 0.5, 0],
     init: function() {
-        a.p([0, 0, -20], [0, 0, 0], [100, 0.5, 100], /"/Math.floor(Math.random()*1000000)/"/", 0, 0, 0.6, false, false, false, false);
+        a.p([0, 0, -20], [0, 0, 0], [100, 0.5, 100], Math.floor(Math.random()*10), 0, 0, 0.6, false, false, false, false);
         a.e([0, 10, -20]);
     },
     post: function() {
