@@ -8,7 +8,7 @@ var map = {
         a.e([0, 10, -20]);
     },
     post: function() {
-        cc.set_monkey("scene.clearColor", new BABYLON.Color3.Random());
+        cc.set_monkey("scene.clearColor", new BABYLON.Color3(0.5, 0.5, 0.5));
         cc.set_monkey("speed", default_speed * 0);
         cc.set_monkey("steer", 0.03);
         cc.refresh();
