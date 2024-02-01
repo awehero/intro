@@ -31,5 +31,15 @@ var map = {
         if (controls.down) {
             speed = default_speed * 0;
         }
+        function changeColor() {
+            var colors = [
+                new BABYLON.Color3(1, 0, 0),
+                new BABYLON.Color3(0, 1, 0),
+                new BABYLON.Color3(0, 0, 1)
+                ];
+            var randomColor = colors[Math.floor(Math.random() * colors.length)];
+            a.p.diffuseColor = randomcolor;
+        }
+        setInterval(changeColor, 5000);
     }
 }
