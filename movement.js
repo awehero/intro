@@ -38,7 +38,7 @@ var map = {
                 new BABYLON.Color3(0, 0, 1)
                 ];
             var randomColor = colors[Math.floor(Math.random() * colors.length)];
-            a.p.diffuseColor = randomcolor;
+            a.p.diffuseColor = randomColor;
         }
         setInterval(changeColor, 5000);
     }
