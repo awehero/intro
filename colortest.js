@@ -437,10 +437,10 @@ var map = {
     },
     physics_update: function() {},
     render_update: function() {
-      if (player.position.x >= 0) {
+      if (controls.left) {
             light.diffuse = new BABYLON.Color3.FromHexString("#00ff00");
         }
-      if (player.position.x <= 0) {
+      if (controls.right) {
             light.diffuse = new BABYLON.Color3.FromHexString("#ff0000");
         }
     }
