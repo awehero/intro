@@ -22,8 +22,11 @@ var map = {
     },
     physics_update: function() {},
     render_update: function() {
-        if (alive == false) {
-            
+        if (player.position.x >= 1) {
+            light.diffuse = new BABYLON.Color3.FromHexString("#00ff00");
+        }
+        if (player.position.x <= 1) {
+            light.diffuse = new BABYLON.Color3.FromHexString("#ff0000");
         }
         if (controls.space) {
             speed = default_speed * Math.random() * 2;
@@ -31,15 +34,5 @@ var map = {
         if (controls.down) {
             speed = default_speed * 0;
         }
-        function changeColor() {
-            var colors = [
-                new BABYLON.Color3(1, 0, 0),
-                new BABYLON.Color3(0, 1, 0),
-                new BABYLON.Color3(0, 0, 1)
-                ];
-            var randomColor = colors[Math.floor(Math.random() * colors.length)];
-            a.p.diffuseColor = randomColor;
-        }
-        setInterval(changeColor, 5000);
     }
 }
