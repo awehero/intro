@@ -126,6 +126,7 @@ var map = {
     },
     section_id: 0,
     section_update: function() {
+        var rand10 = Math.round(10 * Math.random());
         let PZ = player.position.z;
         switch (this.section_id) {
         case 0:
@@ -343,7 +344,6 @@ var map = {
             break;
         case 34:
             if (PZ < -610) {
-              var rand10 = Math.round(10 * Math.random());
               if (rand10 > 5) {
                 a.msg_set("10. What is the name of the mapmaker who made this map? ");
               }
