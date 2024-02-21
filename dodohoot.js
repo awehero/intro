@@ -126,7 +126,7 @@ var map = {
     },
     section_id: 0,
     section_update: function() {
-        var rand10 = Math.round(10 * Math.random());
+        var randomone = Math.round(10 * Math.random());
         let PZ = player.position.z;
         switch (this.section_id) {
         case 0:
@@ -344,10 +344,10 @@ var map = {
             break;
         case 34:
             if (PZ < -610) {
-              if (rand10 > 5) {
+              if (randomone > 5) {
                 a.msg_set("10. What is the name of the mapmaker who made this map? ");
               }
-              if (rand10 < 6) {
+              if (randomone < 6) {
                 a.msg_set("10. What is Awehero's favorite color? ");
               }
                 this.section_id += 1
@@ -361,10 +361,10 @@ var map = {
             break;
         case 36:
             if (PZ < -640) {
-                if (rand10 > 5) {
+                if (randomone > 5) {
                  a.msg_set("a. Darrk_77, b. Bong, c. Bumpo, d. Awehero ");
               }
-                if (rand10 < 6) {
+                if (randomone < 6) {
                 a.msg_set("a. Blue, b. Rainbow, c. Red, d. Zomp");
               }
                 this.section_id += 1
