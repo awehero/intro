@@ -344,10 +344,10 @@ var map = {
             break;
         case 34:
             if (PZ < -610) {
-              if (randomone > 5) {
+              if (randomone > 5.5) {
                 a.msg_set("10. What is the name of the mapmaker who made this map? ");
               }
-              if (randomone < 6) {
+              if (randomone < 5.5) {
                 a.msg_set("10. What is Awehero's favorite color? ");
               }
                 this.section_id += 1
@@ -361,10 +361,10 @@ var map = {
             break;
         case 36:
             if (PZ < -640) {
-                if (randomone > 5) {
+                if (randomone > 5.5) {
                  a.msg_set("a. Darrk_77, b. Bong, c. Bumpo, d. Awehero ");
               }
-                if (randomone < 6) {
+                if (randomone < 5.5) {
                 a.msg_set("a. Blue, b. Rainbow, c. Red, d. Zomp");
               }
                 this.section_id += 1
