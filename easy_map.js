@@ -5,7 +5,7 @@ var map = {
     spawn: [0, 0.5, 0],
     init: function() {
         a.p([0, 0, -20], [0, 0, 0], [100, 0.5, 100], Math.floor(Math.random()*1000000), 0, 0, 0.6, false, false, false, false);
-        a.e([0, 10, -20]);
+        a.e([0, 0, -20]);
     },
     post: function() {
         cc.set_monkey("scene.clearColor", new BABYLON.Color3(Math.random(), Math.random(), Math.random()));
