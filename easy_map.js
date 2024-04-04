@@ -1,15 +1,14 @@
 var map = {
     title: "Easy Map",
     song: "env2",
-    maker: "Ice dodo map maker",
+    maker: "awehero54",
     spawn: [0, 0.5, 0],
     init: function() {
-        a.p([0, 0, -20], [0, 0, 0], [100, 0.5, 100], Math.floor(Math.random()*1000000), 0, 0, 0.6, false, false, false, false);
+        a.p([0, 0, -20], [0, 0, 0], [40, 0.5, 60], "1", 0, 0, 0.6, false, false, false, false);
         a.e([0, 0, -20]);
     },
     post: function() {
-        cc.set_monkey("scene.clearColor", new BABYLON.Color3(Math.random(), Math.random(), Math.random()));
-        cc.set_monkey("speed", default_speed * 0);
+        cc.set_monkey("speed", 0.2);
         cc.set_monkey("steer", 0.03);
         cc.refresh();
     },
@@ -17,22 +16,9 @@ var map = {
     section_update: function() {},
     reset: function() {
         this.section_id = 0;
-        a.re('P0', [0, 0, -20], [0, 0, 0], [100, 0.5, 100]);
+        a.re('P0', [0, 0, -20], [0, 0, 0], [40, 0.5, 60]);
         a.re('E0', [0, 0, -20], [0, 0, 0], [1, 1, 1]);
     },
     physics_update: function() {},
-    render_update: function() {
-        if (player.position.x >= 1) {
-            light.diffuse = new BABYLON.Color3.FromHexString("#00ff00");
-        }
-        if (player.position.x <= 1) {
-            light.diffuse = new BABYLON.Color3.FromHexString("#ff0000");
-        }
-        if (controls.space) {
-            speed = default_speed * Math.random() * 2;
-        }
-        if (controls.down) {
-            speed = default_speed * 0;
-        }
-    }
+    render_update: function() {}
 }
