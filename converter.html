@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+  <title>URL to JS Map Converter</title>
+  </head>
+<body>
+  <label for="query">Enter your full map link here:</label>
+<input type="text" id="query" placeholder="Link goes here...">
+  <button onclick="getJavascriptMap()">Go!</button>
+<div id="result"></div>
+
+<script>
+async function getJavascriptMap() {
+  const query = document.getElementById('query').value;
+  const hostname - 'fn.onionfist.com';
+  const path = '/icemaprun.js';
+  
+  try {
+    const response = await fetch(`https://${hostname}${path}?${query}`);
+    const text = await response.text();
+    document.getElementById('result').innerText = text;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    document.getElementById('result').innerText = 'Error fetching data';
+  }
+}
+  </script>
+</body>
+</html>
