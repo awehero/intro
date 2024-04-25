@@ -11,12 +11,25 @@
 
 <script>
 async function fetchText() {
-  const query = document.getElementById('query').value;
+  const queryString = document.getElementById('query').value;
   const hostname = 'fn.onionfist.com';
   const path = '/icemaprun.js';
-  
+
+  //Find the dollar index
+  const dollarIndex = queryString.indexOf('$');
+  if (dollarIndex !== -1) {
+    //Find the A-G index
+    let endIndex = dollarIndex - 1;
+    while (endIndex >= 0 && !/[A-G]/.test(queryString[endIndex])) {
+      endIndex--;
+    }
+    if (endIndex >= 0) {
+      queryString = 'v8=' + queryString.substring(endIndex);
+    }
+  }
+      
   try {
-    const response = await fetch(`https://${hostname}${path}?${query}`);
+    const response = await fetch(`https://${hostname}${path}?${queryString}`);
     const text = await response.text();
     document.getElementById('result').innerText = text;
   } catch (error) {
