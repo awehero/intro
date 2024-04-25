@@ -6,11 +6,11 @@
 <body>
   <label for="query">Enter your full map link here:</label>
 <input type="text" id="query" placeholder="Link goes here...">
-  <button onclick="getJavascriptMap()">Go!</button>
+  <button onclick="fetchText()">Go!</button>
 <div id="result"></div>
 
 <script>
-async function getJavascriptMap() {
+async function fetchText() {
   const query = document.getElementById('query').value;
   const hostname - 'fn.onionfist.com';
   const path = '/icemaprun.js';
