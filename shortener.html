@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Shortener</title>
+    <script>
+        function removeValues() {
+            // Get the input string from the text box
+            var inputString = document.getElementById("inputString").value;
+
+            // Define the values to be removed
+            var valuesToRemove = ['.007', '.014', '.021', '.028', '.035', '.042', '.049'];
+
+            // Remove each value from the input string
+            valuesToRemove.forEach(function(value) {
+                inputString = inputString.replace(value, '');
+            });
+
+            // Replace .0? with ?, .0$ with $, .0A with A, .0B with B, .0C with C, .0D with D, .0E with E, and .0F with F
+            inputString = inputString.replace(/\.0([0-9A-F])/g, '$1');
+
+            // Update the text box with the modified string
+            document.getElementById("inputString").value = inputString;
+        }
+    </script>
+</head>
+<body>
+    <textarea id="inputString" rows="4" cols="50"></textarea><br>
+    <button onclick="removeValues()">Remove Values</button>
+</body>
+</html>
