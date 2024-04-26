@@ -1,31 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>URL Shortener</title>
-    <script>
-        function removeValues() {
-            // Get the input string from the text box
-            var inputString = document.getElementById("inputString").value;
-
-            // Define the values to be removed
-            var valuesToRemove = ['.007', '.014', '.021', '.028', '.035', '.042', '.049'];
-
-            // Remove each value from the input string
-            valuesToRemove.forEach(function(value) {
-                inputString = inputString.replace(value, '');
-            });
-
-            // Replace .0? with ?
-            inputString = inputString.replace(/\.0\?/g, "?");
-            inputString = inputString.replace(/\.0\$/g, "$");
-
-            // Update the text box with the modified string
-            document.getElementById("inputString").value = inputString;
-        }
-    </script>
+    <title>Modify String</title>
 </head>
 <body>
-    <textarea id="inputString" rows="4" cols="50"></textarea><br>
-    <button onclick="removeValues()">Shorten URL!</button>
+    <input type="text" id="inputString">
+    <button onclick="modifyAndDisplay()">Modify</button>
+    <br><br>
+    <input type="text" id="outputString" readonly>
+
+    <script>
+        function modifyAndDisplay() {
+            // Get the input string from the input element
+            let inputString = document.getElementById("inputString").value;
+
+            // Define an array of patterns to search for
+            const patterns = [".951", ".958", ".965", ".972", ".979", ".986", ".993"];
+
+            // Flag to track if any '9' digits were passed over
+            let passed9 = false;
+
+            // Loop through each pattern
+            for (let pattern of patterns) {
+                // Search for the pattern in the input string
+                let matchIndex = inputString.indexOf(pattern);
+
+                // If the pattern is found
+                if (matchIndex !== -1) {
+                    // Get the character right before the pattern
+                    let charBeforeDot = inputString.charAt(matchIndex - 1);
+
+                    // If the character is between '0' and '8'
+                    if (charBeforeDot >= '0' && charBeforeDot <= '8') {
+                        // Increment the character by 1
+                        let newChar = String.fromCharCode(charBeforeDot.charCodeAt(0) + 1);
+                        // Remove the pattern and replace the character before it
+                        inputString = inputString.substring(0, matchIndex - 1) + newChar + inputString.substring(matchIndex + pattern.length);
+
+                        // Check if any '9' digits were passed over
+                        if (passed9) {
+                            inputString = inputString.replace(/9/g, "0");
+                        }
+
+                        break; // Exit the loop once a pattern is processed
+                    } else if (charBeforeDot === '9') { // If the character is '9'
+                        // Go back another digit
+                        let charBeforeNine = inputString.charAt(matchIndex - 2);
+                        // If the character before '9' is between '0' and '8'
+                        if (charBeforeNine >= '0' && charBeforeNine <= '8') {
+                            // Increment the character by 1
+                            let newChar = String.fromCharCode(charBeforeNine.charCodeAt(0) + 1);
+                            // Remove the pattern and replace the character before it
+                            inputString = inputString.substring(0, matchIndex - 2) + newChar + inputString.substring(matchIndex + pattern.length);
+
+                            // Check if any '9' digits were passed over
+                            if (passed9) {
+                                inputString = inputString.replace(/9/g, "0");
+                            }
+
+                            break; // Exit the loop once a pattern is processed
+                        }
+                    }
+                } else { // If the pattern is not found, check if '9' is present in the input string
+                    if (inputString.includes("9")) {
+                        passed9 = true;
+                    }
+                }
+            }
+
+            // Display the modified string in the output text box
+            document.getElementById("outputString").value = inputString;
+        }
+    </script>
 </body>
 </html>
