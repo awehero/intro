@@ -1,0 +1,149 @@
+<html class="focus-outline-visible"><head>
+        <title>Ice Dodo Map Maker</title>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script><style>
+        #menu {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+    
+    </head>
+    <body>
+        <select id="objectSelect" onchange="addObject()"><option selected="" disabled="">Add</option>
+            
+            <option value="plane">Plane</option>
+            <option value="cube">Cube</option>
+            <option value="cone">Cone</option>
+            <option value="sphere">Finish</option>
+            <option value="cylinder">Cylinder</option>
+            <option value="icosahedron">Sphere</option>
+            <option value="monkey">Monkey</option>
+        </select>
+        <div id="menu">
+            <label>Name:</label><br>
+            <input type="text" id="nameInput"><br><br>
+            <label>Position:</label><br>
+            <input type="text" id="positionX"> X<br>
+            <input type="text" id="positionY"> Y<br>
+            <input type="text" id="positionZ"> Z<br><br>
+            <label>Rotation:</label><br>
+            <input type="text" id="rotationX"> X<br>
+            <input type="text" id="rotationY"> Y<br>
+            <input type="text" id="rotationZ"> Z<br><br>
+            <label>Size:</label><br>
+            <input type="text" id="scaleX"> X<br>
+            <input type="text" id="scaleY"> Y<br>
+            <input type="text" id="scaleZ"> Z<br><br>
+            <button onclick="updateObject()">Update</button>
+        </div>
+        <script>
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            var raycaster = new THREE.Raycaster();
+            var mouse = new THREE.Vector2();
+
+            var cubes = [];
+            var selectedObject = null;
+
+            for (var i = 0; i < 2; i++) {
+                var cube = createCube(i === 0 ? 0xff0000 : 0x0000ff);
+                cube.position.x = i * 3 - 1.5;
+                cubes.push(cube);
+                scene.add(cube);
+            }
+
+            function createCube(color) {
+                var geometry = new THREE.BoxGeometry();
+                var material = new THREE.MeshBasicMaterial({ color: color });
+                return new THREE.Mesh(geometry, material);
+            }
+
+            function onMouseMove(event) {
+                mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            }
+
+            function onClick(event) {
+                raycaster.setFromCamera(mouse, camera);
+                var intersects = raycaster.intersectObjects(scene.children);
+                if(intersects.length > 0) {
+                    selectedObject = intersects[0].object;
+                    updateMenu();
+                }
+            }
+
+            function updateMenu() {
+                document.getElementById('nameInput').value = selectedObject.name;
+                document.getElementById('positionX').value = selectedObject.position.x;
+                document.getElementById('positionY').value = selectedObject.position.y;
+                document.getElementById('positionZ').value = selectedObject.position.z;
+                document.getElementById('rotationX').value = selectedObject.rotation.x;
+                document.getElementById('rotationY').value = selectedObject.rotation.y;
+                document.getElementById('rotationZ').value = selectedObject.rotation.z;
+                document.getElementById('scaleX').value = selectedObject.scale.x;
+                document.getElementById('scaleY').value = selectedObject.scale.y;
+                document.getElementById('scaleZ').value = selectedObject.scale.z;
+            }
+
+            document.addEventListener('mousemove', onMouseMove, false);
+            document.addEventListener('click', onClick, false);
+
+            function animate() {
+                requestAnimationFrame(animate);
+                cubes.forEach(function(cube) {
+                    cube.rotation.x += 0.01;
+                    cube.rotation.y += 0.01;
+                });
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            function addObject() {
+                var type = document.getElementById('objectSelect').value;
+                var object;
+
+                switch (type) {
+                    case 'plane':
+                        object = createPlane();
+                        break;
+                    case 'cube':
+                        object = createCube();
+                        break;
+                    case 'cone':
+                        object = createCone();
+                        break;
+                    case 'sphere':
+                        object = createSphere();
+                        break;
+                    case 'cylinder':
+                        object = createCylinder();
+                        break;
+                    case 'icosahedron':
+                        object = createIcosahedron();
+                        break;
+                    case 'monkey':
+                        object = createMonkey();
+                        break;
+                }
+                scene.add(object);
+                document.getElementById('objectSelect').selectedIndex = 0;
+            }
+        </script>
+        <style>
+            #objectSelect {
+                padding: 5px;
+                font-size: 16px;
+            }
+        </style>
+    
+</body></html>
