@@ -15,8 +15,16 @@
                 inputString = inputString.replace(value, '');
             });
 
-            // Replace .0? with ?, .0$ with $, .0A with A, .0B with B, .0C with C, .0D with D, .0E with E, and .0F with F
-            inputString = inputString.replace(/\.0([0-9A-F])/g, '$1');
+            // Replace .0? with ?
+            inputString = inputString.replace(/\.0\?/g, "?");
+            inputString = inputString.replace(/\.0\$/g, "$");
+            inputString = inputString.replace(/\.0A/g. "A")
+                                     .replace(/\.0B/g. "B")
+                                     .replace(/\.0C/g. "C")
+                                     .replace(/\.0D/g. "D")
+                                     .replace(/\.0E/g. "E")
+                                     .replace(/\.0F/g. "F")
+                                     .replace(/\.0G/g. "G");
 
             // Update the text box with the modified string
             document.getElementById("inputString").value = inputString;
