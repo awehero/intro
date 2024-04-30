@@ -81,26 +81,26 @@
                     updateMenu();
                 }
             }
-        document.addEventListener('wheel', onDocumentMouseWheel, false);
-                function onDocumentMouseWheel(event) {
-                    var zoomFactor = 1.1;
-                    var zoomIncrement = event.deltaY > 0 ? 1 / zoomFactor : zoomFactor;
-                    var forward = new THREE.Vector3(0, 0, -1);
-                    forward.applyQuaternion(camera.quaternion);
-                    forward.multiplyScalar(zoomIncrement);
-                    camera.position.add(forward);
-                    camera.position.clampScalar(2, 20);
-                    updateCameraFov();
-                }
-                function updateCameraFov() {
-                    var vFOV = camera.fov * Math.PI / 180;
-                    var height = 2 * Math.tan(vFOV / 2) * camera.position.z;
-                    var aspect = window.innerWidth / window.innerHeight;
-                    var newFOV = (2 * Math.atan((height / 2) / camera.position.z)) * (180 / Math.PI);
-                    camera.fov = newFOV;
-                    camera.aspect = aspect;
-                    camera.updateProjectionMatrix();
-                }
+            document.addEventListener('wheel', onDocumentMouseWheel, false);
+            function onDocumentMouseWheel(event) {
+                var zoomFactor = 1.1;
+                var zoomIncrement = event.deltaY > 0 ? 1 / zoomFactor : zoomFactor;
+                var forward = new THREE.Vector3(0, 0, -1);
+                forward.applyQuaternion(camera.quaternion);
+                forward.multiplyScalar(zoomIncrement);
+                camera.position.add(forward);
+                camera.position.clampScalar(2, 20);
+                updateCameraFov();
+            }
+           function updateCameraFov() {
+                var vFOV = camera.fov * Math.PI / 180;
+                var height = 2 * Math.tan(vFOV / 2) * camera.position.z;
+                var aspect = window.innerWidth / window.innerHeight;
+                var newFOV = (2 * Math.atan((height / 2) / camera.position.z)) * (180 / Math.PI);
+                camera.fov = newFOV;
+                camera.aspect = aspect;
+                camera.updateProjectionMatrix();
+            }
                 
             function updateMenu() {
                 document.getElementById('nameInput').value = selectedObject.name;
@@ -120,7 +120,6 @@
 
             function animate() {
                 requestAnimationFrame(animate);
-                updateCameraRotation();
                 cubes.forEach(function(cube) {
                     cube.rotation.x += 0.01;
                     cube.rotation.y += 0.01;
@@ -196,6 +195,9 @@
                         targetRotationY -= 0.1;
                     }
                 });
+            setInterval(function() {
+                updateCameraRotation();
+            }, 16);
         </script>
         <style>
             #objectSelect {
