@@ -81,7 +81,27 @@
                     updateMenu();
                 }
             }
-
+        document.addEventListener('wheel', onDocumentMouseWheel, false);
+                function onDocumentMouseWheel(event) {
+                    var zoomFactor = 1.1;
+                    var zoomIncrement = event.deltaY > 0 ? 1 / zoomFactor : zoomFactor;
+                    var forward = new THREE.Vector(0, 0, -1);
+                    forward.applyQuaternion(camera.quaternion);
+                    forward.multiplyScalar(zoomIncrement);
+                    camera.position.add(forward);
+                    camera.position.clampScalar(2, 20);
+                    updateCameraFov();
+                }
+                function updateCameraFov() {
+                    var vFOV = camera.fov * Math.PI / 180;
+                    var height = 2 * Math.tan(vFOV / 2) * camera.position.z;
+                    var aspect = window.innerWidth / window.innerHeight;
+                    var newFOV = (2 * Math.atan((height / 2) / camera.position.z)) * (180 / Math.PI);
+                    camera.fov = newFOV;
+                    camera.aspect = aspect;
+                    camera.updateProjectionMatrix();
+                }
+                
             function updateMenu() {
                 document.getElementById('nameInput').value = selectedObject.name;
                 document.getElementById('positionX').value = selectedObject.position.x;
@@ -100,6 +120,7 @@
 
             function animate() {
                 requestAnimationFrame(animate);
+                updateCameraRotation();
                 cubes.forEach(function(cube) {
                     cube.rotation.x += 0.01;
                     cube.rotation.y += 0.01;
@@ -139,8 +160,6 @@
                 document.getElementById('objectSelect').selectedIndex = 0;
             }
                 function updateObject() {
-                        var selectedValue = document.getElementById('objectSelect').value;
-                        selectedObject = cubes.find(cube => cube.uuid === selectedValue);
                         if (!selectedObject) {
                                 console.error('Selected object not found');
                                 return;
@@ -156,6 +175,27 @@
                         selectedObject.scale.y = parseFloat(document.getElementById('scaleY').value);
                         selectedObject.scale.z = parseFloat(document.getElementById('scaleZ').value);
                 }
+                var targetRotationX = camera.rotation.x;
+                var targetRotationY = camera.rotation.y;
+                var lerpFactor = 0.1;
+                function updateCameraRotation() {
+                    camera.rotation.x += (targetRotationX - camera.rotation.x) * lerpFactor;
+                    camera.rotation.y += (targetRotationY - camera.rotation.y) * lerpFactor;
+                }
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === 'w') {
+                        targetRotationX += 0.1;
+                    }
+                    if (event.key === 's') {
+                        targetRotationX -= 0.1;
+                    }
+                    if (event.key === 'a') {
+                        targetRotationY += 0.1;
+                    }
+                    if (event.key === 'd') {
+                        targetRotationY -= 0.1;
+                    }
+                });
         </script>
         <style>
             #objectSelect {
