@@ -85,7 +85,7 @@
                 function onDocumentMouseWheel(event) {
                     var zoomFactor = 1.1;
                     var zoomIncrement = event.deltaY > 0 ? 1 / zoomFactor : zoomFactor;
-                    var forward = new THREE.Vector(0, 0, -1);
+                    var forward = new THREE.Vector3(0, 0, -1);
                     forward.applyQuaternion(camera.quaternion);
                     forward.multiplyScalar(zoomIncrement);
                     camera.position.add(forward);
