@@ -9,10 +9,16 @@
             padding: 10px;
             border: 1px solid #ccc;
         }
+        #getMapLinkButton {
+            position: absolute;
+            top: 20px;
+            left: 90%;
+        }
     </style>
     
     </head>
     <body>
+        <button id="getMapLinkButton" onclick="getMapLink()">Get Map Link</button>
         <select id="objectSelect" onchange="addObject()"><option selected="" disabled="">Add</option>
             
             <option value="plane">Plane</option>
@@ -120,10 +126,6 @@
 
             function animate() {
                 requestAnimationFrame(animate);
-                cubes.forEach(function(cube) {
-                    cube.rotation.x += 0.01;
-                    cube.rotation.y += 0.01;
-                });
                 renderer.render(scene, camera);
             }
             animate();
@@ -157,6 +159,56 @@
                 }
                 scene.add(object);
                 document.getElementById('objectSelect').selectedIndex = 0;
+            }
+            function createPlane() {
+                var geometry = new THREE.PlaneGeometry(5,5);
+                var material = new THREE.MeshBasicMaterial({ color: 0xffff00, side: THREE.DoubleSide });
+                return new THREE.Mesh(geometry, material);
+            }
+            function createCube() {
+                var geometry = new THREE.BoxGeometry();
+                var material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+                return new THREE.Mesh(geometry, material);
+            }
+            function createCone() {
+                var geometry = new THREE.ConeGeometry(1, 2, 32);
+                var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+                return new THREE.Mesh(geometry, material);
+            }
+            function createSphere() {
+                var geometry = new THREE.SphereGeometry(1, 32, 32);
+                var material = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+                return new THREE.Mesh(geometry, material);
+            }
+            function createCylinder() {
+                var geometry = new THREE.CylinderGeometry(1, 1, 2, 32);
+                var material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
+                return new THREE.Mesh(geometry, material);
+            }
+            function createIcosahedron() {
+                var geometry = new THREE.IcosahedronGeometry(1);
+                var material = new THREE.MeshBasicMaterial({ color: 0xff9900 });
+                return new THREE.Mesh(geometry, material);
+            }
+            function createMonkey() {
+                var loader = new THREE.ObjectLoader(); //If this doesn't work, use OBJLoader();
+                var object;       //You will still have to add the monkey file and object loader file I think
+                loader.load(
+                    'models/monkey.obj',
+                    function (obj) {
+                        object = obj;
+                        object.scale.set(0.02, 0.02, 0.02);
+                        object.position.set(0, 0, 0);
+                        scene.add(object);
+                    },
+                    function (xhr) {
+                        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+                    },
+                    function (error) {
+                        console.log('An error happened');
+                    }
+                    );
+                return object;
             }
                 function updateObject() {
                         if (!selectedObject) {
@@ -198,6 +250,54 @@
             setInterval(function() {
                 updateCameraRotation();
             }, 16);
+            function getMapLink() {
+                var dataString = "";
+                scene.children.forEach(function(object) {
+                    var objectType;
+                    if (object instanceof THREE.Mesh) {
+                        if (object.geometry instanceof THREE.PlaneGeometry) {
+                            objectType = "A";
+                        } else if (object.geometry instanceof THREE.BoxGeometry) {
+                            objectType = "B";
+                        } else if (object.geometry instanceof THREE.ConeGeometry) {
+                            objectType = "C";
+                        } else if (object.geometry instanceof THREE.SphereGeometry) {
+                            objectType = "D";
+                        } else if (object.geometry instanceof THREE.CylinderGeometry) {
+                            objectType = "E";
+                        } else if (object.geometry instanceof THREE.IcosahedronGeometry) {
+                            objectType = "F";
+                        } else {
+                            objectType = "G";
+                        }
+                } else {
+                    objectType = "G";
+                    }
+                        var objectName = object.name ? object.name : "none";
+                        var position = object.position;
+                        var roundedPosition = {
+                            x: Math.round(position.x * 1000) / 1000,
+                            y: Math.round(position.y * 1000) / 1000,
+                            z: Math.round(position.z * 1000) / 1000
+                        };
+                        var rotation = object.rotation;
+                        var roundedRotation = {
+                            x: Math.round(rotation.x * 1000) / 1000,
+                            y: Math.round(rotation.y * 1000) / 1000,
+                            z: Math.round(rotation.z * 1000) / 1000
+                        };
+                        var scale = object.scale;
+                        var roundedScale = {
+                            x: Math.round(scale.x * 1000) / 1000,
+                            y: Math.round(scale.y * 1000) / 1000,
+                            z: Math.round(scale.z * 1000) / 1000
+                        };
+                        var objectData = objectType + "$" + roundedPosition.x + "$" + roundedPosition.y + "$" + roundedPosition.z + "$" + roundedRotation.x + "$" + roundedRotation.y + "$" + roundedRotation.z + "$" + roundedScale.x + "$" + roundedScale.y + "$" + roundedScale.z + "$" + objectName;
+                        dataString += objectData;
+                    });
+                    dataString = "https://onionfist.com/icedodo/?mapCodeVersion=v8&mapUrl=" + dataString;
+                    return dataString
+                }
         </script>
         <style>
             #objectSelect {
