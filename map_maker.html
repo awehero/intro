@@ -296,7 +296,15 @@
                         dataString += objectData;
                     });
                     dataString = "https://onionfist.com/icedodo/?mapCodeVersion=v8&mapUrl=" + dataString;
-                    return dataString
+                    document.getElementById("getMapLinkButton").addEventListener("click", function() {
+                            navigator.clipboard.writeText(dataString)
+                            .then(function() {
+                                    alert("Text copied to clipboard");
+                            })
+                            .catch(function(error)  {
+                                    alert("Unable to automatically copy text: ", error);
+                            });
+                    });
                 }
         </script>
         <style>
