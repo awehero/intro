@@ -1,0 +1,204 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ice Dodo Map Maker</title>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <style>
+        #menu {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <select id="objectSelect" onchange="addObject()">
+        <option selected="" disabled="">Add</option>
+        <option value="plane">Plane</option>
+        <option value="cube">Cube</option>
+        <option value="cone">Cone</option>
+        <option value="sphere">Sphere</option>
+        <option value="cylinder">Cylinder</option>
+        <option value="icosahedron">Icosahedron</option>
+        <!-- Remove the option for 'monkey' -->
+    </select>
+    <div id="menu">
+        <label>Name:</label><br>
+        <input type="text" id="nameInput"><br><br>
+        <label>Position:</label><br>
+        <input type="text" id="positionX"> X<br>
+        <input type="text" id="positionY"> Y<br>
+        <input type="text" id="positionZ"> Z<br><br>
+        <label>Rotation:</label><br>
+        <input type="text" id="rotationX"> X<br>
+        <input type="text" id="rotationY"> Y<br>
+        <input type="text" id="rotationZ"> Z<br><br>
+        <label>Size:</label><br>
+        <input type="text" id="scaleX"> X<br>
+        <input type="text" id="scaleY"> Y<br>
+        <input type="text" id="scaleZ"> Z<br><br>
+        <button onclick="updateObject()">Update</button>
+    </div>
+    <style>
+        #objectSelect {
+            padding: 5px;
+            font-size: 16px;
+        }
+    </style>
+    <script>
+        var canvas = document.getElementById("renderCanvas");
+        var engine = new BABYLON.Engine(canvas, true);
+
+        var createScene = function () {
+            var scene = new BABYLON.Scene(engine);
+            var camera = new BABYLON.FreeCamera("camera", new BABYLON.Vector3(0, 0, -5), scene);
+            camera.setTarget(BABYLON.Vector3.Zero());
+
+            var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+
+            var cubes = [];
+
+            function createCube(color) {
+                var box = BABYLON.MeshBuilder.CreateBox("box", { size: 1 }, scene);
+                var material = new BABYLON.StandardMaterial("material", scene);
+                material.diffuseColor = color;
+                box.material = material;
+                return box;
+            }
+
+            for (var i = 0; i < 2; i++) {
+                var cube = createCube(i === 0 ? new BABYLON.Color3(1, 0, 0) : new BABYLON.Color3(0, 0, 1));
+                cube.position.x = i * 3 - 1.5;
+                cubes.push(cube);
+            }
+
+            return scene;
+        };
+
+        var scene = createScene();
+
+        engine.runRenderLoop(function () {
+            scene.render();
+        });
+
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+
+        var selectedObject = null;
+
+        canvas.addEventListener("pointerdown", function (evt) {
+            var pickResult = scene.pick(scene.pointerX, scene.pointerY);
+            if (pickResult.hit) {
+                selectedObject = pickResult.pickedMesh;
+                updateMenu();
+            }
+        });
+
+        function updateMenu() {
+            document.getElementById('nameInput').value = selectedObject.name;
+            document.getElementById('positionX').value = selectedObject.position.x;
+            document.getElementById('positionY').value = selectedObject.position.y;
+            document.getElementById('positionZ').value = selectedObject.position.z;
+            document.getElementById('rotationX').value = selectedObject.rotation.x;
+            document.getElementById('rotationY').value = selectedObject.rotation.y;
+            document.getElementById('rotationZ').value = selectedObject.rotation.z;
+            document.getElementById('scaleX').value = selectedObject.scaling.x;
+            document.getElementById('scaleY').value = selectedObject.scaling.y;
+            document.getElementById('scaleZ').value = selectedObject.scaling.z;
+        }
+
+        function addObject() {
+            var type = document.getElementById('objectSelect').value;
+            var object;
+
+            switch (type) {
+                case 'plane':
+                    object = createPlane();
+                    break;
+                case 'cube':
+                    object = createCube();
+                    break;
+                case 'cone':
+                    object = createCone();
+                    break;
+                case 'sphere':
+                    object = createSphere();
+                    break;
+                case 'cylinder':
+                    object = createCylinder();
+                    break;
+                case 'icosahedron':
+                    object = createIcosahedron();
+                    break;
+            }
+
+            scene.addMesh(object);
+            document.getElementById('objectSelect').selectedIndex = 0;
+        }
+
+        function createPlane() {
+            var plane = BABYLON.MeshBuilder.CreatePlane("plane", { size: 5 }, scene);
+            var material = new BABYLON.StandardMaterial("material", scene);
+            material.diffuseColor = new BABYLON.Color3(1, 1, 0);
+            plane.material = material;
+            return plane;
+        }
+
+        function createCone() {
+            var cone = BABYLON.MeshBuilder.CreateCylinder("cone", { diameterTop: 0, diameterBottom: 1, height: 2, tessellation: 32 }, scene);
+            var material = new BABYLON.StandardMaterial("material", scene);
+            material.diffuseColor = new BABYLON.Color3(0, 1, 0);
+            cone.material = material;
+            return cone;
+        }
+
+        function createSphere() {
+            var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 1, segments: 32 }, scene);
+            var material = new BABYLON.StandardMaterial("material", scene);
+            material.diffuseColor = new BABYLON.Color3(0, 0, 1);
+            sphere.material = material;
+            return sphere;
+        }
+
+        function createCylinder() {
+            var cylinder = BABYLON.MeshBuilder.CreateCylinder("cylinder", { diameterTop: 1, diameterBottom: 1, height: 2, tessellation: 32 }, scene);
+            var material = new BABYLON.StandardMaterial("material", scene);
+            material.diffuseColor = new BABYLON.Color3(1, 0, 1);
+            cylinder.material = material;
+            return cylinder;
+        }
+
+        function createIcosahedron() {
+            var icosahedron = BABYLON.MeshBuilder.CreateIcoSphere("icosahedron", { radius: 1, subdivisions: 1 }, scene);
+            var material = new BABYLON.StandardMaterial("material", scene);
+            material.diffuseColor = new BABYLON.Color3(1, 0.6, 0);
+            icosahedron.material = material;
+            return icosahedron;
+        }
+
+        function updateObject() {
+            if (!selectedObject) {
+                console.error('Selected object not found');
+                return;
+            }
+
+            selectedObject.name = document.getElementById('nameInput').value;
+            selectedObject.position.x = parseFloat(document.getElementById('positionX').value);
+            selectedObject.position.y = parseFloat(document.getElementById('positionY').value);
+            selectedObject.position.z = parseFloat(document.getElementById('positionZ').value);
+            selectedObject.rotation.x = parseFloat(document.getElementById('rotationX').value);
+            selectedObject.rotation.y = parseFloat(document.getElementById('rotationY').value);
+            selectedObject.rotation.z = parseFloat(document.getElementById('rotationZ').value);
+            selectedObject.scaling.x = parseFloat(document.getElementById('scaleX').value);
+            selectedObject.scaling.y = parseFloat(document.getElementById('scaleY').value);
+            selectedObject.scaling.z = parseFloat(document.getElementById('scaleZ').value);
+        }
+    </script>
+</body>
+</html>
