@@ -110,6 +110,10 @@
                 document.getElementById('scaleZ').value = selectedObject.scale.z;
             }
 
+            var view = "free";
+            function updateView() {
+                view = document.getElementById('viewChanger').value;
+                }
             document.addEventListener('mousemove', onMouseMove, false);
             document.addEventListener('click', onClick, false);
             var moveForward = false;
