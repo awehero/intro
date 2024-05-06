@@ -112,9 +112,9 @@
                 document.getElementById('rotationX').value = (Math.round(selectedObject.rotation.x * (180 / Math.PI) * 100)) / 100;
                 document.getElementById('rotationY').value = (Math.round(selectedObject.rotation.y * (180 / Math.PI) * 100)) / 100;
                 document.getElementById('rotationZ').value = (Math.round(selectedObject.rotation.z * (180 / Math.PI) * 100)) / 100;
-                document.getElementById('scaleX').value = selectedObject.scale.x;
-                document.getElementById('scaleY').value = selectedObject.scale.y;
-                document.getElementById('scaleZ').value = selectedObject.scale.z;
+                document.getElementById('scaleX').value = selectedObject.scale.x * 2;
+                document.getElementById('scaleY').value = selectedObject.scale.y * 2;
+                document.getElementById('scaleZ').value = selectedObject.scale.z * 2;
             }
             document.getElementById("deleteButton").addEventListener("click", function() {
                 if (selectedObject) {
@@ -376,7 +376,7 @@
                 return new THREE.Mesh(geometry, material);
             }
             function createCylinder() {
-                var geometry = new THREE.CylinderGeometry(1, 1, 2, 32);
+                var geometry = new THREE.CylinderGeometry(1, 1, 1, 32);
                 var material = new THREE.MeshBasicMaterial({ map: texture });
                 return new THREE.Mesh(geometry, material);
             }
