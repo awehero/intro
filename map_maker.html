@@ -357,32 +357,32 @@
             }
             function createPlane() {
                 var geometry = new THREE.PlaneGeometry(5,5);
-                var material = new THREE.MeshBasicMaterial({ color: 0xffff00, side: THREE.DoubleSide });
+                var material = new THREE.MeshBasicMaterial({ map: texture });
                 return new THREE.Mesh(geometry, material);
             }
             function createCube() {
                 var geometry = new THREE.BoxGeometry();
-                var material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+                var material = new THREE.MeshBasicMaterial({ map: texture });
                 return new THREE.Mesh(geometry, material);
             }
             function createCone() {
                 var geometry = new THREE.ConeGeometry(1, 2, 32);
-                var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+                var material = new THREE.MeshBasicMaterial({ map: texture });
                 return new THREE.Mesh(geometry, material);
             }
             function createSphere() {
                 var geometry = new THREE.SphereGeometry(1, 32, 32);
-                var material = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+                var material = new THREE.MeshBasicMaterial({ map: texture });
                 return new THREE.Mesh(geometry, material);
             }
             function createCylinder() {
                 var geometry = new THREE.CylinderGeometry(1, 1, 2, 32);
-                var material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
+                var material = new THREE.MeshBasicMaterial({ map: texture });
                 return new THREE.Mesh(geometry, material);
             }
             function createIcosahedron() {
                 var geometry = new THREE.IcosahedronGeometry(1);
-                var material = new THREE.MeshBasicMaterial({ color: 0xff9900 });
+                var material = new THREE.MeshBasicMaterial({ map: texture });
                 return new THREE.Mesh(geometry, material);
             }
             function createMonkey() {
