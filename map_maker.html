@@ -68,6 +68,8 @@
 
             var raycaster = new THREE.Raycaster();
             var mouse = new THREE.Vector2();
+            var texture = new THREE.TextureLoader().load('https://art.pixilart.com/sr2236ed7793daws3.png');
+            var material = new THREE.MeshBasicMaterial({ map: texture });
 
             var cubes = [];
             var selectedObject = null;
@@ -81,7 +83,6 @@
 
             function createCube(color) {
                 var geometry = new THREE.BoxGeometry();
-                var material = new THREE.MeshBasicMaterial({ color: color });
                 return new THREE.Mesh(geometry, material);
             }
 
@@ -402,7 +403,11 @@
                         selectedObject.rotation.y = parseFloat(document.getElementById('rotationY').value) * (Math.PI / 180);
                         selectedObject.rotation.z = parseFloat(document.getElementById('rotationZ').value) * (Math.PI / 180);
                         selectedObject.scale.x = parseFloat(document.getElementById('scaleX').value);
-                        selectedObject.scale.y = parseFloat(document.getElementById('scaleY').value);
+                        if (selectedObject.geometry.type == "PlaneGeometry") {
+                            selectedObject.scale.y = (parseFloat(document.getElementById('scaleY').value)) / 5;
+                        } else {
+                            selectedObject.scale.y = parseFloat(document.getElementById('scaleY').value);
+                        }
                         selectedObject.scale.z = parseFloat(document.getElementById('scaleZ').value);
                 }
                 
