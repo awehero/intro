@@ -73,7 +73,6 @@
             var mouse = new THREE.Vector2();
             var texture = new THREE.TextureLoader().load('https://art.pixilart.com/sr2236ed7793daws3.png');
             var material = new THREE.MeshBasicMaterial({ map: texture });
-            var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
             var cubes = [];
             var selectedObject = null;
@@ -310,7 +309,6 @@
 
             function animate() {
                 requestAnimationFrame(animate);
-                controls.update();
                 renderer.render(scene, camera);
             }
             animate();
