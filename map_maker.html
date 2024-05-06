@@ -146,7 +146,8 @@
             var rotateDown = false;
             var cameraRotation = {
                 x: 0,
-                y: 0
+                y: 0,
+                z: 0
             };
             document.addEventListener('keydown', onKeyDown);
             document.addEventListener('keyup', onKeyUp);
@@ -249,10 +250,12 @@
                         cameraRotation.y -= 0.01;
                     }
                     if (rotateUp) {
-                        cameraRotation.x += 0.01;
+                        cameraRotation.x += Math.round(Math.sin(cameraRotation.y - Math.PI / 2) * 1) / 100;
+                        cameraRotation.z += Math.round(Math.cos(cameraRotation.y - Math.PI / 2) * 1) / 100;
                     }
                     if (rotateDown) {
-                        cameraRotation.x -= 0.01;
+                        cameraRotation.x -= Math.round(Math.sin(cameraRotation.y - Math.PI / 2) * 1) / 100;
+                        cameraRotation.z -= Math.round(Math.cos(cameraRotation.y - Math.PI / 2) * 1) / 100;
                     }
                     camera.rotation.x = cameraRotation.x
                     camera.rotation.y = cameraRotation.y;
