@@ -59,6 +59,7 @@
             <input type="text" id="scaleY"> Y<br>
             <input type="text" id="scaleZ"> Z<br><br>
             <button onclick="updateObject()">Update</button>
+            <button id="deleteButton">Delete</button>
         </div>
         <script>
             var scene = new THREE.Scene();
@@ -115,6 +116,17 @@
                 document.getElementById('scaleY').value = selectedObject.scale.y;
                 document.getElementById('scaleZ').value = selectedObject.scale.z;
             }
+            document.getElementById("deleteButton").addEventListener("click", function() {
+                if (selectedObject) {
+                    var confirmed = window.confirm("are you sure you want to delete this object?");
+                    if (confirmed) {
+                        scene.remove(selectedObject);
+                        selectedObject = null;
+                        console.log("Object deleted");
+                        updateMenu();
+                    }
+                }
+            });
 
             var view = "free";
             function updateView() {
