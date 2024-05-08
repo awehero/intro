@@ -275,15 +275,13 @@
                     }
                     if (rotateUp) {
                         cameraRotation.x -= Math.round(Math.sin(cameraRotation.y - Math.PI / 2) * 1) / 100;
-                        cameraRotation.z -= Math.round(Math.sin(cameraRotation.y - Math.PI / 2) * 1) / 100;
+                        cameraRotation.z -= Math.round(Math.cos(cameraRotation.y - Math.PI / 2) * 1) / 100;
                     }
                     if (rotateDown) {
                         cameraRotation.x += Math.round(Math.sin(cameraRotation.y - Math.PI / 2) * 1) / 100;
-                        cameraRotation.z += Math.round(Math.sin(cameraRotation.y - Math.PI / 2) * 1) / 100;
+                        cameraRotation.z += Math.round(Math.cos(cameraRotation.y - Math.PI / 2) * 1) / 100;
                     }
-                    camera.rotation.x = cameraRotation.x;
                     camera.rotation.y = cameraRotation.y;
-                    camera.rotation.z = cameraRotation.z;
                 } else if (view == "top") {
                     if (moveForward) {
                         
