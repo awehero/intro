@@ -504,32 +504,175 @@
                 } else {
                     console.error("No object selected!");
                 }
+                                    }
+                function loadMap() {
+                    let input = prompt("Paste your map link here:");
+                        if (input) {
+                            const indexOfEquals = input.indexOf('=');
+                            if (indexOfEquals !== -1) {
+                                let i = indexOfEquals + 1;
+                                while (i < input.length) {
+                                    if (input[i].match(/[A-G]/)) {
+                                        break;
+                                    }
+                                    i++;
+                                }
+                                if (i > indexOfEquals) {
+                                    input = input.substring(i);
+                                }
+                            }
+                            const index = input.indexOf('&');
+                            if (index !== -1) {
+                                input = input.substring(0, index);
+                            }
+                            const objectDataArray = input.split(/(?=[A-Z])/);
+                            objectDataArray.forEach(objData => {
+                                const type = objData.charAt(0);
+                                const rest = objData.slice(1);
+                                const [positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name] = rest.split("$");
+                                let object;
+                                switch (type) {
+                                        case 'A':
+                                            object = loadPlane(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                            break;
+                                        case 'B':
+                                            object = loadCube(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                            break;
+                                        case 'C':
+                                            object = loadCone(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                            break;
+                                        case 'D':
+                                            object = loadSphere(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                            break;
+                                        case 'E':
+                                            object = loadCylinder(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                            break;
+                                        case 'F':
+                                            object = loadIcosahedron(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                            break;
+                                        case 'G':
+                                            object = loadMonkey(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                            break;
+                                        default:
+                                            console.error('Unknown object type:', type);
+                                }
+                                if (object) {
+                                    scene.add(object);
+                                }
+                            });
+                        }
+                }
+                function loadPlane(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
+                    const geometry = new THREE.PlaneGeometry(1, 1); // Adjust size as needed
+                    const material = new THREE.MeshBasicMaterial({ map: texture });
+                    const plane = new THREE.Mesh(geometry, material);
+                    setTransforms(plane, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                    plane.name = name;
+                    return plane;
+                }
+                    
+                function loadCube(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
+                    const geometry = new THREE.BoxGeometry(1, 1, 1); // Adjust size as needed
+                    const material = new THREE.MeshBasicMaterial({ map: texture });
+                    const cube = new THREE.Mesh(geometry, material);
+                    setTransforms(cube, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                    cube.name = name;
+                    return cube;
                 }
                 
-            function getMapLink() {
-                var dataString = "";
+                function loadCone(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
+                    const geometry = new THREE.ConeGeometry(1, 1, 32); // Adjust size and segments as needed
+                    const material = new THREE.MeshBasicMaterial({ map: texture });
+                    const cone = new THREE.Mesh(geometry, material);
+                    setTransforms(cone, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                    cone.name = name;
+                    return cone;
+                }
+                function loadSphere(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
+                    const geometry = new THREE.SphereGeometry(1, 32, 32); // Adjust radius and segments as needed
+                    const material = new THREE.MeshBasicMaterial({ map: texture });
+                    const sphere = new THREE.Mesh(geometry, material);
+                    setTransforms(sphere, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                    sphere.name = name;
+                    return sphere;
+                }
+                
+                function loadCylinder(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
+                    const geometry = new THREE.CylinderGeometry(1, 1, 1, 32); // Adjust radii, height, and segments as needed
+                    const material = new THREE.MeshBasicMaterial({ map: texture });
+                    const cylinder = new THREE.Mesh(geometry, material);
+                    setTransforms(cylinder, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                    cylinder.name = name;
+                    return cylinder;
+                }
+                
+                function loadIcosahedron(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
+                    const geometry = new THREE.IcosahedronGeometry(1, 0); // Adjust radius and detail as needed
+                    const material = new THREE.MeshBasicMaterial({ map: texture });
+                    const icosahedron = new THREE.Mesh(geometry, material);
+                    setTransforms(icosahedron, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                    icosahedron.name = name;
+                    return icosahedron;
+                }
+                
+                function loadMonkey(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
+                    /*const loader = new THREE.GLTFLoader();
+                    loader.load(
+                        // URL of the model
+                        'path/to/monkey.gltf',
+                        // Called when the model is loaded
+                        function (gltf) {
+                            const monkey = gltf.scene;
+                            setTransforms(monkey, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                            monkey.name = name;
+                            scene.add(monkey);
+                        },
+                        // Called while loading is progressing
+                        function (xhr) {
+                            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+                        },
+                        // Called when loading has errors
+                        function (error) {
+                            console.error('An error happened', error);
+                        }
+                    );*/
+                }
+                function setTransforms(object, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
+                    object.position.x = positionX / 100;
+                    object.position.z = positionY / 100;
+                    object.position.y = positionZ / 100;
+                    object.rotation.x = rotationX / 100;
+                    object.rotation.y = rotationY / 100;
+                    object.rotation.z = rotationZ / 100;
+                    object.scale.x = scaleX / 50;
+                    object.scale.z = scaleY / 50;
+                    object.scale.y = scaleZ / 50;
+                    object.name = name;
+                }
+                function getMapLink() {
+                    var dataString = "";
                     dataString = "";
-                scene.children.forEach(function(object) {
-                    var objectType;
-                    if (object instanceof THREE.Mesh) {
-                        if (object.geometry instanceof THREE.PlaneGeometry) {
-                            objectType = "A";
-                        } else if (object.geometry instanceof THREE.BoxGeometry) {
-                            objectType = "B";
-                        } else if (object.geometry instanceof THREE.ConeGeometry) {
-                            objectType = "C";
-                        } else if (object.geometry instanceof THREE.SphereGeometry) {
-                            objectType = "D";
-                        } else if (object.geometry instanceof THREE.CylinderGeometry) {
-                            objectType = "E";
-                        } else if (object.geometry instanceof THREE.IcosahedronGeometry) {
-                            objectType = "F";
+                    scene.children.forEach(function(object) {
+                        var objectType;
+                        if (object instanceof THREE.Mesh) {
+                            if (object.geometry instanceof THREE.PlaneGeometry) {
+                                objectType = "A";
+                            } else if (object.geometry instanceof THREE.BoxGeometry) {
+                                objectType = "B";
+                            } else if (object.geometry instanceof THREE.ConeGeometry) {
+                                objectType = "C";
+                            } else if (object.geometry instanceof THREE.SphereGeometry) {
+                                objectType = "D";
+                            } else if (object.geometry instanceof THREE.CylinderGeometry) {
+                                objectType = "E";
+                            } else if (object.geometry instanceof THREE.IcosahedronGeometry) {
+                                objectType = "F";
+                            } else {
+                                objectType = "G";
+                            }
                         } else {
                             objectType = "G";
                         }
-                } else {
-                    objectType = "G";
-                    }
                         var objectName = object.name ? object.name : "none";
                         var position = object.position;
                         var roundedPosition = {
