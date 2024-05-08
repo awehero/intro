@@ -22,6 +22,11 @@
             top: 10px;
             left: 100px;
         }
+        #objectSelect {
+            padding: 5px;
+            font-size: 16px;
+            position: absolute;
+        }
     </style>
     
     </head>
@@ -33,6 +38,7 @@
             <option value="front">Front View</option>
         </select>
         <button id="getMapLinkButton" onclick="getMapLink()">Get Map Link</button>
+        <button id="loadMapButton" onclick="loadMap()">Load Map</button>
         <select id="objectSelect" onchange="addObject()"><option selected="" disabled="">Add</option>
             
             <option value="plane">Plane</option>
@@ -553,12 +559,5 @@
                     });
                 }
         </script>
-        <style>
-            #objectSelect {
-                padding: 5px;
-                font-size: 16px;
-                position: absolute;
-            }
-        </style>
-    
-</body></html>
+    </body>
+</html>
