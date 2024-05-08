@@ -25,7 +25,7 @@
     </style>
     
     </head>
-    <body>
+    <body oncopy="copyObject()">
         <select id="viewChanger" onchange="updateView()">
             <option selected="free">Free Cam</option>
             <option value="top">Top View</option>
@@ -72,8 +72,20 @@
 
             var raycaster = new THREE.Raycaster();
             var mouse = new THREE.Vector2();
-            var texture = new THREE.TextureLoader().load('https://icedodo.onionfist.com/assets/textures/pm1.png');
+            var texture = new THREE.TextureLoader().load('https://mrwallpaper.com/images/high/warm-colors-gradient-9as7hzxqmbgjcqe2.webp');
             var material = new THREE.MeshBasicMaterial({ map: texture });
+
+            var isTyping = false;
+            var menu = document.getElementById('menu');
+            var menuInputs = menu.querySelectorAll('input[type="text"]');
+            menuInputs.forEach(function(input) {
+                input.addEventListener('focus', function() {
+                    isTyping = true;
+                });
+                input.addEventListener('blur', function() {
+                    isTyping = false;
+                });
+            });
 
             var cubes = [];
             var selectedObject = null;
@@ -152,6 +164,7 @@
             document.addEventListener('keydown', onKeyDown);
             document.addEventListener('keyup', onKeyUp);
             function onKeyDown(event) {
+                    if (isTyping) return;
                 switch (event.key) {
                     case 'w':
                         moveForward = true;
@@ -354,6 +367,7 @@
                         break;
                 }
                 scene.add(object);
+                fixPlane();
                 document.getElementById('objectSelect').selectedIndex = 0;
             }
             function createPlane() {
@@ -425,6 +439,60 @@
                             selectedObject.scale.y = parseFloat(document.getElementById('scaleY').value);
                         }
                         selectedObject.scale.z = parseFloat(document.getElementById('scaleZ').value);
+                }
+                function fixPlane() {
+                    scene.children.forEach(function(object) {
+                            if (object instanceof THREE.Mesh) {
+                                if (object.geometry instanceof THREE.PlaneGeometry) {
+                                    object.rotation.x = 90 * (Math.PI / 180);
+                                    object.position.y = -20;
+                                    object.scale.x = 1000;
+                                    object.scale.z = 1;
+                                }
+                            }
+                    });
+                }
+                function copyObject() {
+                if (selectedObject != null) {
+                    var type = selectedObject.geometry.type;
+                    var object;
+                    switch (type) {
+                        case 'PlaneGeometry':
+                            object = createPlane();
+                            break;
+                        case 'BoxGeometry':
+                            object = createCube();
+                            break;
+                        case 'ConeGeometry':
+                            object = createCone();
+                            break;
+                        case 'SphereGeometry':
+                            object = createSphere();
+                            break;
+                        case 'CylinderGeometry':
+                            object = createCylinder();
+                            break;
+                        case 'IcosahedronGeometry':
+                            object = createIcosahedron();
+                            break;
+                        case 'monkey':
+                            object = createMonkey();
+                            break;
+                        }
+                    scene.add(object);
+                    object.name = selectedObject.name;
+                    object.position.x = selectedObject.position.x;
+                    object.position.y = selectedObject.position.y;
+                    object.position.x = selectedObject.position.z;
+                    object.rotation.x = selectedObject.rotation.x;
+                    object.rotation.y = selectedObject.rotation.y;
+                    object.rotation.z = selectedObject.rotation.z;
+                    object.scale.x = selectedObject.scale.x;
+                    object.scale.y = selectedObject.scale.y;
+                    object.scale.z = selectedObject.scale.z;
+                } else {
+                    console.error("No object selected!");
+                }
                 }
                 
             function getMapLink() {
