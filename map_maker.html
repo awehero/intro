@@ -12,6 +12,7 @@
                 background-color: white;
                 padding: 10px;
                 border: 1px solid #ccc;
+                display: none;
             }
             #getMapLinkButton {
                 position: absolute;
@@ -32,6 +33,9 @@
                 padding: 5px;
                 font-size: 16px;
                 position: absolute;
+            }
+            .hidden {
+              display: none;
             }
         </style>
     </head>
@@ -128,6 +132,11 @@
             }
                 
             function updateMenu() {
+                if (selectedObject == null) {
+                    menu.classList.add("hidden");
+                } else {
+                    menu.classList.remove("hidden");
+                }
                 document.getElementById('nameInput').value = selectedObject.name;
                 document.getElementById('positionX').value = selectedObject.position.x;
                 document.getElementById('positionY').value = selectedObject.position.y;
