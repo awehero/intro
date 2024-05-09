@@ -12,7 +12,6 @@
                 background-color: white;
                 padding: 10px;
                 border: 1px solid #ccc;
-                display: none;
             }
             #getMapLinkButton {
                 position: absolute;
@@ -92,6 +91,7 @@
 
             var isTyping = false;
             var menu = document.getElementById('menu');
+            updateMenu();
             var menuInputs = menu.querySelectorAll('input[type="text"]');
             menuInputs.forEach(function(input) {
                 input.addEventListener('focus', function() {
