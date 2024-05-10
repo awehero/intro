@@ -142,8 +142,8 @@
                     document.getElementById('positionY').value = selectedObject.position.z;
                     document.getElementById('positionZ').value = selectedObject.position.y;
                     document.getElementById('rotationX').value = (Math.round(selectedObject.rotation.x * (180 / Math.PI) * 100)) / 100;
-                    document.getElementById('rotationY').value = (Math.round(selectedObject.rotation.y * (180 / Math.PI) * 100)) / 100;
-                    document.getElementById('rotationZ').value = (Math.round(selectedObject.rotation.z * (180 / Math.PI) * 100)) / 100;
+                    document.getElementById('rotationY').value = (Math.round(selectedObject.rotation.z * (180 / Math.PI) * 100)) / -100;
+                    document.getElementById('rotationZ').value = (Math.round(selectedObject.rotation.y * (180 / Math.PI) * 100)) / 100;
                     document.getElementById('scaleX').value = selectedObject.scale.x;
                     document.getElementById('scaleY').value = selectedObject.scale.z;
                     document.getElementById('scaleZ').value = selectedObject.scale.y;
