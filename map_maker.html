@@ -12,6 +12,7 @@
                 background-color: white;
                 padding: 10px;
                 border: 1px solid #ccc;
+                z-index: 1;
             }
             #getMapLinkButton {
                 position: absolute;
@@ -48,7 +49,7 @@
         <button id="getMapLinkButton" onclick="getMapLink()">Get Map Link</button>
         <button id="loadMapButton" onclick="loadMap()">Load Map</button>
         <button id="objectSelect" onclick="addObject()">Add Object</button>
-        <!--<select id="objectSelect" onchange="addObject()"><option selected="" disabled="">Add</option>
+        <div><!--<select id="objectSelect" onchange="addObject()"><option selected="" disabled="">Add</option>
             
             <option value="plane">Plane</option>
             <option value="cube">Cube</option>
@@ -57,8 +58,8 @@
             <option value="cylinder">Cylinder</option>
             <option value="icosahedron">Sphere</option>
             <option value="monkey">Monkey</option>
-        </select>-->
-        <div id="menu">
+        </select>--></div>
+        <div id="menu" class="">
             <label>Name:</label><br>
             <input type="text" id="nameInput"><br><br>
             <label>Position:</label><br>
@@ -70,9 +71,11 @@
             <input type="text" id="rotationY"> Y<br>
             <input type="text" id="rotationZ"> Z<br><br>
             <label>Size:</label><br>
-            <input type="text" id="scaleX"> X<br>
-            <input type="text" id="scaleY"> Y<br>
-            <input type="text" id="scaleZ"> Z<br><br>
+            <div id="scaleMenu" style="display: block;">
+            <div><input type="text" id="scaleX"> X</div>
+            <div><input type="text" id="scaleY"> Y</div>
+            <div><input type="text" id="scaleZ"> Z</div></div>
+            <div id="radiusMenu" style="display: none;"><input type="text" id="radius"> R</div><br>
             <button onclick="updateObject()">Update</button>
             <button id="deleteButton">Delete</button>
             <button id="closeMenuButton" onclick="closeMenu()">Close</button>
@@ -125,11 +128,17 @@
             }
 
             function onClick(event) {
-                raycaster.setFromCamera(mouse, camera);
-                var intersects = raycaster.intersectObjects(scene.children);
-                if(intersects.length > 0) {
-                    selectedObject = intersects[0].object;
-                    updateMenu();
+                var rect = menu.getBoundingClientRect();
+                var z = parseInt(window.getComputedStyle(menu).getPropertyValue('z-index'));
+                if (event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom && z > 0) {
+                    //Nothing needed here
+                } else {
+                    raycaster.setFromCamera(mouse, camera);
+                    var intersects = raycaster.intersectObjects(scene.children);
+                    if(intersects.length > 0) {
+                        selectedObject = intersects[0].object;
+                        updateMenu();
+                    }
                 }
             }
             updateMenu(); 
@@ -145,9 +154,17 @@
                     document.getElementById('rotationX').value = (Math.round(selectedObject.rotation.x * (180 / Math.PI) * 100)) / 100;
                     document.getElementById('rotationY').value = (Math.round(selectedObject.rotation.z * (180 / Math.PI) * 100)) / -100;
                     document.getElementById('rotationZ').value = (Math.round(selectedObject.rotation.y * (180 / Math.PI) * 100)) / 100;
-                    document.getElementById('scaleX').value = selectedObject.scale.x;
-                    document.getElementById('scaleY').value = selectedObject.scale.y;
-                    document.getElementById('scaleZ').value = selectedObject.scale.z;
+                    if (selectedObject.geometry.type == "IcosahedronGeometry") {
+                        document.getElementById("scaleMenu").style.display = "none";
+                        document.getElementById("radiusMenu").style.display = "block";
+                        document.getElementById("radius").value = selectedObject.scale.x;
+                    } else {
+                        document.getElementById("scaleMenu").style.display = "block";
+                        document.getElementById("radiusMenu").style.display = "none";
+                        document.getElementById('scaleX').value = selectedObject.scale.x;
+                        document.getElementById('scaleY').value = selectedObject.scale.y;
+                        document.getElementById('scaleZ').value = selectedObject.scale.z;
+                    }
                 }
             }
             function closeMenu() {
@@ -428,12 +445,12 @@
                 return new THREE.Mesh(geometry, material);
             }
             function createCylinder() {
-                var geometry = new THREE.CylinderGeometry(1, 1, 1, 32);
+                var geometry = new THREE.CylinderGeometry(0.5, 0.5, 1, 32);
                 var material = new THREE.MeshBasicMaterial({ map: texture });
                 return new THREE.Mesh(geometry, material);
             }
             function createIcosahedron() {
-                var geometry = new THREE.IcosahedronGeometry(1);
+                var geometry = new THREE.IcosahedronGeometry(0.5, 2);
                 var material = new THREE.MeshBasicMaterial({ map: texture });
                 return new THREE.Mesh(geometry, material);
             }
@@ -463,15 +480,26 @@
                         return;
                     }
                     selectedObject.name = document.getElementById('nameInput').value;
-                    selectedObject.position.x = parseFloat(document.getElementById('positionX').value) * -1;
+                    selectedObject.position.x = parseFloat(document.getElementById('positionX').value);
                     selectedObject.position.z = parseFloat(document.getElementById('positionY').value);
                     selectedObject.position.y = parseFloat(document.getElementById('positionZ').value);
                     selectedObject.rotation.x = parseFloat(document.getElementById('rotationX').value) * (Math.PI / 180);
                     selectedObject.rotation.y = parseFloat(document.getElementById('rotationY').value) * (Math.PI / 180);
                     selectedObject.rotation.z = parseFloat(document.getElementById('rotationZ').value) * (Math.PI / 180);
-                    selectedObject.scale.x = parseFloat(document.getElementById('scaleX').value);
-                    selectedObject.scale.y = parseFloat(document.getElementById('scaleY').value);
-                    selectedObject.scale.z = parseFloat(document.getElementById('scaleZ').value);
+                    if (selectedObject.geometry.type == "IcosahedronGeometry") {
+                        selectedObject.scale.x = parseFloat(document.getElementById('radius').value);
+                        selectedObject.scale.y = parseFloat(document.getElementById('radius').value);
+                        selectedObject.scale.z = parseFloat(document.getElementById('radius').value);
+                    } else {
+                        selectedObject.scale.x = parseFloat(document.getElementById('scaleX').value);
+                        if (selectedObject.geometry.type == "PlaneGeometry") {
+                            selectedObject.scale.y = parseFloat(document.getElementById('scaleZ').value);
+                            selectedObject.scale.z = parseFloat(document.getElementById('scaleY').value);
+                        } else {
+                            selectedObject.scale.y = parseFloat(document.getElementById('scaleY').value);
+                            selectedObject.scale.z = parseFloat(document.getElementById('scaleZ').value);
+                        }
+                    }
                     fixPlane();
                 }
                 function fixPlane() {
@@ -622,7 +650,7 @@
                 }
                 
                 function loadCylinder(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
-                    const geometry = new THREE.CylinderGeometry(1, 1, 1, 32); // Adjust radii, height, and segments as needed
+                    const geometry = new THREE.CylinderGeometry(0.5, 0.5, 1, 32); // Adjust radii, height, and segments as needed
                     const material = new THREE.MeshBasicMaterial({ map: texture });
                     const cylinder = new THREE.Mesh(geometry, material);
                     setTransforms(cylinder, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
@@ -631,7 +659,7 @@
                 }
                 
                 function loadIcosahedron(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
-                    const geometry = new THREE.IcosahedronGeometry(1, 0); // Adjust radius and detail as needed
+                    const geometry = new THREE.IcosahedronGeometry(0.5, 2); // Adjust radius and detail as needed
                     const material = new THREE.MeshBasicMaterial({ map: texture });
                     const icosahedron = new THREE.Mesh(geometry, material);
                     setTransforms(icosahedron, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
