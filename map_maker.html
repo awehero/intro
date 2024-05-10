@@ -91,7 +91,6 @@
 
             var isTyping = false;
             var menu = document.getElementById('menu');
-            updateMenu();
             var menuInputs = menu.querySelectorAll('input[type="text"]');
             menuInputs.forEach(function(input) {
                 input.addEventListener('focus', function() {
@@ -130,7 +129,7 @@
                     updateMenu();
                 }
             }
-                
+            updateMenu(); 
             function updateMenu() {
                 if (selectedObject == null) {
                     menu.classList.add("hidden");
