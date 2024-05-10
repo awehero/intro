@@ -404,7 +404,7 @@
                         alert("Unknown object type");
                 }
                 scene.add(object);
-                //fixPlane();
+                fixPlane();
                 document.getElementById('objectSelect').selectedIndex = 0;
             }
             function createPlane() {
@@ -481,7 +481,7 @@
                     scene.children.forEach(function(object) {
                             if (object instanceof THREE.Mesh) {
                                 if (object.geometry instanceof THREE.PlaneGeometry) {
-                                    object.rotation.x = 90 * (Math.PI / 180);
+                                    object.rotation.x = -90 * (Math.PI / 180);
                                     object.position.y = -20;
                                     object.scale.x = 1000;
                                     object.scale.z = 1;
