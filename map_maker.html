@@ -38,6 +38,10 @@
             .hidden {
               display: none;
             }
+            #closeMenuButton {
+                position: absolute;
+                font-size
+            }
         </style>
     </head>
     <body oncopy="copyObject()">
@@ -61,6 +65,7 @@
             <option value="monkey">Monkey</option>
         </select>-->
         <div id="menu">
+            <button id="closeMenuButton" onclick="closeMenu()">X</button>
             <label>Name:</label><br>
             <input type="text" id="nameInput"><br><br>
             <label>Position:</label><br>
