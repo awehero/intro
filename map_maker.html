@@ -408,7 +408,7 @@
                 document.getElementById('objectSelect').selectedIndex = 0;
             }
             function createPlane() {
-                var geometry = new THREE.PlaneGeometry(5,5);
+                var geometry = new THREE.PlaneGeometry(1000,1);
                 var material = new THREE.MeshBasicMaterial({ map: texture });
                 return new THREE.Mesh(geometry, material);
             }
@@ -483,7 +483,6 @@
                                 if (object.geometry instanceof THREE.PlaneGeometry) {
                                     object.rotation.x = -90 * (Math.PI / 180);
                                     object.position.y = -20;
-                                    object.scale.x = 1000;
                                     object.scale.z = 1;
                                 }
                             }
