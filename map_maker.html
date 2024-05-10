@@ -700,6 +700,16 @@
                     object.scale.z = scaleY / 50;
                     object.scale.y = scaleZ / 50;
                     object.name = name;
+                    loaderFixer();
+                }
+                function loaderFixer() {
+                    scene.children.forEach(function(object) {
+                        object.rotation.x = object.rotation.x * -1;
+                        object.position.x = object.position.x * -1;
+                        var rotation = object.rotation.y;
+                        object.rotation.y = object.rotation.z;
+                        object.rotation.z = rotation;
+                    });
                 }
                 function getMapLink() {
                     var dataString = "";
