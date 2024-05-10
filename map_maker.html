@@ -161,7 +161,8 @@
 
             var view = "free";
             function updateView() {
-                view = document.getElementById('viewChanger').value;
+                alert("This is currently a work in progress. For best usage, just use free cam. 
+                //view = document.getElementById('viewChanger').value;
                 }
             document.addEventListener('mousemove', onMouseMove, false);
             document.addEventListener('click', onClick, false);
@@ -282,10 +283,10 @@
                         cameraRotation.y -= 0.01;
                     }
                     if (rotateUp) {
-                        cameraRotation.x -= 0.01;
+                        cameraRotation.x += 0.01;
                     }
                     if (rotateDown) {
-                        cameraRotation.x += 0.01;
+                        cameraRotation.x -= 0.01;
                     }
                     camera.rotation.x = cameraRotation.x;
                     camera.rotation.y = cameraRotation.y;
@@ -359,29 +360,30 @@
             animate();
 
             function addObject() {
-                var type = document.getElementById('objectSelect').value;
+                //var type = document.getElementById('objectSelect').value;
+                var type = prompt("What object do you want to add? A = Plane, B = Cube, C = Cone, D = Finish, E = Cylinder, F = Sphere, G = Monkey (***TYPE ANSWER WITH A CAPITAL LETTER***)";
                 var object;
 
                 switch (type) {
-                    case 'plane':
+                    case 'A':
                         object = createPlane();
                         break;
-                    case 'cube':
+                    case 'B':
                         object = createCube();
                         break;
-                    case 'cone':
+                    case 'C':
                         object = createCone();
                         break;
-                    case 'sphere':
+                    case 'D':
                         object = createSphere();
                         break;
-                    case 'cylinder':
+                    case 'E':
                         object = createCylinder();
                         break;
-                    case 'icosahedron':
+                    case 'F':
                         object = createIcosahedron();
                         break;
-                    case 'monkey':
+                    case 'G':
                         object = createMonkey();
                         break;
                 }
