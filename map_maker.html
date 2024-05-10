@@ -181,6 +181,7 @@
             var rotateRight = false
             var rotateUp = false;
             var rotateDown = false;
+            var cameraSpeed = 0.03;
             var cameraRotation = {
                 x: 0,
                 y: 0,
@@ -260,26 +261,26 @@
             setInterval(function() {
                 if (view == "free") {
                     if (moveForward) {
-                        camera.position.x -= Math.sin(cameraRotation.y) * 0.03;
-                        camera.position.z -= Math.cos(cameraRotation.y) * 0.03;
+                        camera.position.x -= Math.sin(cameraRotation.y) * cameraSpeed;
+                        camera.position.z -= Math.cos(cameraRotation.y) * cameraSpeed;
                     }
                     if (moveBackward) {
-                        camera.position.x += Math.sin(cameraRotation.y) * 0.03;
-                        camera.position.z += Math.cos(cameraRotation.y) * 0.03;
+                        camera.position.x += Math.sin(cameraRotation.y) * cameraSpeed;
+                        camera.position.z += Math.cos(cameraRotation.y) * cameraSpeed;
                     }
                     if (moveLeft) {
-                        camera.position.x += Math.round(Math.sin(cameraRotation.y - Math.PI / 2) * 3) / 100;
-                        camera.position.z += Math.round(Math.cos(cameraRotation.y - Math.PI / 2) * 3) / 100;
+                        camera.position.x += Math.round(Math.sin(cameraRotation.y - Math.PI / 2) * cameraSpeed * 100) / 100;
+                        camera.position.z += Math.round(Math.cos(cameraRotation.y - Math.PI / 2) * cameraSpeed * 100) / 100;
                     }
                     if (moveRight) {
-                        camera.position.x -= Math.sin(cameraRotation.y - Math.PI / 2) * 0.03;
-                        camera.position.z -= Math.cos(cameraRotation.y - Math.PI / 2) * 0.03;
+                        camera.position.x -= Math.sin(cameraRotation.y - Math.PI / 2) * cameraSpeed;
+                        camera.position.z -= Math.cos(cameraRotation.y - Math.PI / 2) * cameraSpeed;
                     }
                     if (moveUp) {
-                        camera.position.y += 0.03;
+                        camera.position.y += cameraSpeed;
                     }
                     if (moveDown) {
-                        camera.position.y -= 0.03;
+                        camera.position.y -= cameraSpeed;
                     }
                     if (rotateLeft) {
                         cameraRotation.y += 0.01;
