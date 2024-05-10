@@ -601,7 +601,7 @@
                 }
                 
                 function loadCone(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
-                    const geometry = new THREE.ConeGeometry(1, 1, 32); // Adjust size and segments as needed
+                    const geometry = new THREE.ConeGeometry(0.5, 1, 32); // Adjust size and segments as needed
                     const material = new THREE.MeshBasicMaterial({ map: texture });
                     const cone = new THREE.Mesh(geometry, material);
                     setTransforms(cone, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
