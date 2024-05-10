@@ -182,6 +182,7 @@
             var rotateUp = false;
             var rotateDown = false;
             var cameraSpeed = 0.03;
+            var speedBooster = 1;
             var cameraRotation = {
                 x: 0,
                 y: 0,
@@ -222,6 +223,9 @@
                     case 'ArrowDown':
                         rotateDown = true;
                         break;
+                    case 'shiftKey':
+                        speedBooster = 3;
+                        break;
                 }
             }
             function onKeyUp(event) {
@@ -256,31 +260,34 @@
                     case 'ArrowDown':
                         rotateDown = false;
                         break;
+                    case 'shiftKey':
+                        speedBooster = 1;
+                        break;
                 }
             }
             setInterval(function() {
                 if (view == "free") {
                     if (moveForward) {
-                        camera.position.x -= Math.sin(cameraRotation.y) * cameraSpeed;
-                        camera.position.z -= Math.cos(cameraRotation.y) * cameraSpeed;
+                        camera.position.x -= Math.sin(cameraRotation.y) * cameraSpeed * speedBooster;
+                        camera.position.z -= Math.cos(cameraRotation.y) * cameraSpeed * speedBooster;
                     }
                     if (moveBackward) {
-                        camera.position.x += Math.sin(cameraRotation.y) * cameraSpeed;
-                        camera.position.z += Math.cos(cameraRotation.y) * cameraSpeed;
+                        camera.position.x += Math.sin(cameraRotation.y) * cameraSpeed * speedBooster;
+                        camera.position.z += Math.cos(cameraRotation.y) * cameraSpeed * speedBooster;
                     }
                     if (moveLeft) {
-                        camera.position.x += Math.round(Math.sin(cameraRotation.y - Math.PI / 2) * cameraSpeed * 100) / 100;
-                        camera.position.z += Math.round(Math.cos(cameraRotation.y - Math.PI / 2) * cameraSpeed * 100) / 100;
+                        camera.position.x += Math.round(Math.sin(cameraRotation.y - Math.PI / 2) * cameraSpeed * 100 * speedBooster) / 100;
+                        camera.position.z += Math.round(Math.cos(cameraRotation.y - Math.PI / 2) * cameraSpeed * 100 * speedBooster) / 100;
                     }
                     if (moveRight) {
-                        camera.position.x -= Math.sin(cameraRotation.y - Math.PI / 2) * cameraSpeed;
-                        camera.position.z -= Math.cos(cameraRotation.y - Math.PI / 2) * cameraSpeed;
+                        camera.position.x -= Math.sin(cameraRotation.y - Math.PI / 2) * cameraSpeed * speedBooster;
+                        camera.position.z -= Math.cos(cameraRotation.y - Math.PI / 2) * cameraSpeed * speedBooster;
                     }
                     if (moveUp) {
-                        camera.position.y += cameraSpeed;
+                        camera.position.y += cameraSpeed * speedBooster;
                     }
                     if (moveDown) {
-                        camera.position.y -= cameraSpeed;
+                        camera.position.y -= cameraSpeed * speedBooster;
                     }
                     if (rotateLeft) {
                         cameraRotation.y += 0.01;
