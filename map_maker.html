@@ -463,7 +463,7 @@
                         return;
                     }
                     selectedObject.name = document.getElementById('nameInput').value;
-                    selectedObject.position.x = parseFloat(document.getElementById('positionX').value);
+                    selectedObject.position.x = parseFloat(document.getElementById('positionX').value) * -1;
                     selectedObject.position.z = parseFloat(document.getElementById('positionY').value);
                     selectedObject.position.y = parseFloat(document.getElementById('positionZ').value);
                     selectedObject.rotation.x = parseFloat(document.getElementById('rotationX').value) * (Math.PI / 180);
