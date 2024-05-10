@@ -408,7 +408,7 @@
                 document.getElementById('objectSelect').selectedIndex = 0;
             }
             function createPlane() {
-                var geometry = new THREE.PlaneGeometry(1000,1);
+                var geometry = new THREE.PlaneGeometry(1,1);
                 var material = new THREE.MeshBasicMaterial({ map: texture });
                 return new THREE.Mesh(geometry, material);
             }
