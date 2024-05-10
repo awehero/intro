@@ -458,20 +458,21 @@
                 return object;
             }
                 function updateObject() {
-                        if (!selectedObject) {
-                                console.error('Selected object not found');
-                                return;
-                        }
-                        selectedObject.name = document.getElementById('nameInput').value;
-                        selectedObject.position.x = parseFloat(document.getElementById('positionX').value);
-                        selectedObject.position.z = parseFloat(document.getElementById('positionY').value);
-                        selectedObject.position.y = parseFloat(document.getElementById('positionZ').value);
-                        selectedObject.rotation.x = parseFloat(document.getElementById('rotationX').value) * (Math.PI / 180);
-                        selectedObject.rotation.y = parseFloat(document.getElementById('rotationY').value) * (Math.PI / 180);
-                        selectedObject.rotation.z = parseFloat(document.getElementById('rotationZ').value) * (Math.PI / 180);
-                        selectedObject.scale.x = parseFloat(document.getElementById('scaleX').value);
-                        selectedObject.scale.y = parseFloat(document.getElementById('scaleY').value);
-                        selectedObject.scale.z = parseFloat(document.getElementById('scaleZ').value);
+                    if (!selectedObject) {
+                        console.error('Selected object not found');
+                        return;
+                    }
+                    selectedObject.name = document.getElementById('nameInput').value;
+                    selectedObject.position.x = parseFloat(document.getElementById('positionX').value);
+                    selectedObject.position.z = parseFloat(document.getElementById('positionY').value);
+                    selectedObject.position.y = parseFloat(document.getElementById('positionZ').value);
+                    selectedObject.rotation.x = parseFloat(document.getElementById('rotationX').value) * (Math.PI / 180);
+                    selectedObject.rotation.y = parseFloat(document.getElementById('rotationY').value) * (Math.PI / 180);
+                    selectedObject.rotation.z = parseFloat(document.getElementById('rotationZ').value) * (Math.PI / 180);
+                    selectedObject.scale.x = parseFloat(document.getElementById('scaleX').value);
+                    selectedObject.scale.y = parseFloat(document.getElementById('scaleY').value);
+                    selectedObject.scale.z = parseFloat(document.getElementById('scaleZ').value);
+                    fixPlane();
                 }
                 function fixPlane() {
                     scene.children.forEach(function(object) {
