@@ -77,7 +77,7 @@
             <input type="text" id="scaleZ"> Z<br><br>
             <button onclick="updateObject()">Update</button>
             <button id="deleteButton">Delete</button>
-            <button id="closeMenuButton" onclick="menu.classList.add("hidden");">Close</button>
+            <button id="closeMenuButton" onclick="closeMenu()">Close</button>
         </div>
         <script>
             var scene = new THREE.Scene();
@@ -150,6 +150,9 @@
                     document.getElementById('scaleY').value = selectedObject.scale.z;
                     document.getElementById('scaleZ').value = selectedObject.scale.y;
                 }
+            }
+            function closeMenu() {
+                menu.classList.add("hidden");
             }
             document.getElementById("deleteButton").addEventListener("click", function() {
                 if (selectedObject) {
