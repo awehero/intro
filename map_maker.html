@@ -710,63 +710,66 @@
                         object.rotation.z = rotation;
                     });
                 }
-                function getMapLink() {
+               function getMapLinkTest() {
                     var dataString = "";
-                    dataString = "";
                     scene.children.forEach(function(object) {
                         var objectType;
-                        if (object instanceof THREE.Mesh) {
-                            if (object.geometry instanceof THREE.PlaneGeometry) {
-                                objectType = "A";
-                            } else if (object.geometry instanceof THREE.BoxGeometry) {
-                                objectType = "B";
-                            } else if (object.geometry instanceof THREE.ConeGeometry) {
-                                objectType = "C";
-                            } else if (object.geometry instanceof THREE.SphereGeometry) {
-                                objectType = "D";
-                            } else if (object.geometry instanceof THREE.CylinderGeometry) {
-                                objectType = "E";
-                            } else if (object.geometry instanceof THREE.IcosahedronGeometry) {
-                                objectType = "F";
-                            } else {
-                                objectType = "G";
-                            }
-                        } else {
-                            objectType = "G";
-                        }
-                        var objectName = object.name ? object.name : "none";
-                        var position = object.position;
-                        var roundedPosition = {
-                            x: Math.round(position.x * 1000) / 1000,
-                            y: Math.round(position.y * 1000) / 1000,
-                            z: Math.round(position.z * 1000) / 1000
-                        };
-                        var rotation = object.rotation;
-                        var roundedRotation = {
-                            x: Math.round(rotation.x * 1000) / 1000,
-                            y: Math.round(rotation.y * 1000) / 1000,
-                            z: Math.round(rotation.z * 1000) / 1000
-                        };
-                        var scale = object.scale;
-                        var roundedScale = {
-                            x: Math.round(scale.x * 1000) / 1000,
-                            y: Math.round(scale.y * 1000) / 1000,
-                            z: Math.round(scale.z * 1000) / 1000
-                        };
-                        var objectData = objectType + (roundedPosition.x * 100) + "$" + (roundedPosition.y * 100) + "$" + (roundedPosition.z * 100) + "$" + Math.round(roundedRotation.x * 100) + "$" + Math.round(roundedRotation.y * 100) + "$" + Math.round(roundedRotation.z * 100) + "$" + (roundedScale.x * 100) + "$" + (roundedScale.y * 100) + "$" + (roundedScale.z * 100) + "$" + objectName;
-                        dataString += objectData;
+                                        if (object instanceof THREE.Mesh) {
+                                            if (object.geometry instanceof THREE.PlaneGeometry) {
+                                                objectType = "A";
+                                            } else if (object.geometry instanceof THREE.BoxGeometry) {
+                                                objectType = "B";
+                                            } else if (object.geometry instanceof THREE.ConeGeometry) {
+                                                objectType = "C";
+                                            } else if (object.geometry instanceof THREE.SphereGeometry) {
+                                                objectType = "D";
+                                            } else if (object.geometry instanceof THREE.CylinderGeometry) {
+                                                objectType = "E";
+                                            } else if (object.geometry instanceof THREE.IcosahedronGeometry) {
+                                                objectType = "F";
+                                            } else {
+                                                objectType = "G";
+                                            }
+                                        } else {
+                                            objectType = "G";
+                                        }
+                                        var objectName = object.name ? object.name : "none";
+                                        var position = object.position;
+                                        var roundedPosition = {
+                                            x: Math.round(position.x * 1000) / 1000,
+                                            y: Math.round(position.y * 1000) / 1000,
+                                            z: Math.round(position.z * 1000) / 1000
+                                        };
+                                        var rotation = object.rotation;
+                                        var roundedRotation = {
+                                            x: Math.round(rotation.x * 1000) / 1000,
+                                            y: Math.round(rotation.y * 1000) / 1000,
+                                            z: Math.round(rotation.z * 1000) / 1000
+                                        };
+                                        var scale = object.scale;
+                                        var roundedScale = {
+                                            x: Math.round(scale.x * 1000) / 1000,
+                                            y: Math.round(scale.y * 1000) / 1000,
+                                            z: Math.round(scale.z * 1000) / 1000
+                                        };
+                                        var objectData = objectType + (roundedPosition.x * 100) + "$" + (roundedPosition.y * 100) + "$" + (roundedPosition.z * 100) + "$" + Math.round(roundedRotation.x * 100) + "$" + Math.round(roundedRotation.y * 100) + "$" + Math.round(roundedRotation.z * 100) + "$" + (roundedScale.x * 100) + "$" + (roundedScale.y * 100) + "$" + (roundedScale.z * 100) + "$" + objectName;
+                                        dataString += objectData;
                     });
+                
                     dataString = "https://onionfist.com/icedodo/?mapCodeVersion=v8&mapUrl=" + dataString;
-                    document.getElementById("getMapLinkButton").addEventListener("click", function() {
-                            navigator.clipboard.writeText(dataString)
-                            .then(function() {
-                                    alert("Text copied to clipboard");
-                            })
-                            .catch(function(error)  {
-                                    alert("Unable to automatically copy text: ", error);
-                            });
-                    });
+                    return dataString;
                 }
+                
+                document.getElementById("getMapLinkButton").addEventListener("click", function() {
+                    var mapLink = getMapLinkTest();
+                    navigator.clipboard.writeText(mapLink)
+                        .then(function() {
+                            alert("Text copied to clipboard");
+                        })
+                        .catch(function(error)  {
+                            alert("Unable to automatically copy text: " + error);
+                        });
+                });
         </script>
     </body>
 </html>
