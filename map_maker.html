@@ -704,7 +704,6 @@
                 }
                 function loaderFixer() {
                     scene.children.forEach(function(object) {
-                        object.rotation.x = object.rotation.x * -1;
                         var rotation = object.rotation.y;
                         object.rotation.y = object.rotation.z;
                         object.rotation.z = rotation;
