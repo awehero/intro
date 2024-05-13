@@ -152,7 +152,7 @@
                     document.getElementById('positionY').value = selectedObject.position.z;
                     document.getElementById('positionZ').value = selectedObject.position.y;
                     document.getElementById('rotationX').value = (Math.round(selectedObject.rotation.x * (180 / Math.PI) * 100)) / 100;
-                    document.getElementById('rotationY').value = (Math.round(selectedObject.rotation.z * (180 / Math.PI) * 100)) / -100;
+                    document.getElementById('rotationY').value = (Math.round(selectedObject.rotation.z * (180 / Math.PI) * 100)) / 100;
                     document.getElementById('rotationZ').value = (Math.round(selectedObject.rotation.y * (180 / Math.PI) * 100)) / 100;
                     if (selectedObject.geometry.type == "IcosahedronGeometry") {
                         document.getElementById("scaleMenu").style.display = "none";
@@ -496,8 +496,8 @@
                             selectedObject.scale.y = parseFloat(document.getElementById('scaleZ').value);
                             selectedObject.scale.z = parseFloat(document.getElementById('scaleY').value);
                         } else {
-                            selectedObject.scale.y = parseFloat(document.getElementById('scaleY').value);
-                            selectedObject.scale.z = parseFloat(document.getElementById('scaleZ').value);
+                            selectedObject.scale.y = parseFloat(document.getElementById('scaleZ').value);
+                            selectedObject.scale.z = parseFloat(document.getElementById('scaleY').value);
                         }
                     }
                     fixPlane();
