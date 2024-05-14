@@ -462,14 +462,9 @@
                 return new THREE.Mesh(geometry, material);
             }
             function createMonkey() {
-                const loader = new THREE.GLTFLoader();
-                loader.load('https://awehero.github.io/intro/gold_star.glb', function (gltf) {
-                    gltf.scene.traverse(function (child) {
-                        if (child.isMesh) {
-                            scene.add(child);
-                        }
-                    });
-                });
+                var geometry = new THREE.TorusGeometry(1, 0.5, 32, 32);
+                var material = new THREE.MeshBasicMaterial({ map: texture });
+                return new THREE.Mesh(geometry, material);
             }
                 function updateObject() {
                     if (!selectedObject) {
@@ -674,14 +669,9 @@
                 }
                 
                 function loadMonkey(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
-                    const loader = new THREE.GLTFLoader();
-                    loader.load('https://awehero.github.io/intro/gold_star.glb', function (gltf) {
-                        gltf.scene.traverse(function (child) {
-                            if (child.isMesh) {
-                                scene.add(child);
-                            }
-                        });
-                    });
+                    var geometry = new THREE.TorusGeometry(1, 0.5, 32, 32);
+                    var material = new THREE.MeshBasicMaterial({ map: texture });
+                    return new THREE.Mesh(geometry, material);
                 }
                 function setTransforms(object, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
                     object.position.x = positionX / 100;
