@@ -464,14 +464,11 @@
             function createMonkey() {
                 const loader = new THREE.GLTFLoader();
                 loader.load('https://awehero.github.io/intro/gold_star.glb', function (gltf) {
-                    // Check if the loaded object is a group
-                    if (gltf.scene.children.length > 1) {
-                        console.warn("The loaded GLTF file contains multiple objects. Adding the first one to the scene.");
-                    }
-                
-                    // Add the first object in the scene's children array
-                    const customModel = gltf.scene.children[0];
-                    scene.add(customModel);
+                    gltf.scene.traverse(function (child) {
+                        if (child.isMesh) {
+                            scene.add(child);
+                        }
+                    });
                 });
             }
                 function updateObject() {
@@ -679,14 +676,11 @@
                 function loadMonkey(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
                     const loader = new THREE.GLTFLoader();
                     loader.load('https://awehero.github.io/intro/gold_star.glb', function (gltf) {
-                        // Check if the loaded object is a group
-                        if (gltf.scene.children.length > 1) {
-                            console.warn("The loaded GLTF file contains multiple objects. Adding the first one to the scene.");
-                        }
-                    
-                        // Add the first object in the scene's children array
-                        const customModel = gltf.scene.children[0];
-                        scene.add(customModel);
+                        gltf.scene.traverse(function (child) {
+                            if (child.isMesh) {
+                                scene.add(child);
+                            }
+                        });
                     });
                 }
                 function setTransforms(object, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
