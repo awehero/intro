@@ -440,7 +440,7 @@
                 return new THREE.Mesh(geometry, material);
             }
             function createSphere() {
-                var geometry = new THREE.SphereGeometry(1, 32, 32);
+                var geometry = new THREE.SphereGeometry(0.5, 32, 32);
                 var material = new THREE.MeshBasicMaterial({ map: texture });
                 return new THREE.Mesh(geometry, material);
             }
@@ -650,7 +650,7 @@
                     return cone;
                 }
                 function loadSphere(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
-                    const geometry = new THREE.SphereGeometry(1, 32, 32); // Adjust radius and segments as needed
+                    const geometry = new THREE.SphereGeometry(0.5, 32, 32); // Adjust radius and segments as needed
                     const material = new THREE.MeshBasicMaterial({ map: texture });
                     const sphere = new THREE.Mesh(geometry, material);
                     setTransforms(sphere, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
