@@ -152,8 +152,8 @@
                     document.getElementById('positionY').value = selectedObject.position.z;
                     document.getElementById('positionZ').value = selectedObject.position.y;
                     document.getElementById('rotationX').value = (Math.round(selectedObject.rotation.x * (180 / Math.PI) * 100)) / 100;
-                    document.getElementById('rotationY').value = (Math.round(selectedObject.rotation.z * (180 / Math.PI) * 100)) / 100;
-                    document.getElementById('rotationZ').value = (Math.round(selectedObject.rotation.y * (180 / Math.PI) * 100)) / 100;
+                    document.getElementById('rotationY').value = (Math.round(selectedObject.rotation.y * (180 / Math.PI) * 100)) / 100;
+                    document.getElementById('rotationZ').value = (Math.round(selectedObject.rotation.z * (180 / Math.PI) * 100)) / 100;
                     if (selectedObject.geometry.type == "IcosahedronGeometry") {
                         document.getElementById("scaleMenu").style.display = "none";
                         document.getElementById("radiusMenu").style.display = "block";
@@ -496,8 +496,8 @@
                             selectedObject.scale.y = parseFloat(document.getElementById('scaleZ').value);
                             selectedObject.scale.z = parseFloat(document.getElementById('scaleY').value);
                         } else {
-                            selectedObject.scale.y = parseFloat(document.getElementById('scaleZ').value);
-                            selectedObject.scale.z = parseFloat(document.getElementById('scaleY').value);
+                            selectedObject.scale.y = parseFloat(document.getElementById('scaleY').value);
+                            selectedObject.scale.z = parseFloat(document.getElementById('scaleZ').value);
                         }
                     }
                     fixPlane();
@@ -560,58 +560,65 @@
                 function loadMap() {
                     let input = prompt("Paste your map link here:");
                         if (input) {
-                            const indexOfEquals = input.indexOf('=');
-                            if (indexOfEquals !== -1) {
-                                let i = indexOfEquals + 1;
-                                while (i < input.length) {
-                                    if (input[i].match(/[A-G]/)) {
-                                        break;
+                            var warning = prompt("Are you sure you want to load a map? This will delete everything currently on screen! (y/n)");
+                            if (warning && (warning.toLowerCase() === 'y')) {
+                                var deleteNumber = scene.children.length;
+                                for (let i = 0; i < deleteNumber; i++) {
+                                    scene.remove(scene.children[0]);
+                                }
+                                const indexOfEquals = input.indexOf('=');
+                                if (indexOfEquals !== -1) {
+                                    let i = indexOfEquals + 1;
+                                    while (i < input.length) {
+                                        if (input[i].match(/[A-G]/)) {
+                                            break;
+                                        }
+                                        i++;
                                     }
-                                    i++;
+                                    if (i > indexOfEquals) {
+                                        input = input.substring(i);
+                                    }
                                 }
-                                if (i > indexOfEquals) {
-                                    input = input.substring(i);
+                                const index = input.indexOf('&');
+                                if (index !== -1) {
+                                    input = input.substring(0, index);
                                 }
+                                const objectDataArray = input.split(/(?=[A-Z])/);
+                                objectDataArray.forEach(objData => {
+                                    const type = objData.charAt(0);
+                                    const rest = objData.slice(1);
+                                    const [positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name] = rest.split("$");
+                                    let object;
+                                    switch (type) {
+                                            case 'A':
+                                                object = loadPlane(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                                break;
+                                            case 'B':
+                                                object = loadCube(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                                break;
+                                            case 'C':
+                                                object = loadCone(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                                break;
+                                            case 'D':
+                                                object = loadSphere(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                                break;
+                                            case 'E':
+                                                object = loadCylinder(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                                break;
+                                            case 'F':
+                                                object = loadIcosahedron(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                                break;
+                                            case 'G':
+                                                object = loadMonkey(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                                break;
+                                            default:
+                                                console.error('Unknown object type:', type);
+                                    }
+                                    if (object) {
+                                        scene.add(object);
+                                    }
+                                });
                             }
-                            const index = input.indexOf('&');
-                            if (index !== -1) {
-                                input = input.substring(0, index);
-                            }
-                            const objectDataArray = input.split(/(?=[A-Z])/);
-                            objectDataArray.forEach(objData => {
-                                const type = objData.charAt(0);
-                                const rest = objData.slice(1);
-                                const [positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name] = rest.split("$");
-                                let object;
-                                switch (type) {
-                                        case 'A':
-                                            object = loadPlane(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
-                                            break;
-                                        case 'B':
-                                            object = loadCube(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
-                                            break;
-                                        case 'C':
-                                            object = loadCone(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
-                                            break;
-                                        case 'D':
-                                            object = loadSphere(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
-                                            break;
-                                        case 'E':
-                                            object = loadCylinder(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
-                                            break;
-                                        case 'F':
-                                            object = loadIcosahedron(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
-                                            break;
-                                        case 'G':
-                                            object = loadMonkey(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
-                                            break;
-                                        default:
-                                            console.error('Unknown object type:', type);
-                                }
-                                if (object) {
-                                    scene.add(object);
-                                }
-                            });
                         }
                 }
                 function loadPlane(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
@@ -704,6 +711,7 @@
                 }
                 function loaderFixer() {
                     scene.children.forEach(function(object) {
+                        object.position.x = -object.position.x;
                         var rotation = object.rotation.y;
                         object.rotation.y = object.rotation.z;
                         object.rotation.z = rotation;
