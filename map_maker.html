@@ -159,11 +159,16 @@
                         document.getElementById("radiusMenu").style.display = "block";
                         document.getElementById("radius").value = selectedObject.scale.x;
                     } else {
-                        document.getElementById("scaleMenu").style.display = "block";
-                        document.getElementById("radiusMenu").style.display = "none";
-                        document.getElementById('scaleX').value = selectedObject.scale.x;
-                        document.getElementById('scaleY').value = selectedObject.scale.y;
-                        document.getElementById('scaleZ').value = selectedObject.scale.z;
+                        if (selectedObject.geometry.type == "SphereGeometry") {
+                            document.getElementById("scaleMenu").style.display = "none";
+                            document.getElementById("radiusMenu").style.display = "none";
+                        } else {
+                            document.getElementById("scaleMenu").style.display = "block";
+                            document.getElementById("radiusMenu").style.display = "none";
+                            document.getElementById('scaleX').value = selectedObject.scale.x;
+                            document.getElementById('scaleY').value = selectedObject.scale.y;
+                            document.getElementById('scaleZ').value = selectedObject.scale.z;
+                        }
                     }
                 }
             }
