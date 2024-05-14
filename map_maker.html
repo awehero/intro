@@ -763,8 +763,8 @@
                                         var scale = object.scale;
                                         var roundedScale = {
                                             x: Math.round(scale.x * 1000) / 1000,
-                                            y: Math.round(scale.y * 1000) / 1000,
-                                            z: Math.round(scale.z * 1000) / 1000
+                                            y: Math.round(scale.z * 1000) / 1000,
+                                            z: Math.round(scale.y * 1000) / 1000
                                         };
                                         var objectData = objectType + (roundedPosition.x * 100) + "$" + (roundedPosition.y * 100) + "$" + (roundedPosition.z * 100) + "$" + Math.round(roundedRotation.x * 100) + "$" + Math.round(roundedRotation.y * 100) + "$" + Math.round(roundedRotation.z * 100) + "$" + (roundedScale.x * 100) + "$" + (roundedScale.y * 100) + "$" + (roundedScale.z * 100) + "$" + objectName;
                                         dataString += objectData;
