@@ -460,24 +460,11 @@
                 return new THREE.Mesh(geometry, material);
             }
             function createMonkey() {
-                var loader = new THREE.ObjectLoader(); //If this doesn't work, use OBJLoader();
-                var object;       //You will still have to add the monkey file and object loader file I think
-                loader.load(
-                    'models/monkey.obj',
-                    function (obj) {
-                        object = obj;
-                        object.scale.set(0.02, 0.02, 0.02);
-                        object.position.set(0, 0, 0);
-                        scene.add(object);
-                    },
-                    function (xhr) {
-                        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-                    },
-                    function (error) {
-                        console.log('An error happened');
-                    }
-                    );
-                return object;
+                const loader = new THREE.GLTFLoader();
+                loader.load('https://awehero.github.io/intro/gold_star.glb', function (gltf) {
+                    const customModel = gltf.scene;
+                    scene.add(customModel);
+                });
             }
                 function updateObject() {
                     if (!selectedObject) {
@@ -682,26 +669,11 @@
                 }
                 
                 function loadMonkey(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
-                    /*const loader = new THREE.GLTFLoader();
-                    loader.load(
-                        // URL of the model
-                        'path/to/monkey.gltf',
-                        // Called when the model is loaded
-                        function (gltf) {
-                            const monkey = gltf.scene;
-                            setTransforms(monkey, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
-                            monkey.name = name;
-                            scene.add(monkey);
-                        },
-                        // Called while loading is progressing
-                        function (xhr) {
-                            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-                        },
-                        // Called when loading has errors
-                        function (error) {
-                            console.error('An error happened', error);
-                        }
-                    );*/
+                    const loader = new THREE.GLTFLoader();
+                    loader.load('https://awehero.github.io/intro/gold_star.glb', function (gltf) {
+                        const customModel = gltf.scene;
+                        scene.add(customModel);
+                    });
                 }
                 function setTransforms(object, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
                     object.position.x = positionX / 100;
