@@ -618,6 +618,7 @@
                                         scene.add(object);
                                     }
                                 });
+                                loaderFixer();
                             }
                         }
                 }
@@ -707,7 +708,6 @@
                     object.scale.z = scaleY / 50;
                     object.scale.y = scaleZ / 50;
                     object.name = name;
-                    loaderFixer();
                 }
                 function loaderFixer() {
                     scene.children.forEach(function(object) {
