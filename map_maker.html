@@ -690,7 +690,7 @@
                     const monkey = new THREE.Mesh(geometry, material);
                     setTransforms(monkey, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
                     monkey.name = name;
-                    return new THREE.Mesh(geometry, material);
+                    return monkey;
                 }
                 function setTransforms(object, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
                     object.position.x = positionX / 100;
