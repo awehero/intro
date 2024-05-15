@@ -35,11 +35,17 @@
                 top: 20px;
                 left: 2%;
             }
-             #settingsButton {
+            #settingsButton {
                 position: absolute;
                 top: 90%;
-                left: 3%;
-             }
+                left: 7%;
+            }
+            #helpButton {
+                position: absolute;
+                top: 90%;
+                left: 2%;
+                font-size: large;
+            }
             .hidden {
               display: none;
             }
@@ -56,6 +62,7 @@
         <button id="loadMapButton" onclick="loadMap()">Load Map</button>
         <button id="objectSelect" onclick="addObject()">Add Object</button>
         <button id="settingsButton" onclick="openSettings()">Settings</button>
+        <button id="helpButton" onclick="openHelpMenu()">?</button>
         <div><!--<select id="objectSelect" onchange="addObject()"><option selected="" disabled="">Add</option>
             
             <option value="plane">Plane</option>
