@@ -15,6 +15,15 @@
                 border: 1px solid #ccc;
                 z-index: 1;
             }
+            #settingsMenu {
+                position: absolute;
+                top: 50%;
+                left: 20%;
+                background-color: white;
+                padding: 10px;
+                border: 1px solid #ccc;
+                z-index: 1;
+            }
             #getMapLinkButton {
                 position: absolute;
                 top: 20px;
@@ -37,12 +46,13 @@
             }
             #settingsButton {
                 position: absolute;
-                top: 90%;
+                top: 95%;
                 left: 7%;
+                font-size: large;
             }
             #helpButton {
                 position: absolute;
-                top: 90%;
+                top: 95%;
                 left: 2%;
                 font-size: large;
             }
@@ -63,16 +73,6 @@
         <button id="objectSelect" onclick="addObject()">Add Object</button>
         <button id="settingsButton" onclick="openSettings()">Settings</button>
         <button id="helpButton" onclick="openHelpMenu()">?</button>
-        <div><!--<select id="objectSelect" onchange="addObject()"><option selected="" disabled="">Add</option>
-            
-            <option value="plane">Plane</option>
-            <option value="cube">Cube</option>
-            <option value="cone">Cone</option>
-            <option value="sphere">Finish</option>
-            <option value="cylinder">Cylinder</option>
-            <option value="icosahedron">Sphere</option>
-            <option value="monkey">Monkey</option>
-        </select>--></div>
         <div id="menu" class="">
             <label>Name:</label><br>
             <input type="text" id="nameInput"><br><br>
@@ -408,6 +408,10 @@
                 renderer.render(scene, camera);
             }
             animate();
+
+            function openHelpMenu() {
+                window.location.href = 'https://awehero.github.io/intro/mapmaking_help.html';
+            }
 
             function addObject() {
                 //var type = document.getElementById('objectSelect').value;
