@@ -478,7 +478,7 @@
                 return new THREE.Mesh(geometry, material);
             }
             function createMonkey() {
-                var geometry = new THREE.TorusGeometry(1, 0.5, 32, 32);
+                const geometry = new THREE.OctahedronGeometry(2, 2);
                 var material = new THREE.MeshBasicMaterial({ map: texture });
                 return new THREE.Mesh(geometry, material);
             }
@@ -546,7 +546,7 @@
                         case 'IcosahedronGeometry':
                             object = createIcosahedron();
                             break;
-                        case 'TorusGeometry':
+                        case 'OctahedronGeometry':
                             object = createMonkey();
                             break;
                         }
@@ -685,7 +685,7 @@
                 }
                 
                 function loadMonkey(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
-                    var geometry = new THREE.TorusGeometry(1, 0.5, 32, 32);
+                    const geometry = new THREE.OctahedronGeometry(2, 2);
                     var material = new THREE.MeshBasicMaterial({ map: texture });
                     return new THREE.Mesh(geometry, material);
                 }
@@ -727,7 +727,7 @@
                                                 objectType = "E";
                                             } else if (object.geometry instanceof THREE.IcosahedronGeometry) {
                                                 objectType = "F";
-                                            } else if (object.geometry instanceof THREE.TorusGeometry) {
+                                            } else if (object.geometry instanceof THREE.OctahedronGeometry) {
                                                 objectType = "G";
                                             }
                                         } else {
