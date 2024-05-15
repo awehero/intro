@@ -727,7 +727,7 @@
                                                 objectType = "E";
                                             } else if (object.geometry instanceof THREE.IcosahedronGeometry) {
                                                 objectType = "F";
-                                            } else {
+                                            } else if (object.geometry instanceof THREE.TorusGeometry) {
                                                 objectType = "G";
                                             }
                                         } else {
