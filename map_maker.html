@@ -478,7 +478,7 @@
                 return new THREE.Mesh(geometry, material);
             }
             function createMonkey() {
-                const geometry = new THREE.OctahedronGeometry(2, 2);
+                const geometry = new THREE.OctahedronGeometry(2, 1);
                 var material = new THREE.MeshBasicMaterial({ map: texture });
                 return new THREE.Mesh(geometry, material);
             }
@@ -685,7 +685,7 @@
                 }
                 
                 function loadMonkey(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
-                    const geometry = new THREE.OctahedronGeometry(2, 2);
+                    const geometry = new THREE.OctahedronGeometry(2, 1);
                     var material = new THREE.MeshBasicMaterial({ map: texture });
                     return new THREE.Mesh(geometry, material);
                 }
