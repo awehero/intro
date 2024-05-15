@@ -687,6 +687,9 @@
                 function loadMonkey(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
                     const geometry = new THREE.OctahedronGeometry(2, 1);
                     var material = new THREE.MeshBasicMaterial({ map: texture });
+                    const monkey = new THREE.Mesh(geometry, material);
+                    setTransforms(monkey, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                    monkey.name = name;
                     return new THREE.Mesh(geometry, material);
                 }
                 function setTransforms(object, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
