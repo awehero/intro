@@ -68,6 +68,16 @@
                  cursor: pointer;
                  margin: 10px 0;
             }
+             .input-group {
+            margin: 10px 0;
+             }
+             .input-group label {
+                 display: inline-block;
+                 width: 100px;
+             }
+             .input-group input {
+                 width: 150px;
+             }
         </style>
     </head>
     <body oncopy="copyObject()">
@@ -336,15 +346,31 @@
                        </div>
                        <button type="button" onclick="showValues()">Show Values</button>
                    </form>
+                  <h2>Current Values</h2>
+                   <div id="currentValues"></div>
              </div>
         </div>
          <script>
              const customColorPicker = document.getElementById('customColorPicker');
              customColorPicker.addEventListener('change', (event) => {
-            console.log('Selected color:', event.target.value);
-            document.body.style.backgroundColor = '#' + event.target.value;
-        });
-    </script>
+                 console.log('Selected color:', event.target.value);
+                 document.body.style.backgroundColor = '#' + event.target.value;
+             });
+         </script>
+          <script>
+             function showValues() {
+                 const inputs = document.querySelectorAll('#controlForm input');
+                 let values = '';
+                 inputs.forEach(input => {
+                     if (input.type === 'checkbox') {
+                         values += `<p>${input.id.toUpperCase()}: ${input.checked ? 'On' : 'Off'}</p>`;
+                     } else {
+                         values += `<p>${input.id.toUpperCase()}: ${input.value}</p>`;
+                     }
+                 });
+                 document.getElementById('currentValues').innerHTML = values;
+             }
+         </script>
         <script>
             var scene = new THREE.Scene();
             var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
