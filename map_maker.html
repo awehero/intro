@@ -5,6 +5,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/js/controls/OrbitControls.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/js/loaders/TextureLoader.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+         <script src="https://jscolor.com/release/2.4/jscolor.js"></script>
         <style>
             #menu {
                 position: absolute;
@@ -59,6 +60,14 @@
             .hidden {
               display: none;
             }
+            #colorPicker, #customColorPicker {
+               width: 100px;
+               height: 40px;
+               border: none;
+               border-radius: 5px;
+               cursor: pointer;
+               margin: 10px 0;
+            }
         </style>
     </head>
     <body oncopy="copyObject()">
@@ -73,6 +82,8 @@
         <button id="objectSelect" onclick="addObject()">Add Object</button>
         <button id="settingsButton" onclick="openSettings()">Settings</button>
         <button id="helpButton" onclick="openHelpMenu()">?</button>
+         <label for="customColorPicker">Choose a color:</label>
+         <input class="jscolor" id="customColorPicker" value="ab2567">
         <div id="menu" class="">
             <label>Name:</label><br>
             <input type="text" id="nameInput"><br><br>
@@ -94,6 +105,13 @@
             <button id="deleteButton">Delete</button>
             <button id="closeMenuButton" onclick="closeMenu()">Close</button>
         </div>
+         <script>
+        const customColorPicker = document.getElementById('customColorPicker');
+        customColorPicker.addEventListener('change', (event) => {
+            console.log('Selected color:', event.target.value);
+            document.body.style.backgroundColor = '#' + event.target.value;
+        });
+    </script>
         <script>
             var scene = new THREE.Scene();
             var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
