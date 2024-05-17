@@ -61,12 +61,12 @@
               display: none;
             }
             #colorPicker, #customColorPicker {
-               width: 100px;
-               height: 40px;
-               border: none;
-               border-radius: 5px;
-               cursor: pointer;
-               margin: 10px 0;
+                 width: 100px;
+                 height: 40px;
+                 border: none;
+                 border-radius: 5px;
+                 cursor: pointer;
+                 margin: 10px 0;
             }
         </style>
     </head>
@@ -82,8 +82,7 @@
         <button id="objectSelect" onclick="addObject()">Add Object</button>
         <button id="settingsButton" onclick="openSettings()">Settings</button>
         <button id="helpButton" onclick="openHelpMenu()">?</button>
-         <label for="customColorPicker">Choose a color:</label>
-         <input class="jscolor" id="customColorPicker" value="ab2567">
+         <div id="blockEffectsMenu">
         <div id="menu" class="">
             <label>Name:</label><br>
             <input type="text" id="nameInput"><br><br>
@@ -104,10 +103,244 @@
             <button onclick="updateObject()">Update</button>
             <button id="deleteButton">Delete</button>
             <button id="closeMenuButton" onclick="closeMenu()">Close</button>
+             <div id="blockEffectsMenu">
+                  <h1>Control Parameters</h1>
+                   <form id="controlForm">
+                       <div class="input-group">
+                           <label for="id">ID:</label>
+                           <input type="number" id="id">
+                       </div>
+                       <div class="input-group">
+                           <label for="gx">GX:</label>
+                           <input type="number" id="gx">
+                       </div>
+                       <div class="input-group">
+                           <label for="gy">GY:</label>
+                           <input type="number" id="gy">
+                       </div>
+                       <div class="input-group">
+                           <label for="gz">GZ:</label>
+                           <input type="number" id="gz">
+                       </div>
+                       <div class="input-group">
+                           <label for="tx">TX:</label>
+                           <input type="number" id="tx">
+                       </div>
+                       <div class="input-group">
+                           <label for="ty">TY:</label>
+                           <input type="number" id="ty">
+                       </div>
+                       <div class="input-group">
+                           <label for="tz">TZ:</label>
+                           <input type="number" id="tz">
+                       </div>
+                       <div class="input-group">
+                           <label for="turn">Turn:</label>
+                           <input type="number" id="turn">
+                       </div>
+                       <div class="input-group">
+                           <label for="speed">Speed:</label>
+                           <input type="number" id="speed">
+                       </div>
+                       <div class="input-group">
+                           <label for="fov">FOV:</label>
+                           <input type="number" id="fov">
+                       </div>
+                       <div class="input-group">
+                           <label for="msg">MSG:</label>
+                           <input type="text" id="msg">
+                       </div>
+                       <div class="input-group">
+                           <label for="dx">DX:</label>
+                           <input type="number" id="dx">
+                       </div>
+                       <div class="input-group">
+                           <label for="dy">DY:</label>
+                           <input type="number" id="dy">
+                       </div>
+                       <div class="input-group">
+                           <label for="dz">DZ:</label>
+                           <input type="number" id="dz">
+                       </div>
+                       <div class="input-group">
+                           <label for="mat">MAT:</label>
+                           <input type="text" id="mat">
+                       </div>
+                       <div class="input-group">
+                           <label for="air">Air:</label>
+                           <input type="text" id="air">
+                       </div>
+                       <div class="input-group">
+                           <label for="topr">TopR:</label>
+                           <input type="number" id="topr">
+                       </div>
+                       <div class="input-group">
+                           <label for="mx">MX:</label>
+                           <input type="number" id="mx">
+                       </div>
+                       <div class="input-group">
+                           <label for="my">MY:</label>
+                           <input type="number" id="my">
+                       </div>
+                       <div class="input-group">
+                           <label for="mz">MZ:</label>
+                           <input type="number" id="mz">
+                       </div>
+                       <div class="input-group">
+                           <label for="rx">RX:</label>
+                           <input type="number" id="rx">
+                       </div>
+                       <div class="input-group">
+                           <label for="ry">RY:</label>
+                           <input type="number" id="ry">
+                       </div>
+                       <div class="input-group">
+                           <label for="rz">RZ:</label>
+                           <input type="number" id="rz">
+                       </div>
+                       <div class="input-group">
+                           <label for="mass">Mass:</label>
+                           <input type="number" id="mass">
+                       </div>
+                       <div class="input-group">
+                           <label for="fr">FR:</label>
+                           <input type="number" id="fr">
+                       </div>
+                       <div class="input-group">
+                           <label for="br">BR:</label>
+                           <input type="number" id="br">
+                       </div>
+                       <div class="input-group">
+                           <label for="d">D:</label>
+                           <input type="number" id="d">
+                       </div>
+                       <div class="input-group">
+                           <label for="eye">Eye:</label>
+                           <input type="text" id="eye">
+                       </div>
+                       <div class="input-group">
+                           <label for="o">O:</label>
+                           <input type="number" id="o">
+                       </div>
+                       <div class="input-group">
+                           <label for="air">Air:</label>
+                           <input type="checkbox" id="air">
+                       </div>
+                       <div class="input-group">
+                           <label for="topr">TopR:</label>
+                           <input type="number" id="topr">
+                       </div>
+                       <div class="input-group">
+                           <label for="k">K:</label>
+                           <input type="checkbox" id="k">
+                       </div>
+                       <div class="input-group">
+                           <label for="mx">MX:</label>
+                           <input type="number" id="mx">
+                       </div>
+                       <div class="input-group">
+                           <label for="my">MY:</label>
+                           <input type="number" id="my">
+                       </div>
+                       <div class="input-group">
+                           <label for="mz">MZ:</label>
+                           <input type="number" id="mz">
+                       </div>
+                       <div class="input-group">
+                           <label for="rx">RX:</label>
+                           <input type="number" id="rx">
+                       </div>
+                       <div class="input-group">
+                           <label for="ry">RY:</label>
+                           <input type="number" id="ry">
+                       </div>
+                       <div class="input-group">
+                           <label for="rz">RZ:</label>
+                           <input type="number" id="rz">
+                       </div>
+                       <div class="input-group">
+                           <label for="bou">Bou:</label>
+                           <input type="number" id="bou">
+                       </div>
+                       <div class="input-group">
+                           <label for="mass">Mass:</label>
+                           <input type="number" id="mass">
+                       </div>
+                       <div class="input-group">
+                           <label for="fr">FR:</label>
+                           <input type="number" id="fr">
+                       </div>
+                       <div class="input-group">
+                           <label for="br">BR:</label>
+                           <input type="number" id="br">
+                       </div>
+                       <div class="input-group">
+                           <label for="bg">BG:</label>
+                           <input type="text" id="bg">
+                       </div>
+                       <div class="input-group">
+                           <label for="amb">AMB:</label>
+                           <input type="text" id="amb">
+                       </div>
+                       <div class="input-group">
+                           <label for="dif">DIF:</label>
+                           <input type="text" id="dif">
+                       </div>
+                       <div class="input-group">
+                           <label for="spe">SPE:</label>
+                           <input type="text" id="spe">
+                       </div>
+                       <div class="input-group">
+                           <label for="gro">GRO:</label>
+                           <input type="text" id="gro">
+                       </div>
+                       <div class="input-group">
+                           <label for="d">D:</label>
+                           <input type="number" id="d">
+                       </div>
+                       <div class="input-group">
+                           <label for="eye">Eye:</label>
+                           <input type="text" id="eye">
+                       </div>
+                       <div class="input-group">
+                           <label for="cd">CD:</label>
+                           <input type="number" id="cd">
+                       </div>
+                       <div class="input-group">
+                           <label for="cr">CR:</label>
+                           <input type="number" id="cr">
+                       </div>
+                       <div class="input-group">
+                           <label for="sr">SR:</label>
+                           <input type="number" id="sr">
+                       </div>
+                       <div class="input-group">
+                           <label for="use">USE:</label>
+                           <input type="number" id="use">
+                       </div>
+                       <div class="input-group">
+                           <label for="jump">Jump:</label>
+                           <input type="checkbox" id="jump">
+                       </div>
+                       <div class="input-group">
+                           <label for="dr">DR:</label>
+                           <input type="checkbox" id="dr">
+                       </div>
+                       <div class="input-group">
+                           <label for="js">JS:</label>
+                           <input type="number" id="js">
+                       </div>
+                       <div class="input-group">
+                           <label for="jh">JH:</label>
+                           <input type="number" id="jh">
+                       </div>
+                       <button type="button" onclick="showValues()">Show Values</button>
+                   </form>
+             </div>
         </div>
          <script>
-        const customColorPicker = document.getElementById('customColorPicker');
-        customColorPicker.addEventListener('change', (event) => {
+             const customColorPicker = document.getElementById('customColorPicker');
+             customColorPicker.addEventListener('change', (event) => {
             console.log('Selected color:', event.target.value);
             document.body.style.backgroundColor = '#' + event.target.value;
         });
