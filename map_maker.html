@@ -846,9 +846,9 @@
                                         var objectName = inputString;
                                         var position = object.position;
                                         var roundedPosition = {
-                                            x: Math.round(position.x * 1000) / -1000,
-                                            y: Math.round(position.z * 1000) / 1000,
-                                            z: Math.round(position.y * 1000) / 1000
+                                            x: Math.round(position.x * 1000) / -10,
+                                            y: Math.round(position.z * 1000) / 10,
+                                            z: Math.round(position.y * 1000) / 10
                                         };
                                         var rotation = object.rotation;
                                         var roundedRotation = {
@@ -862,7 +862,7 @@
                                             y: Math.round(scale.z * 1000) / 2000,
                                             z: Math.round(scale.y * 1000) / 2000
                                         };
-                                        var objectData = objectType + (roundedPosition.x * 100) + "$" + (roundedPosition.y * 100) + "$" + (roundedPosition.z * 100) + "$" + Math.round(roundedRotation.x * 100) + "$" + Math.round(roundedRotation.y * 100) + "$" + Math.round(roundedRotation.z * 100) + "$" + (roundedScale.x * 100) + "$" + (roundedScale.y * 100) + "$" + (roundedScale.z * 100) + "$" + objectName;
+                                        var objectData = objectType + (roundedPosition.x) + "$" + (roundedPosition.y) + "$" + (roundedPosition.z) + "$" + Math.round(roundedRotation.x * 100) + "$" + Math.round(roundedRotation.y * 100) + "$" + Math.round(roundedRotation.z * 100) + "$" + (roundedScale.x * 100) + "$" + (roundedScale.y * 100) + "$" + (roundedScale.z * 100) + "$" + objectName;
                                         dataString += objectData;
                     });
                 
