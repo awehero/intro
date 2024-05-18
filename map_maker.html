@@ -1016,33 +1016,32 @@
                                         } else {
                                             objectType = "G";
                                         }
-                                        var objectNameStart = object.name ? object.name : "none";
+                                       var objectNameStart = object.name ? object.name : "none";
                                         let inputString = objectNameStart;
                                         const replacements = [
-                                             { search: ",t=", replace: ",turn=" },
-                                             { search: ", t=", replace: ", turn=" },
-                                             { search: "[t=", replace: "[turn=" },
-                                             { search: ",s=", replace: ",speed=" },
-                                             { search: ", s=", replace: ", speed=" },
-                                             { search: "[s=", replace: "[speed=" },
-                                             { search: ",j=", replace: ",jump=" },
-                                             { search: ", j=", replace: ", jump=" },
-                                             { search: "[j=", replace: "[jump=" },
-                                             { search: "mat=#", replace: "m=" },
-                                             { search: "mat=", replace: "m=" },
-                                             { search: "bg=#", replace: "bg=" },
-                                             { search: "amb=#", replace: "amb=" },
-                                             { search: "dif=#", replace: "dif=" },
-                                             { search: "spe=#", replace: "spe=" },
-                                             { search: "gro=#", replace: "gro=" },
-                                             { search: " ", replace: "" },
-                                             { search: ", s=", replace: ", speed=" },
-                                             { search: "[", replace: "" },
-                                             { search: "]", replace: "" },
-                                             { search: ",", replace: "?" }
-                                       ];
+                                            { search: ",t=", replace: ",turn=" },
+                                            { search: ", t=", replace: ", turn=" },
+                                            { search: "\\[t=", replace: "[turn=" },
+                                            { search: ",s=", replace: ",speed=" },
+                                            { search: ", s=", replace: ", speed=" },
+                                            { search: "\\[s=", replace: "[speed=" },
+                                            { search: ",j=", replace: ",jump=" },
+                                            { search: ", j=", replace: ", jump=" },
+                                            { search: "\\[j=", replace: "[jump=" },
+                                            { search: "mat=#", replace: "m=" },
+                                            { search: "mat=", replace: "m=" },
+                                            { search: "bg=#", replace: "bg=" },
+                                            { search: "amb=#", replace: "amb=" },
+                                            { search: "dif=#", replace: "dif=" },
+                                            { search: "spe=#", replace: "spe=" },
+                                            { search: "gro=#", replace: "gro=" },
+                                            { search: " ", replace: "" },
+                                            { search: "\\[", replace: "" },
+                                            { search: "\\]", replace: "" },
+                                            { search: ",", replace: "?" }
+                                        ];
                                         replacements.forEach(pair => {
-                                              inputString = inputString.replace(new RegExp(pair.search, 'g'), pair.replace);
+                                            inputString = inputString.replace(new RegExp(pair.search, 'g'), pair.replace);
                                         });
                                         var objectName = inputString;
                                         var position = object.position;
