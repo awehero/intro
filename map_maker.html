@@ -269,7 +269,7 @@
             document.addEventListener('keyup', onKeyUp);
             function onKeyDown(event) {
                     if (isTyping) return;
-                switch (event.key) {
+                switch (event.key.toLowerCase()) {
                     case 'w':
                         moveForward = true;
                         break;
