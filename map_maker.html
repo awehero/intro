@@ -269,23 +269,29 @@
             document.addEventListener('keyup', onKeyUp);
             function onKeyDown(event) {
                     if (isTyping) return;
-                switch (event.key.toLowerCase()) {
+                switch (event.key) {
                     case 'w':
+                    case: 'W':
                         moveForward = true;
                         break;
                     case 's':
+                    case 'S':
                         moveBackward = true;
                         break;
                     case 'a':
+                    case 'A':
                         moveLeft = true;
                         break;
                     case 'd':
+                    case 'D':
                         moveRight = true;
                         break;
                     case 'e':
+                    case 'E':
                         moveUp = true;
                         break;
                     case 'c':
+                    case 'C':
                         moveDown = true;
                         break;
                     case 'ArrowLeft':
