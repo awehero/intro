@@ -867,6 +867,20 @@
                     });
                 
                     dataString = "https://onionfist.com/icedodo/?mapCodeVersion=v8&mapUrl=" + dataString;
+                    const replacementsTwo = [
+                         { search: ".0?", replace: "?" },
+                         { search: ".0$", replace: "$" },
+                         { search: ".0A", replace: "A" },
+                         { search: ".0B", replace: "B" },
+                         { search: ".0C", replace: "C" },
+                         { search: ".0D", replace: "D" },
+                         { search: ".0E", replace: "E" },
+                         { search: ".0F", replace: "F" },
+                         { search: ".0G", replace: "G" },
+                    ],
+                    replacementsTwo.forEach(pair => {
+                        dataString = dataString.replace(new RegExp(pair.search, 'g'), pair.replace);
+                    });
                     return dataString;
                 }
                 
