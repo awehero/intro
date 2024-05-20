@@ -428,8 +428,8 @@
                     if (rotateDown) {
                         cameraRotation.x -= 0.01;
                     }
-                    camera.rotation.x = cameraRotation.x;
-                    camera.rotation.y = cameraRotation.y;
+                    //camera.rotation.x = cameraRotation.x;
+                    //camera.rotation.y = cameraRotation.y;
                 } else if (view == "top") {
                     if (moveForward) {
                         
@@ -492,6 +492,30 @@
                     }
                 }
             }, 1);
+            document.addEventListener('keydown', function(event) {
+            var key = event.key;
+            var rotationSpeed = 0.05;
+
+            if (key === 'j') {
+                yaw -= rotationSpeed;
+            }
+            if (key === 'l') {
+                yaw += rotationSpeed;
+            }
+            if (key === 'i') {
+                pitch -= rotationSpeed;
+            }
+            if (key === 'k') {
+                pitch += rotationSpeed;
+            }
+
+            var maxPitch = Math.PI / 2 - 0.01;
+            pitch = Math.max(-maxPitch, Math.min(maxPitch, pitch));
+
+            var quaternion = new THREE.Quaternion();
+            quaternion.setFromEuler(new THREE.Euler(pitch, yaw, 0, 'YXZ'));
+            camera.quaternion.copy(quaternion);
+        });
 
             function animate() {
                 requestAnimationFrame(animate);
