@@ -1,4 +1,4 @@
-     <html class="focus-outline-visible">
+<html class="focus-outline-visible">
     <head>
         <title>Ice Dodo Map Maker</title>
         <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
@@ -6,6 +6,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/js/loaders/TextureLoader.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
          <script src="https://jscolor.com/release/2.4/jscolor.js"></script>
+         <script src="https://threejs.org/examples/js/postprocessing/EffectComposer.js"></script>
+         <script src="https://threejs.org/examples/js/postprocessing/RenderPass.js"></script>
+         <script src="https://threejs.org/examples/js/postprocessing/UnrealBloomPass.js"></script>
         <style>
             #menu {
                 position: absolute;
@@ -148,6 +151,18 @@
             var mouse = new THREE.Vector2();
             var texture = new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1.png');
             var material = new THREE.MeshBasicMaterial({ map: texture });
+            const composer = new THREE.EffectComposer(renderer);
+          
+            const renderPass = new THREE.RenderPass(scene, camera);
+            composer.addPass(renderPass);
+          
+            const bloomPass = new THREE.UnrealBloomPass(
+                 new THREE.Vector2(window.innerWidth, window.innerHeight),
+                 1.5,  // strength
+                 0.4,  // radius
+                 0.85  // threshold
+               );
+              composer.addPass(bloomPass);
 
             var isTyping = false;
             var menu = document.getElementById('menu');
@@ -482,6 +497,7 @@
             function animate() {
                 requestAnimationFrame(animate);
                 renderer.render(scene, camera);
+                composer.render();
             }
             animate();
 
