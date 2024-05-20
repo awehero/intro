@@ -727,6 +727,7 @@
                                 });
                                 loaderFixer();
                                 closeMenu();
+                                updateObject();
                             }
                         }
                 }
@@ -816,7 +817,6 @@
                              object.scale.z = scale;
                         }
                     });
-                    updateObject();
                 }
                function replaceASCIIWithMsg(input) {
                     return input.replace(/msg=([\d:]+)/g, (match, p1) => {
