@@ -32,33 +32,39 @@
                 position: absolute;
                 top: 20px;
                 left: 93%;
+                z-index: 1;
             }
             #loadMapButton {
                 position: absolute;
                 top: 20px;
                 left: 85%;
+                z-index: 1;
             }
             #viewChanger {
                 position: absolute;
                 top: 20px;
                 left: 10%;
+                z-index: 1;
             }
             #objectSelect {
                 position: absolute;
                 top: 20px;
                 left: 2%;
+                z-index: 1;
             }
             #settingsButton {
                 position: absolute;
                 top: 95%;
                 left: 7%;
                 font-size: large;
+                z-index: 1;
             }
             #helpButton {
                 position: absolute;
                 top: 95%;
                 left: 2%;
                 font-size: large;
+                z-index: 1;
             }
             .hidden {
               display: none;
@@ -71,16 +77,6 @@
                  cursor: pointer;
                  margin: 10px 0;
             }
-             .input-group {
-            margin: 10px 0;
-             }
-             .input-group label {
-                 display: inline-block;
-                 width: 100px;
-             }
-             .input-group input {
-                 width: 30px;
-             }
         </style>
     </head>
     <body oncopy="copyObject()">
@@ -112,9 +108,9 @@
             <div><input type="text" id="scaleY"> Y</div>
             <div><input type="text" id="scaleZ"> Z</div></div>
             <div id="radiusMenu" style="display: none;"><input type="text" id="radius"> R</div><br>
-            <button onclick="updateObject()">Update</button>
-            <button id="deleteButton">Delete</button>
-            <button id="closeMenuButton" onclick="closeMenu()">Close</button>
+            <button onclick="updateObject()" style="z-index: 1;">Update</button>
+            <button id="deleteButton" style="z-index: 1;">Delete</button>
+            <button id="closeMenuButton" onclick="closeMenu()" style="z-index: 1;">Close</button>
         </div>
          <script>
              const customColorPicker = document.getElementById('customColorPicker');
