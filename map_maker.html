@@ -791,6 +791,11 @@
                         var rotation = object.rotation.y;
                         object.rotation.y = object.rotation.z;
                         object.rotation.z = rotation;
+                        if (object.geometry.type == "PlaneGeometry") {
+                             var scale = object.scale.y;
+                             object.scale.y = object.scale.z;
+                             object.scale.z = scale;
+                        }
                     });
                 }
                function getMapLinkTest() {
