@@ -228,7 +228,7 @@
                         document.getElementById("radiusMenu").style.display = "block";
                         document.getElementById("radius").value = selectedObject.scale.x;
                     } else {
-                        if (selectedObject.geometry.type == "SphereGeometry") {
+                        if (selectedObject.geometry.type == "SphereGeometry" || selectedObject.geometry.type == "OctahedronGeometry") {
                             document.getElementById("scaleMenu").style.display = "none";
                             document.getElementById("radiusMenu").style.display = "none";
                         } else {
