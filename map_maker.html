@@ -277,24 +277,15 @@
             var rotationSpeed = 0.01;
             var yaw = 0;
             var pitch = 0;
-            var ti = false;
-            var tj = false;
-            var to = false;
-            var tk = false;
-            var tp = false;
-            var tl = false;
-            var yi = false;
-            var yj = false;
-            var yo = false;
-            var yk = false;
-            var yp = false;
-            var yl = false;
-            var ui = false;
-            var uj = false;
-            var uo = false;
-            var uk = false;
-            var up = false;
-            var ul = false;
+            var tPressed = false;
+            var yPressed = false;
+            var uPressed = false;
+            var iPressed = false;
+            var jPressed = false;
+            var oPressed = false;
+            var kPressed = false;
+            var pPressed = false;
+            var lPressed = false;
             var cameraRotation = {
                 x: 0,
                 y: 0,
@@ -357,83 +348,31 @@
                         speedBooster = 4;
                         break;
                     case 't':
-                        if (event.key === 'i') {
-                            ti = true;
-                        } else if (event.key === 'j') {
-                            tj = true;
-                        } else if (event.key === 'o') {
-                            tj = true;
-                        } else if (event.key === 'k') {
-                            tj = true;
-                        } else if (event.key === 'p') {
-                            tj = true;
-                        } else if (event.key === 'l') {
-                            tj = true;
-                        }
-                        /*switch (event.key) {
-                            case 'i':
-                                ti = true;
-                                break;
-                            case 'j':
-                                tj = true;
-                                break;
-                            case 'o':
-                                to = true;
-                                break;
-                            case 'k':
-                                tk = true;
-                                break;
-                            case 'p':
-                                tp = true;
-                                break;
-                            case 'l':
-                                tl = true;
-                                break;
-                        }
-                        break;*/
+                        tPressed = true;
+                        break;
                     case 'y':
-                        switch (event.key) {
-                            case 'i':
-                                yi = true;
-                                break;
-                            case 'j':
-                                yj = true;
-                                break;
-                            case 'o':
-                                yo = true;
-                                break;
-                            case 'k':
-                                yk = true;
-                                break;
-                            case 'p':
-                                yp = true;
-                                break;
-                            case 'l':
-                                yl = true;
-                                break;
-                        }
+                        yPressed = true;
                         break;
                     case 'u':
-                        switch (event.key) {
-                            case 'i':
-                                ui = true;
-                                break;
-                            case 'j':
-                                uj = true;
-                                break;
-                            case 'o':
-                                uo = true;
-                                break;
-                            case 'k':
-                                uk = true;
-                                break;
-                            case 'p':
-                                up = true;
-                                break;
-                            case 'l':
-                                ul = true;
-                                break;
-                        }
+                        uPressed = true;
+                        break;
+                    case 'i':
+                        iPressed = true;
+                        break;
+                    case 'j':
+                        jPressed = true;
+                        break;
+                    case 'o':
+                        oPressed = true;
+                        break;
+                    case 'k':
+                        kPressed = true;
+                        break;
+                    case 'p':
+                        pPressed = true;
+                        break;
+                    case 'l':
+                        lPressed = true;
                         break;
                 }
             }
@@ -491,83 +430,31 @@
                         speedBooster = 1.5;
                         break;
                     case 't':
-                        if (event.key === 'i') {
-                            ti = false;
-                        } else if (event.key === 'j') {
-                            tj = false;
-                        } else if (event.key === 'o') {
-                            tj = false;
-                        } else if (event.key === 'k') {
-                            tj = false;
-                        } else if (event.key === 'p') {
-                            tj = false;
-                        } else if (event.key === 'l') {
-                            tj = false;
-                        }
-                        /*switch (event.key) {
-                            case 'i':
-                                ti = false;
-                                break;
-                            case 'j':
-                                tj = false;
-                                break;
-                            case 'o':
-                                to = false;
-                                break;
-                            case 'k':
-                                tk = false;
-                                break;
-                            case 'p':
-                                tp = false;
-                                break;
-                            case 'l':
-                                tl = false;
-                                break;
-                        }
-                        break;*/
+                        tPressed = false;
+                        break;
                     case 'y':
-                        switch (event.key) {
-                            case 'i':
-                                yi = false;
-                                break;
-                            case 'j':
-                                yj = false;
-                                break;
-                            case 'o':
-                                yo = false;
-                                break;
-                            case 'k':
-                                yk = false;
-                                break;
-                            case 'p':
-                                yp = false;
-                                break;
-                            case 'l':
-                                yl = false;
-                                break;
-                        }
+                        yPressed = false;
                         break;
                     case 'u':
-                        switch (event.key) {
-                            case 'i':
-                                //ui = false;
-                                break;
-                            case 'j':
-                                uj = false;
-                                break;
-                            case 'o':
-                                uo = false;
-                                break;
-                            case 'k':
-                                uk = false;
-                                break;
-                            case 'p':
-                                up = false;
-                                break;
-                            case 'l':
-                                ul = false;
-                                break;
-                        }
+                        uPressed = false;
+                        break;
+                    case 'i':
+                        iPressed = false;
+                        break;
+                    case 'j':
+                        jPressed = false;
+                        break;
+                    case 'o':
+                        oPressed = false;
+                        break;
+                    case 'k':
+                        kPressed = false;
+                        break;
+                    case 'p':
+                        pPressed = false;
+                        break;
+                    case 'l':
+                        lPressed = false;
                         break;
                 }
             }
@@ -619,75 +506,75 @@
                     camera.quaternion.copy(quaternion);
                     //camera.rotation.x = cameraRotation.x;
                     //camera.rotation.y = cameraRotation.y;
-                    if (ti) {
+                    if (tPressed && iPressed) {
                         selectedObject.position.x += 0.1;
                     }
                     
-                    if (tj) {
+                    if (tPressed && jPressed) {
                         selectedObject.position.x -= 0.1;
                     }
                     
-                    if (to) {
+                    if (tPressed && oPressed) {
                         selectedObject.position.y -= 0.1;
                     }
                     
-                    if (tk) {
+                    if (tPressed && kPressed) {
                         selectedObject.position.y -= 0.1;
                     }
                     
-                    if (tp) {
+                    if (tPressed && pPressed) {
                         selectedObject.position.z += 0.1;
                     }
                     
-                    if (tl) {
+                    if (tPressed && lPressed) {
                         selectedObject.position.z -= 0.1;
                     }
                     
-                    if (yi) {
+                    if (yPressed && iPressed) {
                         selectedObject.rotation.x += 0.1;
                     }
                     
-                    if (yj) {
+                    if (yPressed && jPressed) {
                         selectedObject.rotation.x -= 0.1;
                     }
                     
-                    if (yo) {
+                    if (yPressed && oPressed) {
                         selectedObject.rotation.y += 0.1;
                     }
                     
-                    if (yk) {
+                    if (yPressed && kPressed) {
                         selectedObject.rotation.y -= 0.1;
                     }
                     
-                    if (yp) {
+                    if (yPressed && pPressed) {
                         selectedObject.rotation.z += 0.1;
                     }
                     
-                    if (yl) {
+                    if (yPressed && lPressed) {
                         selectedObject.rotation.z -= 0.1;
                     }
                     
-                    if (ui) {
+                    if (uPressed && iPressed) {
                         selectedObject.scale.x += 0.1;
                     }
                     
-                    if (uj) {
+                    if (uPressed && jPressed) {
                         selectedObject.scale.x -= 0.1;
                     }
                     
-                    if (uo) {
+                    if (uPressed && oPressed) {
                         selectedObject.scale.y += 0.1;
                     }
                     
-                    if (uk) {
+                    if (uPressed && kPressed) {
                         selectedObject.scale.y -= 0.1;
                     }
                     
-                    if (up) {
+                    if (uPressed && pPressed) {
                         selectedObject.scale.z += 0.1;
                     }
                     
-                    if (ul) {
+                    if (uPressed && lPressed) {
                         selectedObject.scale.z -= 0.1;
                     }
                 } else if (view == "top") {
