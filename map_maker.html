@@ -864,8 +864,13 @@
                                         var scale = object.scale;
                                         var roundedScale = {
                                             x: Math.round(scale.x * 1000) / 20,
-                                            y: Math.round(scale.z * 1000) / 20,
-                                            z: Math.round(scale.y * 1000) / 20
+                                            if (object.geometry.type == "PlaneGeometry") {
+                                                 y: Math.round(scale.y * 1000) / 20,
+                                                 z: Math.round(scale.z * 1000) / 20
+                                            } else {
+                                                 y: Math.round(scale.z * 1000) / 20,
+                                                 z: Math.round(scale.y * 1000) / 20
+                                            }
                                         };
                                         var objectData = objectType + (roundedPosition.x) + "$" + (roundedPosition.y) + "$" + (roundedPosition.z) + "$" + Math.round(roundedRotation.x * 100) + "$" + Math.round(roundedRotation.y * 100) + "$" + Math.round(roundedRotation.z * 100) + "$" + (roundedScale.x) + "$" + (roundedScale.y) + "$" + (roundedScale.z) + "$" + objectName;
                                         dataString += objectData;
