@@ -592,18 +592,24 @@
                     selectedObject.rotation.x = parseFloat(document.getElementById('rotationX').value) * (Math.PI / 180);
                     selectedObject.rotation.y = parseFloat(document.getElementById('rotationY').value) * (Math.PI / 180);
                     selectedObject.rotation.z = parseFloat(document.getElementById('rotationZ').value) * (Math.PI / 180);
-                    if (selectedObject.geometry.type == "IcosahedronGeometry") {
-                        selectedObject.scale.x = parseFloat(document.getElementById('radius').value);
-                        selectedObject.scale.y = parseFloat(document.getElementById('radius').value);
-                        selectedObject.scale.z = parseFloat(document.getElementById('radius').value);
+                    if (selectedObject.geometry.type == "SphereGeometry" || selectedObject.geometry.type == "OctahedronGeometry") {
+                        selectedObject.scale.x = 1;
+                        selectedObject.scale.y = 1;
+                        selectedObject.scale.z = 1;
                     } else {
-                        selectedObject.scale.x = parseFloat(document.getElementById('scaleX').value);
-                        if (selectedObject.geometry.type == "PlaneGeometry") {
-                            selectedObject.scale.y = parseFloat(document.getElementById('scaleY').value);
-                            selectedObject.scale.z = parseFloat(document.getElementById('scaleZ').value);
+                        if (selectedObject.geometry.type == "IcosahedronGeometry") {
+                            selectedObject.scale.x = parseFloat(document.getElementById('radius').value);
+                            selectedObject.scale.y = parseFloat(document.getElementById('radius').value);
+                            selectedObject.scale.z = parseFloat(document.getElementById('radius').value);
                         } else {
-                            selectedObject.scale.y = parseFloat(document.getElementById('scaleY').value);
-                            selectedObject.scale.z = parseFloat(document.getElementById('scaleZ').value);
+                            selectedObject.scale.x = parseFloat(document.getElementById('scaleX').value);
+                            if (selectedObject.geometry.type == "PlaneGeometry") {
+                                selectedObject.scale.y = parseFloat(document.getElementById('scaleY').value);
+                                selectedObject.scale.z = parseFloat(document.getElementById('scaleZ').value);
+                            } else {
+                                selectedObject.scale.y = parseFloat(document.getElementById('scaleY').value);
+                                selectedObject.scale.z = parseFloat(document.getElementById('scaleZ').value);
+                            }
                         }
                     }
                     fixPlane();
