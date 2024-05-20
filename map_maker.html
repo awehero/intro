@@ -788,7 +788,7 @@
                     const geometry = new THREE.OctahedronGeometry(2, 1);
                     var material = new THREE.MeshBasicMaterial({ map: texture });
                     const monkey = new THREE.Mesh(geometry, material);
-                    setTransforms(monkey, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                    setTransforms(monkey, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, 1, 1, 1, name);
                     monkey.name = name;
                     return monkey;
                 }
