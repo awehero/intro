@@ -193,7 +193,11 @@
                     raycaster.setFromCamera(mouse, camera);
                     var intersects = raycaster.intersectObjects(scene.children);
                     if(intersects.length > 0) {
+                        if (selectedObject !== null) {
+                            selectedObject.material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1.png') });
+                        }
                         selectedObject = intersects[0].object;
+                        selectedObject.material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1_selected.png') });
                         updateMenu();
                     }
                 }
