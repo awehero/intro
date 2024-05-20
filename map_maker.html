@@ -119,20 +119,6 @@
                  document.body.style.backgroundColor = '#' + event.target.value;
              });
          </script>
-          <script>
-             function showValues() {
-                 const inputs = document.querySelectorAll('#controlForm input');
-                 let values = '';
-                 inputs.forEach(input => {
-                     if (input.type === 'checkbox') {
-                         values += `<p>${input.id.toUpperCase()}: ${input.checked ? 'On' : 'Off'}</p>`;
-                     } else {
-                         values += `<p>${input.id.toUpperCase()}: ${input.value}</p>`;
-                     }
-                 });
-                 document.getElementById('currentValues').innerHTML = values;
-             }
-         </script>
         <script>
             var scene = new THREE.Scene();
             var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
