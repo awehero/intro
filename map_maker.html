@@ -788,7 +788,7 @@
                     const geometry = new THREE.OctahedronGeometry(2, 1);
                     var material = new THREE.MeshBasicMaterial({ map: texture });
                     const monkey = new THREE.Mesh(geometry, material);
-                    setTransforms(monkey, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, 1, 1, 1, name);
+                    setTransforms(monkey, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
                     monkey.name = name;
                     return monkey;
                 }
@@ -799,9 +799,15 @@
                     object.rotation.x = rotationX / 100;
                     object.rotation.y = rotationY / 100;
                     object.rotation.z = rotationZ / 100;
-                    object.scale.x = scaleX / 50;
-                    object.scale.z = scaleY / 50;
-                    object.scale.y = scaleZ / 50;
+                    if (object.geometry.type == "OctahedronGeometry") {
+                        object.scale.x = 1;
+                        object.scale.z = 1;
+                        object.scale.y = 1;
+                    } else {
+                        object.scale.x = scaleX / 50;
+                        object.scale.z = scaleY / 50;
+                        object.scale.y = scaleZ / 50;
+                    }
                     object.name = name;
                 }
                 function loaderFixer() {
