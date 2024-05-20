@@ -229,7 +229,9 @@
             }
             function closeMenu() {
                 setTimeout(function() {
-                    selectedObject.material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1.png') });
+                    if (selectedObject !== null) {
+                        selectedObject.material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1.png') });
+                    }
                     menu.classList.add("hidden");
                 }, 10);
             }
