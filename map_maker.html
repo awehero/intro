@@ -188,7 +188,7 @@
                     var intersects = raycaster.intersectObjects(scene.children);
                     if(intersects.length > 0) {
                         if (selectedObject !== null) {
-                            selectedObject.material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1.png') });
+                            selectedObject.material = new THREE.MeshBasicMaterial({ map: texture });
                         }
                         selectedObject = intersects[0].object;
                         selectedObject.material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1_selected.png') });
@@ -230,7 +230,7 @@
             function closeMenu() {
                 setTimeout(function() {
                     if (selectedObject !== null) {
-                        selectedObject.material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1.png') });
+                        selectedObject.material = new THREE.MeshBasicMaterial({ map: texture });
                     }
                     menu.classList.add("hidden");
                 }, 10);
@@ -246,6 +246,14 @@
                     }
                 }
             });
+            function changeTexture() {
+                let input = prompt("Please enter a ***URL*** of an image to use for your texture!");
+                window.texture = new THREE.TextureLoader().load(input);
+                window.material = new THREE.MeshBasicMaterial({ map: texture });
+                scene.children.forEach(function(object) {
+                    object.material = material;
+                });
+            }
 
             var view = "free";
             function updateView() {
