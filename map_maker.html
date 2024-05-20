@@ -181,11 +181,24 @@
             }
 
             function onClick(event) {
-                var rect = menu.getBoundingClientRect();
-                var z = parseInt(window.getComputedStyle(menu).getPropertyValue('z-index'));
-                if (event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom && z > 0) {
-                    //Nothing needed here
-                } else {
+                var buttons = document.querySelectorAll('button');
+                var menu = document.querySelector('.menu'); // Assuming the menu has a class "menu"
+                var eventInsideButton = false;
+                var eventInsideMenu = false;
+                
+                buttons.forEach(function(button) {
+                    var rect = button.getBoundingClientRect();
+                    var z = parseInt(window.getComputedStyle(button).getPropertyValue('z-index'));
+                    if (event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom && z > 0) {
+                        eventInsideButton = true;
+                    }
+                });
+                var menuRect = menu.getBoundingClientRect();
+                var menuZIndex = parseInt(window.getComputedStyle(menu).getPropertyValue('z-index'));
+                if (event.clientX >= menuRect.left && event.clientX <= menuRect.right && event.clientY >= menuRect.top && event.clientY <= menuRect.bottom && menuZIndex > 0) {
+                    eventInsideMenu = true;
+                }
+                if (!eventInsideButton && !eventInsideMenu) {
                     raycaster.setFromCamera(mouse, camera);
                     var intersects = raycaster.intersectObjects(scene.children);
                     if(intersects.length > 0) {
