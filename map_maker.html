@@ -242,7 +242,9 @@
                 }
             }
             function closeMenu() {
-                menu.classList.add("hidden");
+                setTimeout(function() {
+                    menu.classList.add("hidden");
+                }, 10);
             }
             document.getElementById("deleteButton").addEventListener("click", function() {
                 if (selectedObject) {
