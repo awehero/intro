@@ -885,7 +885,7 @@
                                         var objectData = objectType + (roundedPosition.x) + "$" + (roundedPosition.y) + "$" + (roundedPosition.z) + "$" + Math.round(roundedRotation.x * 100) + "$" + Math.round(roundedRotation.y * 100) + "$" + Math.round(roundedRotation.z * 100) + "$" + (roundedScale.x) + "$" + (roundedScale.y) + "$" + (roundedScale.z) + "$" + objectName;
                                         dataString += objectData;
                     });
-                
+                    dataString = replaceMsgWithASCII(dataString);
                     dataString = "https://onionfist.com/icedodo/?mapCodeVersion=v8&mapUrl=" + dataString;
                     const replacementsTwo = [
                         { search: "\\.0\\?", replace: "?" },
@@ -904,7 +904,13 @@
                     });
                     return dataString;
                 }
-                
+                function replaceMsgWithASCII(input) {
+                        return input.replace(/msg=\{([^}]*)\}/g, (match, p1) => {
+                            const asciiValues = Array.from(p1).map(char => char.charCodeAt(0));
+                            const asciiString = asciiValues.join(':');
+                            return `msg=${asciiString}`;
+                        });
+                }
                 document.getElementById("getMapLinkButton").addEventListener("click", function() {
                     var mapLink = getMapLinkTest();
                     navigator.clipboard.writeText(mapLink)
