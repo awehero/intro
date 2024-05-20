@@ -563,19 +563,19 @@
                     }
                     
                     if (uPressed && oPressed) {
-                        selectedObject.scale.y += 0.01;
-                    }
-                    
-                    if (uPressed && kPressed) {
-                        selectedObject.scale.y -= 0.01;
-                    }
-                    
-                    if (uPressed && pPressed) {
                         selectedObject.scale.z += 0.01;
                     }
                     
-                    if (uPressed && lPressed) {
+                    if (uPressed && kPressed) {
                         selectedObject.scale.z -= 0.01;
+                    }
+                    
+                    if (uPressed && pPressed) {
+                        selectedObject.scale.y += 0.01;
+                    }
+                    
+                    if (uPressed && lPressed) {
+                        selectedObject.scale.y -= 0.01;
                     }
                 } else if (view == "top") {
                     if (moveForward) {
