@@ -611,47 +611,47 @@
                     });
                 }
                 function copyObject() {
-                if (selectedObject != null) {
-                    var type = selectedObject.geometry.type;
-                    var object;
-                    switch (type) {
-                        case 'PlaneGeometry':
-                            object = createPlane();
-                            break;
-                        case 'BoxGeometry':
-                            object = createCube();
-                            break;
-                        case 'ConeGeometry':
-                            object = createCone();
-                            break;
-                        case 'SphereGeometry':
-                            object = createSphere();
-                            break;
-                        case 'CylinderGeometry':
-                            object = createCylinder();
-                            break;
-                        case 'IcosahedronGeometry':
-                            object = createIcosahedron();
-                            break;
-                        case 'OctahedronGeometry':
-                            object = createMonkey();
-                            break;
-                        }
-                    scene.add(object);
-                    object.name = selectedObject.name;
-                    object.position.x = selectedObject.position.x;
-                    object.position.y = selectedObject.position.y;
-                    object.position.x = selectedObject.position.z;
-                    object.rotation.x = selectedObject.rotation.x;
-                    object.rotation.y = selectedObject.rotation.y;
-                    object.rotation.z = selectedObject.rotation.z;
-                    object.scale.x = selectedObject.scale.x;
-                    object.scale.y = selectedObject.scale.y;
-                    object.scale.z = selectedObject.scale.z;
-                } else {
-                    console.error("No object selected!");
+                    if (selectedObject != null) {
+                        var type = selectedObject.geometry.type;
+                        var object;
+                        switch (type) {
+                            case 'PlaneGeometry':
+                                object = createPlane();
+                                break;
+                            case 'BoxGeometry':
+                                object = createCube();
+                                break;
+                            case 'ConeGeometry':
+                                object = createCone();
+                                break;
+                            case 'SphereGeometry':
+                                object = createSphere();
+                                break;
+                            case 'CylinderGeometry':
+                                object = createCylinder();
+                                break;
+                            case 'IcosahedronGeometry':
+                                object = createIcosahedron();
+                                break;
+                            case 'OctahedronGeometry':
+                                object = createMonkey();
+                                break;
+                            }
+                        scene.add(object);
+                        object.name = selectedObject.name;
+                        object.position.x = selectedObject.position.x;
+                        object.position.y = selectedObject.position.y;
+                        object.position.x = selectedObject.position.z;
+                        object.rotation.x = selectedObject.rotation.x;
+                        object.rotation.y = selectedObject.rotation.y;
+                        object.rotation.z = selectedObject.rotation.z;
+                        object.scale.x = selectedObject.scale.x;
+                        object.scale.y = selectedObject.scale.y;
+                        object.scale.z = selectedObject.scale.z;
+                    } else {
+                        console.error("No object selected!");
+                    }
                 }
-                                    }
                 function loadMap() {
                     let input = prompt("Paste your map link here:");
                         if (input) {
@@ -661,6 +661,7 @@
                                 for (let i = 0; i < deleteNumber; i++) {
                                     scene.remove(scene.children[0]);
                                 }
+                                input = replaceASCIIWithMsg(input);
                                 const indexOfEquals = input.indexOf('=');
                                 if (indexOfEquals !== -1) {
                                     let i = indexOfEquals + 1;
@@ -803,6 +804,14 @@
                              object.scale.y = object.scale.z;
                              object.scale.z = scale;
                         }
+                    });
+                }
+               function replaceASCIIWithMsg(input) {
+                    return input.replace(/msg=([\d:]+)/g, (match, p1) => {
+                        const asciiValues = p1.split(':');
+                        const characters = asciiValues.map(ascii => String.fromCharCode(parseInt(ascii, 10)));
+                        const originalString = characters.join('');
+                        return `msg={${originalString}}`;
                     });
                 }
                function getMapLinkTest() {
