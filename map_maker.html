@@ -781,9 +781,9 @@
                     return monkey;
                 }
                 function setTransforms(object, positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
-                    object.position.x = positionX / 100;
-                    object.position.z = positionY / 100;
-                    object.position.y = positionZ / 100;
+                    object.position.x = Math.round(positionX * 1000) / 100000;
+                    object.position.z = Math.round(positionY * 1000) / 100000;
+                    object.position.y = Math.round(positionZ * 1000) / 100000;
                     object.rotation.x = rotationX / 100;
                     object.rotation.y = rotationY / 100;
                     object.rotation.z = rotationZ / 100;
