@@ -113,6 +113,17 @@
             <button id="deleteButton" style="z-index: 1;">Delete</button>
             <button id="closeMenuButton" onclick="closeMenu()" style="z-index: 1;">Close</button>
         </div>
+        <div id="settingsMenu">
+            <h2>Settings:</h2>
+            <button id="changeTextureButton" onclick="changeTexture()">Change Texture</button>
+            <div id="textureImageContainer" style="width: 20px; height: 20px;">
+                <div id="textureImage"></div>
+            </div>
+            Default Camera Speed: <input type="number" id="defaultCameraSpeed" style="width: 40px;"><br><br>
+            Fast Camera Speed: <input type="number" id="fastCameraSpeed" style="width: 40px"><br><br>
+            <button id="savePreferencesButton" onclick="savePreferences()">Save Preferences</button><br><br>
+            <button id="resetPreferencesButton" onclick="resetPreferences()">Reset Preferences</button>
+        </div>
          <script>
              const customColorPicker = document.getElementById('customColorPicker');
              customColorPicker.addEventListener('change', (event) => {
