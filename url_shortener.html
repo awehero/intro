@@ -42,10 +42,10 @@
     }
     document.getElementById('roundNumbersForm').addEventListener('submit', function(event) {
       event.preventDefault(); 
-      const inputString = document.getElementById('inputString').value;
-      const lengthBefore = inputString.length;
-      const resultString = roundDollarNumbersInString(inputString);
-      const lengthAfter = resultString.length;
+      var inputString = document.getElementById('inputString').value;
+      var lengthBefore = inputString.length;
+      var resultString = roundDollarNumbersInString(inputString);
+      var lengthAfter = resultString.length;
       document.getElementById('result').innerText = resultString;
       document.getElementById('lengthBefore').innerText = `Length Before: ${lengthBefore}`;
       document.getElementById('lengthAfter').innerText = `Length After: ${lengthAfter}`;
