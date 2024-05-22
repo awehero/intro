@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Shortener for Ice Dodo</title>
+</head>
+<body>
+  <h1>URL Shortener by Awehero</h1>
+  <form id="roundNumbersForm">
+    <label for="inputString">Enter your string:</label><br>
+    <textarea id="inputString" rows="4" cols="50"></textarea><br><br>
+    <button type="submit">Shorten URL</button>
+  </form>
+  <h2>Result:</h2>
+  <div id="lengthBefore"></div>
+  <div id="lengthAfter"></div>
+  <div id="result"></div>
+  <script>
+    function roundDollarNumbersInString(input) {
+      const regex = /\$(\-?\d+(\.\d+)?)\$/g;
+      const roundedString = input.replace(regex, (match, p1) => {
+        const number = parseFloat(p1);
+        const roundedNumber = Math.round(number);
+        return `$${roundedNumber}$`;
+      });
+     const replacements = [
+       { search: "\\.0\\?", replace: "?" },
+       { search: "\\.0\\$", replace: "$" },
+       { search: "\\.0A", replace: "A" },
+       { search: "\\.0B", replace: "B" },
+       { search: "\\.0C", replace: "C" },
+       { search: "\\.0D", replace: "D" },
+       { search: "\\.0E", replace: "E" },
+       { search: "\\.0F", replace: "F" },
+       { search: "\\.0G", replace: "G" },
+     ];
+     replacements.forEach(pair => {
+       roundedString = roundedString.replace(new RegExp(pair.search, 'g'), pair.replace);
+     });
+    return roundedString;
+    }
+    document.getElementById('roundNumbersForm').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+      const inputString = document.getElementById('inputString').value;
+      const lengthBefore = inputString.length;
+      const resultString = roundDollarNumbersInString(inputString);
+      const lengthAfter = resultString.length;
+      document.getElementById('result').innerText = resultString;
+      document.getElementById('lengthBefore').innerText = `Length Before: ${lengthBefore}`;
+      document.getElementById('lengthAfter').innerText = `Length After: ${lengthAfter}`;
+    });
+  </script>
+</body>
+</html>
