@@ -19,9 +19,9 @@
   <script>
     function roundDollarNumbersInString(input) {
       const regex = /\$(\-?\d+(\.\d+)?)\$/g;
-      const roundedString = input.replace(regex, (match, p1) => {
-        const number = parseFloat(p1);
-        const roundedNumber = Math.round(number);
+      let roundedString = input.replace(regex, (match, p1) => {
+        let number = parseFloat(p1);
+        let roundedNumber = Math.round(number);
         return `$${roundedNumber}$`;
       });
      const replacements = [
