@@ -144,7 +144,13 @@
 
             var raycaster = new THREE.Raycaster();
             var mouse = new THREE.Vector2();
-            var texture = new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1.png');
+            if (localStorage.getItem('texture') == null) {
+                localStorage.setItem('texture', "https://awehero.github.io/intro/pm_1.png");
+            } else if (localStorage.getItem('texture') == "https://awehero.github.io/intro/pm_1.png") {
+                var texture = new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1.png');
+            } else {
+                var texture = new THREE.TextureLoader().load(localStorage.getItem('texture'));
+            }
             var material = new THREE.MeshBasicMaterial({ map: texture });
 
             var isTyping = false;
@@ -286,7 +292,9 @@
             var rotateUp = false;
             var rotateDown = false;
             var cameraSpeed = 0.03;
+            
             var speedBooster = 1.5;
+            var 
             var rotationSpeed = 0.01;
             var yaw = 0;
             var pitch = 0;
