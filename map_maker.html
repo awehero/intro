@@ -154,6 +154,7 @@
             var material = new THREE.MeshBasicMaterial({ map: texture });
 
             var isTyping = false;
+            document.getElementById("settingsMenu").style.display = "none";
             var menu = document.getElementById('menu');
             var menuInputs = menu.querySelectorAll('input[type="text"]');
             menuInputs.forEach(function(input) {
