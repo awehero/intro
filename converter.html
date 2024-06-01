@@ -16,10 +16,8 @@ async function fetchText() {
   const hostname = 'fn.onionfist.com';
   const path = '/icemaprun.js';
 
-  //Find the dollar index
   const dollarIndex = queryString.indexOf('$');
   if (dollarIndex !== -1) {
-    //Find the A-G index
     let endIndex = dollarIndex - 1;
     while (endIndex >= 0 && !/[A-G]/.test(queryString[endIndex])) {
       endIndex--;
