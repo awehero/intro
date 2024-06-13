@@ -8,28 +8,74 @@
         
       }
       #numberContainer {
-        
+        background-color: lightgray;
       }
       .digitContainer {
-        
+        background-color: white;
+        border: none;
+        padding: 1%;
+        border-radius: 4px;
       }
       .numberText {
         
       }
       .letters {
-        
+        font-size: xx-small;
       }
     </style>
     <div id="mainContainer">
       <div id="numberContainer">
-        <button id="oneButton" class="digitContainer">
-          <div class="numberText">1</div>
-          <div class="letters"> </div>
-        </button>
-        <button id="twoButton" class="digitContainer">
-          <div class="numberText">2</div>
-          <div class="letters">A B C</div>
-        </button>
+        <div class="rowContainer">
+          <button id="oneButton" class="digitContainer">
+            <div class="numberText">1</div>
+            <div class="letters"> </div>
+          </button>
+          <button id="twoButton" class="digitContainer">
+            <div class="numberText">2</div>
+            <div class="letters">A B C</div>
+          </button>
+          <button id="twoButton" class="digitContainer">
+            <div class="numberText">3</div>
+            <div class="letters">D E F</div>
+          </button>
+        </div>
+        <div class="rowContainer">
+          <button id="oneButton" class="digitContainer">
+            <div class="numberText">4</div>
+            <div class="letters">G H I</div>
+          </button>
+          <button id="twoButton" class="digitContainer">
+            <div class="numberText">5</div>
+            <div class="letters">J K L</div>
+          </button>
+          <button id="twoButton" class="digitContainer">
+            <div class="numberText">6</div>
+            <div class="letters">M N O</div>
+          </button>
+        </div>
+        <div class="rowContainer">
+          <button id="oneButton" class="digitContainer">
+            <div class="numberText">7</div>
+            <div class="letters">P Q R S</div>
+          </button>
+          <button id="twoButton" class="digitContainer">
+            <div class="numberText">8</div>
+            <div class="letters">T U V</div>
+          </button>
+          <button id="twoButton" class="digitContainer">
+            <div class="numberText">9</div>
+            <div class="letters">W X Y Z</div>
+          </button>
+        </div>
+        <div class="rowContainer">
+          <div id="oneButton" class="digitContainer"></div>
+          <button id="twoButton" class="digitContainer">
+            <div class="numberText">0</div>
+          </button>
+          <button id="twoButton" class="digitContainer">
+            <div class="numberText">⌫</div>
+          </button>
+        </div>
       </div>
     </div>
     <script>
