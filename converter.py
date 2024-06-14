@@ -81,17 +81,8 @@ def map2link():
     print('Good luck with your map, hope it gets approved!')
     print('__________________________________________________________________________________\n')
 
-with open('map_analyze.txt', 'w') as f:
-    f.write(' ')
-
 link2map(link)
 delete_empty()
 old_map = copy.deepcopy(map)
 shorten_link()
-
-with open('map_analyze.txt', 'a') as f:
-    for key in map.keys():
-        for item_n in range(len(map[key])):
-            f.write('_____________________________\n')
-            for element_n in range(len(map[key][item_n])):
-                f.write(str(old_map[key][item_n][element_n]) + "   <----->   " + str(map[key][item_n][element_n]) + '\n')
+map2link()
