@@ -47,13 +47,24 @@
         justify-content: space-between;
         padding: 0.75%;
       }
-      #cancelButton {
-        position: absolute;
+      #textContainer {
+        
+      }
+      .cancelBox {
+        
+      }
+      #cancelContainer {
         
       }
     </style>
-    <button id="cancelButton onclick="cancel()">Cancel</button>
     <div id="mainContainer">
+      <div id="textContainer">
+        <div id="spaceWaste" class="cancelBox"></div>
+        <div id="enterPasscode">Enter Passcode</div>
+        <div id="cancelContainer" class="cancelBox">
+          <button id="cancelButton onclick="cancel()">Cancel</button>
+        </div>
+      </div>
       <div id="numberContainer">
         <div class="rowContainer">
           <button id="oneButton" class="digitContainer" onclick="one()">
