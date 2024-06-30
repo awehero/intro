@@ -148,11 +148,13 @@
             var mouse = new THREE.Vector2();
             if (localStorage.getItem('texture') == null) {
                 localStorage.setItem('texture', "https://awehero.github.io/intro/pm_1.png");
+                var texture = new THREE.TextureLoader().load(localStorage.getItem('texture'));
             } else if (localStorage.getItem('texture') == "https://awehero.github.io/intro/pm_1.png") {
                 var texture = new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1.png');
             } else {
                 var texture = new THREE.TextureLoader().load(localStorage.getItem('texture'));
             }
+            alert("New? Click the ? in the bottom left to find out how the map maker!");
             var material = new THREE.MeshBasicMaterial({ map: texture });
 
             var isTyping = false;
