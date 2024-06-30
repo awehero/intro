@@ -1,208 +1,165 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ice Dodo Map Maker</title>
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
     <style>
-        #menu {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: white;
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
-        #renderCanvas {
-            height: 100%;
-            width: 100%;
-        }
-    </style>
+            #menu {
+                position: absolute;
+                top: 50px;
+                left: 20px;
+                background-color: white;
+                padding: 10px;
+                border: 1px solid #ccc;
+                z-index: 1;
+            }
+            #settingsMenu {
+                position: absolute;
+                top: 50%;
+                left: 20%;
+                background-color: white;
+                padding: 10px;
+                border: 2px solid #ccc;
+                z-index: 1;
+            }
+            #getMapLinkButton {
+                position: absolute;
+                top: 20px;
+                left: 93%;
+                z-index: 1;
+            }
+            #loadMapButton {
+                position: absolute;
+                top: 20px;
+                left: 85%;
+                z-index: 1;
+            }
+            #viewChanger {
+                position: absolute;
+                top: 20px;
+                left: 10%;
+                z-index: 1;
+                display: none;
+            }
+            #objectSelect {
+                position: absolute;
+                top: 20px;
+                left: 2%;
+                z-index: 1;
+            }
+            #settingsButton {
+                position: absolute;
+                top: 95%;
+                left: 7%;
+                font-size: large;
+                z-index: 1;
+            }
+            #helpButton {
+                position: absolute;
+                top: 95%;
+                left: 2%;
+                font-size: large;
+                z-index: 1;
+            }
+            .hidden {
+              display: none;
+            }
+            #colorPicker, #customColorPicker {
+                 width: 100px;
+                 height: 40px;
+                 border: none;
+                 border-radius: 5px;
+                 cursor: pointer;
+                 margin: 10px 0;
+            }
+        </style>
 </head>
-<body>
-    <canvas id="renderCanvas"></canvas>
-    <select id="objectSelect" onchange="addObject()">
-        <option selected="" disabled="">Add</option>
-        <option value="plane">Plane</option>
-        <option value="cube">Cube</option>
-        <option value="cone">Cone</option>
-        <option value="sphere">Sphere</option>
-        <option value="cylinder">Cylinder</option>
-        <option value="icosahedron">Icosahedron</option>
-        <!-- Remove the option for 'monkey' -->
-    </select>
-    <div id="menu">
-        <label>Name:</label><br>
-        <input type="text" id="nameInput"><br><br>
-        <label>Position:</label><br>
-        <input type="text" id="positionX"> X<br>
-        <input type="text" id="positionY"> Y<br>
-        <input type="text" id="positionZ"> Z<br><br>
-        <label>Rotation:</label><br>
-        <input type="text" id="rotationX"> X<br>
-        <input type="text" id="rotationY"> Y<br>
-        <input type="text" id="rotationZ"> Z<br><br>
-        <label>Size:</label><br>
-        <input type="text" id="scaleX"> X<br>
-        <input type="text" id="scaleY"> Y<br>
-        <input type="text" id="scaleZ"> Z<br><br>
-        <button onclick="updateObject()">Update</button>
-    </div>
-    <style>
-        #objectSelect {
-            padding: 5px;
-            font-size: 16px;
-        }
-    </style>
+<body oncopy="copyObject()">
+        <select id="viewChanger" onchange="updateView()">
+            <option selected="free">Free Cam</option>
+            <option value="top">Top View</option>
+            <option value="side">Side View</option>
+            <option value="front">Front View</option>
+        </select>
+        <button id="getMapLinkButton">Get Map Link</button>
+        <button id="loadMapButton" onclick="loadMap()">Load Map</button>
+        <button id="objectSelect" onclick="addObject()">Add Object</button>
+        <button id="settingsButton" onclick="openSettings()">Settings</button>
+        <button id="helpButton" onclick="openHelpMenu()">?</button>
+        <div id="menu" class="">
+            <label>Name:</label><br>
+            <input type="text" id="nameInput"><br><br>
+            <label>Position:</label><br>
+            <input type="text" id="positionX"> X<br>
+            <input type="text" id="positionY"> Y<br>
+            <input type="text" id="positionZ"> Z<br><br>
+            <label>Rotation:</label><br>
+            <input type="text" id="rotationX"> X<br>
+            <input type="text" id="rotationY"> Y<br>
+            <input type="text" id="rotationZ"> Z<br><br>
+            <label>Size:</label><br>
+            <div id="scaleMenu" style="display: block;">
+            <div><input type="text" id="scaleX"> X</div>
+            <div><input type="text" id="scaleY"> Y</div>
+            <div><input type="text" id="scaleZ"> Z</div></div>
+            <div id="radiusMenu" style="display: none;"><input type="text" id="radius"> R</div><br>
+            <button onclick="updateObject()" style="z-index: 1;">Update</button>
+            <button id="deleteButton" style="z-index: 1;">Delete</button>
+            <button id="closeMenuButton" onclick="closeMenu()" style="z-index: 1;">Close</button>
+        </div>
+        <div id="settingsMenu">
+            <h2>Settings:</h2>
+            <button id="changeTextureButton" onclick="changeTexture()">Change Texture</button>
+            <div id="textureImageContainer" style="width: 20px; height: 20px;">
+                <div id="textureImage"></div>
+            </div>
+            Default Camera Speed: <input type="number" id="defaultCameraSpeed" style="width: 40px;"><br><br>
+            Fast Camera Speed: <input type="number" id="fastCameraSpeed" style="width: 40px"><br><br>
+            <button id="updateSettingsButton" onclick="updateSettings()">Apply Changes</button><br><br>
+            <button id="savePreferencesButton" onclick="savePreferences()">Save Preferences</button><br>
+            <button id="resetPreferencesButton" onclick="resetPreferences()">Reset Preferences</button>
+        </div>
     <script>
-        var canvas = document.getElementById("renderCanvas");
-        var engine = new BABYLON.Engine(canvas, true);
+        // Create the scene
+var scene = new BABYLON.Scene(engine);
 
-        var createScene = function () {
-            var scene = new BABYLON.Scene(engine);
-            var camera = new BABYLON.FreeCamera("camera", new BABYLON.Vector3(0, 0, -5), scene);
-            camera.setTarget(BABYLON.Vector3.Zero());
+// Create the camera
+var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 2, 5), scene);
+camera.setTarget(BABYLON.Vector3.Zero());
 
-            var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+// Create the renderer (engine)
+var canvas = document.getElementById("renderCanvas"); // Assuming you have a canvas element with this id
+var engine = new BABYLON.Engine(canvas, true);
+engine.runRenderLoop(function () {
+    scene.render();
+});
 
-            var cubes = [];
+// Handle window resize
+window.addEventListener("resize", function () {
+    engine.resize();
+});
 
-            function createCube(color) {
-                var box = BABYLON.MeshBuilder.CreateBox("box", { size: 1 }, scene);
-                var material = new BABYLON.StandardMaterial("material", scene);
-                material.diffuseColor = color;
-                box.material = material;
-                return box;
-            }
+// Initialize the raycaster (Babylon.js equivalent is picking)
+var ray = new BABYLON.Ray();
+var rayHelper = new BABYLON.RayHelper(ray);
 
-            for (var i = 0; i < 2; i++) {
-                var cube = createCube(i === 0 ? new BABYLON.Color3(1, 0, 0) : new BABYLON.Color3(0, 0, 1));
-                cube.position.x = i * 3 - 1.5;
-                cubes.push(cube);
-            }
+// Initialize the mouse position (Babylon.js equivalent is event handling)
+var mouse = new BABYLON.Vector2();
 
-            return scene;
-        };
+// Set texture from local storage or load a default texture
+if (localStorage.getItem('texture') == null) {
+    localStorage.setItem('texture', "https://awehero.github.io/intro/pm_1.png");
+}
 
-        var scene = createScene();
+var textureUrl = localStorage.getItem('texture') === "https://awehero.github.io/intro/pm_1.png" 
+    ? 'https://awehero.github.io/intro/pm1.png' 
+    : localStorage.getItem('texture');
 
-        engine.runRenderLoop(function () {
-            scene.render();
-        });
+var texture = new BABYLON.Texture(textureUrl, scene);
 
-        window.addEventListener("resize", function () {
-            engine.resize();
-        });
+// Create a material using the texture
+var material = new BABYLON.StandardMaterial("material", scene);
+material.diffuseTexture = texture;
 
-        var selectedObject = null;
-
-        canvas.addEventListener("pointerdown", function (evt) {
-            var pickResult = scene.pick(scene.pointerX, scene.pointerY);
-            if (pickResult.hit) {
-                selectedObject = pickResult.pickedMesh;
-                updateMenu();
-            }
-        });
-
-        function updateMenu() {
-            document.getElementById('nameInput').value = selectedObject.name;
-            document.getElementById('positionX').value = selectedObject.position.x;
-            document.getElementById('positionY').value = selectedObject.position.y;
-            document.getElementById('positionZ').value = selectedObject.position.z;
-            document.getElementById('rotationX').value = selectedObject.rotation.x;
-            document.getElementById('rotationY').value = selectedObject.rotation.y;
-            document.getElementById('rotationZ').value = selectedObject.rotation.z;
-            document.getElementById('scaleX').value = selectedObject.scaling.x;
-            document.getElementById('scaleY').value = selectedObject.scaling.y;
-            document.getElementById('scaleZ').value = selectedObject.scaling.z;
-        }
-
-        function addObject() {
-            var type = document.getElementById('objectSelect').value;
-            var object;
-
-            switch (type) {
-                case 'plane':
-                    object = createPlane();
-                    break;
-                case 'cube':
-                    object = createCube();
-                    break;
-                case 'cone':
-                    object = createCone();
-                    break;
-                case 'sphere':
-                    object = createSphere();
-                    break;
-                case 'cylinder':
-                    object = createCylinder();
-                    break;
-                case 'icosahedron':
-                    object = createIcosahedron();
-                    break;
-            }
-
-            scene.addMesh(object);
-            document.getElementById('objectSelect').selectedIndex = 0;
-        }
-
-        function createPlane() {
-            var plane = BABYLON.MeshBuilder.CreatePlane("plane", { size: 5 }, scene);
-            var material = new BABYLON.StandardMaterial("material", scene);
-            material.diffuseColor = new BABYLON.Color3(1, 1, 0);
-            plane.material = material;
-            return plane;
-        }
-
-        function createCone() {
-            var cone = BABYLON.MeshBuilder.CreateCylinder("cone", { diameterTop: 0, diameterBottom: 1, height: 2, tessellation: 32 }, scene);
-            var material = new BABYLON.StandardMaterial("material", scene);
-            material.diffuseColor = new BABYLON.Color3(0, 1, 0);
-            cone.material = material;
-            return cone;
-        }
-
-        function createSphere() {
-            var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 1, segments: 32 }, scene);
-            var material = new BABYLON.StandardMaterial("material", scene);
-            material.diffuseColor = new BABYLON.Color3(0, 0, 1);
-            sphere.material = material;
-            return sphere;
-        }
-
-        function createCylinder() {
-            var cylinder = BABYLON.MeshBuilder.CreateCylinder("cylinder", { diameterTop: 1, diameterBottom: 1, height: 2, tessellation: 32 }, scene);
-            var material = new BABYLON.StandardMaterial("material", scene);
-            material.diffuseColor = new BABYLON.Color3(1, 0, 1);
-            cylinder.material = material;
-            return cylinder;
-        }
-
-        function createIcosahedron() {
-            var icosahedron = BABYLON.MeshBuilder.CreateIcoSphere("icosahedron", { radius: 1, subdivisions: 1 }, scene);
-            var material = new BABYLON.StandardMaterial("material", scene);
-            material.diffuseColor = new BABYLON.Color3(1, 0.6, 0);
-            icosahedron.material = material;
-            return icosahedron;
-        }
-
-        function updateObject() {
-            if (!selectedObject) {
-                console.error('Selected object not found');
-                return;
-            }
-
-            selectedObject.name = document.getElementById('nameInput').value;
-            selectedObject.position.x = parseFloat(document.getElementById('positionX').value);
-            selectedObject.position.y = parseFloat(document.getElementById('positionY').value);
-            selectedObject.position.z = parseFloat(document.getElementById('positionZ').value);
-            selectedObject.rotation.x = parseFloat(document.getElementById('rotationX').value);
-            selectedObject.rotation.y = parseFloat(document.getElementById('rotationY').value);
-            selectedObject.rotation.z = parseFloat(document.getElementById('rotationZ').value);
-            selectedObject.scaling.x = parseFloat(document.getElementById('scaleX').value);
-            selectedObject.scaling.y = parseFloat(document.getElementById('scaleY').value);
-            selectedObject.scaling.z = parseFloat(document.getElementById('scaleZ').value);
-        }
     </script>
 </body>
 </html>
