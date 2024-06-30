@@ -147,10 +147,10 @@
             var raycaster = new THREE.Raycaster();
             var mouse = new THREE.Vector2();
             if (localStorage.getItem('texture') == null) {
-                localStorage.setItem('texture', "https://awehero.github.io/intro/pm_1.png");
+                localStorage.setItem('texture', "https://awehero.github.io/intro/pm1.png");
                 var texture = new THREE.TextureLoader().load(localStorage.getItem('texture'));
             } else if (localStorage.getItem('texture') == "https://awehero.github.io/intro/pm_1.png") {
-                var texture = new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1.png');
+                var texture = new THREE.TextureLoader().load('https://awehero.github.io/intro/pm_1.png');
             } else {
                 var texture = new THREE.TextureLoader().load(localStorage.getItem('texture'));
             }
