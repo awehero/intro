@@ -154,7 +154,7 @@
             } else {
                 var texture = new THREE.TextureLoader().load(localStorage.getItem('texture'));
             }
-            alert("New? Click the ? in the bottom left to find out how the map maker!");
+            setTimeout(alert("New? Click the ? in the bottom left to find out how to use the map maker!"), 100);
             var material = new THREE.MeshBasicMaterial({ map: texture });
 
             var isTyping = false;
