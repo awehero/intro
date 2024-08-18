@@ -301,6 +301,8 @@
             
             var speedBooster = 1.5;
             var quickChangeValue = 0.25;
+            let lastUpdateTime = 0;
+            const updateInterval = 100;
             var rotationSpeed = 0.01;
             var yaw = 0;
             var pitch = 0;
@@ -585,8 +587,6 @@
                         camera.position.z += 0.01;
                     }
                 }
-                let lastUpdateTime = 0;
-                const updateInterval = 100; // in milliseconds
                 function updateSelectedObject() {
                     if (tPressed) {
                         if (iPressed) selectedObject.position.x += quickChangeValue;
