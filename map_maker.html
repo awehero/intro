@@ -276,9 +276,13 @@
             var view = "free";
             function updateView() {
                     if (view == "free") {
+                        pitch = -1.7;
+                        yaw = 0;
+                        camera.position.y = 20;
                         view = "top";
                     } else {
                         view = "free";
+                        pitch = 0;
                     }
                 }
             document.addEventListener('mousemove', onMouseMove, false);
@@ -530,23 +534,22 @@
                     //camera.rotation.y = cameraRotation.y;
                 } else if (view == "top") {
                     if (moveForward) {
-                        
-                        camera.position.z -= 0.01;
+                        camera.position.z -= cameraSpeed * speedBooster;
                     }
                     if (moveBackward) {
-                        camera.position.z += 0.01;
+                        camera.position.z += cameraSpeed * speedBooster;
                     }
                     if (moveLeft) {
-                        camera.position.x += 0.01
+                        camera.position.x += cameraSpeed * speedBooster;
                     }
                     if (moveRight) {
-                        camera.position.x -= 0.01;
+                        camera.position.x -= cameraSpeed * speedBooster;
                     }
                     if (moveUp) {
-                        camera.position.y -= 0.01;
+                        camera.position.y += cameraSpeed * speedBooster;
                     }
                     if (moveDown) {
-                        camera.position.y += 0.01;
+                        camera.position.y -= cameraSpeed * speedBooster;
                     }
                 } else if (view == "side") {
                     if (moveForward) {
