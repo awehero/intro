@@ -524,14 +524,6 @@
                         pitch -= rotationSpeed;
                         cameraRotation.x -= 0.01;
                     }
-                    var maxPitch = Math.PI / 2 - 0.01;
-                    pitch = Math.max(-maxPitch, Math.min(maxPitch, pitch));
-        
-                    var quaternion = new THREE.Quaternion();
-                    quaternion.setFromEuler(new THREE.Euler(pitch, yaw, 0, 'YXZ'));
-                    camera.quaternion.copy(quaternion);
-                    //camera.rotation.x = cameraRotation.x;
-                    //camera.rotation.y = cameraRotation.y;
                 } else if (view == "top") {
                     if (moveForward) {
                         camera.position.z -= cameraSpeed * speedBooster;
@@ -540,10 +532,10 @@
                         camera.position.z += cameraSpeed * speedBooster;
                     }
                     if (moveLeft) {
-                        camera.position.x += cameraSpeed * speedBooster;
+                        camera.position.x -= cameraSpeed * speedBooster;
                     }
                     if (moveRight) {
-                        camera.position.x -= cameraSpeed * speedBooster;
+                        camera.position.x += cameraSpeed * speedBooster;
                     }
                     if (moveUp) {
                         camera.position.y += cameraSpeed * speedBooster;
@@ -681,6 +673,12 @@
                     selectedObject.scale.y -= 0.01;
                     updateMenu();
                 }
+                var maxPitch = Math.PI / 2 - 0.01;
+                pitch = Math.max(-maxPitch, Math.min(maxPitch, pitch));
+        
+                var quaternion = new THREE.Quaternion();
+                quaternion.setFromEuler(new THREE.Euler(pitch, yaw, 0, 'YXZ'));
+                camera.quaternion.copy(quaternion);
             }, 1);
 
             function animate() {
