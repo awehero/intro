@@ -588,31 +588,36 @@
                     }
                 }
                 function updateSelectedObject() {
+                    let hasChanges = false;
                     if (tPressed) {
-                        if (iPressed) selectedObject.position.x += quickChangeValue;
-                        if (jPressed) selectedObject.position.x -= quickChangeValue;
-                        if (oPressed) selectedObject.position.z += quickChangeValue;
-                        if (kPressed) selectedObject.position.z -= quickChangeValue;
-                        if (pPressed) selectedObject.position.y += quickChangeValue;
-                        if (lPressed) selectedObject.position.y -= quickChangeValue;
+                        if (iPressed) { selectedObject.position.x += quickChangeValue; hasChanges = true; }
+                        if (jPressed) { selectedObject.position.x -= quickChangeValue; hasChanges = true; }
+                        if (oPressed) { selectedObject.position.z += quickChangeValue; hasChanges = true; }
+                        if (kPressed) { selectedObject.position.z -= quickChangeValue; hasChanges = true; }
+                        if (pPressed) { selectedObject.position.y += quickChangeValue; hasChanges = true; }
+                        if (lPressed) { selectedObject.position.y -= quickChangeValue; hasChanges = true; }
                     }
+                    
                     if (yPressed) {
-                        if (iPressed) selectedObject.rotation.x += 0.01;
-                        if (jPressed) selectedObject.rotation.x -= 0.01;
-                        if (oPressed) selectedObject.rotation.y += 0.01;
-                        if (kPressed) selectedObject.rotation.y -= 0.01;
-                        if (pPressed) selectedObject.rotation.z += 0.01;
-                        if (lPressed) selectedObject.rotation.z -= 0.01;
+                        if (iPressed) { selectedObject.rotation.x += 1; hasChanges = true; }
+                        if (jPressed) { selectedObject.rotation.x -= 1; hasChanges = true; }
+                        if (oPressed) { selectedObject.rotation.y += 1; hasChanges = true; }
+                        if (kPressed) { selectedObject.rotation.y -= 1; hasChanges = true; }
+                        if (pPressed) { selectedObject.rotation.z += 1; hasChanges = true; }
+                        if (lPressed) { selectedObject.rotation.z -= 1; hasChanges = true; }
                     }
+                    
                     if (uPressed) {
-                        if (iPressed) selectedObject.scale.x += quickChangeValue;
-                        if (jPressed) selectedObject.scale.x -= quickChangeValue;
-                        if (oPressed) selectedObject.scale.z += quickChangeValue;
-                        if (kPressed) selectedObject.scale.z -= quickChangeValue;
-                        if (pPressed) selectedObject.scale.y += quickChangeValue;
-                        if (lPressed) selectedObject.scale.y -= quickChangeValue;
+                        if (iPressed) { selectedObject.scale.x += quickChangeValue; hasChanges = true; }
+                        if (jPressed) { selectedObject.scale.x -= quickChangeValue; hasChanges = true; }
+                        if (oPressed) { selectedObject.scale.z += quickChangeValue; hasChanges = true; }
+                        if (kPressed) { selectedObject.scale.z -= quickChangeValue; hasChanges = true; }
+                        if (pPressed) { selectedObject.scale.y += quickChangeValue; hasChanges = true; }
+                        if (lPressed) { selectedObject.scale.y -= quickChangeValue; hasChanges = true; }
                     }
-                    updateMenu();
+                    if (hasChanges) {
+                        updateMenu();
+                    }
                 }
                 function throttleUpdate() {
                     const currentTime = Date.now();
