@@ -588,87 +588,70 @@
                     selectedObject.position.x += 0.01;
                     updateMenu();
                 }
-                
                 if (tPressed && jPressed) {
                     selectedObject.position.x -= 0.01;
                     updateMenu();
                 }
-                
                 if (tPressed && oPressed) {
                     selectedObject.position.z += 0.01;
                     updateMenu();
                 }
-                
                 if (tPressed && kPressed) {
                     selectedObject.position.z -= 0.01;
                     updateMenu();
                 }
-                
                 if (tPressed && pPressed) {
                     selectedObject.position.y += 0.01;
                     updateMenu();
                 }
-                
                 if (tPressed && lPressed) {
                     selectedObject.position.y -= 0.01;
                     updateMenu();
                 }
-                
                 if (yPressed && iPressed) {
                     selectedObject.rotation.x += 0.01;
                     updateMenu();
                 }
-                
                 if (yPressed && jPressed) {
                     selectedObject.rotation.x -= 0.01;
                     updateMenu();
                 }
-                
                 if (yPressed && oPressed) {
                     selectedObject.rotation.y += 0.01;
                     updateMenu();
                 }
-                
                 if (yPressed && kPressed) {
                     selectedObject.rotation.y -= 0.01;
                     updateMenu();
                 }
-                
                 if (yPressed && pPressed) {
                     selectedObject.rotation.z += 0.01;
                     updateMenu();
                 }
-                
                 if (yPressed && lPressed) {
                     selectedObject.rotation.z -= 0.01;
                     updateMenu();
                 }
-                
                 if (uPressed && iPressed) {
                     selectedObject.scale.x += 0.01;
                     updateMenu();
                 }
-                
                 if (uPressed && jPressed) {
                     selectedObject.scale.x -= 0.01;
                     updateMenu();
                 }
-                
                 if (uPressed && oPressed) {
                     selectedObject.scale.z += 0.01;
                     updateMenu();
                 }
-                
                 if (uPressed && kPressed) {
                     selectedObject.scale.z -= 0.01;
                     updateMenu();
                 }
-                
                 if (uPressed && pPressed) {
                     selectedObject.scale.y += 0.01;
                     updateMenu();
                 }
-                
                 if (uPressed && lPressed) {
                     selectedObject.scale.y -= 0.01;
                     updateMenu();
@@ -727,7 +710,9 @@
                 }
                 scene.add(object);
                 fixPlane();
-                document.getElementById('objectSelect').selectedIndex = 0;
+                selectedObject = object;
+                selectedObject.material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1_selected.png') });
+                updateMenu();
             }
             function createPlane() {
                 var geometry = new THREE.PlaneGeometry(1,1);
