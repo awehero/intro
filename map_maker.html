@@ -300,6 +300,7 @@
             var cameraSpeed = 0.03;
             
             var speedBooster = 1.5;
+            var quickChangeValue = 0.25;
             var rotationSpeed = 0.01;
             var yaw = 0;
             var pitch = 0;
@@ -584,81 +585,46 @@
                         camera.position.z += 0.01;
                     }
                 }
-                if (tPressed && iPressed) {
-                    selectedObject.position.x += 0.01;
+                let lastUpdateTime = 0;
+                const updateInterval = 100; // in milliseconds
+                function updateSelectedObject() {
+                    if (tPressed) {
+                        if (iPressed) selectedObject.position.x += quickChangeValue;
+                        if (jPressed) selectedObject.position.x -= quickChangeValue;
+                        if (oPressed) selectedObject.position.z += quickChangeValue;
+                        if (kPressed) selectedObject.position.z -= quickChangeValue;
+                        if (pPressed) selectedObject.position.y += quickChangeValue;
+                        if (lPressed) selectedObject.position.y -= quickChangeValue;
+                    }
+                    if (yPressed) {
+                        if (iPressed) selectedObject.rotation.x += 0.01;
+                        if (jPressed) selectedObject.rotation.x -= 0.01;
+                        if (oPressed) selectedObject.rotation.y += 0.01;
+                        if (kPressed) selectedObject.rotation.y -= 0.01;
+                        if (pPressed) selectedObject.rotation.z += 0.01;
+                        if (lPressed) selectedObject.rotation.z -= 0.01;
+                    }
+                    if (uPressed) {
+                        if (iPressed) selectedObject.scale.x += quickChangeValue;
+                        if (jPressed) selectedObject.scale.x -= quickChangeValue;
+                        if (oPressed) selectedObject.scale.z += quickChangeValue;
+                        if (kPressed) selectedObject.scale.z -= quickChangeValue;
+                        if (pPressed) selectedObject.scale.y += quickChangeValue;
+                        if (lPressed) selectedObject.scale.y -= quickChangeValue;
+                    }
                     updateMenu();
                 }
-                if (tPressed && jPressed) {
-                    selectedObject.position.x -= 0.01;
-                    updateMenu();
+                function throttleUpdate() {
+                    const currentTime = Date.now();
+                    if (currentTime - lastUpdateTime >= updateInterval) {
+                        updateSelectedObject();
+                        lastUpdateTime = currentTime;
+                    }
                 }
-                if (tPressed && oPressed) {
-                    selectedObject.position.z += 0.01;
-                    updateMenu();
-                }
-                if (tPressed && kPressed) {
-                    selectedObject.position.z -= 0.01;
-                    updateMenu();
-                }
-                if (tPressed && pPressed) {
-                    selectedObject.position.y += 0.01;
-                    updateMenu();
-                }
-                if (tPressed && lPressed) {
-                    selectedObject.position.y -= 0.01;
-                    updateMenu();
-                }
-                if (yPressed && iPressed) {
-                    selectedObject.rotation.x += 0.01;
-                    updateMenu();
-                }
-                if (yPressed && jPressed) {
-                    selectedObject.rotation.x -= 0.01;
-                    updateMenu();
-                }
-                if (yPressed && oPressed) {
-                    selectedObject.rotation.y += 0.01;
-                    updateMenu();
-                }
-                if (yPressed && kPressed) {
-                    selectedObject.rotation.y -= 0.01;
-                    updateMenu();
-                }
-                if (yPressed && pPressed) {
-                    selectedObject.rotation.z += 0.01;
-                    updateMenu();
-                }
-                if (yPressed && lPressed) {
-                    selectedObject.rotation.z -= 0.01;
-                    updateMenu();
-                }
-                if (uPressed && iPressed) {
-                    selectedObject.scale.x += 0.01;
-                    updateMenu();
-                }
-                if (uPressed && jPressed) {
-                    selectedObject.scale.x -= 0.01;
-                    updateMenu();
-                }
-                if (uPressed && oPressed) {
-                    selectedObject.scale.z += 0.01;
-                    updateMenu();
-                }
-                if (uPressed && kPressed) {
-                    selectedObject.scale.z -= 0.01;
-                    updateMenu();
-                }
-                if (uPressed && pPressed) {
-                    selectedObject.scale.y += 0.01;
-                    updateMenu();
-                }
-                if (uPressed && lPressed) {
-                    selectedObject.scale.y -= 0.01;
-                    updateMenu();
-                }
+                throttleUpdate();
+                
                 var maxPitch = Math.PI / 2 - 0.01;
                 pitch = Math.max(-maxPitch, Math.min(maxPitch, pitch));
-        
                 var quaternion = new THREE.Quaternion();
                 quaternion.setFromEuler(new THREE.Euler(pitch, yaw, 0, 'YXZ'));
                 camera.quaternion.copy(quaternion);
