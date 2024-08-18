@@ -996,9 +996,9 @@
                         object.scale.z = 1;
                         object.scale.y = 1;
                     } else {
-                        object.scale.x = scaleX / 100;
-                        object.scale.z = scaleY / 100;
-                        object.scale.y = scaleZ / 100;
+                        object.scale.x = scaleX / 50;
+                        object.scale.z = scaleY / 50;
+                        object.scale.y = scaleZ / 50;
                     }
                     object.name = name;
                 }
@@ -1090,15 +1090,15 @@
                                         var scale = object.scale;
                                         if (object.geometry.type == "PlaneGeometr") {
                                              var roundedScale = {
-                                                  x: Math.round(scale.x * 1000) / 10,
-                                                  y: Math.round(scale.y * 1000) / 10,
-                                                  z: Math.round(scale.z * 1000) / 10
+                                                  x: Math.round(scale.x * 1000) / 20,
+                                                  y: Math.round(scale.y * 1000) / 20,
+                                                  z: Math.round(scale.z * 1000) / 20
                                              };
                                         } else {
                                              var roundedScale = {
-                                                  x: Math.round(scale.x * 1000) / 10,
-                                                  y: Math.round(scale.z * 1000) / 10,
-                                                  z: Math.round(scale.y * 1000) / 10
+                                                  x: Math.round(scale.x * 1000) / 20,
+                                                  y: Math.round(scale.z * 1000) / 20,
+                                                  z: Math.round(scale.y * 1000) / 20
                                              };
                                         }
                                         var objectData = objectType + (roundedPosition.x) + "$" + (roundedPosition.y) + "$" + (roundedPosition.z) + "$" + Math.round(roundedRotation.x * 100) + "$" + Math.round(roundedRotation.y * 100) + "$" + Math.round(roundedRotation.z * 100) + "$" + (roundedScale.x) + "$" + (roundedScale.y) + "$" + (roundedScale.z) + "$" + objectName;
