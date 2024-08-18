@@ -45,7 +45,6 @@
                 top: 20px;
                 left: 10%;
                 z-index: 1;
-                display: none;
             }
             #objectSelect {
                 position: absolute;
@@ -81,12 +80,7 @@
         </style>
     </head>
     <body oncopy="copyObject()">
-        <select id="viewChanger" onchange="updateView()">
-            <option selected="free">Free Cam</option>
-            <option value="top">Top View</option>
-            <option value="side">Side View</option>
-            <option value="front">Front View</option>
-        </select>
+        <button id="viewChanger" onclick="updateView()">Toggle View</button>
         <button id="getMapLinkButton">Get Map Link</button>
         <button id="loadMapButton" onclick="loadMap()">Load Map</button>
         <button id="objectSelect" onclick="addObject()">Add Object</button>
@@ -281,8 +275,11 @@
 
             var view = "free";
             function updateView() {
-                alert("This is currently a work in progress. For best usage, just use free cam.");
-                //view = document.getElementById('viewChanger').value;
+                    if (view == "free") {
+                        view = "top";
+                    } else {
+                        view = "free";
+                    }
                 }
             document.addEventListener('mousemove', onMouseMove, false);
             document.addEventListener('click', onClick, false);
@@ -531,95 +528,6 @@
                     camera.quaternion.copy(quaternion);
                     //camera.rotation.x = cameraRotation.x;
                     //camera.rotation.y = cameraRotation.y;
-                    if (tPressed && iPressed) {
-                        selectedObject.position.x += 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (tPressed && jPressed) {
-                        selectedObject.position.x -= 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (tPressed && oPressed) {
-                        selectedObject.position.z += 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (tPressed && kPressed) {
-                        selectedObject.position.z -= 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (tPressed && pPressed) {
-                        selectedObject.position.y += 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (tPressed && lPressed) {
-                        selectedObject.position.y -= 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (yPressed && iPressed) {
-                        selectedObject.rotation.x += 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (yPressed && jPressed) {
-                        selectedObject.rotation.x -= 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (yPressed && oPressed) {
-                        selectedObject.rotation.y += 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (yPressed && kPressed) {
-                        selectedObject.rotation.y -= 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (yPressed && pPressed) {
-                        selectedObject.rotation.z += 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (yPressed && lPressed) {
-                        selectedObject.rotation.z -= 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (uPressed && iPressed) {
-                        selectedObject.scale.x += 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (uPressed && jPressed) {
-                        selectedObject.scale.x -= 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (uPressed && oPressed) {
-                        selectedObject.scale.z += 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (uPressed && kPressed) {
-                        selectedObject.scale.z -= 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (uPressed && pPressed) {
-                        selectedObject.scale.y += 0.01;
-                        updateMenu();
-                    }
-                    
-                    if (uPressed && lPressed) {
-                        selectedObject.scale.y -= 0.01;
-                        updateMenu();
-                    }
                 } else if (view == "top") {
                     if (moveForward) {
                         
@@ -680,6 +588,95 @@
                     if (moveDown) {
                         camera.position.z += 0.01;
                     }
+                }
+                if (tPressed && iPressed) {
+                    selectedObject.position.x += 0.01;
+                    updateMenu();
+                }
+                
+                if (tPressed && jPressed) {
+                    selectedObject.position.x -= 0.01;
+                    updateMenu();
+                }
+                
+                if (tPressed && oPressed) {
+                    selectedObject.position.z += 0.01;
+                    updateMenu();
+                }
+                
+                if (tPressed && kPressed) {
+                    selectedObject.position.z -= 0.01;
+                    updateMenu();
+                }
+                
+                if (tPressed && pPressed) {
+                    selectedObject.position.y += 0.01;
+                    updateMenu();
+                }
+                
+                if (tPressed && lPressed) {
+                    selectedObject.position.y -= 0.01;
+                    updateMenu();
+                }
+                
+                if (yPressed && iPressed) {
+                    selectedObject.rotation.x += 0.01;
+                    updateMenu();
+                }
+                
+                if (yPressed && jPressed) {
+                    selectedObject.rotation.x -= 0.01;
+                    updateMenu();
+                }
+                
+                if (yPressed && oPressed) {
+                    selectedObject.rotation.y += 0.01;
+                    updateMenu();
+                }
+                
+                if (yPressed && kPressed) {
+                    selectedObject.rotation.y -= 0.01;
+                    updateMenu();
+                }
+                
+                if (yPressed && pPressed) {
+                    selectedObject.rotation.z += 0.01;
+                    updateMenu();
+                }
+                
+                if (yPressed && lPressed) {
+                    selectedObject.rotation.z -= 0.01;
+                    updateMenu();
+                }
+                
+                if (uPressed && iPressed) {
+                    selectedObject.scale.x += 0.01;
+                    updateMenu();
+                }
+                
+                if (uPressed && jPressed) {
+                    selectedObject.scale.x -= 0.01;
+                    updateMenu();
+                }
+                
+                if (uPressed && oPressed) {
+                    selectedObject.scale.z += 0.01;
+                    updateMenu();
+                }
+                
+                if (uPressed && kPressed) {
+                    selectedObject.scale.z -= 0.01;
+                    updateMenu();
+                }
+                
+                if (uPressed && pPressed) {
+                    selectedObject.scale.y += 0.01;
+                    updateMenu();
+                }
+                
+                if (uPressed && lPressed) {
+                    selectedObject.scale.y -= 0.01;
+                    updateMenu();
                 }
             }, 1);
 
