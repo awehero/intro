@@ -249,10 +249,10 @@
                 setTimeout(function() {
                     if (selectedObject !== null) {
                         selectedObject.material = new THREE.MeshBasicMaterial({ map: texture });
+                        color();
                     }
                     menu.classList.add("hidden");
                 }, 10);
-                color();
             }
             document.getElementById("deleteButton").addEventListener("click", function() {
                 if (selectedObject) {
