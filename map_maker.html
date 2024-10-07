@@ -335,7 +335,12 @@
             document.addEventListener('keydown', onKeyDown);
             document.addEventListener('keyup', onKeyUp);
             function onKeyDown(event) {
-                    if (isTyping) return;
+                    if (isTyping) {
+                        if (event.key === 'Enter') {
+                            updateObject();
+                        }
+                        return;
+                    }
                 switch (event.key) {
                     case 'w':
                         moveForward = true;
