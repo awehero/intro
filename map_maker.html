@@ -272,6 +272,17 @@
                     object.material = material;
                 });
             }
+            function color() {
+                scene.traverse(function (object) {
+                    if (object.isMesh && object.name.includes('mat=#')) {
+                        const match = object.name.match(/mat=(#[0-9A-Fa-f]{6})/);
+                        if (match) {
+                            const hexColor = match[1];
+                            object.material.color.set(hexColor);
+                        }
+                    }
+                });
+            }
 
             var view = "free";
             function updateView() {
@@ -756,6 +767,7 @@
                         }
                     }
                     fixPlane();
+                    color();
                 }
                 function fixPlane() {
                     scene.children.forEach(function(object) {
