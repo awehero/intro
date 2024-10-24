@@ -11,13 +11,81 @@
 <div id="result"></div>
 
 <script>
+function convert() {
+    // Get the mapfile string from an HTML element with id 'query'
+    let mapfile = document.getElementById("query").value;
 
+    // Separate schemas for each object type
+    const schemas = {
+        "a.p": ["type", "position", "rotation", "size", "color", "friction", "air", "bounce", "jump", "drift", "mass", "killer"],
+        "a.c": ["type", "position", "color"],
+        "a.e": ["type", "position"],
+        "a.y": ["type", "position", "rotation", "size", "color", "bounce", "mass", "friction", "air", "topr", "killer"],
+        "a.s": ["type", "position", "size", "color", "bounce", "mass", "friction", "air", "killer"]
+    };
 
+    // Find the first '{' and '}'.
+    let firstBraceIndex = mapfile.indexOf('{');
+    let closingBraceIndex = mapfile.indexOf('}', firstBraceIndex);
+    
+    if (firstBraceIndex === -1 || closingBraceIndex === -1) return;
 
+    // Extract the content between the first '{' and '}'.
+    let contentBetweenBraces = mapfile.slice(firstBraceIndex + 1, closingBraceIndex).trim();
 
+    // Split the content by lines and process each line
+    let init = contentBetweenBraces
+        .split('\n')
+        .map(line => line.trim())   // Remove extra spaces around each line
+        .filter(line => line.length > 0)  // Remove empty lines
+        .map(line => processLine(line, schemas)) // Process each line based on schema
+    
+    console.log(init);
+}
 
+function processLine(line, schemas) {
+    // Split the line by the first `;`
+    let [command, rest] = line.split(';').map(part => part.trim());
 
+    // Extract the type (e.g., a.p, a.c, a.e, a.y, a.s)
+    let type = command.split('(')[0];
 
+    // Check if the type exists in the schemas array
+    if (schemas[type]) {
+        // Extract the arguments in between the parentheses
+        let args = command.match(/\((.*)\)/)[1].split(',').map(arg => arg.trim());
+        let parsedArgs = parseArgsBySchema(args, schemas[type]);
+
+        return parsedArgs;
+    } else {
+        return null;
+    }
+}
+
+function parseArgsBySchema(args, schema) {
+    let parsed = {};
+
+    schema.forEach((key, index) => {
+        if (key === "position" || key === "rotation" || key === "size") {
+            // Split the array-based values for position, rotation, size
+            parsed[key] = args[index].match(/\[(.*)\]/)[1].split(',').map(Number);
+        } else if (key === "color") {
+            // Handle the color value and split it into shade and opacity
+            let colorValue = args[index].replace(/["']/g, ''); // Remove quotes
+            if (colorValue.includes(',')) {
+                let [shade, opacity] = colorValue.split(',').map(val => val.trim());
+                parsed["color"] = { "shade": shade, "opacity": Number(opacity) };
+            } else {
+                parsed["color"] = { "shade": colorValue, "opacity": 1 };
+            }
+        } else {
+            // For other values, assign directly (convert to number if applicable)
+            parsed[key] = isNaN(args[index]) ? args[index] : Number(args[index]);
+        }
+    });
+
+    return parsed;
+}
 </script>
 </body>
 </html>
