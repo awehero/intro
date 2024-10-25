@@ -25,7 +25,7 @@
     <div id="result"></div>
 
     <script>
-   function extractStartData() {
+   /*function extractStartData() {
     // Get the mapfile string from the input
     let mapfile = document.getElementById("query").value;
 
@@ -41,8 +41,100 @@
     if (firstBraceIndex === 0 || lastBraceIndex === -1) return; // Exit if braces are not found
 
     let initData = mapfile.substring(firstBraceIndex, lastBraceIndex);
+*/
+        let objects = []; // Array to store the final results
 
-    // Step 3: Split the initData string into an array of arguments
+function formatString(input) {
+    return input.replace(/[\[\])]/g, "") // Remove [, ], and )
+                .replace(/\(/g, ",")    // Replace ( with ,
+                .replace(/\s+/g, "")    // Remove all spaces
+                .replace(/(\ba\.(p|c|e|y|s))/g, '"$1"'); // Add quotes around a.p, a.c, a.e, a.y, a.s
+}
+
+let input = `a.p([265.60035, -56.68965, -170.32965], [1.03, -0.22, -0.07], [70, 70, 70], "402c14", 0, 0, 0.6, false, false, false, false);
+a.c([1, 2, 3], "ff0000");
+a.e("event");
+a.y(100);
+a.s([4, 5, 6], true);
+a.p([256.97042, -56.68958, -351.48958], [1.6, -0.22, -0.07], [70, 70, 70], "402c14", 0, 0, 0.6, false, false, false, false);`;
+
+input = formatString(input);
+
+// Split the formatted string into an array based on the ';' character
+const outputArray = input.split(';').map(item => item.trim()).filter(item => item);
+
+// Process each line
+outputArray.forEach(row => {
+    let fullRow = row; // The full row as a string
+    let rowOne = fullRow.substring(0, 5); // The first 5 characters (e.g., "a.p")
+    fullRow = fullRow.substring(fullRow.indexOf(",") + 1); // Everything after the first comma
+
+    if (rowOne === "a.p" || rowOne === "a.y") {
+        // Set listRow based on the expected format for a.p and a.y
+        const values = fullRow.split(',');
+        let listRow = [
+            rowOne,                      // [0] a.p or a.y
+            values[0],                  // [1] value before first comma
+            values[1],                  // [2] value before second comma
+            values[2],                  // [3] value before third comma
+            values[3],                  // [4] value before fourth comma
+            values[4],                  // [5] value before fifth comma
+            values[5],                  // [6] value before sixth comma
+            values[6],                  // [7] value before seventh comma
+            values[7],                  // [8] value before eighth comma
+            values[8],                  // [9] value before ninth comma
+            values[9],                  // [10] value between the ninth comma and the second quotation mark
+        ];
+
+        let rowTwo = fullRow.split('"')[1]; // Everything after the first comma after the fourth quotation mark
+        const rowTwoValues = rowTwo.split(',');
+        listRow.push(...rowTwoValues); // Append values from rowTwo
+
+        // Access rowTwo values based on the listRow array
+        listRow.push(rowTwoValues[0]); // [11]
+        listRow.push(rowTwoValues[1]); // [12]
+        listRow.push(rowTwoValues[2]); // [13]
+        listRow.push(rowTwoValues[3]); // [14]
+        listRow.push(rowTwoValues[4]); // [15]
+
+        // If rowOne is "a.p" (not "a.y"), handle the seventh comma value
+        if (rowOne === "a.p") {
+            listRow.push(rowTwoValues[5]); // [17]
+        }
+
+        objects.push(listRow); // Save the listRow array to objects
+
+    } else if (rowOne === "a.c") {
+        // Set listRow based on the expected format for a.c
+        const values = fullRow.split(',');
+        let listRow = [
+            rowOne,                      // [0] a.c
+            values[0],                  // [1] value before first comma
+            values[1],                  // [2] value before second comma
+            values[2],                  // [3] value before third comma
+            values.slice(3).join(',')   // [4] everything after the third comma
+        ];
+
+        objects.push(listRow); // Save the listRow array to objects
+
+    } else if (rowOne === "a.e") {
+        // Set listRow based on the expected format for a.e
+        const values = fullRow.split(',');
+        let listRow = [
+            rowOne,                      // [0] a.e
+            values[0],                  // [1] value before first comma
+            values[1],                  // [2] value before second comma
+            values[2]                   // [3] value before third comma
+        ];
+
+        objects.push(listRow); // Save the listRow array to objects
+    }
+});
+
+// Log the final objects array
+console.log(objects);
+
+    /*// Step 3: Split the initData string into an array of arguments
     let argArray = initData.match(/(?:a\.\w+\(.*?\);?)/g);
     
     // Create a mapping for the expected keys based on the type
@@ -103,7 +195,7 @@
 
     // Display the result in the result div
     document.getElementById("result").innerText = JSON.stringify(startData, null, 2);
-}
+}*/
 </script>
 </body>
 </html>
