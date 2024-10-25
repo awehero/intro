@@ -25,7 +25,7 @@
     <div id="result"></div>
 
     <script>
-    function extractStartData() {
+   function extractStartData() {
     // Get the mapfile string from the input
     let mapfile = document.getElementById("query").value;
 
@@ -47,11 +47,11 @@
     
     // Create a mapping for the expected keys based on the type
     const typesMap = {
-        "a.p": ["type", "position", "rotation", "size", "color", "friction", "air", "bounce", "jump", "drift", "mass", "killer"],
-        "a.c": ["type", "position", "color"],
-        "a.e": ["type", "position"],
-        "a.y": ["type", "position", "rotation", "size", "color", "bounce", "mass", "friction", "air", "topr", "killer"],
-        "a.s": ["type", "position", "size", "color", "bounce", "mass", "friction", "air", "killer"]
+        "a.p": ["type", "xpos", "ypos", "zpos", "xrot", "yrot", "zrot", "xsiz", "ysiz", "zsiz", "color", "opacity", "friction", "air", "bounce", "jump", "drift", "mass", "killer"],
+        "a.c": ["type", "xpos", "ypos", "zpos", "color", "opacity"],
+        "a.e": ["type", "xpos", "ypos", "zpos"],
+        "a.y": ["type", "xpos", "ypos", "zpos", "xrot", "yrot", "zrot", "xsiz", "ysiz", "zsiz", "color", "opacity", "bounce", "mass", "friction", "air", "topr", "killer"],
+        "a.s": ["type", "xpos", "ypos", "zpos", "size", "color", "opacity", "bounce", "mass", "friction", "air", "killer"]
     };
 
     // Step 4: Initialize the startData array
@@ -59,13 +59,13 @@
 
     // Step 5: Loop through the args and parse the values
     for (let item of argArray) {
-        let parsed = {};
+        let parsed = [];
         
         // Identify the type
         let typeKey = item.match(/^a\.(\w+)/);
         if (typeKey) {
             const type = typeKey[1];
-            parsed.type = type;
+            parsed.push(type); // Push the type as the first element
             
             // Remove the type identifier and parentheses
             let argsString = item.replace(/^a\.\w+\((.*)\);?$/, '$1');
@@ -73,34 +73,26 @@
 
             // Map parsed values based on the type
             for (let key of typesMap[`a.${type}`]) {
-                if (key === "position" || key === "rotation" || key === "size") {
-                    // Extract three values for position, rotation, or size
-                    parsed[key] = args.splice(0, 3).map(val => {
-                        let number = Number(val);
-                        return isNaN(number) ? null : number; // Set to null if not a valid number
-                    });
-                } else if (key === "color") {
+                if (key === "color") {
                     let colorValue = args.shift(); // Get the next value for color
                     if (colorValue) {
-                        // Handle color value to split into shade and opacity
+                        // Handle color value to split into color and opacity
                         if (colorValue.includes(',')) {
-                            let [shade, opacity] = colorValue.split(',').map(val => val.trim());
-                            parsed["color"] = { 
-                                "shade": shade.replace(/["']/g, ''), // Keep quotes removed from shade
-                                "opacity": Number(opacity) 
-                            };
+                            let [color, opacity] = colorValue.split(',').map(val => val.trim());
+                            parsed.push(color.replace(/["']/g, '')); // Keep quotes removed from color
+                            parsed.push(Number(opacity)); // Add opacity
                         } else {
-                            parsed["color"] = { 
-                                "shade": colorValue.replace(/["']/g, ''), // Keep quotes removed from shade
-                                "opacity": 1 
-                            };
+                            parsed.push(colorValue.replace(/["']/g, '')); // Keep quotes removed from color
+                            parsed.push(1); // Default opacity
                         }
                     } else {
-                        parsed["color"] = { "shade": "", "opacity": 1 }; // Default if color is missing
+                        parsed.push(""); // Default color if color is missing
+                        parsed.push(1); // Default opacity
                     }
                 } else {
                     // For other attributes, just get the next value
-                    parsed[key] = args.shift() || null; // Set to null if undefined
+                    let value = args.shift();
+                    parsed.push(value ? (isNaN(value) ? value : Number(value)) : null); // Convert to number or null if undefined
                 }
             }
 
