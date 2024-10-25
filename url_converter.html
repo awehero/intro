@@ -59,7 +59,7 @@ const outputArray = input.split(';').map(item => item.trim()).filter(item => ite
 
 outputArray.forEach(row => {
     let fullRow = row; // The full row as a string
-    let rowOne = fullRow.substring(0, 5); // The first 5 characters (e.g., "a.p")
+    let rowOne = fullRow.substring(0, 3); // The first 5 characters (e.g., "a.p")
     fullRow = fullRow.substring(fullRow.indexOf(",") + 1); // Everything after the first comma
 
     if (rowOne === "a.p" || rowOne === "a.y") {
