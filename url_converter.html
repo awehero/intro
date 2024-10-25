@@ -69,7 +69,7 @@
             
             // Remove the type identifier and parentheses
             let argsString = item.replace(/^a\.\w+\((.*)\);?$/, '$1');
-            let args = argsString.split(',').map(arg => arg.trim());
+            let args = argsString.split(',').map(arg => arg.trim().replace(/^\[|\]$/g, '')); // Remove brackets at the ends
 
             // Map parsed values based on the type
             for (let key of typesMap[`a.${type}`]) {
@@ -79,10 +79,10 @@
                         // Handle color value to split into color and opacity
                         if (colorValue.includes(',')) {
                             let [color, opacity] = colorValue.split(',').map(val => val.trim());
-                            parsed.push(color.replace(/["']/g, '')); // Keep quotes removed from color
-                            parsed.push(Number(opacity)); // Add opacity
+                            parsed.push(color.replace(/["']/g, '')); // Remove quotes from color
+                            parsed.push(Number(opacity)); // Add opacity as a number
                         } else {
-                            parsed.push(colorValue.replace(/["']/g, '')); // Keep quotes removed from color
+                            parsed.push(colorValue.replace(/["']/g, '')); // Remove quotes from color
                             parsed.push(1); // Default opacity
                         }
                     } else {
@@ -90,7 +90,7 @@
                         parsed.push(1); // Default opacity
                     }
                 } else {
-                    // For other attributes, just get the next value
+                    // For other attributes, get the next value and parse as number if possible
                     let value = args.shift();
                     parsed.push(value ? (isNaN(value) ? value : Number(value)) : null); // Convert to number or null if undefined
                 }
@@ -104,7 +104,6 @@
     // Display the result in the result div
     document.getElementById("result").innerText = JSON.stringify(startData, null, 2);
 }
-
-    </script>
+</script>
 </body>
 </html>
