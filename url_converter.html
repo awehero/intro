@@ -20,7 +20,7 @@
 <body>
     <label for="query">Enter the full mapfile here:</label>
     <input type="text" id="query" placeholder="Script goes here..." style="width: 100%;">
-    <button onclick="extractStartData()">Go!</button>
+    <button onclick="convert()">Go!</button>
     <div>Made by awehero54</div>
     <div id="result"></div>
 
@@ -44,6 +44,7 @@
 */
 let startObjects = []; // Array to store the final results
 let version = 8;
+function convert() {
 function formatString(input) {
     return input.replace(/[\[\])]/g, "") // Remove [, ], and )
                 .replace(/\(/g, ",")    // Replace ( with ,
@@ -154,7 +155,8 @@ outputArray.forEach(row => {
 });
 console.log(startObjects);
 
-
+//postOne = input.substring(input.indexOf("post"),input.indexOf("section_id: 0"));
+}
     /*// Step 3: Split the initData string into an array of arguments
     let argArray = initData.match(/(?:a\.\w+\(.*?\);?)/g);
     
