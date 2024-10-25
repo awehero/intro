@@ -42,23 +42,21 @@
 
     let initData = mapfile.substring(firstBraceIndex, lastBraceIndex);
 */
-        let objects = []; // Array to store the final results
+let objects = []; // Array to store the final results
 
 function formatString(input) {
     return input.replace(/[\[\])]/g, "") // Remove [, ], and )
                 .replace(/\(/g, ",")    // Replace ( with ,
-                .replace(/\s+/g, "")    // Remove all spaces
-                .replace(/(\ba\.(p|c|e|y|s))/g, '"$1"'); // Add quotes around a.p, a.c, a.e, a.y, a.s
+                .replace(/\s+/g, "");   // Remove all spaces
 }
 
 let input = prompt();
 
-input = formatString(input);
+input = formatString(input); // Format the input string
 
 // Split the formatted string into an array based on the ';' character
 const outputArray = input.split(';').map(item => item.trim()).filter(item => item);
 
-// Process each line
 outputArray.forEach(row => {
     let fullRow = row; // The full row as a string
     let rowOne = fullRow.substring(0, 5); // The first 5 characters (e.g., "a.p")
@@ -107,7 +105,7 @@ outputArray.forEach(row => {
             values[0],                  // [1] value before first comma
             values[1],                  // [2] value before second comma
             values[2],                  // [3] value before third comma
-            values.slice(3).join(',')   // [4] everything after the third comma
+            fullRow.substring(fullRow.indexOf(",") + 1) // [4] everything after the third comma
         ];
 
         objects.push(listRow); // Save the listRow array to objects
@@ -123,11 +121,36 @@ outputArray.forEach(row => {
         ];
 
         objects.push(listRow); // Save the listRow array to objects
+
+    } else if (rowOne === "a.s") {
+        // Set listRow based on the expected format for a.s
+        const values = fullRow.split(',');
+        let listRow = [
+            rowOne,                      // [0] a.s
+            values[0],                  // [1] value before first comma
+            values[1],                  // [2] value before second comma
+            values[2],                  // [3] value before third comma
+            values[3]                   // [4] value before fourth comma
+        ];
+
+        let rowTwo = fullRow.split('"')[1]; // Everything after the first comma after the fourth quotation mark
+        const rowTwoValues = rowTwo.split(',');
+        listRow.push(...rowTwoValues); // Append values from rowTwo
+
+        // Access rowTwo values based on the listRow array
+        listRow.push(rowTwoValues[0]); // [5]
+        listRow.push(rowTwoValues[1]); // [6]
+        listRow.push(rowTwoValues[2]); // [7]
+        listRow.push(rowTwoValues[3]); // [8]
+        listRow.push(rowTwoValues[4]); // [9]
+
+        objects.push(listRow); // Save the listRow array to objects
     }
 });
 
 // Log the final objects array
 console.log(objects);
+
 
     /*// Step 3: Split the initData string into an array of arguments
     let argArray = initData.match(/(?:a\.\w+\(.*?\);?)/g);
