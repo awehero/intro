@@ -82,21 +82,20 @@ outputArray.forEach(row => {
         let rowTwoHelper = fullRow.substring(fullRow.indexOf('"')+1);
         let rowTwo = rowTwoHelper.substring(rowTwoHelper.indexOf('"')+2);
         const rowTwoValues = rowTwo.split(',');
-        //listRow.push(...rowTwoValues);
+        listRow.push(...rowTwoValues);
 
-        // CHANGE THE 4 TO A DIFFERENT VALUE IF USING DIFFERENT DIFFERENT MAP VERSION
-        if (rowTwoValues.length >= 5 && version == 8) {
-            listRow.push(rowTwoValues[0]); // [11]
-            listRow.push(rowTwoValues[1]); // [12]
-            listRow.push(rowTwoValues[2]); // [13]
-            listRow.push(rowTwoValues[3]); // [14]
-            listRow.push(rowTwoValues[4]); // [15]
-        }
+        /*// CHANGE THE NUMBER OF VALUES DEPENDING ON IF YOU ARE USING A DIFFERENT DIFFERENT VERSION
+        listRow.push(rowTwoValues[0]); // [11]
+        listRow.push(rowTwoValues[1]); // [12]
+        listRow.push(rowTwoValues[2]); // [13]
+        listRow.push(rowTwoValues[3]); // [14]
+        listRow.push(rowTwoValues[4]); // [15]
+        if (version == 8) {listRow.push(rowTwoValues[5]);
 
         // If rowOne is "a.p" (not "a.y"), handle the seventh comma value
         if (rowOne === "a.p" && rowTwoValues.length > 5 && version == 8) {
             listRow.push(rowTwoValues[5]); // [17]
-        }
+        }*/
 
         objects.push(listRow); // Save the listRow array to objects
 
