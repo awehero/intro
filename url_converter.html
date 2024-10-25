@@ -1,102 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>URL to JS Map Converter</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL to JS Map Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
-  <label for="query">Enter the full mapfile here:</label>
-<input type="text" id="query" placeholder="Script goes here...">
-  <button onclick="extractStartData()">Go!</button>
-  <div>Made by awehero54</div>
-<div id="result"></div>
+    <label for="query">Enter the full mapfile here:</label>
+    <input type="text" id="query" placeholder="Script goes here..." style="width: 100%;">
+    <button onclick="extractStartData()">Go!</button>
+    <div>Made by awehero54</div>
+    <div id="result"></div>
 
-<script>
-function extractStartData() {
-// Assuming mapfile is obtained from document.getElementById("query").value
-let mapfile = document.getElementById("query").value;
+    <script>
+        function extractStartData() {
+            // Get the mapfile string from the input
+            let mapfile = document.getElementById("query").value;
 
-// Step 1: Remove everything before the second '{'
-let firstIndex = mapfile.indexOf('{');
-let secondIndex = mapfile.indexOf('{', firstIndex + 1);
-if (secondIndex === -1) return; // Exit if there's no second '{'
-mapfile = mapfile.substring(secondIndex);
+            // Step 1: Remove everything before the second '{'
+            let firstIndex = mapfile.indexOf('{');
+            let secondIndex = mapfile.indexOf('{', firstIndex + 1);
+            if (secondIndex === -1) return; // Exit if there's no second '{'
+            mapfile = mapfile.substring(secondIndex);
 
-// Step 2: Find the first '}' and extract the data between the first '{' and '}'
-let firstBraceIndex = mapfile.indexOf('{') + 1;
-let lastBraceIndex = mapfile.indexOf('}');
-if (firstBraceIndex === 0 || lastBraceIndex === -1) return; // Exit if braces are not found
+            // Step 2: Find the first '}' and extract the data between the first '{' and '}'
+            let firstBraceIndex = mapfile.indexOf('{') + 1;
+            let lastBraceIndex = mapfile.indexOf('}');
+            if (firstBraceIndex === 0 || lastBraceIndex === -1) return; // Exit if braces are not found
 
-let initData = mapfile.substring(firstBraceIndex, lastBraceIndex);
+            let initData = mapfile.substring(firstBraceIndex, lastBraceIndex);
 
-// Step 3: Split the initData string into an array of arguments
-let argArray = initData.match(/(?:\[.*?\]|"[^"]*"|[^,]+)/g).map(arg => arg.trim());
+            // Step 3: Split the initData string into an array of arguments
+            let argArray = initData.match(/(?:a\.\w+\(.*?\);?)/g);
 
-// Step 4: Parse each argument into an object based on its type
-let startData = [];
-let typesMap = {
-    "a.p": ["type", "position", "rotation", "size", "color", "friction", "air", "bounce", "jump", "drift", "mass", "killer"],
-    "a.c": ["type", "position", "color"],
-    "a.e": ["type", "position"],
-    "a.y": ["type", "position", "rotation", "size", "color", "bounce", "mass", "friction", "air", "topr", "killer"],
-    "a.s": ["type", "position", "size", "color", "bounce", "mass", "friction", "air", "killer"]
-};
+            // Step 4: Parse each argument into an object based on its type
+            let startData = [];
+            let typesMap = {
+                "a.p": ["type", "position", "rotation", "size", "color", "friction", "air", "bounce", "jump", "drift", "mass", "killer"],
+                "a.c": ["type", "position", "color"],
+                "a.e": ["type", "position"],
+                "a.y": ["type", "position", "rotation", "size", "color", "bounce", "mass", "friction", "air", "topr", "killer"],
+                "a.s": ["type", "position", "size", "color", "bounce", "mass", "friction", "air", "killer"]
+            };
 
-// Step 5: Loop through the args and parse the values
-for (let index = 0; index < argArray.length; index++) {
-    let item = argArray[index];
-    
-    // Identify the type and initialize the parsed object
-    let parsed = {};
-    if (item.startsWith("a.p")) {
-        parsed.type = "a.p";
-    } else if (item.startsWith("a.c")) {
-        parsed.type = "a.c";
-    } else if (item.startsWith("a.e")) {
-        parsed.type = "a.e";
-    } else if (item.startsWith("a.y")) {
-        parsed.type = "a.y";
-    } else if (item.startsWith("a.s")) {
-        parsed.type = "a.s";
-    } else {
-        continue; // Skip unrecognized items
-    }
-
-    // Split the arguments
-    let args = item.split(',').map(arg => arg.trim());
-    
-    // Map parsed values based on the type
-    for (let key of typesMap[parsed.type]) {
-        if (key === "position" || key === "rotation" || key === "size") {
-            parsed[key] = args.splice(0, 3).map(Number); // Convert to numbers
-        } else if (key === "color") {
-            let colorValue = args.shift(); // Get the next value for color
-            if (colorValue) {
-                // Handle color value to split into shade and opacity
-                if (colorValue.includes(',')) {
-                    let [shade, opacity] = colorValue.split(',').map(val => val.trim());
-                    parsed["color"] = { 
-                        "shade": shade.replace(/["']/g, ''), // Remove quotes from shade
-                        "opacity": Number(opacity) 
-                    };
+            // Step 5: Loop through the args and parse the values
+            for (let item of argArray) {
+                let parsed = {};
+                
+                // Identify the type and initialize the parsed object
+                if (item.startsWith("a.p")) {
+                    parsed.type = "a.p";
+                } else if (item.startsWith("a.c")) {
+                    parsed.type = "a.c";
+                } else if (item.startsWith("a.e")) {
+                    parsed.type = "a.e";
+                } else if (item.startsWith("a.y")) {
+                    parsed.type = "a.y";
+                } else if (item.startsWith("a.s")) {
+                    parsed.type = "a.s";
                 } else {
-                    parsed["color"] = { 
-                        "shade": colorValue.replace(/["']/g, ''), // Remove quotes from shade
-                        "opacity": 1 
-                    };
+                    continue; // Skip unrecognized items
                 }
+
+                // Remove the type identifier and parentheses
+                let argsString = item.replace(/^a\.\w+\((.*)\);?$/, '$1');
+                let args = argsString.split(',').map(arg => arg.trim());
+
+                // Map parsed values based on the type
+                for (let key of typesMap[parsed.type]) {
+                    if (key === "position" || key === "rotation" || key === "size") {
+                        // Extract three values for position, rotation, or size
+                        parsed[key] = args.splice(0, 3).map(Number); // Convert to numbers
+                    } else if (key === "color") {
+                        let colorValue = args.shift(); // Get the next value for color
+                        if (colorValue) {
+                            // Handle color value to split into shade and opacity
+                            if (colorValue.includes(',')) {
+                                let [shade, opacity] = colorValue.split(',').map(val => val.trim());
+                                parsed["color"] = { 
+                                    "shade": shade.replace(/["']/g, ''), // Keep quotes removed from shade
+                                    "opacity": Number(opacity) 
+                                };
+                            } else {
+                                parsed["color"] = { 
+                                    "shade": colorValue.replace(/["']/g, ''), // Keep quotes removed from shade
+                                    "opacity": 1 
+                                };
+                            }
+                        } else {
+                            parsed["color"] = { "shade": "", "opacity": 1 }; // Default if color is missing
+                        }
+                    } else {
+                        // For other attributes, just get the next value
+                        parsed[key] = args.shift() || null; // Set to null if undefined
+                    }
+                }
+
+                // Push the parsed object to startData
+                startData.push(parsed);
             }
-        } else {
-            parsed[key] = args.shift(); // Get the next value for other keys
+
+            // Display the result in the result div
+            document.getElementById("result").innerText = JSON.stringify(startData, null, 2);
         }
-    }
-
-    // Push the parsed object to startData
-    startData.push(parsed);
-}
-
-// Log the final parsed data for debugging
-console.log(startData);
-}
-</script>
+    </script>
 </body>
 </html>
