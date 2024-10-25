@@ -12,6 +12,7 @@
 
 <script>
 function extractStartData() {
+// Assuming mapfile is obtained from document.getElementById("query").value
 let mapfile = document.getElementById("query").value;
 
 // Step 1: Remove everything before the second '{'
@@ -92,6 +93,9 @@ for (let index = 0; index < argArray.length; index++) {
     // Push the parsed object to startData
     startData.push(parsed);
 }
+
+// Log the final parsed data for debugging
+console.log(startData);
 }
 </script>
 </body>
