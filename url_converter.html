@@ -134,7 +134,8 @@ outputArray.forEach(row => {
             values[3]                   // [4] value before fourth comma
         ];
 
-        let rowTwo = fullRow.split('"')[1]; // Everything after the first comma after the fourth quotation mark
+        let rowTwoHelper = fullRow.substring(fullRow.indexOf('"')+1);
+        let rowTwo = rowTwoHelper.substring(rowTwoHelper.indexOf('"')+2);
         const rowTwoValues = rowTwo.split(',');
         listRow.push(...rowTwoValues); // Append values from rowTwo
 
