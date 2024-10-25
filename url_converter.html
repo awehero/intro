@@ -42,7 +42,7 @@
 
     let initData = mapfile.substring(firstBraceIndex, lastBraceIndex);
 */
-let objects = []; // Array to store the final results
+let startObjects = []; // Array to store the final results
 let version = 8;
 function formatString(input) {
     return input.replace(/[\[\])]/g, "") // Remove [, ], and )
@@ -97,7 +97,7 @@ outputArray.forEach(row => {
             listRow.push(rowTwoValues[5]); // [17]
         }
 
-        objects.push(listRow); // Save the listRow array to objects
+        startObjects.push(listRow); // Save the listRow array to objects
 
     } else if (rowOne === "a.c") {
         // Set listRow based on the expected format for a.c
@@ -110,7 +110,7 @@ outputArray.forEach(row => {
             (fullRow.substring(fullRow.indexOf('"') + 1)).substr(0,fullRow.substring(fullRow.indexOf('"')+1).length-1)
         ];
 
-        objects.push(listRow); // Save the listRow array to objects
+        startObjects.push(listRow); // Save the listRow array to objects
 
     } else if (rowOne === "a.e") {
         // Set listRow based on the expected format for a.e
@@ -122,7 +122,7 @@ outputArray.forEach(row => {
             values[2]                   // [3] value before third comma
         ];
 
-        objects.push(listRow); // Save the listRow array to objects
+        startObjects.push(listRow); // Save the listRow array to objects
 
     } else if (rowOne === "a.s") {
         // Set listRow based on the expected format for a.s
@@ -149,10 +149,10 @@ outputArray.forEach(row => {
             listRow.push(rowTwoValues[4]); // [9]
         }
 
-        objects.push(listRow); // Save the listRow array to objects
+        startObjects.push(listRow); // Save the listRow array to objects
     }
 });
-console.log(objects);
+console.log(startObjects);
 
 
     /*// Step 3: Split the initData string into an array of arguments
