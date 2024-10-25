@@ -12,97 +12,86 @@
 
 <script>
 function extractStartData() {
-    // Get the mapfile string from an HTML element with id 'query'
-    let mapfile = document.getElementById("query").value;
+let mapfile = document.getElementById("query").value;
 
-    // Separate schemas for each object type
-    const schemas = {
-        "a.p": ["type", "position", "rotation", "size", "color", "friction", "air", "bounce", "jump", "drift", "mass", "killer"],
-        "a.c": ["type", "position", "color"],
-        "a.e": ["type", "position"],
-        "a.y": ["type", "position", "rotation", "size", "color", "bounce", "mass", "friction", "air", "topr", "killer"],
-        "a.s": ["type", "position", "size", "color", "bounce", "mass", "friction", "air", "killer"]
-    };
+// Step 1: Remove everything before the second '{'
+let firstIndex = mapfile.indexOf('{');
+let secondIndex = mapfile.indexOf('{', firstIndex + 1);
+if (secondIndex === -1) return; // Exit if there's no second '{'
+mapfile = mapfile.substring(secondIndex);
 
-    // Find the first '{' and the second '{'
-    let firstIndex = mapfile.indexOf('{');
-    if (firstIndex === -1) return;
+// Step 2: Find the first '}' and extract the data between the first '{' and '}'
+let firstBraceIndex = mapfile.indexOf('{') + 1;
+let lastBraceIndex = mapfile.indexOf('}');
+if (firstBraceIndex === 0 || lastBraceIndex === -1) return; // Exit if braces are not found
 
-    let secondIndex = mapfile.indexOf('{', firstIndex + 1);
-    if (secondIndex === -1) return;
+let initData = mapfile.substring(firstBraceIndex, lastBraceIndex);
 
-    // Find the closing '}' after the second '{'
-    let closingBraceIndex = mapfile.indexOf('}', secondIndex);
-    if (closingBraceIndex === -1) return;
+// Step 3: Split the initData string into an array of arguments
+let argArray = initData.match(/(?:\[.*?\]|"[^"]*"|[^,]+)/g).map(arg => arg.trim());
 
-    // Extract the content between the second '{' and the closing '}'
-    let contentBetweenBraces = mapfile.slice(secondIndex + 1, closingBraceIndex).trim();
+// Step 4: Parse each argument into an object based on its type
+let startData = [];
+let typesMap = {
+    "a.p": ["type", "position", "rotation", "size", "color", "friction", "air", "bounce", "jump", "drift", "mass", "killer"],
+    "a.c": ["type", "position", "color"],
+    "a.e": ["type", "position"],
+    "a.y": ["type", "position", "rotation", "size", "color", "bounce", "mass", "friction", "air", "topr", "killer"],
+    "a.s": ["type", "position", "size", "color", "bounce", "mass", "friction", "air", "killer"]
+};
 
-    // Split the content by lines and process each line
-    let startData = contentBetweenBraces
-        .split('\n')
-        .map(line => line.trim())   // Remove extra spaces around each line
-        .filter(line => line.length > 0)  // Remove empty lines
-        .map(line => processLine(line, schemas)); // Process each line based on schema
+// Step 5: Loop through the args and parse the values
+for (let index = 0; index < argArray.length; index++) {
+    let item = argArray[index];
     
-    console.log(startData);
-}
-
-function processLine(line, schemas) {
-    // Split the line by the first `;`
-    let [command, rest] = line.split(';').map(part => part.trim());
-
-    // Extract the type (e.g., a.p, a.c, a.e, a.y, a.s)
-    let type = command.split('(')[0];
-
-    // Check if the type exists in the schemas array
-    if (schemas[type]) {
-        // Extract the arguments in between the parentheses
-        let argsMatch = command.match(/\((.*)\)/);
-        if (!argsMatch) return null; // Exit if no arguments found
-        
-        // Get the arguments, trimming any whitespace
-        let argsString = argsMatch[1];
-        
-        // Use a regex to find all bracketed values (positions, rotations, sizes) correctly
-        let args = argsString.split(/,(?=(?:[^\[]*\[|\[.*?[^\]]*\])*$)/).map(arg => arg.trim());
-
-        let parsedArgs = parseArgsBySchema(args, schemas[type]);
-
-        return parsedArgs;
-    } else {
-        return null;
-    }
-}
-
-function parseArgsBySchema(args, schema) {
+    // Identify the type and initialize the parsed object
     let parsed = {};
+    if (item.startsWith("a.p")) {
+        parsed.type = "a.p";
+    } else if (item.startsWith("a.c")) {
+        parsed.type = "a.c";
+    } else if (item.startsWith("a.e")) {
+        parsed.type = "a.e";
+    } else if (item.startsWith("a.y")) {
+        parsed.type = "a.y";
+    } else if (item.startsWith("a.s")) {
+        parsed.type = "a.s";
+    } else {
+        continue; // Skip unrecognized items
+    }
 
-    schema.forEach((key, index) => {
+    // Split the arguments
+    let args = item.split(',').map(arg => arg.trim());
+    
+    // Map parsed values based on the type
+    for (let key of typesMap[parsed.type]) {
         if (key === "position" || key === "rotation" || key === "size") {
-            // Check if the corresponding arg has square brackets
-            let match = args[index] && args[index].match(/\[(.*)\]/);
-            if (match) {
-                parsed[key] = match[1].split(',').map(Number); // Convert to an array of numbers
-            } else {
-                parsed[key] = []; // Default to an empty array if not found
-            }
+            parsed[key] = args.splice(0, 3).map(Number); // Convert to numbers
         } else if (key === "color") {
-            // Handle the color value and split it into shade and opacity
-            let colorValue = args[index]; // Keep the original value with quotes
-            if (colorValue.includes(',')) {
-                let [shade, opacity] = colorValue.split(',').map(val => val.trim());
-                parsed["color"] = { "shade": shade.replace(/["']/g, ''), "opacity": Number(opacity) }; // Remove quotes from shade
-            } else {
-                parsed["color"] = { "shade": colorValue.replace(/["']/g, ''), "opacity": 1 }; // Remove quotes from shade
+            let colorValue = args.shift(); // Get the next value for color
+            if (colorValue) {
+                // Handle color value to split into shade and opacity
+                if (colorValue.includes(',')) {
+                    let [shade, opacity] = colorValue.split(',').map(val => val.trim());
+                    parsed["color"] = { 
+                        "shade": shade.replace(/["']/g, ''), // Remove quotes from shade
+                        "opacity": Number(opacity) 
+                    };
+                } else {
+                    parsed["color"] = { 
+                        "shade": colorValue.replace(/["']/g, ''), // Remove quotes from shade
+                        "opacity": 1 
+                    };
+                }
             }
         } else {
-            // For other values, assign directly (convert to number if applicable)
-            parsed[key] = isNaN(args[index]) ? args[index] : Number(args[index]);
+            parsed[key] = args.shift(); // Get the next value for other keys
         }
-    });
+    }
 
-    return parsed;
+    // Push the parsed object to startData
+    startData.push(parsed);
+}
 }
 </script>
 </body>
