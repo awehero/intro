@@ -106,7 +106,7 @@ outputArray.forEach(row => {
             values[0],                  // [1] value before first comma
             values[1],                  // [2] value before second comma
             values[2],                  // [3] value before third comma
-            fullRow.substring(fullRow.indexOf(",") + 1) // [4] everything after the third comma
+            (fullRow.substring(fullRow.indexOf('"') + 1)).substr(0,fullRow.substring(fullRow.indexOf('"')+1).length-1)
         ];
 
         objects.push(listRow); // Save the listRow array to objects
