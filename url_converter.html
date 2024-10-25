@@ -43,7 +43,7 @@ function extractStartData() {
         .split('\n')
         .map(line => line.trim())   // Remove extra spaces around each line
         .filter(line => line.length > 0)  // Remove empty lines
-        .map(line => processLine(line, schemas)) // Process each line based on schema
+        .map(line => processLine(line, schemas)); // Process each line based on schema
     
     console.log(startData);
 }
@@ -58,7 +58,15 @@ function processLine(line, schemas) {
     // Check if the type exists in the schemas array
     if (schemas[type]) {
         // Extract the arguments in between the parentheses
-        let args = command.match(/\((.*)\)/)[1].split(',').map(arg => arg.trim());
+        let argsMatch = command.match(/\((.*)\)/);
+        if (!argsMatch) return null; // Exit if no arguments found
+        
+        // Get the arguments, trimming any whitespace
+        let argsString = argsMatch[1];
+        
+        // Use a regex to find all bracketed values (positions, rotations, sizes) correctly
+        let args = argsString.split(/,(?=(?:[^\[]*\[|\[.*?[^\]]*\])*$)/).map(arg => arg.trim());
+
         let parsedArgs = parseArgsBySchema(args, schemas[type]);
 
         return parsedArgs;
@@ -72,8 +80,13 @@ function parseArgsBySchema(args, schema) {
 
     schema.forEach((key, index) => {
         if (key === "position" || key === "rotation" || key === "size") {
-            // Split the array-based values for position, rotation, size
-            parsed[key] = args[index].match(/\[(.*)\]/)[1].split(',').map(Number);
+            // Check if the corresponding arg has square brackets
+            let match = args[index] && args[index].match(/\[(.*)\]/);
+            if (match) {
+                parsed[key] = match[1].split(',').map(Number); // Convert to an array of numbers
+            } else {
+                parsed[key] = []; // Default to an empty array if not found
+            }
         } else if (key === "color") {
             // Handle the color value and split it into shade and opacity
             let colorValue = args[index].replace(/["']/g, ''); // Remove quotes
@@ -90,7 +103,6 @@ function parseArgsBySchema(args, schema) {
     });
 
     return parsed;
-}
 }
 </script>
 </body>
