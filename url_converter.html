@@ -139,14 +139,16 @@ outputArray.forEach(row => {
         let rowTwoHelper = fullRow.substring(fullRow.indexOf('"')+1);
         let rowTwo = rowTwoHelper.substring(rowTwoHelper.indexOf('"')+2);
         const rowTwoValues = rowTwo.split(',');
-        listRow.push(...rowTwoValues); // Append values from rowTwo
+        //listRow.push(...rowTwoValues); // Append values from rowTwo
 
         // Access rowTwo values based on the listRow array
-        /*listRow.push(rowTwoValues[0]); // [5]
-        listRow.push(rowTwoValues[1]); // [6]
-        listRow.push(rowTwoValues[2]); // [7]
-        listRow.push(rowTwoValues[3]); // [8]
-        listRow.push(rowTwoValues[4]); // [9]*/
+        if (version == 8) {
+            listRow.push(rowTwoValues[0]); // [5]
+            listRow.push(rowTwoValues[1]); // [6]
+            listRow.push(rowTwoValues[2]); // [7]
+            listRow.push(rowTwoValues[3]); // [8]
+            listRow.push(rowTwoValues[4]); // [9]
+        }
 
         objects.push(listRow); // Save the listRow array to objects
     }
