@@ -43,7 +43,7 @@
     let initData = mapfile.substring(firstBraceIndex, lastBraceIndex);
 */
 let objects = []; // Array to store the final results
-
+let version = 8;
 function formatString(input) {
     return input.replace(/[\[\])]/g, "") // Remove [, ], and )
                 .replace(/\(/g, ",")    // Replace ( with ,
@@ -82,17 +82,19 @@ outputArray.forEach(row => {
         let rowTwoHelper = fullRow.substring(fullRow.indexOf('"')+1);
         let rowTwo = rowTwoHelper.substring(rowTwoHelper.indexOf('"')+2);
         const rowTwoValues = rowTwo.split(',');
-        listRow.push(...rowTwoValues); // Append values from rowTwo
+        //listRow.push(...rowTwoValues);
 
-        // Access rowTwo values based on the listRow array
-        listRow.push(rowTwoValues[0]); // [11]
-        listRow.push(rowTwoValues[1]); // [12]
-        listRow.push(rowTwoValues[2]); // [13]
-        listRow.push(rowTwoValues[3]); // [14]
-        listRow.push(rowTwoValues[4]); // [15]
+        // CHANGE THE 4 TO A DIFFERENT VALUE IF USING DIFFERENT DIFFERENT MAP VERSION
+        if (rowTwoValues.length >= 5 && version == 8) {
+            listRow.push(rowTwoValues[0]); // [11]
+            listRow.push(rowTwoValues[1]); // [12]
+            listRow.push(rowTwoValues[2]); // [13]
+            listRow.push(rowTwoValues[3]); // [14]
+            listRow.push(rowTwoValues[4]); // [15]
+        }
 
         // If rowOne is "a.p" (not "a.y"), handle the seventh comma value
-        if (rowOne === "a.p") {
+        if (rowOne === "a.p" && rowTwoValues.length > 5 && version == 8) {
             listRow.push(rowTwoValues[5]); // [17]
         }
 
@@ -140,17 +142,15 @@ outputArray.forEach(row => {
         listRow.push(...rowTwoValues); // Append values from rowTwo
 
         // Access rowTwo values based on the listRow array
-        listRow.push(rowTwoValues[0]); // [5]
+        /*listRow.push(rowTwoValues[0]); // [5]
         listRow.push(rowTwoValues[1]); // [6]
         listRow.push(rowTwoValues[2]); // [7]
         listRow.push(rowTwoValues[3]); // [8]
-        listRow.push(rowTwoValues[4]); // [9]
+        listRow.push(rowTwoValues[4]); // [9]*/
 
         objects.push(listRow); // Save the listRow array to objects
     }
 });
-
-// Log the final objects array
 console.log(objects);
 
 
