@@ -21,10 +21,14 @@ function convert() {
         "a.s": ["type", "position", "size", "color", "bounce", "mass", "friction", "air", "killer"]
     };
   
-    let firstBraceIndex = mapfile.indexOf('{');
-    let closingBraceIndex = mapfile.indexOf('}', firstBraceIndex);  
-    if (firstBraceIndex === -1 || closingBraceIndex === -1) return;
-    let contentBetweenBraces = mapfile.slice(firstBraceIndex + 1, closingBraceIndex).trim();
+    let firstIndex = mapfile.indexOf('{');
+    if (firstIndex === -1) return;
+    let secondIndex = mapfile.indexOf('{', firstIndex + 1);
+    if (secondIndex === -1) return;
+    let closingBraceIndex = mapfile.indexOf('}', secondIndex);
+    if (closingBraceIndex === -1) return;
+  
+    let contentBetweenBraces = mapfile.slice(secondIndex + 1, closingBraceIndex).trim();
 
     let init = contentBetweenBraces
         .split('\n')
