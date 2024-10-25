@@ -89,12 +89,12 @@ function parseArgsBySchema(args, schema) {
             }
         } else if (key === "color") {
             // Handle the color value and split it into shade and opacity
-            let colorValue = args[index].replace(/["']/g, ''); // Remove quotes
+            let colorValue = args[index]; // Keep the original value with quotes
             if (colorValue.includes(',')) {
                 let [shade, opacity] = colorValue.split(',').map(val => val.trim());
-                parsed["color"] = { "shade": shade, "opacity": Number(opacity) };
+                parsed["color"] = { "shade": shade.replace(/["']/g, ''), "opacity": Number(opacity) }; // Remove quotes from shade
             } else {
-                parsed["color"] = { "shade": colorValue, "opacity": 1 };
+                parsed["color"] = { "shade": colorValue.replace(/["']/g, ''), "opacity": 1 }; // Remove quotes from shade
             }
         } else {
             // For other values, assign directly (convert to number if applicable)
