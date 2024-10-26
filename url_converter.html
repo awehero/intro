@@ -137,9 +137,9 @@ outputArray.forEach(row => {
 });
 console.log(startObjects);
 
-    let postOne = input.substring(input.indexOf("post"),input.indexOf("section_id: 0"));
-    let post = postOne.substring(postOne.indexOf("cc"));
-    post = post.replace(/\s+/g, "")
+let postOne = input.substring(input.indexOf("post"),input.indexOf("section_id: 0"));
+let post = postOne.substring(postOne.indexOf("cc"));
+post = post.replace(/\s+/g, "")
             .replace(/"/g, "")
             .replace(/cc\.set_monkey\(/g, "")
             .replace(/\)/g, "")
@@ -164,8 +164,8 @@ console.log(startObjects);
             .replace(/gravity,newBABYLON\.Vector3\(/g, "gravity,")
             .replace(/camera\.upVector,newBABYLON\.Vector3\(/g, "tilt,")
             .replace(/player\.scaling,newBABYLON\.Vector3\(/g, "dodoScale,")
-    post = post.substring(0,post.length-1);
-    post = post.split(";");
+post = post.substring(0,post.length-1);
+post = post.split(";");
 for (var i=0; i < post.length; i++) {
     if (post[i].length <= 10) {
         post[i] = post[i].replace(/,/g, "=");
@@ -231,7 +231,27 @@ for (var i=0; i < post.length; i++) {
         post[i] = dodoHelp;
     }
 }
-}
+    let name = "";
+    for (var i = 0; i < post.length; i++) {
+        if (i != post.length - 1) {
+            name = name + post[i] + "?";
+        } else {
+            name = name + post[i];
+        }
+    }
+    objects.push({
+    "type": "G",
+    "posx": 0,
+    "posy": 1500,
+    "posz": 1500,
+    "rotx": 0,
+    "roty": 0,
+    "rotz": 0,
+    "sizx": 50,
+    "sizy": 50,
+    "sizz": 50,
+    "name": name
+});
 }
 </script>
 </body>
