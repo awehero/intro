@@ -37,14 +37,7 @@
             .replace(/https:\/\/icedodo.onionfist\.com\/?/g, "")
             .replace(/singleplayer\?/g, "")
             .replace(/mapUrl=/g, "")
-            .replace(/&/g, "");
-        for (var i = 0; i < 1000; i++) {
-            match[i] = letters.exec(data);
-        }
-        whereNull = 0;
-        while (match[whereNull] != null) {
-            whereNull++
-        }
+            .replace(/https:\/\/onionfist.com\/icedodo\/\?/g, "");
   }
 </script>
 </body>
