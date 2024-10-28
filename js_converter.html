@@ -25,11 +25,26 @@
     <div id="result"></div>
 
 <script>
-  let input = "";
-  let version;
-  function convert() {
-    input = document.getElementById("query").value;
-    
+    let input = "";
+    let version;
+    let data = "";
+    let match = [];
+    const letters = /[A-G]/g;
+    function convert() {
+        input = document.getElementById("query").value;
+        version = parseInt(input.substring(input.indexOf("mapCodeVersion"),input.indexOf("mapCodeVersion")+17).replace(/mapCodeVersion=v/g, ""));
+        data = input.replace(/mapCodeVersion=v[0-9]/g, "")
+            .replace(/https:\/\/icedodo.onionfist\.com\/?/g, "")
+            .replace(/singleplayer\?/g, "")
+            .replace(/mapUrl=/g, "")
+            .replace(/&/g, "");
+        for (var i = 0; i < 1000; i++) {
+            match[i] = letters.exec(data);
+        }
+        whereNull = 0;
+        while (match[whereNull] != null) {
+            whereNull++
+        }
   }
 </script>
 </body>
