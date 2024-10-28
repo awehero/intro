@@ -28,8 +28,7 @@
     let input = "";
     let version;
     let data = "";
-    let match = [];
-    const letters = /[A-G]/g;
+    let letters = ["A","B","C","D","E","G"];
     function convert() {
         input = document.getElementById("query").value;
         version = parseInt(input.substring(input.indexOf("mapCodeVersion"),input.indexOf("mapCodeVersion")+17).replace(/mapCodeVersion=v/g, ""));
@@ -38,6 +37,32 @@
             .replace(/singleplayer\?/g, "")
             .replace(/mapUrl=/g, "")
             .replace(/https:\/\/onionfist.com\/icedodo\/\?/g, "");
+        let cutData = data;
+        let indexes = [];
+        let lowestLetter = 0;
+        let inlink = true;
+        for (var i = 0, inlink; i++) {
+            let indexLetters = [];
+            for (var i = 0; i < 6; i++) {
+                indexLetters[i] = cutData.substring(lowestLetter).indexOf(letters[i]);
+            }
+            lowestLetter = indexLetters[0];
+            for (var i = 1; i < indexLetters.length; i++) {
+                if (indexLetters[i] < lowestLetter && indexLetters[i] != -1) {
+                    lowestLetter = indexLetters[i];
+                }
+            }
+            if (lowestLetter != -1) {
+                if (indexes.length != 0) {
+                    indexes.push(lowestLetter+indexes[indexes.length -1]);
+                } else {
+                    indexes.push(lowestLetter);
+                }
+            } else {
+                inlink = false;
+            }
+        }
+        
   }
 </script>
 </body>
