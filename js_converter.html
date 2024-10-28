@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL to JS Map Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <label for="query">Enter the full mapfile here:</label>
+    <input type="text" id="query" placeholder="Script goes here..." style="width: 100%;">
+    <button onclick="convert()">Go!</button>
+    <div>Made by awehero54</div>
+    <div id="result"></div>
+
+<script>
+  let input = "";
+  function convert() {
+    input = document.getElementById("query");
+    
+  }
+</script>
+</body>
+</html>
