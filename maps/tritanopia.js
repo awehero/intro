@@ -256,7 +256,6 @@ var map = {
                 if (PZ < -61) {
                     scene.clearColor = new BABYLON.Color3.FromHexString("#3a6165");
                     steer = default_steer * 2.0;
-                    a.msg_set("Warning: fast");
                     a.cam_d(3.0);
                     a.g(1.0, null, null);
                     this.section_id += 1
@@ -276,7 +275,6 @@ var map = {
                 if (PZ < -101) {
                     scene.clearColor = cc.get("scene.clearColor", null);
                     steer = cc.get("steer", null);
-                    a.msg_del();
                     a.cam_d(null);
                     a.g(null, null, null);
                     this.section_id += 1
@@ -286,7 +284,6 @@ var map = {
                 if (PZ < -101) {
                     scene.clearColor = new BABYLON.Color3.FromHexString("#86e1e5");
                     speed = default_speed * 1.5;
-                    a.msg_set("Stay in the centre at the end.");
                     this.section_id += 1
                 }
                 break;
@@ -304,7 +301,6 @@ var map = {
                 if (PZ < -165) {
                     scene.clearColor = cc.get("scene.clearColor", null);
                     speed = cc.get("speed", null);
-                    a.msg_del();
                     this.section_id += 1
                 }
                 break;
