@@ -276,7 +276,10 @@
             function color() {
                 scene.traverse(function (object) {
                     if (object.isMesh && object.name.includes('mat=#')) {
-                        const match = object.name.match(/mat=(#[0-9A-Fa-f]{6})/);
+                        let match = object.name.match(/mat=(#[0-9A-Fa-f]{6})/);
+                        if (!match) {
+                            match = selectedObject.name.match(/m=([0-9A-Fa-f]{6})/)
+                        }
                         if (match) {
                             const hexColor = match[1];
                             object.material.color.set(hexColor);
