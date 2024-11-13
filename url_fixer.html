@@ -22,6 +22,7 @@
     <input type="text" id="query" placeholder="Link goes here..." style="width: 100%;">
     <button onclick="getText()">Go!</button>
     <div>Made by awehero54</div>
+    <button id="copyButton" onclick="copyLink()">Copy Link</button>
     <div id="result"></div>
 
 <script>
@@ -32,6 +33,11 @@ async function getText() {
                               .replace(/%3F/g, '?')
                               .replace(/%24/g, '$');
   document.getElementById('result').innerText = realString;
+}
+function copyLink() {
+    if (document.getElementById("result").innerText != null) {
+        navigator.clipboard.writeText(document.getElementById("result").innerText);
+    }
 }
 </script>
 </body>
