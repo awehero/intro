@@ -1,17 +1,31 @@
 <!DOCTYPE html>
-  <html>
-  <head>
-  <title>URL to JS Map Converter</title>
-  </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Fixer for New Update</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
 <body>
-  <label for="query">Enter the messed up map link here:</label>
-<input type="text" id="query" placeholder="Link goes here...">
-  <button onclick="fetchText()">Go!</button>
-  <div>Made by awehero54</div>
-<div id="result"></div>
+    <label for="query">Enter the messed up map link here:</label>
+    <input type="text" id="query" placeholder="Link goes here..." style="width: 100%;">
+    <button onclick="getText()">Go!</button>
+    <div>Made by awehero54</div>
+    <div id="result"></div>
 
 <script>
-async function fetchText() {
+async function getText() {
   let queryString = document.getElementById('query').value;
   let realString = queryString.replace(/%3D/g, '=')
                               .replace(/%3A/g, ':')
