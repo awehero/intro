@@ -6,10 +6,15 @@
     <title>Mesh Generator</title>
     <script>
         function processString() {
-            // Step 1: Split the input string by capital letters
-            let inputString = document.getElementById("inputString").innerText;
+            // Step 1: Get the input string from the textarea
+            let inputString = document.getElementById("inputString").value;
+            
+            // Split the input string by capital letters
             let regex = /(?=[A-G])/g;
             let chunks = inputString.split(regex).filter(chunk => chunk.length > 0); // Removes empty chunks
+
+            // Initialize an array to store meshes
+            let meshes = [];
 
             // Step 2: Iterate over each chunk and process it
             chunks.forEach(chunk => {
@@ -35,9 +40,12 @@
                 // Step 4: Generate mesh based on the type
                 let mesh = createMesh(type, xPos, yPos, zPos, xRot, yRot, zRot, xSize, ySize, zSize, name);
 
-                // Step 5: Log the mesh for debugging
-                console.log(mesh);
+                // Add mesh to the array
+                meshes.push(mesh);
             });
+
+            // Step 5: Output the array of meshes as a JSON string in the output div
+            document.getElementById("output").innerText = JSON.stringify(meshes, null, 2);
         }
 
         function createMesh(type, xPos, yPos, zPos, xRot, yRot, zRot, xSize, ySize, zSize, name) {
@@ -72,7 +80,7 @@
   <button onclick="processString()">Process String</button>
 
   <h2>Processed Output:</h2>
-  <div id="output"></div>
+  <div id="output" style="white-space: pre-wrap;"></div>
 
 </body>
 </html>
