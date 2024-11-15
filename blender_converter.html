@@ -8,7 +8,16 @@
         function processString() {
             // Step 1: Get the input string from the textarea
             let inputString = document.getElementById("inputString").value;
-            
+            let dollarIndex = inputString.indexOf('$');
+            if (dollarIndex !== -1) {
+                let endIndex = dollarIndex - 1;
+                while (endIndex >= 0 && !/[A-G]/.test(inputString[endIndex])) {
+                  endIndex--;
+                }
+                if (endIndex >= 0) {
+                    inputString = inputString.substring(endIndex);
+                }
+            }
             // Split the input string by capital letters
             let regex = /(?=[A-G])/g;
             let chunks = inputString.split(regex).filter(chunk => chunk.length > 0); // Removes empty chunks
