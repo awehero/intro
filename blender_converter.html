@@ -43,10 +43,10 @@
         function createMesh(type, xPos, yPos, zPos, xRot, yRot, zRot, xSize, ySize, zSize, name) {
             let meshType = '';
             let mesh = {
-                { x: xPos, y: yPos, z: zPos },
-                { x: xRot, y: yRot, z: zRot },
-                { x: xSize, y: ySize, z: zSize },
-                name
+                position: { x: xPos, y: yPos, z: zPos },
+                rotation: { x: xRot, y: yRot, z: zRot },
+                size: { x: xSize, y: ySize, z: zSize },
+                name: name
             };
             switch (type) {
                 case 'A': meshType = 'Plane'; break;
