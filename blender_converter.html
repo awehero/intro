@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesh Generator</title>
     <script>
-        function processString(inputString) {
+        function processString() {
             // Step 1: Split the input string by capital letters
-            const regex = /(?=[A-G])/g;
-            const chunks = inputString.split(regex).filter(chunk => chunk.length > 0); // Removes empty chunks
+            let inputString = document.getElementById("inputString").innerText;
+            let regex = /(?=[A-G])/g;
+            let chunks = inputString.split(regex).filter(chunk => chunk.length > 0); // Removes empty chunks
 
             // Step 2: Iterate over each chunk and process it
             chunks.forEach(chunk => {
@@ -17,7 +18,7 @@
                 let rest = chunk.slice(1); // Rest of the string
 
                 // Split by '$'
-                const parts = rest.split('$');
+                let parts = rest.split('$');
 
                 // Step 3: Extract values for position, rotation, size, etc.
                 let xPos = parseFloat(parts[0]) / 100;
@@ -62,17 +63,13 @@
             mesh.type = meshType;
             return mesh;
         }
-
-        // Example input string
-        let inputString = "A0$-264$-2099.993$79$45$-13$100000$258$100$gy=-5.0?m=ffff00?turn=0.0?msg=104:101:108:108:111?br=0.0A5$-5021$-2099.986$0$0$0$100000$396$100$id=1";
-        processString(inputString);
     </script>
 </head>
 <body>
   <h1>String Processor</h1>
   <p>Enter the string below to process:</p>
   <textarea id="inputString" rows="6" cols="80"></textarea><br>
-  <button onclick="processInput()">Process String</button>
+  <button onclick="processString()">Process String</button>
 
   <h2>Processed Output:</h2>
   <div id="output"></div>
