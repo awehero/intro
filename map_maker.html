@@ -275,14 +275,16 @@
             }
             function color() {
                 scene.traverse(function (object) {
-                    if (object.name.includes('mat=#') || object.name.includes('mat=#')) {
-                        let match = object.name.match(/mat=(#[0-9A-Fa-f]{6})/);
-                        if (!match) {
-                            match = object.name.match(/m=([0-9A-Fa-f]{6})/)
-                        }
-                        if (match) {
-                            const hexColor = match[1];
-                            object.material.color.set(hexColor);
+                    if (object.isMesh && object.name) {
+                        if (object.name.includes('mat=#') || object.name.includes('mat=#')) {
+                            let match = object.name.match(/mat=(#[0-9A-Fa-f]{6})/);
+                            if (!match) {
+                                match = object.name.match(/m=([0-9A-Fa-f]{6})/)
+                            }
+                            if (match) {
+                                const hexColor = match[1];
+                                object.material.color.set(hexColor);
+                            }
                         }
                     }
                 });
