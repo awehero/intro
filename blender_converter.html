@@ -80,6 +80,11 @@
             mesh.type = meshType;
             return mesh;
         }
+        function copyLink() {
+            if (document.getElementById("result").innerText != null) {
+                navigator.clipboard.writeText(document.getElementById("result").innerText);
+            }
+        }
     </script>
 </head>
 <body>
@@ -87,7 +92,8 @@
   <p>Enter the string below to process:</p>
   <textarea id="inputString" rows="6" cols="80"></textarea><br>
   <button onclick="processString()">Process String</button>
-
+    <div>Made by awehero54</div>
+    <button id="copyButton" onclick="copyLink()">Copy Link</button>
   <h2>Processed Output:</h2>
   <div id="output" style="white-space: pre-wrap;"></div>
 
