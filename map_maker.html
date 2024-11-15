@@ -278,7 +278,7 @@
                     if (object.isMesh && object.name.includes('mat=#')) {
                         let match = object.name.match(/mat=(#[0-9A-Fa-f]{6})/);
                         if (!match) {
-                            match = selectedObject.name.match(/m=([0-9A-Fa-f]{6})/)
+                            match = object.name.match(/m=([0-9A-Fa-f]{6})/)
                         }
                         if (match) {
                             const hexColor = match[1];
