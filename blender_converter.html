@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesh Generator</title>
+    <title>Blender Converter</title>
     <script>
         function processString() {
-            // Step 1: Get the input string from the textarea
             let inputString = document.getElementById("inputString").value;
             let dollarIndex = inputString.indexOf('$');
             if (dollarIndex !== -1) {
@@ -18,23 +17,13 @@
                     inputString = inputString.substring(endIndex);
                 }
             }
-            // Split the input string by capital letters
             let regex = /(?=[A-G])/g;
-            let chunks = inputString.split(regex).filter(chunk => chunk.length > 0); // Removes empty chunks
-
-            // Initialize an array to store meshes
+            let chunks = inputString.split(regex).filter(chunk => chunk.length > 0);
             let meshes = [];
-
-            // Step 2: Iterate over each chunk and process it
             chunks.forEach(chunk => {
-                // Split the first character (mesh type) from the rest of the string
-                let type = chunk[0]; // First character (A, B, C, etc.)
-                let rest = chunk.slice(1); // Rest of the string
-
-                // Split by '$'
+                let type = chunk[0];
+                let rest = chunk.slice(1);
                 let parts = rest.split('$');
-
-                // Step 3: Extract values for position, rotation, size, etc.
                 let xPos = parseFloat(parts[0]) / 100;
                 let yPos = parseFloat(parts[1]) / 100;
                 let zPos = parseFloat(parts[2]) / 100;
@@ -44,16 +33,10 @@
                 let xSize = parseFloat(parts[6]) / 100;
                 let ySize = parseFloat(parts[7]) / 100;
                 let zSize = parseFloat(parts[8]) / 100;
-                let name = parts[9];  // The remaining part for name or other properties
-
-                // Step 4: Generate mesh based on the type
+                let name = parts[9];
                 let mesh = createMesh(type, xPos, yPos, zPos, xRot, yRot, zRot, xSize, ySize, zSize, name);
-
-                // Add mesh to the array
                 meshes.push(mesh);
             });
-
-            // Step 5: Output the array of meshes as a JSON string in the output div
             document.getElementById("output").innerText = JSON.stringify(meshes, null, 2);
         }
 
@@ -65,8 +48,6 @@
                 size: { x: xSize, y: ySize, z: zSize },
                 name: name
             };
-
-            // Determine mesh type based on the first character
             switch (type) {
                 case 'A': meshType = 'Plane'; break;
                 case 'B': meshType = 'Cube'; break;
@@ -76,7 +57,6 @@
                 case 'G': meshType = 'Monkey'; break;
                 default: meshType = 'Unknown'; break;
             }
-
             mesh.type = meshType;
             return mesh;
         }
@@ -89,12 +69,12 @@
 </head>
 <body>
   <h1>String Processor</h1>
-  <p>Enter the string below to process:</p>
+  <p>Enter the URL below</p>
   <textarea id="inputString" rows="6" cols="80"></textarea><br>
   <button onclick="processString()">Process String</button>
     <div>Made by awehero54</div>
-    <button id="copyButton" onclick="copyLink()">Copy Link</button>
-  <h2>Processed Output:</h2>
+    <button id="copyButton" onclick="copyLink()">Copy!</button>
+  <h2>Output:</h2>
   <div id="output" style="white-space: pre-wrap;"></div>
 
 </body>
