@@ -283,6 +283,7 @@
                                     match = object.name.match(/m=([0-9A-Fa-f]{6})/)
                                 }
                                 if (match) {
+                                    match[1] = '#' + match[1];
                                     const hexColor = match[1];
                                     object.material.color.set(hexColor);
                                 }
