@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>String Processor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input, button {
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 14px;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f4f4f4;
+      border: 1px solid #ccc;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>String Processor</h1>
+  <p>Enter the string below to process:</p>
+  <textarea id="inputString" rows="6" cols="80"></textarea><br>
+  <button onclick="processInput()">Process String</button>
+
+  <h2>Processed Output:</h2>
+  <div id="output"></div>
+
+  <script>
+    function processInput() {
+      const inputString = document.getElementById("inputString").value;
+      const outputDiv = document.getElementById("output");
+      outputDiv.textContent = '';  // Clear previous output
+
+      const chunks = [];
+      const regex = /([A-G])([^A-G]*)/g;
+      let match;
+      
+      // Step 1: Split the string by capital letters A-G
+      while ((match = regex.exec(inputString)) !== null) {
+        chunks.push(match[1] + match[2].trim());
+      }
+
+      let outputText = '';  // Store the final output
+
+      // Step 2: Process each chunk to extract data and create 3D objects
+      chunks.forEach(chunk => {
+        const parts = chunk.split('$'); // Split by $
+
+        let type = parts[0]; // Mesh type (A, B, C, D, E, G)
+        let xPos = parseFloat(parts[1]) / 100;
+        let yPos = parseFloat(parts[2]) / 100;
+        let zPos = parseFloat(parts[3]) / 100;
+        let xRot = Math.round(parseFloat(parts[4]) / 100) / (Math.PI / 180);
+        let yRot = Math.round(parseFloat(parts[5]) / 100) / (Math.PI / 180);
+        let zRot = Math.round(parseFloat(parts[6]) / 100) / (Math.PI / 180);
+        let xSize = parseFloat(parts[7]) / 100;
+        let ySize = parseFloat(parts[8]) / 100;
+        let zSize = parseFloat(parts[9]) / 100;
+
+        let name = parts[10].replace("?", ",").replace("drift", "dr").replace("turn", "t").replace("speed", "s");
+
+        // Handle 'm=' for material
+        if (name.includes("m=")) {
+          let mat = name.match(/m=([a-f0-9]{6})/);
+          if (mat) {
+            name = name.replace(mat[0], `mat=#${mat[1]}`);
+          } else {
+            name = name.replace("m=", "mat=");
+          }
+        }
+
+        // Handle 'msg=' for message conversion
+        if (name.includes("msg=")) {
+          let msg = name.match(/msg=([\d:]+)/);
+          if (msg) {
+            let asciiValues = msg[1].split(":").map(val => String.fromCharCode(parseInt(val)));
+            let newMsg = `{${asciiValues.join('')}}`;
+            name = name.replace(msg[0], `msg=${newMsg}`);
+          }
+        }
+
+        // Handle the conversion of other properties like 'spe=', 'gro=', etc.
+        name = name.replace(/spe=/g, "spe=#")
+                   .replace(/gro=/g, "gro=#")
+                   .replace(/dif=/g, "dif=#")
+                   .replace(/bg=/g, "bg=#")
+                   .replace(/amb=/g, "amb=#");
+
+        // Generate the output text
+        outputText += `Mesh type = Mesh ${getMeshName(type)}\n`;
+        outputText += `X Position = ${xPos}\n`;
+        outputText += `Y Position = ${yPos}\n`;
+        outputText += `Z Position = ${zPos}\n`;
+        outputText += `X Rotation = ${xRot} degrees\n`;
+        outputText += `Y Rotation = ${yRot} degrees\n`;
+        outputText += `Z Rotation = ${zRot} degrees\n`;
+        outputText += `X Size = ${xSize * 1000}\n`;  // To show in original scale
+        outputText += `Y Size = ${ySize * 1000}\n`;  // To show in original scale
+        outputText += `Z Size = ${zSize * 1000}\n`;  // To show in original scale
+        outputText += `Name = [${name}]\n\n`;
+      });
+
+      outputDiv.textContent = outputText;
+    }
+
+    function getMeshName(type) {
+      switch (type) {
+        case 'A': return 'Plane';
+        case 'B': return 'Cube';
+        case 'C': return 'Cone';
+        case 'D': return 'UV Sphere';
+        case 'E': return 'Cylinder';
+        case 'G': return 'Monkey';
+        default: return 'Unknown';
+      }
+    }
+  </script>
+</body>
+</html>
