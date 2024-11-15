@@ -277,7 +277,7 @@
                 scene.traverse(function (object) {
                     if (object.name) {
                         if (object.name != "") {
-                            if (object.name.includes('mat=#') || object.name.includes('mat=#')) {
+                            if (object.name.includes('mat=#') || object.name.includes('m=')) {
                                 let match = object.name.match(/mat=(#[0-9A-Fa-f]{6})/);
                                 if (!match) {
                                     match = object.name.match(/m=([0-9A-Fa-f]{6})/)
