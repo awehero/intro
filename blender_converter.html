@@ -27,9 +27,9 @@
                 let xPos = parseFloat(parts[0]) / 100;
                 let yPos = parseFloat(parts[1]) / 100;
                 let zPos = parseFloat(parts[2]) / 100;
-                let xRot = Math.round(parseFloat(parts[3]) / 100) / (Math.PI / 180);
-                let yRot = Math.round(parseFloat(parts[4]) / 100) / (Math.PI / 180);
-                let zRot = Math.round(parseFloat(parts[5]) / 100) / (Math.PI / 180);
+                let xRot = Math.round(parseFloat(parts[3]) / 100 / (Math.PI / 180));
+                let yRot = Math.round(parseFloat(parts[4]) / 100 / (Math.PI / 180));
+                let zRot = Math.round(parseFloat(parts[5]) / 100 / (Math.PI / 180));
                 let xSize = parseFloat(parts[6]) / 100;
                 let ySize = parseFloat(parts[7]) / 100;
                 let zSize = parseFloat(parts[8]) / 100;
