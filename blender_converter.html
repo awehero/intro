@@ -55,7 +55,7 @@
                         .replace("dif=", "dif=#")
                         .replace("bg=", "bg=#");
                 }
-                
+                name = "[" + items.join() + "]";
                 let mesh = createMesh(type, xPos, yPos, zPos, xRot, yRot, zRot, xSize, ySize, zSize, name);
                 meshes.push(mesh);
             });
