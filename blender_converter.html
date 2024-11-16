@@ -59,9 +59,8 @@
                 let mesh = createMesh(type, xPos, yPos, zPos, xRot, yRot, zRot, xSize, ySize, zSize, name);
                 meshes.push(mesh);
             });
-            realString = JSON.stringify(meshes, null, 2);
-            realString = realString.replace(/\s+/g, "")
-                .replace(/{\"position\":{/g, "\[\(")
+            realString = JSON.stringify(meshes);
+            realString = realString.replace(/{\"position\":{/g, "\[\(")
                 .replace(/},\"rotation\":{/g, "\),\(")
                 .replace(/},\"size\":{/g, "\),\(")
                 .replace(/},\"name\":/g, "\),")
