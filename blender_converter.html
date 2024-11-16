@@ -38,22 +38,22 @@
                 for (var i = 0; i < items.length; i++) {
                     if (items[i].match("m=") != null) {
                         if (items[i].length > 4) {
-                            items[i].replace(/m=/g, "mat=#");
+                            items[i] = items[i].replace(/m=/g, "mat=#");
                         } else {
-                            items[i].replace(/m=/g, "mat=");
+                            items[i] = items[i].replace(/m=/g, "mat=");
                         }
                     }
                     if (items[i].match(":") != null) {
-                        items[i] = "msg={" + items[0].substring(4).split(":").map(code => String.fromCharCode(Number(code))).join("") + "}";
+                        items[i] = "msg={" + items[i].substring(4).split(":").map(code => String.fromCharCode(Number(code))).join("") + "}";
                     }
-                    items[i].replace(/drift/g, "dr")
-                        .replace(/turn/g, "t")
-                        .replace(/speed/g, "s")
-                        .replace(/spe=/g, "spe=#")
-                        .replace(/amb=/g, "amb=#")
-                        .replace(/gro=/g, "gro=#")
-                        .replace(/dif=/g, "dif=#")
-                        .replace(/bg=/g, "bg=#");
+                    items[i] = items[i].replace("drift", "dr")
+                        .replace("turn", "t")
+                        .replace("speed", "s")
+                        .replace("spe=", "spe=#")
+                        .replace("amb=", "amb=#")
+                        .replace("gro=", "gro=#")
+                        .replace("dif=", "dif=#")
+                        .replace("bg=", "bg=#");
                 }
                 
                 let mesh = createMesh(type, xPos, yPos, zPos, xRot, yRot, zRot, xSize, ySize, zSize, name);
