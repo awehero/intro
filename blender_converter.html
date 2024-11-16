@@ -44,7 +44,7 @@
                         }
                     }
                     if (items[i].match(":") != null) {
-                        
+                        items[i] = "msg={" + items[0].substring(4).split(":").map(code => String.fromCharCode(Number(code))).join("") + "}";
                     }
                     items[i].replace("drift", "dr")
                         .replace("turn", "t")
@@ -55,6 +55,7 @@
                         .replace("dif=", "dif=#")
                         .replace("bg=", "bg=#");
                 }
+                
                 let mesh = createMesh(type, xPos, yPos, zPos, xRot, yRot, zRot, xSize, ySize, zSize, name);
                 meshes.push(mesh);
             });
