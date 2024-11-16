@@ -98,7 +98,7 @@
             return mesh;
         }
         function copyLink() {
-            if (document.getElementById("output").innerText != null) {
+            if (document.getElementById("output").innerText != '') {
                 navigator.clipboard.writeText(document.getElementById("output").innerText);
             }
         }
