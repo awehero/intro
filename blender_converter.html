@@ -60,7 +60,6 @@
             });
             realString = JSON.stringify(meshes, null, 2);
             realString = realString.replace(/\s+/g, "")
-                .replace(/\[/g, "")
                 .replace(/{\"position\":{/g, "\[\(")
                 .replace(/},\"rotation\":{/g, "\),\(")
                 .replace(/},\"size\":{/g, "\),\(")
@@ -69,7 +68,7 @@
                 .replace(/\"x\":/g, "")
                 .replace(/\"y\":/g, "")
                 .replace(/\"z\":/g, "")
-                .replace(/},\[/g, "\],\[")
+                .replace(/},\[/g, "\],\[");
             //document.getElementById("output").innerText
         }
 
