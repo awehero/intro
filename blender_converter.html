@@ -35,9 +35,11 @@
                 let zSize = parseFloat(parts[8]) / 100;
                 let name = parts[9];
                 let indexEq = 0;
+                let indexesEq = [];
                 let numberEq = 0;
                 while (name.indexOf("=",indexEq) != -1) {
                     numberEq++;
+                    indexesEq.push(indexEq);
                     index = name.indexOf("=",indexEq + 1);
                 }
                 let mesh = createMesh(type, xPos, yPos, zPos, xRot, yRot, zRot, xSize, ySize, zSize, name);
