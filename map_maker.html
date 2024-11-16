@@ -275,6 +275,7 @@
             }
             function color() {
                 scene.traverse(function (object) {
+                    //if (object.geometry.type == "OctahedronGeometry") { For background color
                     if (object.name) {
                         if (object.name != "") {
                             if (object.name.includes('mat=#') || object.name.includes('m=')) {
