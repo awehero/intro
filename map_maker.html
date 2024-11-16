@@ -1076,11 +1076,18 @@
                                             z: Math.round(position.y * 1000) / 10
                                         };
                                         var rotation = object.rotation;
-                                        var roundedRotation = {
-                                            x: Math.round(rotation.x * 1000) / -1000,
-                                            y: Math.round(rotation.z * 1000) / 1000,
-                                            z: Math.round(rotation.y * 1000) / 1000
-                                        };
+                                        if (object.geometry.type == "PlaneGeometry") {
+                                            var roundedRotation = {
+                                                x: 0,
+                                                y: 0,
+                                                z: 0
+                                            };
+                                        } else {
+                                            var roundedRotation = {
+                                                x: Math.round(rotation.x * 1000) / -1000,
+                                                y: Math.round(rotation.z * 1000) / 1000,
+                                                z: Math.round(rotation.y * 1000) / 1000
+                                        }
                                         var scale = object.scale;
                                         if (object.geometry.type == "PlaneGeometry") {
                                              var roundedScale = {
