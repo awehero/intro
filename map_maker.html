@@ -755,6 +755,7 @@
                         console.error('Selected object not found');
                         return;
                     }
+                    let inputFields = Array.from(document.querySelectorAll('input'));
                     for (var i = 0; i < inputFields.length; i++) {
                         if (!!inputFields[i].id.match("position") || !!inputFields[i].id.match("rotation") || !!inputFields[i].id.match("scale")) {
                             if (inputFields[i].innerText == '') {
