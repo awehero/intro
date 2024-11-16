@@ -755,6 +755,14 @@
                         console.error('Selected object not found');
                         return;
                     }
+                    for (var i = 0; i < inputFields.length; i++) {
+                        if (!!inputFields[i].id.match("position") || !!inputFields[i].id.match("rotation") || !!inputFields[i].id.match("scale")) {
+                            if (inputFields[i].innerText == '') {
+                                alert("Please make sure all required input fields have a value!");
+                                return;
+                            }
+                        }
+                    }
                     selectedObject.name = document.getElementById('nameInput').value;
                     selectedObject.position.x = parseFloat(document.getElementById('positionX').value);
                     selectedObject.position.z = parseFloat(document.getElementById('positionY').value);
