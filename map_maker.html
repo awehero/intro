@@ -285,7 +285,9 @@
                                 }
                                 if (match) {
                                     object.material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('https://awehero.github.io/intro/hex_color_texture.png') });
-                                    match[1] = '#' + match[1];
+                                    if (match[1].match("#") == null) {
+                                        match[1] = '#' + match[1];
+                                    }
                                     const hexColor = match[1];
                                     object.material.color.set(hexColor);
                                 }
