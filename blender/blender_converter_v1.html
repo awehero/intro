@@ -121,11 +121,11 @@
                         .replace("dif=", "dif=#")
                         .replace("bg=", "bg=#");
                 }
-                if (items.join() != "none") {
-                    name = "[" + items.join() + "]";
-                } else {
+                //if (items.join() != "none") {
+                    //name = "[" + items.join() + "]";
+                //} else {
                     name = items.join();
-                }
+                //}
                 let mesh = createMesh(type, xPos, yPos, zPos, xRot, yRot, zRot, xSize, ySize, zSize, name);
                 meshes.push(mesh);
             });
