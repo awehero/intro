@@ -1,1 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V1 URL to Blender Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        div {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        p {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        textarea {
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            max-width: 100%;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #copyButton {
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function processString() {
+            let inputString = document.getElementById("inputString").value;
+            let dollarIndex = inputString.indexOf('$');
+            if (dollarIndex !== -1) {
+                let endIndex = dollarIndex - 1;
+                while (endIndex >= 0 && !/[A-G]/.test(inputString[endIndex])) {
+                  endIndex--;
+                }
+                if (endIndex >= 0) {
+                    inputString = inputString.substring(endIndex);
+                }
+            }
+            let regex = /(?=[A-G])/g;
+            let chunks = inputString.split(regex).filter(chunk => chunk.length > 0);
+            let meshes = [];
+            chunks.forEach(chunk => {
+                let type = chunk[0];
+                let rest = chunk.slice(1);
+                let parts = rest.split('$');
+                let xPos = parseFloat(parts[0]) / 100;
+                let yPos = parseFloat(parts[1]) / 100;
+                let zPos = parseFloat(parts[2]) / 100;
+                let xRot = Math.round(parseFloat(parts[3]) / 100 / (Math.PI / 180));
+                let yRot = Math.round(parseFloat(parts[4]) / 100 / (Math.PI / 180));
+                let zRot = Math.round(parseFloat(parts[5]) / 100 / (Math.PI / 180));
+                let xSize = parseFloat(parts[6]) / 100;
+                let ySize = parseFloat(parts[7]) / 100;
+                let zSize = parseFloat(parts[8]) / 100;
+                let name = parts[9];
+                let items = name.split("?");
+                for (var i = 0; i < items.length; i++) {
+                    if (items[i].match("m=") != null) {
+                        if (items[i].length > 4) {
+                            items[i] = items[i].replace(/m=/g, "mat=#");
+                        } else {
+                            items[i] = items[i].replace(/m=/g, "mat=");
+                        }
+                    }
+                    if (items[i].match(":") != null) {
+                        items[i] = "msg={" + items[i].substring(4).split(":").map(code => String.fromCharCode(Number(code))).join("") + "}";
+                    }
+                    items[i] = items[i].replace("drift", "dr")
+                        .replace("turn", "t")
+                        .replace("speed", "s")
+                        .replace("spe=", "spe=#")
+                        .replace("amb=", "amb=#")
+                        .replace("gro=", "gro=#")
+                        .replace("dif=", "dif=#")
+                        .replace("bg=", "bg=#");
+                }
+                if (items.join() != "none") {
+                    name = "[" + items.join() + "]";
+                } else {
+                    name = items.join();
+                }
+                let mesh = createMesh(type, xPos, yPos, zPos, xRot, yRot, zRot, xSize, ySize, zSize, name);
+                meshes.push(mesh);
+            });
+            realString = JSON.stringify(meshes);
+            realString = realString.replace(/{\"position\":{/g, "\[\(")
+                .replace(/},\"rotation\":{/g, "\),\(")
+                .replace(/},\"size\":{/g, "\),\(")
+                .replace(/},\"name\":/g, "\),")
+                .replace(/,\"type\":/g, "\,")
+                .replace(/\"x\":/g, "")
+                .replace(/\"y\":/g, "")
+                .replace(/\"z\":/g, "")
+                .replace(/},\[/g, "\],\[");
+            realString = realString.substring(0,realString.length-2) + "]]";
+            document.getElementById("output").innerText = realString;
+        }
 
+        function createMesh(type, xPos, yPos, zPos, xRot, yRot, zRot, xSize, ySize, zSize, name) {
+            let meshType = '';
+            let mesh = {
+                position: { x: xPos, y: yPos, z: zPos },
+                rotation: { x: xRot, y: yRot, z: zRot },
+                size: { x: xSize, y: ySize, z: zSize },
+                name: name
+            };
+            switch (type) {
+                case 'A': meshType = 'Plane'; break;
+                case 'B': meshType = 'Cube'; break;
+                case 'C': meshType = 'Cone'; break;
+                case 'D': meshType = 'UV Sphere'; break;
+                case 'E': meshType = 'Cylinder'; break;
+                case 'F': meshType = 'Ico Sphere'; break;
+                case 'G': meshType = 'Monkey'; break;
+                default: meshType = 'Unknown'; break;
+            }
+            mesh.type = meshType;
+            return mesh;
+        }
+        function copyLink() {
+            if (document.getElementById("output").innerText != '') {
+                navigator.clipboard.writeText(document.getElementById("output").innerText);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>URL to Blender Converter</h1>
+    <div>Made by awehero54</div>
+    <p>To use, get the script code found below, paste it into the scripting tab in blender, and then follow the instructions in the code.</p>
+    <button onclick="window.location.href='https://awehero.github.io/intro/blender/blender_code.html';">Get Script Code Here!</button>
+    <p>Enter the URL below</p>
+    <textarea id="inputString" rows="6" cols="80"></textarea>
+    <br>
+    <button onclick="processString()">Get Code!</button>
+    <br><br>
+    <button id="copyButton" onclick="copyLink()">Copy!</button>
+    <h2>Code:</h2>
+    <div id="output" style="white-space: pre-wrap;"></div>
+</body>
+</html>
