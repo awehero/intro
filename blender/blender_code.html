@@ -41,7 +41,7 @@
     <p>Copy the script below and paste it into the scripting tab in Blender, then follow the directions in the code.</p>
     <div class="button-group">
         <button onclick="copyToClipboard()">Copy Script Code</button>
-        <button onclick="window.location.href='https://awehero.github.io/intro/blender_converter.html';">Back</button>
+        <button onclick="backToPage()">Back</button>
     </div>
     <pre id="script">
 import bpy
@@ -86,6 +86,14 @@ for entry in data:
             }).catch(err => {
                 console.error('Failed to copy: ', err);
             });
+        }
+        function backToPage() {
+            let page = localStorage.getItem("page")
+            if (page) {
+                window.location.href=page;
+            } else {
+                window.location.href='https://awehero.github.io/intro/blender_converter.html';
+            }
         }
     </script>
 </body>
