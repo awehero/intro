@@ -35,6 +35,7 @@
 <body>
     <h1>Blender Script</h1>
     <p>Copy the script below and use it in Blender:</p>
+    <button onclick="copyToClipboard()">Copy to Clipboard</button>
     <pre id="script">
 import bpy
 import ast
@@ -69,7 +70,6 @@ for entry in data:
     position, rotation, size, name, obj_type = entry
     add_object(position, rotation, size, name, obj_type)
     </pre>
-    <button onclick="copyToClipboard()">Copy to Clipboard</button>
 
     <script>
         function copyToClipboard() {
