@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V1 URL to Blender Converter</title>
+    <title>URL v1 to Blender Converter</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -67,16 +67,15 @@
     <script>
         function processString() {
             let inputString = document.getElementById("inputString").value;
-            let dollarIndex = inputString.indexOf('$');
-            if (dollarIndex !== -1) {
-                let endIndex = dollarIndex - 1;
-                while (endIndex >= 0 && !/[A-G]/.test(inputString[endIndex])) {
-                  endIndex--;
-                }
-                if (endIndex >= 0) {
-                    inputString = inputString.substring(endIndex);
-                }
-            }
+            inputString = inputString.substring(inputString.indexOf("=") + 1);
+            inputString = inputString.replace(/e/g,"$noneE")
+                .replace(/b/g, "$noneB")
+                .replace(/c/g, "$noneC")
+                .replace(/d/g, "$noneD")
+                .replace(/a/g, "$noneA")
+                .replace(/f/g, "$noneF")
+                .replace(/g/g, "$noneG");
+            inputString = inputString.substring(5) + "$none";
             let regex = /(?=[A-G])/g;
             let chunks = inputString.split(regex).filter(chunk => chunk.length > 0);
             let meshes = [];
@@ -166,11 +165,11 @@
     </script>
 </head>
 <body>
-    <h1>URL to Blender Converter</h1>
+    <h1>URL v1 to Blender Converter</h1>
     <div>Made by awehero54</div>
     <p>To use, get the script code found below, paste it into the scripting tab in blender, and then follow the instructions in the code.</p>
     <button onclick="window.location.href='https://awehero.github.io/intro/blender/blender_code.html';">Get Script Code Here!</button>
-    <p>Enter the URL below</p>
+    <p>Enter the v1 URL below</p>
     <textarea id="inputString" rows="6" cols="80"></textarea>
     <br>
     <button onclick="processString()">Get Code!</button>
