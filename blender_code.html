@@ -75,7 +75,7 @@ for entry in data:
         function copyToClipboard() {
             const script = document.getElementById('script').innerText;
             navigator.clipboard.writeText(script).then(() => {
-                alert('Script copied to clipboard!');
+                console.log('Script copied to clipboard!');
             }).catch(err => {
                 console.error('Failed to copy: ', err);
             });
