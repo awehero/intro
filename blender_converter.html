@@ -163,16 +163,13 @@
                 navigator.clipboard.writeText(document.getElementById("output").innerText);
             }
         }
-        function blenderCode() {
-            window.open("https://awehero.github.io/intro/blender_code.html");
-        }
     </script>
 </head>
 <body>
     <h1>URL to Blender Converter</h1>
     <div>Made by awehero54</div>
     <p>To use, get the script code found below and paste it into the scripting tab in blender. </p>
-    <button onclick="blendercode()">Get Script Code Here!</button>
+    <button onclick="window.location.href='https://awehero.github.io/intro/blender_code.html';">Get Script Code Here!</button>
     <p>Enter the URL below</p>
     <textarea id="inputString" rows="6" cols="80"></textarea>
     <br>
