@@ -1119,7 +1119,7 @@
                                         dataString += objectData;
                     });
                     dataString = replaceMsgWithASCII(dataString);
-                    dataString = "https://onionfist.com/icedodo/?mapCodeVersion=v8&mapUrl=" + dataString;
+                    dataString = "https://icedodo.onionfist.com/creative/?CompilerVersion=v9&CompilerOutput=" + dataString;
                     const replacementsTwo = [
                         { search: "\\.0\\?", replace: "?" },
                         { search: "\\.0\\$", replace: "$" },
@@ -1130,6 +1130,7 @@
                         { search: "\\.0E", replace: "E" },
                         { search: "\\.0F", replace: "F" },
                         { search: "\\.0G", replace: "G" },
+                        { search: "\\none", replace: "_" },
                     ];
                     
                     replacementsTwo.forEach(pair => {
