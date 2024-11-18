@@ -1033,7 +1033,7 @@
                function getMapLinkTest() {
                     var dataString = "";
                     scene.children.forEach(function(object) {
-                        if (!!scene.children[i].position.x) {
+                        if (!!object.position.x) {
                         var objectType;
                                         if (object instanceof THREE.Mesh) {
                                             if (object.geometry instanceof THREE.PlaneGeometry) {
