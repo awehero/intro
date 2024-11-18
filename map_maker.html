@@ -871,17 +871,14 @@
                                     scene.remove(scene.children[0]);
                                 }
                                 input = replaceASCIIWithMsg(input);
-                                const indexOfEquals = input.indexOf('=');
-                                if (indexOfEquals !== -1) {
-                                    let i = indexOfEquals + 1;
-                                    while (i < input.length) {
-                                        if (input[i].match(/[A-G]/)) {
-                                            break;
-                                        }
-                                        i++;
+                                let dollarIndex = input.indexOf('$');
+                                if (dollarIndex !== -1) {
+                                    let endIndex = dollarIndex - 1;
+                                    while (endIndex >= 0 && !/[A-G]/.test(input[endIndex])) {
+                                      endIndex--;
                                     }
-                                    if (i > indexOfEquals) {
-                                        input = input.substring(i);
+                                    if (endIndex >= 0) {
+                                        input = input.substring(endIndex);
                                     }
                                 }
                                 const index = input.indexOf('&');
