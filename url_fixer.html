@@ -32,7 +32,8 @@ async function getText() {
   let realString = queryString.replace(/%3D/g, '=')
                               .replace(/%3A/g, ':')
                               .replace(/%3F/g, '?')
-                              .replace(/%24/g, '$');
+                              .replace(/%24/g, '$')
+                              .replace(/none/g, '_');
   document.getElementById('result').innerText = realString;
 }
 function copyLink() {
