@@ -33,7 +33,8 @@ async function getText() {
                               .replace(/%3A/g, ':')
                               .replace(/%3F/g, '?')
                               .replace(/%24/g, '$')
-                              .replace(/none/g, '_');
+                              .replace(/none/g, '_')
+                              .replace(/Version=v8/g, 'Version=v9');
   document.getElementById('result').innerText = realString;
 }
 function copyLink() {
