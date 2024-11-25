@@ -14,8 +14,8 @@
 <script>
 async function fetchText() {
   let queryString = document.getElementById('query').value;
-  const hostname = 'fn.onionfist.com';
-  const path = '/icemaprun.js';
+  const hostname = 'icedodo-api.onionfist.com';
+  const path = '/api/compile_long_map_url.js?longUrl=';
 
   const dollarIndex = queryString.indexOf('$');
   if (dollarIndex !== -1) {
@@ -23,13 +23,13 @@ async function fetchText() {
     while (endIndex >= 0 && !/[A-G]/.test(queryString[endIndex])) {
       endIndex--;
     }
-    if (endIndex >= 0) {
+    /*if (endIndex >= 0) {
       queryString = 'v8=' + queryString.substring(endIndex);
-    }
+    }*/
   }
       
   try {
-    const response = await fetch(`https://${hostname}${path}?${queryString}`);
+    const response = await fetch(`https://${hostname}${path}${queryString}`);
     const text = await response.text();
     const fixedText = text.replace(/;/g, ';\n');
     document.getElementById('result').innerText = fixedText;
