@@ -23,9 +23,9 @@ async function fetchText() {
     while (endIndex >= 0 && !/[A-G]/.test(queryString[endIndex])) {
       endIndex--;
     }
-    /*if (endIndex >= 0) {
-      queryString = 'v8=' + queryString.substring(endIndex);
-    }*/
+    if (endIndex >= 0) {
+      queryString = queryString.substring(endIndex);
+    }
   }
       
   try {
