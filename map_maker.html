@@ -1,6 +1,7 @@
 <html class="focus-outline-visible">
     <head>
         <title>Ice Dodo Map Maker</title>
+        <link rel="icon" href="https://awehero.github.io/intro/awehero.png" type="image/png">
         <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/js/controls/OrbitControls.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/js/loaders/TextureLoader.js"></script>
@@ -249,6 +250,7 @@
                 setTimeout(function() {
                     if (selectedObject !== null) {
                         selectedObject.material = new THREE.MeshBasicMaterial({ map: texture });
+                        color();
                     }
                     menu.classList.add("hidden");
                 }, 10);
@@ -270,6 +272,29 @@
                 window.material = new THREE.MeshBasicMaterial({ map: texture });
                 scene.children.forEach(function(object) {
                     object.material = material;
+                });
+            }
+            function color() {
+                scene.traverse(function (object) {
+                    //if (object.geometry.type == "OctahedronGeometry") { For background color
+                    if (object.name) {
+                        if (object.name != "") {
+                            if (object.name.includes('mat=#') || object.name.includes('m=')) {
+                                let match = object.name.match(/mat=(#[0-9A-Fa-f]{6})/);
+                                if (!match) {
+                                    match = object.name.match(/m=([0-9A-Fa-f]{6})/)
+                                }
+                                if (match) {
+                                    object.material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('https://awehero.github.io/intro/hex_color_texture.png') });
+                                    if (match[1].match("#") == null) {
+                                        match[1] = '#' + match[1];
+                                    }
+                                    const hexColor = match[1];
+                                    object.material.color.set(hexColor);
+                                }
+                            }
+                        }
+                    }
                 });
             }
 
@@ -323,7 +348,12 @@
             document.addEventListener('keydown', onKeyDown);
             document.addEventListener('keyup', onKeyUp);
             function onKeyDown(event) {
-                    if (isTyping) return;
+                    if (isTyping) {
+                        if (event.key === 'Enter') {
+                            updateObject();
+                        }
+                        return;
+                    }
                 switch (event.key) {
                     case 'w':
                         moveForward = true;
@@ -728,6 +758,24 @@
                         console.error('Selected object not found');
                         return;
                     }
+                    let inputFields = Array.from(document.querySelectorAll('input'));
+                    for (var i = 0; i < inputFields.length; i++) {
+                        if (selectedObject.geometry.type == 'IcosahedronGeometry') {
+                            if (!!inputFields[i].id.match("position") || !!inputFields[i].id.match("rotation") || !!inputFields[i].id.match("radius")) {
+                                if (inputFields[i].value == '') {
+                                    alert("Please make sure all required input fields have a value!");
+                                    return;
+                                }
+                            }
+                        } else {
+                            if (!!inputFields[i].id.match("position") || !!inputFields[i].id.match("rotation") || !!inputFields[i].id.match("scale")) {
+                                if (inputFields[i].value == '') {
+                                    alert("Please make sure all required input fields have a value!");
+                                    return;
+                                }
+                            }
+                        }
+                    }
                     selectedObject.name = document.getElementById('nameInput').value;
                     selectedObject.position.x = parseFloat(document.getElementById('positionX').value);
                     selectedObject.position.z = parseFloat(document.getElementById('positionY').value);
@@ -741,9 +789,9 @@
                         selectedObject.scale.z = 1;
                     } else {
                         if (selectedObject.geometry.type == "IcosahedronGeometry") {
-                            selectedObject.scale.x = parseFloat(document.getElementById('radius').value) * 2;
-                            selectedObject.scale.y = parseFloat(document.getElementById('radius').value) * 2;
-                            selectedObject.scale.z = parseFloat(document.getElementById('radius').value) * 2;
+                            selectedObject.scale.x = parseFloat(document.getElementById('radius').value);// * 2;
+                            selectedObject.scale.y = parseFloat(document.getElementById('radius').value);// * 2;
+                            selectedObject.scale.z = parseFloat(document.getElementById('radius').value);// * 2;
                         } else {
                             selectedObject.scale.x = parseFloat(document.getElementById('scaleX').value) * 2;
                             if (selectedObject.geometry.type == "PlaneGeometry") {
@@ -756,6 +804,7 @@
                         }
                     }
                     fixPlane();
+                    color();
                 }
                 function fixPlane() {
                     scene.children.forEach(function(object) {
@@ -822,17 +871,14 @@
                                     scene.remove(scene.children[0]);
                                 }
                                 input = replaceASCIIWithMsg(input);
-                                const indexOfEquals = input.indexOf('=');
-                                if (indexOfEquals !== -1) {
-                                    let i = indexOfEquals + 1;
-                                    while (i < input.length) {
-                                        if (input[i].match(/[A-G]/)) {
-                                            break;
-                                        }
-                                        i++;
+                                let dollarIndex = input.indexOf('$');
+                                if (dollarIndex !== -1) {
+                                    let endIndex = dollarIndex - 1;
+                                    while (endIndex >= 0 && !/[A-G]/.test(input[endIndex])) {
+                                      endIndex--;
                                     }
-                                    if (i > indexOfEquals) {
-                                        input = input.substring(i);
+                                    if (endIndex >= 0) {
+                                        input = input.substring(endIndex);
                                     }
                                 }
                                 const index = input.indexOf('&');
@@ -984,6 +1030,7 @@
                function getMapLinkTest() {
                     var dataString = "";
                     scene.children.forEach(function(object) {
+                        if (!!object.scale.x || object.geometry.type == "PlaneGeometry") {
                         var objectType;
                                         if (object instanceof THREE.Mesh) {
                                             if (object.geometry instanceof THREE.PlaneGeometry) {
@@ -1039,13 +1086,21 @@
                                             z: Math.round(position.y * 1000) / 10
                                         };
                                         var rotation = object.rotation;
-                                        var roundedRotation = {
-                                            x: Math.round(rotation.x * 1000) / -1000,
-                                            y: Math.round(rotation.z * 1000) / 1000,
-                                            z: Math.round(rotation.y * 1000) / 1000
-                                        };
+                                        if (object.geometry.type == "PlaneGeometry") {
+                                            var roundedRotation = {
+                                                x: 0,
+                                                y: 0,
+                                                z: 0
+                                            };
+                                        } else {
+                                            var roundedRotation = {
+                                                x: Math.round(rotation.x * 1000) / -1000,
+                                                y: Math.round(rotation.z * 1000) / 1000,
+                                                z: Math.round(rotation.y * 1000) / 1000
+                                            };
+                                        }
                                         var scale = object.scale;
-                                        if (object.geometry.type == "PlaneGeometr") {
+                                        if (object.geometry.type == "PlaneGeometry") {
                                              var roundedScale = {
                                                   x: Math.round(scale.x * 1000) / 20,
                                                   y: Math.round(scale.y * 1000) / 20,
@@ -1060,9 +1115,10 @@
                                         }
                                         var objectData = objectType + (roundedPosition.x) + "$" + (roundedPosition.y) + "$" + (roundedPosition.z) + "$" + Math.round(roundedRotation.x * 100) + "$" + Math.round(roundedRotation.y * 100) + "$" + Math.round(roundedRotation.z * 100) + "$" + (roundedScale.x) + "$" + (roundedScale.y) + "$" + (roundedScale.z) + "$" + objectName;
                                         dataString += objectData;
+                        }
                     });
                     dataString = replaceMsgWithASCII(dataString);
-                    dataString = "https://onionfist.com/icedodo/?mapCodeVersion=v8&mapUrl=" + dataString;
+                    dataString = "https://icedodo.onionfist.com/creative/?CompilerVersion=v9&CompilerOutput=" + dataString;
                     const replacementsTwo = [
                         { search: "\\.0\\?", replace: "?" },
                         { search: "\\.0\\$", replace: "$" },
@@ -1073,6 +1129,7 @@
                         { search: "\\.0E", replace: "E" },
                         { search: "\\.0F", replace: "F" },
                         { search: "\\.0G", replace: "G" },
+                        { search: "none", replace: "_" },
                     ];
                     
                     replacementsTwo.forEach(pair => {

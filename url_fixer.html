@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Fixer for New Update</title>
+    <link rel="icon" href="https://awehero.github.io/intro/awehero.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <label for="query">Enter the broken map link here:</label>
+    <input type="text" id="query" placeholder="Link goes here..." style="width: 100%;">
+    <button onclick="getText()">Go!</button>
+    <div>Made by awehero54</div>
+    <button id="copyButton" onclick="copyLink()">Copy Link</button>
+    <div id="result"></div>
+
+<script>
+async function getText() {
+  let queryString = document.getElementById('query').value;
+  let realString = queryString.replace(/%3D/g, '=')
+                              .replace(/%3A/g, ':')
+                              .replace(/%3F/g, '?')
+                              .replace(/%24/g, '$')
+                              .replace(/none/g, '_')
+                              .replace(/Version=v8/g, 'Version=v9');
+  document.getElementById('result').innerText = realString;
+}
+function copyLink() {
+    if (document.getElementById("result").innerText != null) {
+        navigator.clipboard.writeText(document.getElementById("result").innerText);
+    }
+}
+</script>
+</body>
+</html>

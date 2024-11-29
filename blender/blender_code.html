@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blender Script</title>
+    <link rel="icon" href="https://awehero.github.io/intro/awehero.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #ddd;
+            font-family: monospace;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blender Script</h1>
+    <p>Copy the script below and paste it into the scripting tab in Blender, then follow the directions in the code.</p>
+    <div class="button-group">
+        <button onclick="copyToClipboard()">Copy Script Code</button>
+        <button onclick="backToPage()">Back</button>
+    </div>
+    <pre id="script">
+import bpy
+import ast
+bpy.ops.object.select_all(action='SELECT')
+bpy.ops.object.delete()
+# THIS WILL DELETE ALL OBJECTS CURRENTLY IN THE SCENE
+# Paste your generated code after "data =" (right below this) then click the arrow to run the script
+data = 
+
+def add_object(position, rotation, size, name, obj_type):
+    if obj_type == "Cube":
+        bpy.ops.mesh.primitive_cube_add(location=position, rotation=tuple(r * 3.141592653589793 / 180 for r in rotation))
+    elif obj_type == "Plane":
+        bpy.ops.mesh.primitive_plane_add(location=position, rotation=tuple(r * 3.141592653589793 / 180 for r in rotation))
+    elif obj_type == "Cone":
+        bpy.ops.mesh.primitive_cone_add(location=position, rotation=tuple(r * 3.141592653589793 / 180 for r in rotation))
+    elif obj_type == "UV Sphere":
+        bpy.ops.mesh.primitive_uv_sphere_add(location=position, rotation=tuple(r * 3.141592653589793 / 180 for r in rotation))
+    elif obj_type == "Cylinder":
+        bpy.ops.mesh.primitive_cylinder_add(location=position, rotation=tuple(r * 3.141592653589793 / 180 for r in rotation))
+    elif obj_type == "Ico Sphere":
+        bpy.ops.mesh.primitive_ico_sphere_add(location=position, rotation=tuple(r * 3.141592653589793 / 180 for r in rotation))
+    elif obj_type == "Monkey":
+        bpy.ops.mesh.primitive_monkey_add(location=position, rotation=tuple(r * 3.141592653589793 / 180 for r in rotation))
+    else:
+        print(f"Unknown object type: {obj_type}")
+        return
+    obj = bpy.context.object
+    obj.scale = size
+    obj.name = name
+for entry in data:
+    position, rotation, size, name, obj_type = entry
+    add_object(position, rotation, size, name, obj_type)
+    </pre>
+
+    <script>
+        function copyToClipboard() {
+            const script = document.getElementById('script').innerText;
+            navigator.clipboard.writeText(script).then(() => {
+                console.log('Script copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+        function backToPage() {
+            let page = localStorage.getItem("page")
+            if (page) {
+                window.location.href=page;
+            } else {
+                window.location.href='https://awehero.github.io/intro/blender_converter.html';
+            }
+        }
+    </script>
+</body>
+</html>
