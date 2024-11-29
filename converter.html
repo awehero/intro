@@ -13,30 +13,31 @@
 
 <script>
 async function fetchText() {
-  let queryString = document.getElementById('query').value;
-  const hostname = 'icedodo-api.onionfist.com';
-  const path = '/api/compile_long_map_url.js?longUrl=';
 
-  const dollarIndex = queryString.indexOf('$');
-  if (dollarIndex !== -1) {
-    let endIndex = dollarIndex - 1;
-    while (endIndex >= 0 && !/[A-G]/.test(queryString[endIndex])) {
-      endIndex--;
+    let link = document.getElementById('query').value;
+    let queryString = document.getElementById('query').value;
+    const hostname = 'icedodo-api.onionfist.com/api/compile_long_map_url.js?longUrl=';
+
+
+    const regex = /[?&]mapUrl=([^&]+)/;
+    const match = link.match(regex);
+    let mapurl;
+
+    if (match && match[1]) {
+        mapurl = decodeURIComponent(match[1]);
+    } else {
+        throw new Error('Error extracting from link: ' + error);
     }
-    if (endIndex >= 0) {
-      queryString = queryString.substring(endIndex);
+    try {
+        const response = await fetch(`https://${hostname}${mapurl}`);
+        const text = await response.text();
+        const fixedText = text.replace(/;/g, ';\n');
+        document.getElementById('result').innerText = fixedText;
+    } catch (error) {
+        throw new Error('Error fetching from onionfist: ' + error);
+        document.getElementById('result').innerText = 'Error fetching data';
     }
-  }
-      
-  try {
-    const response = await fetch(`https://${hostname}${path}${queryString}`);
-    const text = await response.text();
-    const fixedText = text.replace(/;/g, ';\n');
-    document.getElementById('result').innerText = fixedText;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    document.getElementById('result').innerText = 'Error fetching data';
-  }
+
 }
   </script>
 </body>
