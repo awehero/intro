@@ -102,7 +102,17 @@ var map = {
     },
     section_id: 0,
     section_update: function() {
+        let tickets = 0;
         let PZ = player.position.z;
+        let parentElement = document.getElementById("overlay");
+        let ticketElement = document.createElement("div");
+        ticketElement.style.visibility = "visible";
+        ticketElement.style.bottom = "80px";
+        ticketElement.setAttribute("data-v-31fa11aa", "");
+        ticketElement.id = "ticketElement";
+        ticketElement.classList.add("textLarge", "overlayTime");
+        ticketElement.textContent = "Tickets: " + tickets;
+        parentElement.appendChild(ticketElement);
         switch (this.section_id) {
         case 0:
             if (PZ < -16.99993) {
