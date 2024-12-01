@@ -136,6 +136,7 @@ var map = {
             a.rot('P25', 'y', -0.5);
             a.rot('P26', 'y', -1.0);
             a.rot('P27', 'y', 0.5);
+            tickets += 5;
             if (PZ < -263.99978999999996) {
                 this.section_id += 1
             }
