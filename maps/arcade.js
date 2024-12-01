@@ -103,6 +103,8 @@ var map = {
     section_id: 0,
     section_update: function() {
         let tickets = 0;
+        let currentGame = "golf";
+        let games = [0,0];
         let PZ = player.position.z;
         let parentElement = document.getElementById("overlay");
         let ticketElement = document.createElement("div");
@@ -136,7 +138,15 @@ var map = {
             a.rot('P25', 'y', -0.5);
             a.rot('P26', 'y', -1.0);
             a.rot('P27', 'y', 0.5);
-            tickets += 5;
+            if (games[0] == 0) {
+                
+                tickets = 10000 - score;
+                if (Math.abs(tickets) != tickets) {
+                    tickets = 0;
+                }
+                games[0] = tickets;
+                ticketElement.innerText = "Tickets: " + tickets;
+            }
             if (PZ < -263.99978999999996) {
                 this.section_id += 1
             }
