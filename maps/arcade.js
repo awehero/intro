@@ -138,8 +138,7 @@ var map = {
             a.rot('P25', 'y', -0.5);
             a.rot('P26', 'y', -1.0);
             a.rot('P27', 'y', 0.5);
-            if (games[0] == 0) {
-                
+            if (games[0] == 0) { //Need to change this later
                 tickets = 10000 - score;
                 if (Math.abs(tickets) != tickets) {
                     tickets = 0;
