@@ -5,18 +5,6 @@ var map = {
     maker: "Ice dodo map maker",
     spawn: [0, 0.5, 0],
     init: function() {
-        let tickets = 0;
-        let currentGame = "golf";
-        let games = [0,0];
-        let parentElement = document.getElementById("overlay");
-        let ticketElement = document.createElement("div");
-        ticketElement.style.visibility = "visible";
-        ticketElement.style.bottom = "80px";
-        ticketElement.setAttribute("data-v-31fa11aa", "");
-        ticketElement.id = "ticketElement";
-        ticketElement.classList.add("textLarge", "overlayTime");
-        ticketElement.textContent = "Tickets: " + tickets;
-        parentElement.appendChild(ticketElement);
         a.p([0.00035, -18.99965, -209.99965], [0, 0, 0], [200, 2, 210], "00000a", 0, 0, 0.6, false, true, false, false);
         a.p([-99.99958, -104.99958, -209.99958], [0, 0, 0], [2, 30, 210], "00000a", 0, 0, 0.6, false, true, false, false);
         a.p([0.00049, -104.99951, -314.99951], [0, 0, 0], [200, 30, 2], "00000a", 0, 0, 0.6, false, true, false, false);
@@ -112,13 +100,27 @@ var map = {
         cc.set_monkey("steer", 0.03);
         cc.refresh();
     },
-    section_id: 0,
+    section_id: -1,
     section_update: function() {
         let PZ = player.position.z;
         switch (this.section_id) {
+        case -1:
+            let tickets = 0;
+            let currentGame = "golf";
+            let games = [0,0];
+            let parentElement = document.getElementById("overlay");
+            let ticketElement = document.createElement("div");
+            ticketElement.style.visibility = "visible";
+            ticketElement.style.bottom = "80px";
+            ticketElement.setAttribute("data-v-31fa11aa", "");
+            ticketElement.id = "ticketElement";
+            ticketElement.classList.add("textLarge", "overlayTime");
+            ticketElement.textContent = "Tickets: " + 0;
+            parentElement.appendChild(ticketElement);
+            this.section_id += 1
         case 0:
             if (PZ < -16.99993) {
-              player.position.z = -130;
+                player.position.z = -130;
                 speed = default_speed * 0.5;
                 this.section_id += 1
             }
