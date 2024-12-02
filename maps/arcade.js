@@ -135,6 +135,7 @@ var map = {
                 currentGame = "tutorial";
                 player.position.x = 800;
                 player.position.z = -43;
+                rotation = 0 * Math.PI / 180;
             }
         }
         if (currentGame == "tutorial") {
@@ -293,6 +294,7 @@ var map = {
     },
     reset: function() {
         this.section_id = 0;
+        currentGame = "main";
         //Golf
         a.re('P0', [0.00035, -18.99965, -209.99965], [0, 0, 0], [200, 2, 210]);
         a.re('P1', [-99.99958, -104.99958, -209.99958], [0, 0, 0], [2, 30, 210]);
