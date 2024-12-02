@@ -5,8 +5,9 @@ var map = {
     maker: "Ice dodo map maker",
     spawn: [0, 0.5, 0],
     init: function() {
+        //Code
         globalThis.tickets = 0;
-        globalThis.currentGame = "golf";
+        globalThis.currentGame = "main";
         globalThis.games = [0,0];
         let parentElement = document.getElementById("overlay");
         globalThis.ticketElement = document.createElement("div");
@@ -17,6 +18,7 @@ var map = {
         ticketElement.classList.add("textLarge", "overlayTime");
         ticketElement.textContent = "Tickets: " + 0;
         parentElement.appendChild(ticketElement);
+        //Golf
         a.p([0.00035, -18.99965, -209.99965], [0, 0, 0], [200, 2, 210], "00000a", 0, 0, 0.6, false, true, false, false);
         a.p([-99.99958, -104.99958, -209.99958], [0, 0, 0], [2, 30, 210], "00000a", 0, 0, 0.6, false, true, false, false);
         a.p([0.00049, -104.99951, -314.99951], [0, 0, 0], [200, 30, 2], "00000a", 0, 0, 0.6, false, true, false, false);
@@ -95,6 +97,10 @@ var map = {
         a.p([-29.99986, 7.00014, -16.99986], [0, 0, 0], [1, 14, 51], "1", 0, 0, 0.6, false, false, false, false);
         a.p([0.00021, 0.00021, -16.99979], [0, 0, 0], [60, 0.5, 50], "1", 0, 0, 0.6, false, false, false, false);
         a.e([33.50028, -15.99972, -194.99972]);
+        //Tutorial
+        a.p([771.49, 0, -99.42], [0, 0, 0], [2, 50, 198], "1", 0, 0, 0.6, false, false, false, false);
+        a.p([831.49007, 0.00007, -99.41993], [0, 0, 0], [2, 50, 198], "1", 0, 0, 0.6, false, false, false, false);
+        a.p([800.00014, 0.00014, -113.99986], [0, 0, 0], [10, 0.5, 150], "1", 0, 0, 0.6, false, false, false, false);
     },
     post: function() {
         a.u('P16');
@@ -118,84 +124,176 @@ var map = {
     section_id: 0,
     section_update: function() {
         let PZ = player.position.z;
-        switch (this.section_id) {
-        case 0:
-            if (PZ < -16.99993) {
-                player.position.z = -130;
-                speed = default_speed * 0.5;
-                this.section_id += 1
+        let PX = player.position.x;
+        if (currentGame == "main") {
+            if (PZ < -13 && PZ > -21 && PX < -28.5) {
+                currentGame = "games";
+                player.position.x = -50;
+                player.position.z = -30;
             }
-            break;
-        case 1:
-            if (PZ < -22.99993) {
-                speed = cc.get("speed", null);
-                this.section_id += 1
+            if (PZ < -13 && PZ > -21 && PX > 28.5) {
+                currentGame = "tutorial";
+                player.position.x = 800;
+                player.position.z = -43;
             }
-            break;
-        case 2:
-            if (PZ < -119.99978999999999) {
-                this.section_id += 1
-            }
-            break;
-        case 3:
-            a.rot('P25', 'y', -0.5);
-            a.rot('P26', 'y', -1.0);
-            a.rot('P27', 'y', 0.5);
-            if (games[0] == 0) { //Need to change this later
-                tickets = 10000 - score;
-                if (Math.abs(tickets) != tickets) {
-                    tickets = 0;
+        }
+        if (currentGame == "tutorial") {
+            switch (this.section_id) {
+            case 0:
+                if (PZ < -39.99993) {
+                    steer = default_steer * 0.0;
+                    this.section_id += 1
                 }
-                games[0] = tickets;
-                ticketElement.innerText = "Tickets: " + tickets;
+                break;
+            case 1:
+                if (PZ < -49.99993) {
+                    //steer = cc.get("steer", null);
+                    this.section_id += 1
+                }
+                break;
+            case 2:
+                if (PZ < -49.99972) {
+                    a.msg_set("Welcome to the arcade!");
+                    this.section_id += 1
+                }
+                break;
+            case 3:
+                if (PZ < -59.99972) {
+                    a.msg_del();
+                    this.section_id += 1
+                }
+                break;
+            case 4:
+                if (PZ < -60) {
+                    a.msg_set("Your goal is to collect tickets by playing games!");
+                    this.section_id += 1
+                }
+                break;
+            case 5:
+                if (PZ < -74) {
+                    a.msg_del();
+                    this.section_id += 1
+                }
+                break;
+            case 6:
+                if (PZ < -73.99951) {
+                    a.msg_set("You will get tickets based on your performance in games");
+                    this.section_id += 1
+                }
+                break;
+            case 7:
+                if (PZ < -89.99951) {
+                    a.msg_del();
+                    this.section_id += 1
+                }
+                break;
+            case 8:
+                if (PZ < -89.99965) {
+                    a.msg_set("You can press R to go back to the arcade booth");
+                    this.section_id += 1
+                }
+                break;
+            case 9:
+                if (PZ < -101.99965) {
+                    a.msg_del();
+                    this.section_id += 1
+                }
+                break;
+            case 10:
+                if (PZ < -101.99958) {
+                    a.msg_set("You can see the number of tickets you have on each game");
+                    this.section_id += 1
+                }
+                break;
+            case 11:
+                if (PZ < -117.99958) {
+                    a.msg_del();
+                    this.section_id += 1
+                }
+                break;
             }
-            if (PZ < -263.99978999999996) {
-                this.section_id += 1
+        }
+        if (currentGame == "golf") {
+            switch (this.section_id) {
+            case 0:
+                if (PZ < -16.99993) {
+                    player.position.z = -130;
+                    speed = default_speed * 0.5;
+                    this.section_id += 1
+                }
+                break;
+            case 1:
+                if (PZ < -22.99993) {
+                    speed = cc.get("speed", null);
+                    this.section_id += 1
+                }
+                break;
+            case 2:
+                if (PZ < -119.99978999999999) {
+                    this.section_id += 1
+                }
+                break;
+            case 3:
+                a.rot('P25', 'y', -0.5);
+                a.rot('P26', 'y', -1.0);
+                a.rot('P27', 'y', 0.5);
+                if (games[0] == 0) { //Need to change this later
+                    tickets = 10000 - score;
+                    if (Math.abs(tickets) != tickets) {
+                        tickets = 0;
+                    }
+                    games[0] = tickets;
+                    ticketElement.innerText = "Tickets: " + tickets;
+                }
+                if (PZ < -263.99978999999996) {
+                    this.section_id += 1
+                }
+                break;
+            case 4:
+                if (PZ < -263.99986) {
+                    isSpinLocked = true;
+                    this.section_id += 1
+                }
+                break;
+            case 5:
+                if (PZ < -277.99986) {
+                    spinlock = cc.get("isSpinLocked", null);
+                    this.section_id += 1
+                }
+                break;
+            case 6:
+                if (PZ < -277.99986) {
+                    a.cam_cr(50.0);
+                    a.g(null, 0.0, 1.0);
+                    this.section_id += 1
+                }
+                break;
+            case 7:
+                if (PZ < -293.99986) {
+                    a.cam_cr(null);
+                    a.g(null, null, null);
+                    this.section_id += 1
+                }
+                break;
+            case 8:
+                if (PZ < -293.99972) {
+                    this.section_id += 1
+                }
+                break;
+            case 9:
+                a.rot('P17', 'y', -0.5);
+                a.rot('P19', 'y', 0.3);
+                a.rot('P20', 'y', 0.3);
+                if (PZ < -303.99972) {
+                    this.section_id += 1
+                }
+                break;
             }
-            break;
-        case 4:
-            if (PZ < -263.99986) {
-                isSpinLocked = true;
-                this.section_id += 1
-            }
-            break;
-        case 5:
-            if (PZ < -277.99986) {
-                spinlock = cc.get("isSpinLocked", null);
-                this.section_id += 1
-            }
-            break;
-        case 6:
-            if (PZ < -277.99986) {
-                a.cam_cr(50.0);
-                a.g(null, 0.0, 1.0);
-                this.section_id += 1
-            }
-            break;
-        case 7:
-            if (PZ < -293.99986) {
-                a.cam_cr(null);
-                a.g(null, null, null);
-                this.section_id += 1
-            }
-            break;
-        case 8:
-            if (PZ < -293.99972) {
-                this.section_id += 1
-            }
-            break;
-        case 9:
-            a.rot('P17', 'y', -0.5);
-            a.rot('P19', 'y', 0.3);
-            a.rot('P20', 'y', 0.3);
-            if (PZ < -303.99972) {
-                this.section_id += 1
-            }
-            break;
         }
     },
     reset: function() {
         this.section_id = 0;
+        //Golf
         a.re('P0', [0.00035, -18.99965, -209.99965], [0, 0, 0], [200, 2, 210]);
         a.re('P1', [-99.99958, -104.99958, -209.99958], [0, 0, 0], [2, 30, 210]);
         a.re('P2', [0.00049, -104.99951, -314.99951], [0, 0, 0], [200, 30, 2]);
@@ -274,6 +372,10 @@ var map = {
         a.re('P65', [-29.99986, 7.00014, -16.99986], [0, 0, 0], [1, 14, 51]);
         a.re('P66', [0.00021, 0.00021, -16.99979], [0, 0, 0], [60, 0.5, 50]);
         a.re('E0', [33.50028, -15.99972, -194.99972], [0, 0, 0], [1, 1, 1]);
+        //Tutorial
+        a.re('P67', [771.49, 0, -99.42], [0, 0, 0], [2, 50, 198]);
+        a.re('P68', [831.49007, 0.00007, -99.41993], [0, 0, 0], [2, 50, 198]);
+        a.re('P69', [800.00014, 0.00014, -113.99986], [0, 0, 0], [10, 0.5, 150]);
     },
     physics_update: function() {},
     render_update: function() {}
