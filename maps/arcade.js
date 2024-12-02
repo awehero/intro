@@ -102,7 +102,7 @@ var map = {
                 currentGame = "games";
                 player.position.x = -810;
                 player.position.z = -60;
-                a.cam_cd(10);
+                a.cam_cd(5);
                 a.cam_d(3);
             }
             if (PZ < -13 && PZ > -21 && PX > 28.5) {
