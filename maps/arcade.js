@@ -102,8 +102,6 @@ var map = {
                 currentGame = "games";
                 player.position.x = -810;
                 player.position.z = -60;
-                a.cam_cd(5);
-                a.cam_d(3);
             }
             if (PZ < -13 && PZ > -21 && PX > 28.5) {
                 currentGame = "tutorial";
@@ -111,6 +109,10 @@ var map = {
                 player.position.z = -43;
                 rotation = 0 * Math.PI / 180;
             }
+        }
+        if (currentGame == "games") {
+            a.cam_cd(5);
+            a.cam_d(3);
         }
         if (currentGame == "tutorial") {
             switch (this.section_id) {
