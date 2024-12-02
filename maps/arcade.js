@@ -81,6 +81,8 @@ var map = {
         a.p([771.49, 0, -99.42], [0, 0, 0], [2, 50, 198], "1", 0, 0, 0.6, false, false, false, false);
         a.p([831.49007, 0.00007, -99.41993], [0, 0, 0], [2, 50, 198], "1", 0, 0, 0.6, false, false, false, false);
         a.p([800.00014, 0.00014, -113.99986], [0, 0, 0], [10, 0.5, 150], "1", 0, 0, 0.6, false, false, false, false);
+        //Ending
+        a.e([0.00028, 0.00028, -499.99972]);
     },
     post: function() {
         cc.set_monkey("scene.clearColor", new BABYLON.Color3.FromHexString("#00000a"));
@@ -184,9 +186,9 @@ var map = {
                 break;
             }
         }
-        if (currentGame == "") {
+        /*if (currentGame == "") {
             
-        }
+        }*/
     },
     reset: function() {
         this.section_id = 0;
@@ -254,6 +256,8 @@ var map = {
         a.re('P39', [771.49, 0, -99.42], [0, 0, 0], [2, 50, 198]);
         a.re('P40', [831.49007, 0.00007, -99.41993], [0, 0, 0], [2, 50, 198]);
         a.re('P41', [800.00014, 0.00014, -113.99986], [0, 0, 0], [10, 0.5, 150]);
+        //Ending
+        a.re('E0', [0.00028, 0.00028, -499.99972], [0, 0, 0], [1, 1, 1]);
     },
     physics_update: function() {},
     render_update: function() {}
