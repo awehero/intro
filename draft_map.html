@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL to Draft Map</title>
+    <link rel="icon" href="https://awehero.github.io/intro/awehero.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        div {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        p {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        textarea {
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            max-width: 100%;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #copyButton {
+            margin-top: 10px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+    </style>
+    <script>
+        localStorage.setItem("page",window.location);
+        function processString() {
+            let inputString = document.getElementById("inputString").value;
+            let dollarIndex = inputString.indexOf('$');
+            if (dollarIndex !== -1) {
+                let endIndex = dollarIndex - 1;
+                while (endIndex >= 0 && !/[A-G]/.test(inputString[endIndex])) {
+                  endIndex--;
+                }
+                if (endIndex >= 0) {
+                    inputString = inputString.substring(endIndex);
+                }
+            }
+            let data = {
+              compilerOutput: inputString,
+              compilerVersion: "v9",
+              tokenId: "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNmZDA3MmRmYTM4MDU2NzlmMTZmZTQxNzM4YzJhM2FkM2Y5MGIyMTQiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiYXdlaGVybzU0IiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FBVFhBSnpqOHZPNTByUEt0RkJXOTRSTXhySXAwMnRwUTB0M0kyZlRVTVJLPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL29uaW9uZmlzdC02YmM1YiIsImF1ZCI6Im9uaW9uZmlzdC02YmM1YiIsImF1dGhfdGltZSI6MTcyNjIzNDQxMywidXNlcl9pZCI6ImViSWJ4WlNhUEdldm8ybDdGemVvSWd6cnV4MDIiLCJzdWIiOiJlYklieFpTYVBHZXZvMmw3Rnplb0lnenJ1eDAyIiwiaWF0IjoxNzMzMjYzMjU3LCJleHAiOjE3MzMyNjY4NTcsImVtYWlsIjoiYXdlZ2FtaW5nNzlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTQ0NTUxNzA4MDM0MzQ5MzA5NDgiXSwiZW1haWwiOlsiYXdlZ2FtaW5nNzlAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9fQ.Mv4HbOsvmjVMvLz5iQj_R-K6jrdoOe6LB7zAw6WcPMLCRkpk5hUxCxkfWuTgnus1T7ydBhM3l2Srys_F2oWbemmdzz0zuXjFWAyuseel3nOYZ1amhjRn6bqGTLBSkn7DWg0AOV6fWRgRqknnKDJ1P5y6y4bpv_p8azWIvz52RNpBgbbCqXjy1_winKiHRQOIDBKG8EMNGq3JU2V3M3vNT6haAilPmyEZrb_yEaL0Gh4MRhWuhIOqaGoL40XEPnirKToUxHQm28L9PEiQHJctQTIJa4XS0zzwAIwJzU8a36p7LzqULuIuui8JWF6Q9EqXtfdii8MMICNcG5I3TcnL9A"
+            };
+            const options = {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            };
+            fetch('https://icedodo-api.onionfist.com/api/share_map_as_draft', options)
+              .then(response => response.text())
+              .then(text => {
+                document.getElementById("output").innerText = "https://icedodo.onionfist.com/draft/?DraftId=" + text;
+              })
+              .catch(error => {
+                console.error('Error fetching map link:', error);
+                document.getElementById("output").innerText = 'Error fetching map link.';
+              });
+              }
+        function copyLink() {
+            if (document.getElementById("output").innerText != '') {
+                navigator.clipboard.writeText(document.getElementById("output").innerText);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>URL to Blender Converter</h1>
+    <div>Made by awehero54</div>
+    <p>To use, get the script code found below, paste it into the scripting tab in blender, and then follow the instructions in the code.</p>
+    <div class="button-group">
+        <button onclick="window.location.href='https://awehero.github.io/intro/blender/blender_code.html';">Get Script Code Here!</button>
+        <button onclick="window.location.href='https://awehero.github.io/intro/blender/blender_converter_versions.html';">Other Versions!</button>
+    </div>
+    <p>Enter the URL below</p>
+    <textarea id="inputString" rows="6" cols="80"></textarea>
+    <br>
+    <button onclick="processString()">Get Code!</button>
+    <br><br>
+    <button id="copyButton" onclick="copyLink()">Copy!</button>
+    <h2>Code:</h2>
+    <div id="output" style="white-space: pre-wrap;"></div>
+</body>
+</html>
