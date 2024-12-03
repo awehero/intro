@@ -71,7 +71,6 @@
         }
     </style>
     <script>
-        localStorage.setItem("page",window.location);
         function processString() {
             let inputString = document.getElementById("inputString").value;
             let dollarIndex = inputString.indexOf('$');
@@ -114,20 +113,15 @@
     </script>
 </head>
 <body>
-    <h1>URL to Blender Converter</h1>
+    <h1>URL to Draft Map</h1>
     <div>Made by awehero54</div>
-    <p>To use, get the script code found below, paste it into the scripting tab in blender, and then follow the instructions in the code.</p>
-    <div class="button-group">
-        <button onclick="window.location.href='https://awehero.github.io/intro/blender/blender_code.html';">Get Script Code Here!</button>
-        <button onclick="window.location.href='https://awehero.github.io/intro/blender/blender_converter_versions.html';">Other Versions!</button>
-    </div>
     <p>Enter the URL below</p>
     <textarea id="inputString" rows="6" cols="80"></textarea>
     <br>
-    <button onclick="processString()">Get Code!</button>
+    <button onclick="processString()">Get Draft Map!</button>
     <br><br>
     <button id="copyButton" onclick="copyLink()">Copy!</button>
-    <h2>Code:</h2>
+    <h2>Map:</h2>
     <div id="output" style="white-space: pre-wrap;"></div>
 </body>
 </html>
