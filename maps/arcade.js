@@ -81,6 +81,14 @@ var map = {
         a.p([771.49, 0, -99.42], [0, 0, 0], [2, 50, 198], "1", 0, 0, 0.6, false, false, false, false);
         a.p([831.49007, 0.00007, -99.41993], [0, 0, 0], [2, 50, 198], "1", 0, 0, 0.6, false, false, false, false);
         a.p([800.00014, 0.00014, -113.99986], [0, 0, 0], [10, 0.5, 150], "1", 0, 0, 0.6, false, false, false, false);
+        //Skeeball
+        a.p([0.00014, 0.00014, -189.99986], [0, 0, 0], [8, 0.5, 2], "01037e", 0, 0, 0.0, true, false, false, false);
+        a.p([0.00021, 0.00021, -200.99979], [0, 0, 0], [8, 0.5, 20], "01037e", 0, 0, 0.0, false, false, false, false);
+        a.p([0.00028, 0.10028, -211.29972], [0, 0.1, 0], [8, 0.5, 2], "01037e", 0, 0, 0.0, false, false, false, false);
+        a.p([0.00035, 0.20035, -211.49965], [0, 0.21, 0], [8, 0.5, 2], "01037e", 0, 0, 0.0, false, false, false, false);
+        a.p([0.00042, 0.30042, -211.69958], [0, 0.31, 0], [8, 0.5, 2], "01037e", 0, 0, 0.0, false, false, false, false);
+        a.p([0.00049, 0.40049, -211.89951], [0, 0.42, 0], [8, 0.5, 2], "01037e", 0, 0, 0.0, false, false, false, false);
+        a.p([0, 0.5, -212.1], [0, 0.52, 0], [8, 0.5, 2], "01037e", 0, 0, 0.0, false, false, false, false);
         //Ending
         a.e([0.00028, 0.00028, -499.99972]);
     },
@@ -113,6 +121,65 @@ var map = {
         if (currentGame == "games") {
             a.cam_cd(5);
             a.cam_d(3);
+            if (PZ < -81) {
+                if (PX > -788 && PX < -780) {
+                    currentGame = "pinball";
+                    /*player.position.x = -810;
+                    player.position.z = -60;*/
+                }
+                if (PX > -801 && PX < -793) {
+                    currentGame = "skeeball";
+                    rotation = 0;
+                    player.position.x = 0;
+                    player.position.z = -190;
+                }
+                if (PX > -814 && PX < -806) {
+                    currentGame = "game3";
+                    /*player.position.x = -810;
+                    player.position.z = -60;*/
+                }
+                if (PX > -827 && PX < -819) {
+                    currentGame = "game4";
+                    /*player.position.x = -810;
+                    player.position.z = -60;*/
+                }
+                if (PX > -840 && PX < -832) {
+                    currentGame = "game5";
+                    /*player.position.x = -810;
+                    player.position.z = -60;*/
+                }
+            }
+        }
+        if (currentGame == "skeeball") {
+            switch (this.section_id) {
+            case 0:
+                if (PZ < -188.99993) {
+                    a.jh(0.0);
+                    a.js(10.0);
+                    steer = default_steer * 0.0;
+                    speed = default_speed * 0.0;
+                    this.section_id += 1
+                }
+                break;
+            case 1:
+                if (PZ < -190.99993) {
+                    a.jh(0.0);
+                    a.js(10.0);
+                    steer = default_steer * 0.0;
+                    speed = default_speed * 0.0;
+                    this.section_id += 1
+                }
+                break;
+            case 2:
+                if (PZ < -240.99993) {
+                    a.jh(null);
+                    a.js(null);
+                    steer = cc.get("steer", null);
+                    speed = cc.get("speed", null);
+                    this.section_id += 1
+                }
+                break;
+            }
         }
         if (currentGame == "tutorial") {
             switch (this.section_id) {
@@ -190,9 +257,9 @@ var map = {
                 break;
             }
         }
-        /*if (currentGame == "") {
+        if (currentGame == "skeeball") {
             
-        }*/
+        }
     },
     reset: function() {
         this.section_id = 0;
