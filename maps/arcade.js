@@ -9,6 +9,8 @@ var map = {
         globalThis.tickets = 0;
         globalThis.currentGame = "main";
         globalThis.games = [0,0];
+        globalThis.sliderdir = 1;
+        globalThis.sliderspeed = 1;
         let parentElement = document.getElementById("overlay");
         globalThis.ticketElement = document.createElement("div");
         ticketElement.style.visibility = "visible";
@@ -152,10 +154,12 @@ var map = {
             }
         }
         if (currentGame == "skeeball") {
-            if (paused) {
-                document.dispatchEvent(new KeyboardEvent('keydown', { key: 'r', code: 'KeyR', keyCode: 82, which: 82, bubbles: true}));
-                alert("Nope, no pausing for you here!");
-            }
+            document.addEventListener('keydown', (event) => {
+              if (event.key === 'p') {
+                document.dispatchEvent(new KeyboardEvent('keydown', { key: 'r', code: 'KeyR', keyCode: 82, which: 82, bubbles: true }));
+                  alert("Nope, no pausing for you here!");
+              }
+            });
             switch (this.section_id) {
             case 0:
                 if (PZ < -188.99993) {
@@ -167,6 +171,22 @@ var map = {
                 }
                 break;
             case 1:
+                if (PX > 3.5) {
+                    sliderdir = -1;
+                }
+                if (PX < -3.5) {
+                    sliderdir = 1;
+                }
+                player.position.x += sliderspeed * sliderdir;
+                if (PZ < -190.99993) {
+                    a.jh(null);
+                    a.js(null);
+                    steer = cc.get("steer", null);
+                    speed = cc.get("speed", null);
+                    this.section_id += 1
+                }
+                break;
+            case 2:
                 if (PZ < -190.99993) {
                     a.jh(0.0);
                     a.js(10.0);
@@ -175,7 +195,7 @@ var map = {
                     this.section_id += 1
                 }
                 break;
-            case 2:
+            case 3:
                 if (PZ < -240.99993) {
                     a.jh(null);
                     a.js(null);
