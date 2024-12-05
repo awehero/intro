@@ -110,12 +110,13 @@ var map = {
                 currentGame = "games";
                 player.position.x = -810;
                 player.position.z = -60;
+                rotation = 0;
             }
             if (PZ < -13 && PZ > -21 && PX > 28.5) {
                 currentGame = "tutorial";
                 player.position.x = 800;
                 player.position.z = -43;
-                rotation = 0 * Math.PI / 180;
+                rotation = 0;
             }
         }
         if (currentGame == "games") {
