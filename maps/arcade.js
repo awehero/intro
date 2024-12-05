@@ -152,6 +152,10 @@ var map = {
             }
         }
         if (currentGame == "skeeball") {
+            if (paused) {
+                document.dispatchEvent(new KeyboardEvent('keydown', { key: 'r', code: 'KeyR', keyCode: 82, which: 82, bubbles: true}));
+                alert("Nope, no pausing for you here!");
+            }
             switch (this.section_id) {
             case 0:
                 if (PZ < -188.99993) {
