@@ -184,7 +184,7 @@ var map = {
                     sliderdir = 1;
                 }
                 player.position.x += sliderspeed * sliderdir;
-                if (PZ < -191) {
+                if (PZ < -191.5) {
                     a.jh(0.0);
                     a.js(1.0);
                     steer = default_steer * 0.0;
