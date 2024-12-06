@@ -98,7 +98,7 @@ var map = {
     post: function() {
         cc.set_monkey("scene.clearColor", new BABYLON.Color3.FromHexString("#00000a"));
         cc.set_monkey("jumpHeight", 0.0);
-        cc.set_monkey("speed", default_speed * 2);
+        cc.set_monkey("speed", default_speed * 1.5);
         cc.set_monkey("jumpSpeed", 3.5);
         cc.set_monkey("player.scaling", new BABYLON.Vector3(null,0.5,null));
         cc.set_monkey("steer", 0.03);
@@ -208,7 +208,7 @@ var map = {
                     var xplayer = player.position.x;
                     var ImpulseVector = gravity;
                     ImpulseVector = ImpulseVector.scale(ImpulseMagnitude);
-                    ImpulseVector.z += -9 * (xplayer + 3);
+                    ImpulseVector.z += -5 * (xplayer + 3) + 5;
                     ImpulseVector.y = 0.01;
                     player.position.x = xcatch;
                     player.position.z = -194;
