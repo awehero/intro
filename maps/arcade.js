@@ -202,6 +202,10 @@ var map = {
                     ImpulseVector.z = 0;
                     ImpulseVector.y = 0;
                     player.physicsImpostor.setLinearVelocity(ImpulseVector);
+                    scene.meshes[79].position.y = 0.03;
+                    for (var i = 88; i < 95; i++) {
+                        scene.meshes[i].position.y = 0.03;
+                    }
                     this.section_id += 1
                 }
                 break;
