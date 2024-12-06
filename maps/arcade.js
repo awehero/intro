@@ -12,6 +12,7 @@ var map = {
         globalThis.sliderdir = 1;
         globalThis.sliderspeed = 0.25;
         globalThis.xcatch = 0;
+        globalThis.firstjump = true;
         let parentElement = document.getElementById("overlay");
         globalThis.ticketElement = document.createElement("div");
         ticketElement.style.visibility = "visible";
@@ -170,6 +171,12 @@ var map = {
                     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'r', code: 'KeyR', keyCode: 82, which: 82, bubbles: true }));
                     alert("Nope, no pausing for you here!");
                 }
+                if (event.key === 'w' || event.key === 'ArrowUp' || event.key === ' ') {
+                    if (firstjump) {
+                        xcatch = player.position.x;
+                        firstjump = false;
+                    }
+                }
             });
             switch (this.section_id) {
             case 0:
@@ -178,6 +185,7 @@ var map = {
                     a.js(1.0);
                     steer = default_steer * 0.0;
                     speed = default_speed * 0.0;
+                    firstjump = true;
                     this.section_id += 1
                 }
                 break;
@@ -194,7 +202,6 @@ var map = {
                     a.js(1.0);
                     steer = default_steer * 0.0;
                     speed = default_speed * 0.0;
-                    xcatch = player.position.x;
                     player.position.z = -190;
                     player.position.y = 0.37513842056015506;
                     var ImpulseVector = gravity;
