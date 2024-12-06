@@ -11,6 +11,7 @@ var map = {
         globalThis.games = [0,0];
         globalThis.sliderdir = 1;
         globalThis.sliderspeed = 0.25;
+        globalThis.jumpedq = true;
         let parentElement = document.getElementById("overlay");
         globalThis.ticketElement = document.createElement("div");
         ticketElement.style.visibility = "visible";
@@ -134,6 +135,7 @@ var map = {
                     currentGame = "skeeball";
                     rotation = 0;
                     player.position.x = 0;
+                    player.position.y = 0.37513842056015506;
                     player.position.z = -190;
                 }
                 if (PX > -814 && PX < -806) {
@@ -155,14 +157,18 @@ var map = {
         }
         if (currentGame == "skeeball") {
             document.addEventListener('keydown', (event) => {
-              if (event.key === 'p') {
-                document.dispatchEvent(new KeyboardEvent('keydown', { key: 'r', code: 'KeyR', keyCode: 82, which: 82, bubbles: true }));
-                  alert("Nope, no pausing for you here!");
-              }
+                if (event.key === 'p') {
+                    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'r', code: 'KeyR', keyCode: 82, which: 82, bubbles: true }));
+                    alert("Nope, no pausing for you here!");
+                }
+                if (event.key === 'w' || event.key === 'ArrowUp' || event.key === ' ') {
+                    jumpedq = false;
+                }
             });
             switch (this.section_id) {
             case 0:
-                if (PZ < -188.99993) {
+                if (PZ < -189) {
+                    jumpedq = true;
                     a.jh(0.0);
                     a.js(10.0);
                     steer = default_steer * 0.0;
@@ -178,7 +184,37 @@ var map = {
                     sliderdir = 1;
                 }
                 player.position.x += sliderspeed * sliderdir;
-                if (PZ < -190.99993) {
+                if (PZ < -191) {
+                    a.jh(0.0);
+                    a.js(1.0);
+                    steer = default_steer * 0.0;
+                    speed = default_speed * 0.0;
+                    player.position.z = -190;
+                    player.position.y = 0.37513842056015506;
+                    this.section_id += 1
+                }
+                break;
+            case 2:
+                if (PZ < -194) {
+                    sliderdir = 1;
+                }
+                if (PX > -190) {
+                    sliderdir = -1;
+                }
+                if (!jumpedq) {
+                    var ImpulseVector = gravity;
+                    ImpulseVector = ImpulseVector.scale(ImpulseMagnitude);
+                    ImpulseVector.z += 9 * (player.position.z - -190);
+                    ImpulseVector.y = 0.01;
+                    player.physicsImpostor.setLinearVelocity(ImpulseVector);
+                }
+                player.position.z += sliderspeed * sliderdir;
+                if (PZ < -195) {
+                    this.section_id += 1
+                }
+                break;
+            case 3:
+                if (PZ < -250) {
                     a.jh(null);
                     a.js(null);
                     steer = cc.get("steer", null);
@@ -186,16 +222,7 @@ var map = {
                     this.section_id += 1
                 }
                 break;
-            case 2:
-                if (PZ < -190.99993) {
-                    a.jh(0.0);
-                    a.js(10.0);
-                    steer = default_steer * 0.0;
-                    speed = default_speed * 0.0;
-                    this.section_id += 1
-                }
-                break;
-            case 3:
+            case 4:
                 if (PZ < -240.99993) {
                     a.jh(null);
                     a.js(null);
