@@ -170,7 +170,7 @@ var map = {
                 if (PZ < -189) {
                     jumpedq = true;
                     a.jh(0.0);
-                    a.js(10.0);
+                    a.js(1.0);
                     steer = default_steer * 0.0;
                     speed = default_speed * 0.0;
                     this.section_id += 1
@@ -191,6 +191,11 @@ var map = {
                     speed = default_speed * 0.0;
                     player.position.z = -190;
                     player.position.y = 0.37513842056015506;
+                    var ImpulseVector = gravity;
+                    ImpulseVector = ImpulseVector.scale(ImpulseMagnitude);
+                    ImpulseVector.z = 0;
+                    ImpulseVector.y = 0;
+                    player.physicsImpostor.setLinearVelocity(ImpulseVector);
                     this.section_id += 1
                 }
                 break;
