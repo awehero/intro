@@ -210,6 +210,7 @@ var map = {
                     ImpulseVector.z += -9 * (xplayer + 3);
                     ImpulseVector.y = 0.01;
                     player.position.x = xcatch;
+                    player.position.z = -194;
                     player.physicsImpostor.setLinearVelocity(ImpulseVector);
                     this.section_id += 1
                 }
