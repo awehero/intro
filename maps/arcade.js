@@ -11,7 +11,7 @@ var map = {
         globalThis.games = [0,0];
         globalThis.sliderdir = 1;
         globalThis.sliderspeed = 0.25;
-        globalThis.jumpedq = true;
+        globalThis.xcatch = true;
         let parentElement = document.getElementById("overlay");
         globalThis.ticketElement = document.createElement("div");
         ticketElement.style.visibility = "visible";
@@ -161,14 +161,10 @@ var map = {
                     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'r', code: 'KeyR', keyCode: 82, which: 82, bubbles: true }));
                     alert("Nope, no pausing for you here!");
                 }
-                if (event.key === 'w' || event.key === 'ArrowUp' || event.key === ' ') {
-                    jumpedq = false;
-                }
             });
             switch (this.section_id) {
             case 0:
                 if (PZ < -189) {
-                    jumpedq = true;
                     a.jh(0.0);
                     a.js(1.0);
                     steer = default_steer * 0.0;
@@ -196,26 +192,25 @@ var map = {
                     ImpulseVector.z = 0;
                     ImpulseVector.y = 0;
                     player.physicsImpostor.setLinearVelocity(ImpulseVector);
-                    jumpedq = true;
                     this.section_id += 1
                 }
                 break;
             case 2:
-                if (PZ < -194) {
-                    sliderdir = 1;
-                }
-                if (PX > -190) {
+                if (PX > 3.5) {
                     sliderdir = -1;
                 }
-                if (!jumpedq) {
+                if (PX < -3.5) {
+                    sliderdir = 1;
+                }
+                player.position.x += sliderspeed * sliderdir;
+                if (PZ < -191.5) {
+                    var xplayer = player.position.x;
                     var ImpulseVector = gravity;
                     ImpulseVector = ImpulseVector.scale(ImpulseMagnitude);
-                    ImpulseVector.z += 9 * (player.position.z - -190);
+                    ImpulseVector.z += -9 * (xplayer + 3);
                     ImpulseVector.y = 0.01;
+                    player.position.x = xcatch;
                     player.physicsImpostor.setLinearVelocity(ImpulseVector);
-                }
-                player.position.z += sliderspeed * sliderdir;
-                if (PZ < -195) {
                     this.section_id += 1
                 }
                 break;
