@@ -12,7 +12,9 @@ var map = {
         globalThis.sliderdir = 1;
         globalThis.sliderspeed = 0.25;
         globalThis.xcatch = 0;
+        globalThis.powercatch = 0;
         globalThis.firstjump = true;
+        globalThis.secondjump = false;
         let parentElement = document.getElementById("overlay");
         globalThis.ticketElement = document.createElement("div");
         ticketElement.style.visibility = "visible";
@@ -175,6 +177,8 @@ var map = {
                     if (firstjump) {
                         xcatch = player.position.x;
                         firstjump = false;
+                    } else if (secondjump) {
+                        powercatch = player.position.x;
                     }
                 }
             });
@@ -186,6 +190,10 @@ var map = {
                     steer = default_steer * 0.0;
                     speed = default_speed * 0.0;
                     firstjump = true;
+                    scene.meshes[79].position.y = -0.03;
+                    for (var i = 88; i < 95; i++) {
+                        scene.meshes[i].position.y = -0.03;
+                    }
                     this.section_id += 1
                 }
                 break;
@@ -213,6 +221,7 @@ var map = {
                     for (var i = 88; i < 95; i++) {
                         scene.meshes[i].position.y = 0.03;
                     }
+                    secondjump = true;
                     this.section_id += 1
                 }
                 break;
@@ -225,10 +234,9 @@ var map = {
                 }
                 player.position.x += sliderspeed * sliderdir;
                 if (PZ < -191.5) {
-                    var xplayer = player.position.x;
                     var ImpulseVector = gravity;
                     ImpulseVector = ImpulseVector.scale(ImpulseMagnitude);
-                    ImpulseVector.z += -5 * (xplayer + 3) - 5;
+                    ImpulseVector.z += -5 * (powercatch + 3) - 5;
                     ImpulseVector.y = 0.01;
                     player.position.x = xcatch;
                     player.position.z = -194;
