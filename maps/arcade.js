@@ -236,7 +236,7 @@ var map = {
                 if (PZ < -191.5) {
                     var ImpulseVector = gravity;
                     ImpulseVector = ImpulseVector.scale(ImpulseMagnitude);
-                    ImpulseVector.z += -4 * (powercatch + 3) - 8;
+                    ImpulseVector.z += -3 * (powercatch + 3) - 8;
                     ImpulseVector.y = 0.01;
                     player.position.x = xcatch;
                     player.position.z = -194;
