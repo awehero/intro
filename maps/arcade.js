@@ -98,7 +98,7 @@ var map = {
     post: function() {
         cc.set_monkey("scene.clearColor", new BABYLON.Color3.FromHexString("#00000a"));
         cc.set_monkey("jumpHeight", 0.0);
-        cc.set_monkey("speed", default_speed * 0.3);
+        cc.set_monkey("speed", default_speed * 2);
         cc.set_monkey("jumpSpeed", 3.5);
         cc.set_monkey("player.scaling", new BABYLON.Vector3(null,0.5,null));
         cc.set_monkey("steer", 0.03);
