@@ -11,7 +11,7 @@ var map = {
         globalThis.games = [0,0];
         globalThis.sliderdir = 1;
         globalThis.sliderspeed = 0.25;
-        globalThis.xcatch = true;
+        globalThis.xcatch = 0;
         let parentElement = document.getElementById("overlay");
         globalThis.ticketElement = document.createElement("div");
         ticketElement.style.visibility = "visible";
@@ -185,6 +185,7 @@ var map = {
                     a.js(1.0);
                     steer = default_steer * 0.0;
                     speed = default_speed * 0.0;
+                    xcatch = player.position.x;
                     player.position.z = -190;
                     player.position.y = 0.37513842056015506;
                     var ImpulseVector = gravity;
