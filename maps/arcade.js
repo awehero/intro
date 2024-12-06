@@ -196,6 +196,7 @@ var map = {
                     ImpulseVector.z = 0;
                     ImpulseVector.y = 0;
                     player.physicsImpostor.setLinearVelocity(ImpulseVector);
+                    jumpedq = true;
                     this.section_id += 1
                 }
                 break;
