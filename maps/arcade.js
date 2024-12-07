@@ -6,6 +6,7 @@ var map = {
     spawn: [0, 0.5, 0],
     init: function() {
         //Code
+        globalThis.elementCheck;
         globalThis.tickets = 0;
         globalThis.currentGame = "main";
         globalThis.games = [0,0];
@@ -565,10 +566,10 @@ var map = {
     physics_update: function() {},
     render_update: function() {}
 }
-const interval = setInterval(() => {
+elementCheck = setInterval(() => {
     if (isMapLoaded === false) {
         ticketElement.remove();
         attemptsElement.remove();
-        clearInterval(interval);
+        clearInterval(elementCheck);
     }
 }, 100);
