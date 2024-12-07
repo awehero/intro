@@ -17,15 +17,17 @@ var map = {
         globalThis.secondjump = false;
         globalThis.currentBall = 0;
         globalThis.activeBall = 1;
-        let parentElement = document.getElementById("overlay");
-        globalThis.ticketElement = document.createElement("div");
-        ticketElement.style.visibility = "visible";
-        ticketElement.style.bottom = "80px";
-        ticketElement.setAttribute("data-v-31fa11aa", "");
-        ticketElement.id = "ticketElement";
-        ticketElement.classList.add("textLarge", "overlayTime");
-        ticketElement.textContent = "Tickets: " + 0;
-        parentElement.appendChild(ticketElement);
+        if (document.getElementById("ticketElement") == null) {
+            let parentElement = document.getElementById("overlay");
+            globalThis.ticketElement = document.createElement("div");
+            ticketElement.style.visibility = "visible";
+            ticketElement.style.bottom = "80px";
+            ticketElement.setAttribute("data-v-31fa11aa", "");
+            ticketElement.id = "ticketElement";
+            ticketElement.classList.add("textLarge", "overlayTime");
+            ticketElement.textContent = "Tickets: " + 0;
+            parentElement.appendChild(ticketElement);
+        }
         //Main
         a.p([29.98014, 4.00014, -16.99986], [0, 0, 0], [1, 8, 8], "00000a", 0, 0, 0.6, false, false, false, false);
         a.p([-29.97979, 4.00021, -16.99979], [0, 0, 0], [1, 8, 8], "00000a", 0, 0, 0.6, false, false, false, false);
