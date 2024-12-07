@@ -19,14 +19,24 @@ var map = {
         globalThis.activeBall = 1;
         if (typeof ticketElement === 'undefined') {
             let parentElement = document.getElementById("overlay");
+            //Ticket Element
             globalThis.ticketElement = document.createElement("div");
             ticketElement.style.visibility = "visible";
-            ticketElement.style.bottom = "80px";
+            ticketElement.style.bottom = "124px";
             ticketElement.setAttribute("data-v-31fa11aa", "");
             ticketElement.id = "ticketElement";
             ticketElement.classList.add("textLarge", "overlayTime");
             ticketElement.textContent = "Tickets: " + 0;
             parentElement.appendChild(ticketElement);
+            //Attempts Left Element
+            globalThis.attemptsElement = document.createElement("div");
+            attemptsElement.style.visibility = "hidden";
+            attemptsElement.style.bottom = "168px";
+            attemptsElement.setAttribute("data-v-31fa11aa", "");
+            attemptsElement.id = "attemptsElement";
+            attemptsElement.classList.add("textLarge", "overlayTime");
+            attemptsElement.textContent = "";
+            parentElement.appendChild(attemptsElement);
         } else {
             let parentElement = document.getElementById("overlay");
             parentElement.appendChild(ticketElement);
@@ -555,30 +565,10 @@ var map = {
     physics_update: function() {},
     render_update: function() {}
 }
-exitOne = document.getElementById("overlayMenuButton");
-exitTwo = document.getElementsByClassName("endingMenuButton");
-exitThree = document.getElementById("endingNextMapButton");
-exitOne.addEventListener('click', function () {
-    removeElements();
-});
-exitTwo[0].addEventListener('click', function () {
-    removeElements();
-});
-exitTwo[1].addEventListener('click', function () {
-    removeElements();
-});
-exitThree.addEventListener('click', function () {
-    removeElements();
-});
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'x' || event.key === 'X') {
-        if (!alive) {
-            removeElements();
-        }
-    }
-});
-function removeElements() {
-    if (document.getElementById("ticketElement") != null) {
+const interval = setInterval(() => {
+    if (isMapLoaded === false) {
         ticketElement.remove();
+        attemptsElement.remove();
+        clearInterval(interval);
     }
-}
+}, 100);
