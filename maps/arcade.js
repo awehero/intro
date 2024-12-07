@@ -283,7 +283,7 @@ var map = {
                 }
                 break;
             case 3:
-                if (PY < 0.9 && currentBall == activeBall) {
+                if (PY < 0.9 && currentBall == activeBall && PZ < -215) {
                     if (PX < 0.9 && PX > -0.9 && PZ < -220.82 && PZ > -222.3) {
                         tickets += 10;
                         ticketElement.innerText = 'Tickets: ' + tickets;
