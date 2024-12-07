@@ -15,6 +15,8 @@ var map = {
         globalThis.powercatch = 0;
         globalThis.firstjump = true;
         globalThis.secondjump = false;
+        globalThis.currentBall = 0;
+        globalThis.activeBall = 1;
         let parentElement = document.getElementById("overlay");
         globalThis.ticketElement = document.createElement("div");
         ticketElement.style.visibility = "visible";
@@ -146,8 +148,9 @@ var map = {
     },
     section_id: 0,
     section_update: function() {
-        let PZ = player.position.z;
         let PX = player.position.x;
+        let PY = player.position.y;
+        let PZ = player.position.z;
         if (currentGame == "main") {
             if (PZ < -13 && PZ > -21 && PX < -28.5) {
                 currentGame = "games";
@@ -173,7 +176,11 @@ var map = {
                 }
                 if (PX > -801 && PX < -793) {
                     currentGame = "skeeball";
+                    tickets = games[1];
+                    ticketElement.innerText = 'Tickets: ' + tickets;
                     rotation = 0;
+                    currentBall = 0;
+                    activeBall = 1;
                     player.position.x = 0;
                     player.position.y = 0.37513842056015506;
                     player.position.z = -190;
@@ -271,25 +278,61 @@ var map = {
                     player.position.x = xcatch;
                     player.position.z = -194;
                     player.physicsImpostor.setLinearVelocity(ImpulseVector);
+                    currentBall += 1;
                     this.section_id += 1
                 }
                 break;
             case 3:
-                if (PZ < -250) {
-                    a.jh(null);
-                    a.js(null);
-                    steer = cc.get("steer", null);
-                    speed = cc.get("speed", null);
-                    this.section_id += 1
+                if (PY < 0.9 && currentBall == activeBall) {
+                    if (PX < 0.9 && PX > -0.9 && PZ < -220.82 && PZ > -222.3) {
+                        tickets += 10;
+                        ticketElement.innerText = 'Tickets: ' + tickets;
+                        activeBall += 1;
+                        this.section_id += 1
+                    } else if (PX < 0.9 && PX > -0.9 && PZ < -222.5 && PZ > -224.24) {
+                        tickets += 20;
+                        ticketElement.innerText = 'Tickets: ' + tickets;
+                        activeBall += 1;
+                        this.section_id += 1
+                    } else if (PX < 0.9 && PX > -0.9 && PZ < -224.43 && PZ > -226.17) {
+                        tickets += 30;
+                        ticketElement.innerText = 'Tickets: ' + tickets;
+                        activeBall += 1;
+                        this.section_id += 1
+                    } else if (PX < 0.9 && PX > -0.9 && PZ < -226.36 && PZ > -228.1) {
+                        tickets += 40;
+                        ticketElement.innerText = 'Tickets: ' + tickets;
+                        activeBall += 1;
+                        this.section_id += 1
+                    } else if (PX < 0.9 && PX > -0.9 && PZ < -228.29 && PZ > -230.03) {
+                        tickets += 50;
+                        ticketElement.innerText = 'Tickets: ' + tickets;
+                        activeBall += 1;
+                        this.section_id += 1
+                    } else if (PX < -2.1 && PX > -3.7 && PZ < -228.29 && PZ > -230.03) {
+                        tickets += 100;
+                        ticketElement.innerText = 'Tickets: ' + tickets;
+                        activeBall += 1;
+                        this.section_id += 1
+                    } else if (PX < 3.7 && PX > 2.1 && PZ < -228.29 && PZ > -230.03) {
+                        tickets += 100;
+                        ticketElement.innerText = 'Tickets: ' + tickets;
+                        activeBall += 1;
+                        this.section_id += 1
+                    } else {
+                        activeBall += 1;
+                        this.section_id += 1
+                    }
                 }
                 break;
             case 4:
-                if (PZ < -240.99993) {
-                    a.jh(null);
-                    a.js(null);
-                    steer = cc.get("steer", null);
-                    speed = cc.get("speed", null);
-                    this.section_id += 1
+                if (currentBall == 9) {
+                    currentGame = "gameEnd";
+                    player.position.x = 0;
+                    player.position.y = 2;
+                    player.position.z = -2;
+                } else {
+                    this.section_id = 0;
                 }
                 break;
             }
