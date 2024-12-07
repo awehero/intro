@@ -332,6 +332,10 @@ var map = {
                     player.position.y = 2;
                     player.position.z = -2;
                 } else {
+                    rotation = 0;
+                    player.position.x = 0;
+                    player.position.y = 0.37513842056015506;
+                    player.position.z = -190;
                     this.section_id = 0;
                 }
                 break;
