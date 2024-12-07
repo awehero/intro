@@ -17,7 +17,7 @@ var map = {
         globalThis.secondjump = false;
         globalThis.currentBall = 0;
         globalThis.activeBall = 1;
-        if (document.getElementById("ticketElement") == null) {
+        if (ticketElement == null) {
             let parentElement = document.getElementById("overlay");
             globalThis.ticketElement = document.createElement("div");
             ticketElement.style.visibility = "visible";
@@ -551,4 +551,29 @@ var map = {
     },
     physics_update: function() {},
     render_update: function() {}
+}
+exitOne = document.getElementById("overlayMenuButton");
+exitTwo = document.getElementsByClassName("endingMenuButton");
+exitThree = document.getElementById("endingNextMapButton");
+exitOne.addEventListener('click', function () {
+  removeTicketElement();
+});
+exitTwo[0].addEventListener('click', function () {
+  removeTicketElement();
+});
+exitTwo[1].addEventListener('click', function () {
+  removeTicketElement();
+});
+exitThree.addEventListener('click', function () {
+  removeTicketElement();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'x') {
+    removeTicketElement();
+  }
+});
+function removeTicketElement() {
+    if (currentMapId == "testing") { //CHANGE THIS TO "arcade" LATER
+        ticketElement.remove();
+    }
 }
