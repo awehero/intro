@@ -17,7 +17,7 @@ var map = {
         globalThis.secondjump = false;
         globalThis.currentBall = 0;
         globalThis.activeBall = 1;
-        if (ticketElement == null) {
+        if (typeof ticketElement === 'undefined') {
             let parentElement = document.getElementById("overlay");
             globalThis.ticketElement = document.createElement("div");
             ticketElement.style.visibility = "visible";
@@ -26,6 +26,9 @@ var map = {
             ticketElement.id = "ticketElement";
             ticketElement.classList.add("textLarge", "overlayTime");
             ticketElement.textContent = "Tickets: " + 0;
+            parentElement.appendChild(ticketElement);
+        } else {
+            let parentElement = document.getElementById("overlay");
             parentElement.appendChild(ticketElement);
         }
         //Main
