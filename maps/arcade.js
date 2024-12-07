@@ -338,8 +338,11 @@ var map = {
                     player.position.z = -190;
                     var ImpulseVector = gravity;
                     ImpulseVector = ImpulseVector.scale(ImpulseMagnitude);
-                    ImpulseVector.z = 0;
+                    ImpulseVector.x = 0;
                     ImpulseVector.y = 0;
+                    ImpulseVector.z = 0;
+                    player.physicsImpostor.setLinearVelocity(ImpulseVector);
+                    player.physicsImpostor.setLinearVelocity(ImpulseVector);
                     player.physicsImpostor.setLinearVelocity(ImpulseVector);
                     this.section_id = 0;
                 }
