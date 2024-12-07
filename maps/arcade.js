@@ -329,7 +329,7 @@ var map = {
                 }
                 break;
             case 4:
-                    if (PY < -3.5) {
+                    if (PY == -3.124931611204729) {
                         this.section_id += 1
                     }
                     break;
