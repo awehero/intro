@@ -559,24 +559,26 @@ exitOne = document.getElementById("overlayMenuButton");
 exitTwo = document.getElementsByClassName("endingMenuButton");
 exitThree = document.getElementById("endingNextMapButton");
 exitOne.addEventListener('click', function () {
-  removeTicketElement();
+    removeElements();
 });
 exitTwo[0].addEventListener('click', function () {
-  removeTicketElement();
+    removeElements();
 });
 exitTwo[1].addEventListener('click', function () {
-  removeTicketElement();
+    removeElements();
 });
 exitThree.addEventListener('click', function () {
-  removeTicketElement();
+    removeElements();
 });
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'x') {
-    removeTicketElement();
-  }
+    if (event.key === 'x' || event.key === 'X') {
+        if (!alive) {
+            removeElements();
+        }
+    }
 });
-function removeTicketElement() {
-    if (currentMapId == "testing") { //CHANGE THIS TO "arcade" LATER
+function removeElements() {
+    if (document.getElementById("ticketElement") != null) {
         ticketElement.remove();
     }
 }
