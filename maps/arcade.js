@@ -251,11 +251,11 @@ var map = {
                     speed = default_speed * 0.0;
                     player.position.z = -190;
                     player.position.y = 0.37513842056015506;
-                    var ImpulseVector = gravity;
-                    ImpulseVector = ImpulseVector.scale(ImpulseMagnitude);
-                    ImpulseVector.z = 0;
-                    ImpulseVector.y = 0;
-                    player.physicsImpostor.setLinearVelocity(ImpulseVector);
+                    player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3.Zero());
+                    player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3.Zero());
+                    player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3.Zero());
+                    player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3.Zero());
+                    player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3.Zero());
                     for (var i = 55; i < scene.meshes.length; i++) {
                         if (Math.abs(Math.round(scene.meshes[i].position.y * 100)) == 3) {
                             scene.meshes[i].position.y = 0.03;
@@ -344,14 +344,11 @@ var map = {
                     player.position.x = 0;
                     player.position.y = 0.37513842056015506;
                     player.position.z = -190;
-                    var ImpulseVector = gravity;
-                    ImpulseVector = ImpulseVector.scale(ImpulseMagnitude);
-                    ImpulseVector.x = 0;
-                    ImpulseVector.y = 0;
-                    ImpulseVector.z = 0;
-                    player.physicsImpostor.setLinearVelocity(ImpulseVector);
-                    player.physicsImpostor.setLinearVelocity(ImpulseVector);
-                    player.physicsImpostor.setLinearVelocity(ImpulseVector);
+                    player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3.Zero());
+                    player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3.Zero());
+                    player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3.Zero());
+                    player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3.Zero());
+                    player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3.Zero());
                     this.section_id = 0;
                 }
                 break;
