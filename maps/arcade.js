@@ -329,11 +329,6 @@ var map = {
                 }
                 break;
             case 4:
-                    if (PY == -3.124931611204729) {
-                        this.section_id += 1
-                    }
-                    break;
-            case 5:
                 if (currentBall == 9) {
                     currentGame = "gameEnd";
                     player.position.x = 0;
@@ -348,6 +343,7 @@ var map = {
                     player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3.Zero());
                     player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3.Zero());
                     player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3.Zero());
+                    player.position.z = -190;
                     player.physicsImpostor.setLinearVelocity(new BABYLON.Vector3.Zero());
                     this.section_id = 0;
                 }
