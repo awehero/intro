@@ -329,6 +329,11 @@ var map = {
                 }
                 break;
             case 4:
+                    if (PY < -3.5) {
+                        this.section_id += 1
+                    }
+                    break;
+            case 5:
                 if (currentBall == 9) {
                     currentGame = "gameEnd";
                     player.position.x = 0;
