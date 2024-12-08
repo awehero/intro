@@ -160,7 +160,7 @@ var map = {
     post: function() {
         globalThis.coins = [];
         for (var i = 0; i < scene.meshes.length; i++) {
-            if (Math.round(scene.meshes[i].position.y * 1000) == 20106) {
+            if (Math.round(scene.meshes[i].position.y * 1000) == 20000) {
                 coins.push(scene.meshes[i]);
             }
         }
