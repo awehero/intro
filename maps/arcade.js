@@ -19,7 +19,9 @@ var map = {
         globalThis.currentBall = 0;
         globalThis.activeBall = 1;
         globalThis.bestElement = document.getElementById("overlayBestTime"); //Replace with document.getElementById("hudBest");
-        if (typeof ticketElement === 'undefined') {
+        bestElement.style.textAlign = "left";
+        globalThis.bestScore = bestElement.innerHTML.substring(6);
+        /*if (typeof ticketElement === 'undefined') {
             let parentElement = document.getElementById("overlay");
             //Ticket Element
             globalThis.ticketElement = document.createElement("div");
@@ -43,7 +45,7 @@ var map = {
             let parentElement = document.getElementById("overlay");
             parentElement.appendChild(ticketElement);
             parentElement.appendChild(attemptsElement);
-        }
+        }*/
         //Main
         a.p([29.98014, 4.00014, -16.99986], [0, 0, 0], [1, 8, 8], "00000a", 0, 0, 0.6, false, false, false, false);
         a.p([-29.97979, 4.00021, -16.99979], [0, 0, 0], [1, 8, 8], "00000a", 0, 0, 0.6, false, false, false, false);
@@ -177,7 +179,7 @@ var map = {
             for (var i = 0; i < games.length; i++) {
                 total += games[i];
             }
-            bestElement.innerText = "Best:" + total;
+            bestElement.innerHTML = "<br>Tickets: " + total + "<br>Best: " + bestScore;
             if (PZ < -13 && PZ > -21 && PX < -28.5) {
                 currentGame = "games";
                 player.position.x = -810;
@@ -203,7 +205,7 @@ var map = {
                 if (PX > -801 && PX < -793) {
                     currentGame = "skeeball";
                     tickets = games[1];
-                    ticketElement.innerText = 'Tickets: ' + tickets;
+                    bestElement.innerHTML = "Attempts: " + 10 + "<br>Tickets: " + 0 + "<br>Best: " + tickets;
                     rotation = 0;
                     currentBall = 0;
                     activeBall = 1;
