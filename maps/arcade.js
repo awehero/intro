@@ -158,6 +158,12 @@ var map = {
         a.e([0.00028, 0.00028, -499.99972]);
     },
     post: function() {
+        globalThis.coins = [];
+        for (var i = 0; i < scene.meshes.length; i++) {
+            if (Math.round(scene.meshes[i].position.y * 1000) == 20106) {
+                coins.push(scene.meshes[i]);
+            }
+        }
         a.u('Y19');
         a.u('Y20');
         a.u('Y21');
@@ -637,10 +643,3 @@ var map = {
     physics_update: function() {},
     render_update: function() {}
 }
-elementCheck = setInterval(() => {
-    if (isMapLoaded === false) {
-        ticketElement.remove();
-        attemptsElement.remove();
-        clearInterval(elementCheck);
-    }
-}, 100);
