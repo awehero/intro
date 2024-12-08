@@ -18,7 +18,7 @@ var map = {
         globalThis.secondjump = false;
         globalThis.currentBall = 0;
         globalThis.activeBall = 1;
-        globalThis.attemptsLeft = 0;
+        globalThis.attempts = 0;
         globalThis.bestElement = document.getElementById("overlayBestTime"); //Replace with document.getElementById("hudBest");
         bestElement.style.textAlign = "left";
         globalThis.bestScore = bestElement.innerHTML.substring(6);
@@ -233,6 +233,7 @@ var map = {
                 }
                 if (PX > -814 && PX < -806) {
                     currentGame = "coin";
+                    rotation = 0;
                     player.position.x = 340;
                     player.position.z = -184;
                 }
@@ -470,6 +471,7 @@ var map = {
             }
         }
         if (currentGame == "coin") {
+            let PXC = coins[attempts].position.x - 340;
             switch (this.section_id) {
             case 0:
                 if (PZ < -183) {
@@ -481,13 +483,13 @@ var map = {
                 }
                 break;
             case 1:
-                if (PX > 3.5) {
+                if (PXC > 18) {
                     sliderdir = -1;
                 }
-                if (PX < -3.5) {
+                if (PXC < -18) {
                     sliderdir = 1;
                 }
-                player.position.x += sliderspeed * sliderdir;
+                coins[attempts].position.x += sliderspeed * sliderdir * 2;
                 if (PZ < -189) {
                     a.cam_cd(18.0);
                     this.section_id += 1
