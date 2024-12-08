@@ -18,29 +18,31 @@ var map = {
         globalThis.secondjump = false;
         globalThis.currentBall = 0;
         globalThis.activeBall = 1;
+        globalThis.bestElement = document.getElementById("overlayBestTime"); //Replace with document.getElementById("hudBest");
         if (typeof ticketElement === 'undefined') {
             let parentElement = document.getElementById("overlay");
             //Ticket Element
             globalThis.ticketElement = document.createElement("div");
             ticketElement.style.visibility = "visible";
             ticketElement.style.bottom = "124px";
-            ticketElement.setAttribute("data-v-31fa11aa", "");
+            ticketElement.setAttribute("data-v-31fa11aa", ""); //Replace with "data-v-6e4630ee", ""
             ticketElement.id = "ticketElement";
-            ticketElement.classList.add("textLarge", "overlayTime");
+            ticketElement.classList.add("textLarge", "overlayTime"); //Replace with "textLarge", "hudTimeAndBest"
             ticketElement.textContent = "Tickets: " + 0;
             parentElement.appendChild(ticketElement);
             //Attempts Left Element
             globalThis.attemptsElement = document.createElement("div");
             attemptsElement.style.visibility = "hidden";
             attemptsElement.style.bottom = "168px";
-            attemptsElement.setAttribute("data-v-31fa11aa", "");
+            attemptsElement.setAttribute("data-v-31fa11aa", ""); //Replace with "data-v-6e4630ee", ""
             attemptsElement.id = "attemptsElement";
-            attemptsElement.classList.add("textLarge", "overlayTime");
+            attemptsElement.classList.add("textLarge", "overlayTime"); //Replace with "textLarge", "hudTimeAndBest"
             attemptsElement.textContent = "";
             parentElement.appendChild(attemptsElement);
         } else {
             let parentElement = document.getElementById("overlay");
             parentElement.appendChild(ticketElement);
+            parentElement.appendChild(attemptsElement);
         }
         //Main
         a.p([29.98014, 4.00014, -16.99986], [0, 0, 0], [1, 8, 8], "00000a", 0, 0, 0.6, false, false, false, false);
@@ -171,6 +173,11 @@ var map = {
         let PY = player.position.y;
         let PZ = player.position.z;
         if (currentGame == "main") {
+            let total = 0;
+            for (var i = 0; i < games.length; i++) {
+                total += games[i];
+            }
+            bestElement.innerText = "Best:" + total;
             if (PZ < -13 && PZ > -21 && PX < -28.5) {
                 currentGame = "games";
                 player.position.x = -810;
