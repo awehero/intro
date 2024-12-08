@@ -9,7 +9,7 @@ var map = {
         globalThis.elementCheck;
         globalThis.tickets = 0;
         globalThis.currentGame = "main";
-        globalThis.games = [0,0];
+        globalThis.games = [];
         globalThis.sliderdir = 1;
         globalThis.sliderspeed = 0.25;
         globalThis.xcatch = 0;
@@ -18,34 +18,10 @@ var map = {
         globalThis.secondjump = false;
         globalThis.currentBall = 0;
         globalThis.activeBall = 1;
+        globalThis.attemptsLeft = 0;
         globalThis.bestElement = document.getElementById("overlayBestTime"); //Replace with document.getElementById("hudBest");
         bestElement.style.textAlign = "left";
         globalThis.bestScore = bestElement.innerHTML.substring(6);
-        /*if (typeof ticketElement === 'undefined') {
-            let parentElement = document.getElementById("overlay");
-            //Ticket Element
-            globalThis.ticketElement = document.createElement("div");
-            ticketElement.style.visibility = "visible";
-            ticketElement.style.bottom = "124px";
-            ticketElement.setAttribute("data-v-31fa11aa", ""); //Replace with "data-v-6e4630ee", ""
-            ticketElement.id = "ticketElement";
-            ticketElement.classList.add("textLarge", "overlayTime"); //Replace with "textLarge", "hudTimeAndBest"
-            ticketElement.textContent = "Tickets: " + 0;
-            parentElement.appendChild(ticketElement);
-            //Attempts Left Element
-            globalThis.attemptsElement = document.createElement("div");
-            attemptsElement.style.visibility = "hidden";
-            attemptsElement.style.bottom = "168px";
-            attemptsElement.setAttribute("data-v-31fa11aa", ""); //Replace with "data-v-6e4630ee", ""
-            attemptsElement.id = "attemptsElement";
-            attemptsElement.classList.add("textLarge", "overlayTime"); //Replace with "textLarge", "hudTimeAndBest"
-            attemptsElement.textContent = "";
-            parentElement.appendChild(attemptsElement);
-        } else {
-            let parentElement = document.getElementById("overlay");
-            parentElement.appendChild(ticketElement);
-            parentElement.appendChild(attemptsElement);
-        }*/
         //Main
         a.p([29.98014, 4.00014, -16.99986], [0, 0, 0], [1, 8, 8], "00000a", 0, 0, 0.6, false, false, false, false);
         a.p([-29.97979, 4.00021, -16.99979], [0, 0, 0], [1, 8, 8], "00000a", 0, 0, 0.6, false, false, false, false);
@@ -157,10 +133,46 @@ var map = {
         a.p([4.00049, -1.07951, -223.08951], [0, -0.08, 0], [0.2, 2, 20], "-1.0", 0, 0, 0.0, false, false, false, false);
         a.p([0, -2.08, -223.09], [0, -0.08, 0], [8.2, 0.5, 20], "-1.0", 0, 0, 0.0, false, false, false, false);
         a.p([0.00007, -3.49993, -235.88993], [0, 0, 0], [8.2, 0.5, 4], "-1.0", 0, 0, 100.0, false, false, false, false);
+        //Coin
+        a.p([340.00021, 1.50021, -244.99979], [0, 0, 0], [40, 4, 40], "01037e", 0, 0, 0.0, false, false, false, false);
+        a.p([340.00028, 5.00028, -249.99972], [0, 0, 0], [40, 4, 30], "01037e", 0, 0, 0.0, false, false, false, false);
+        a.p([305.00035, 19.60035, -258.99965], [0, 0, 0], [10, 0.5, 16], "01037e", 0, 0, 0.0, false, false, false, false);
+        a.p([340.00042, 0.00042, -234.99958], [0, 0, 0], [40, 1, 50], "01037e", 0, 0, 0.0, false, false, false, false);
+        a.p([340.00049, 0.00049, -184.99951], [0, 0, 0], [10, 1, 10], "01037e", 0, 0, 5.0, false, false, false, false);
+        a.y([308, 20, -265], [0, 0, 0], [2, 0.2, 2], "ffff00", 0, 1.0, 0.6, false, 1, false);
+        a.y([305.00007, 20.00007, -264.99993], [0, 0, 0], [2, 0.2, 2], "ffff00", 0, 1.0, 0.6, false, 1, false);
+        a.y([308.00014, 20.00014, -261.99986], [0, 0, 0], [2, 0.2, 2], "ffff00", 0, 1.0, 0.6, false, 1, false);
+        a.y([305.00021, 20.00021, -261.99979], [0, 0, 0], [2, 0.2, 2], "ffff00", 0, 1.0, 0.6, false, 1, false);
+        a.y([302.00028, 20.00028, -261.99972], [0, 0, 0], [2, 0.2, 2], "ffff00", 0, 1.0, 0.6, false, 1, false);
+        a.y([308.00035, 20.00035, -258.99965], [0, 0, 0], [2, 0.2, 2], "ffff00", 0, 1.0, 0.6, false, 1, false);
+        a.y([305.00042, 20.00042, -258.99958], [0, 0, 0], [2, 0.2, 2], "ffff00", 0, 1.0, 0.6, false, 1, false);
+        a.y([302.00049, 20.00049, -258.99951], [0, 0, 0], [2, 0.2, 2], "ffff00", 0, 1.0, 0.6, false, 1, false);
+        a.y([308, 20, -256], [0, 0, 0], [2, 0.2, 2], "ffff00", 0, 1.0, 0.6, false, 1, false);
+        a.y([305.00007, 20.00007, -255.99993], [0, 0, 0], [2, 0.2, 2], "ffff00", 0, 1.0, 0.6, false, 1, false);
+        a.y([302.00014, 20.00014, -255.99986], [0, 0, 0], [2, 0.2, 2], "ffff00", 0, 1.0, 0.6, false, 1, false);
+        a.y([308.00021, 20.00021, -252.99979], [0, 0, 0], [2, 0.2, 2], "ffff00", 0, 1.0, 0.6, false, 1, false);
+        a.y([305.00028, 20.00028, -252.99972], [0, 0, 0], [2, 0.2, 2], "ffff00", 0, 1.0, 0.6, false, 1, false);
+        a.y([302.00035, 20.00035, -264.99965], [0, 0, 0], [2, 0.2, 2], "ffff00", 0, 1.0, 0.6, false, 1, false);
+        a.y([302.00042, 20.00042, -252.99958], [0, 0, 0], [2, 0.2, 2], "ffff00", 0, 1.0, 0.6, false, 1, false);
         //Ending
         a.e([0.00028, 0.00028, -499.99972]);
     },
     post: function() {
+        a.u('Y19');
+        a.u('Y20');
+        a.u('Y21');
+        a.u('Y22');
+        a.u('Y23');
+        a.u('Y24');
+        a.u('Y25');
+        a.u('Y26');
+        a.u('Y27');
+        a.u('Y28');
+        a.u('Y29');
+        a.u('Y30');
+        a.u('Y31');
+        a.u('Y32');
+        a.u('Y33');
         cc.set_monkey("scene.clearColor", new BABYLON.Color3.FromHexString("#00000a"));
         cc.set_monkey("jumpHeight", 0.0);
         cc.set_monkey("speed", default_speed * 1.5);
@@ -175,11 +187,11 @@ var map = {
         let PY = player.position.y;
         let PZ = player.position.z;
         if (currentGame == "main") {
-            let total = 0;
+            tickets = 0;
             for (var i = 0; i < games.length; i++) {
-                total += games[i];
+                tickets += games[i];
             }
-            bestElement.innerHTML = "<br>Tickets: " + total + "<br>Best: " + bestScore;
+            bestElement.innerHTML = "<br>Tickets: " + tickets + "<br>Best: " + bestScore;
             if (PZ < -13 && PZ > -21 && PX < -28.5) {
                 currentGame = "games";
                 player.position.x = -810;
@@ -214,9 +226,9 @@ var map = {
                     player.position.z = -190;
                 }
                 if (PX > -814 && PX < -806) {
-                    currentGame = "game3";
-                    /*player.position.x = -810;
-                    player.position.z = -60;*/
+                    currentGame = "coin";
+                    player.position.x = 340;
+                    player.position.z = -184;
                 }
                 if (PX > -827 && PX < -819) {
                     currentGame = "game4";
@@ -451,8 +463,37 @@ var map = {
                 break;
             }
         }
-        if (currentGame == "skeeball") {
-            
+        if (currentGame == "coin") {
+            switch (this.section_id) {
+            case 0:
+                if (PZ < -183) {
+                    a.jh(0.5);
+                    a.js(0.3);
+                    steer = default_steer * 0.0;
+                    speed = default_speed * 0.0;
+                    this.section_id += 1
+                }
+                break;
+            case 1:
+                if (PX > 3.5) {
+                    sliderdir = -1;
+                }
+                if (PX < -3.5) {
+                    sliderdir = 1;
+                }
+                player.position.x += sliderspeed * sliderdir;
+                if (PZ < -189) {
+                    a.cam_cd(18.0);
+                    this.section_id += 1
+                }
+                break;
+            case 2:
+                if (PZ < -191) {
+                    a.cam_cd(null);
+                    this.section_id += 1
+                }
+                break;
+            }
         }
     },
     reset: function() {
@@ -569,6 +610,27 @@ var map = {
         a.re('P86', [4.00049, -1.07951, -223.08951], [0, -0.08, 0], [0.2, 2, 20]);
         a.re('P87', [0, -2.08, -223.09], [0, -0.08, 0], [8.2, 0.5, 20]);
         a.re('P88', [0.00007, -3.49993, -235.88993], [0, 0, 0], [8.2, 0.5, 4]);
+        //Coin
+        a.re('P89', [340.00021, 1.50021, -244.99979], [0, 0, 0], [40, 4, 40]);
+        a.re('P90', [340.00028, 5.00028, -249.99972], [0, 0, 0], [40, 4, 30]);
+        a.re('P91', [305.00035, 19.60035, -258.99965], [0, 0, 0], [10, 0.5, 16]);
+        a.re('P92', [340.00042, 0.00042, -234.99958], [0, 0, 0], [40, 1, 50]);
+        a.re('P93', [340.00049, 0.00049, -184.99951], [0, 0, 0], [10, 1, 10]);
+        a.re('Y19', [308, 20, -265], [0, 0, 0], [2, 0.2, 2]);
+        a.re('Y20', [305.00007, 20.00007, -264.99993], [0, 0, 0], [2, 0.2, 2]);
+        a.re('Y21', [308.00014, 20.00014, -261.99986], [0, 0, 0], [2, 0.2, 2]);
+        a.re('Y22', [305.00021, 20.00021, -261.99979], [0, 0, 0], [2, 0.2, 2]);
+        a.re('Y23', [302.00028, 20.00028, -261.99972], [0, 0, 0], [2, 0.2, 2]);
+        a.re('Y24', [308.00035, 20.00035, -258.99965], [0, 0, 0], [2, 0.2, 2]);
+        a.re('Y25', [305.00042, 20.00042, -258.99958], [0, 0, 0], [2, 0.2, 2]);
+        a.re('Y26', [302.00049, 20.00049, -258.99951], [0, 0, 0], [2, 0.2, 2]);
+        a.re('Y27', [308, 20, -256], [0, 0, 0], [2, 0.2, 2]);
+        a.re('Y28', [305.00007, 20.00007, -255.99993], [0, 0, 0], [2, 0.2, 2]);
+        a.re('Y29', [302.00014, 20.00014, -255.99986], [0, 0, 0], [2, 0.2, 2]);
+        a.re('Y30', [308.00021, 20.00021, -252.99979], [0, 0, 0], [2, 0.2, 2]);
+        a.re('Y31', [305.00028, 20.00028, -252.99972], [0, 0, 0], [2, 0.2, 2]);
+        a.re('Y32', [302.00035, 20.00035, -264.99965], [0, 0, 0], [2, 0.2, 2]);
+        a.re('Y33', [302.00042, 20.00042, -252.99958], [0, 0, 0], [2, 0.2, 2]);
         //Ending
         a.re('E0', [0.00028, 0.00028, -499.99972], [0, 0, 0], [1, 1, 1]);
     },
