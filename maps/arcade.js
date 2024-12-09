@@ -301,7 +301,7 @@ var map = {
                 coins.push(scene.meshes[i]);
             }
         }
-        a.u('Y19');
+        /*a.u('Y19');
         a.u('Y20');
         a.u('Y21');
         a.u('Y22');
@@ -424,7 +424,7 @@ var map = {
         a.u('Y139');
         a.u('Y140');
         a.u('Y141');
-        a.u('Y142');
+        a.u('Y142');*/
         cc.set_monkey("scene.clearColor", new BABYLON.Color3.FromHexString("#00000a"));
         cc.set_monkey("jumpHeight", 0.0);
         cc.set_monkey("speed", default_speed * 1.5);
