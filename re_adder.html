@@ -74,12 +74,15 @@
     <script>
         function processString() {
             let inputString = document.getElementById("inputString").value;
+            let inputString = inputString.replace(/\s+/g, '')
             let lines = inputString.split(';')
             for (var i = 0; i < lines.length - 1; i++) {
                 let letter = lines[i].substring(6,7);
                 let split = lines[i].split(letter);
                 let number = split[1].substring(0,split[1].indexOf("'"));
-                let newNumber = parseInt(number) + 2;
+                let addNumber = document.getElementById(letter);
+                if (addNumber == '') addNumber = 0;
+                let newNumber = parseInt(number) + parseInt(addNumber);
                 lines[i] = lines[i].substring(lines[i].indexOf("'",7));
                 lines[i] = "a.re\(\'" + letter + newNumber + lines[i];
             }
