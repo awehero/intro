@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>re Adder</title>
+    <link rel="icon" href="https://awehero.github.io/intro/awehero.png" type="image/png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        div {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        p {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        textarea {
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            max-width: 100%;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #copyButton {
+            margin-top: 10px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+    </style>
+    <script>
+        function processString() {
+            let inputString = document.getElementById("inputString").value;
+            let lines = inputString.split(';')
+            for (var i = 0; i < lines.length - 1; i++) {
+                let letter = lines[i].substring(6,7);
+                let split = lines[i].split(letter);
+                let number = split[1].substring(0,split[1].indexOf("'"));
+                let newNumber = number + document.getElementById(letter).value;
+                lines[i] = lines[i].substring(lines[i].indexOf("'",7));
+                lines[i] = "a.re\(\'" + letter + newNumber + lines[i];
+            }
+        }
+        function copyLink() {
+            if (document.getElementById("output").innerText != '') {
+                navigator.clipboard.writeText(document.getElementById("output").innerText);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>re Adder</h1>
+    <div>Made by awehero54</div>
+    <p>Enter the URL below</p>
+    <textarea id="inputString" rows="6" cols="80"></textarea>
+    <br>
+    <textarea id="P"></textarea>
+    <textarea id="Y"></textarea>
+    <textarea id="C"></textarea>
+    <textarea id="S"></textarea>
+    <button onclick="processString()">Get Draft Map!</button>
+    <br><br>
+    <button id="copyButton" onclick="copyLink()">Copy!</button>
+    <h2>Map:</h2>
+    <div id="output" style="white-space: pre-wrap;"></div>
+</body>
+</html>
