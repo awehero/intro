@@ -86,6 +86,11 @@
                 lines[i] = lines[i].substring(lines[i].indexOf("'",7));
                 lines[i] = "a.re\(\'" + letter + newNumber + lines[i];
             }
+            let final = [];
+            for (var i = 0; i < lines.length - 1; i++) {
+                final.push(lines[i]);
+            }
+            document.getElementById("output").innerText = final.map(line => line + ";").join("\n")
         }
         function copyLink() {
             if (document.getElementById("output").innerText != '') {
