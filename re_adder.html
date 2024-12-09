@@ -74,7 +74,7 @@
     <script>
         function processString() {
             let inputString = document.getElementById("inputString").value;
-            let inputString = inputString.replace(/\s+/g, '')
+            inputString = inputString.replace(/\s+/g, '')
             let lines = inputString.split(';')
             for (var i = 0; i < lines.length - 1; i++) {
                 let letter = lines[i].substring(6,7);
