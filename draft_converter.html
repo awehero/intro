@@ -1,1 +1,121 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draft to Mapfile Converter</title>
+    <link rel="icon" href="https://awehero.github.io/intro/awehero.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        div {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        p {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        textarea {
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            max-width: 100%;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #copyButton {
+            margin-top: 10px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+    </style>
+    <script>
+        function processString() {
+            let inputString = document.getElementById("inputString").value;
+            if (inputString.includes("DraftId=")) {
+              inputString = inputString.substring(inputString.indexOf("DraftId=") + 8);
+            }
+            
+            /*let data = {
+              compilerOutput: inputString,
+              compilerVersion: "v9",
+              tokenId: ""
+            };*/
+            const options = {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            };
+            fetch("https://icedodo-api.onionfist.com/api/get_draft_javascript.js?DraftId=" + inputString, options)
+              .then(response => response.text())
+              .then(text => {
+                document.getElementById("output").innerText = text;
+              })
+              .catch(error => {
+                console.error('Error fetching mapfile:', error);
+                document.getElementById("output").innerText = 'Error fetching map link.';
+              });
+              }
+        function copyLink() {
+            if (document.getElementById("output").innerText != '') {
+                navigator.clipboard.writeText(document.getElementById("output").innerText);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Draft to Mapfile Converter</h1>
+    <div>Made by awehero54</div>
+    <p>Enter the Draft Link or Id below</p>
+    <textarea id="inputString" rows="6" cols="80"></textarea>
+    <br>
+    <button onclick="processString()">Get Mapfile!</button>
+    <br><br>
+    <button id="copyButton" onclick="copyLink()">Copy!</button>
+    <h2>Mapfile:</h2>
+    <div id="output" style="white-space: pre-wrap;"></div>
+</body>
+</html>
