@@ -86,8 +86,8 @@
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(data)
+              }
+              //body: JSON.stringify(data)
             };
             fetch("https://icedodo-api.onionfist.com/api/get_draft_javascript.js?DraftId=" + inputString, options)
               .then(response => response.text())
