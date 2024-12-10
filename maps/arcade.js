@@ -215,16 +215,18 @@ var map = {
         }
         if (currentGame == "skeeball") {
             document.addEventListener('keydown', (event) => {
-                if (event.key === 'p') {
-                    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'r', code: 'KeyR', keyCode: 82, which: 82, bubbles: true }));
-                    alert("Nope, no pausing for you here!");
-                }
-                if (event.key === 'w' || event.key === 'ArrowUp' || event.key === ' ') {
-                    if (firstjump) {
-                        xcatch = player.position.x;
-                        firstjump = false;
-                    } else if (secondjump) {
-                        powercatch = player.position.x;
+                if (currentMapId == "testing") { //Change to arcade later
+                    if (event.key === 'p') {
+                        document.dispatchEvent(new KeyboardEvent('keydown', { key: 'r', code: 'KeyR', keyCode: 82, which: 82, bubbles: true }));
+                        alert("Nope, no pausing for you here!");
+                    }
+                    if (event.key === 'w' || event.key === 'ArrowUp' || event.key === ' ') {
+                        if (firstjump) {
+                            xcatch = player.position.x;
+                            firstjump = false;
+                        } else if (secondjump) {
+                            powercatch = player.position.x;
+                        }
                     }
                 }
             });
