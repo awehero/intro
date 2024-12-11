@@ -846,7 +846,6 @@
                                 object = createMonkey();
                                 break;
                             }
-                        scene.add(object);
                         object.name = selectedObject.name;
                         object.position.x = selectedObject.position.x;
                         object.position.y = selectedObject.position.y;
@@ -857,6 +856,7 @@
                         object.scale.x = selectedObject.scale.x;
                         object.scale.y = selectedObject.scale.y;
                         object.scale.z = selectedObject.scale.z;
+                        scene.add(object);
                     } else {
                         console.error("No object selected!");
                     }
