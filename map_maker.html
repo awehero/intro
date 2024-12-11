@@ -1053,7 +1053,7 @@
                                         }
                                        var objectNameStart = object.name ? object.name : "none";
                                         let inputString = objectNameStart;
-                                        replaceMsgWithASCII(inputString);
+                                        inputString = replaceMsgWithASCII(inputString);
                                         const replacements = [
                                             { search: ",t=", replace: ",turn=" },
                                             { search: ", t=", replace: ", turn=" },
