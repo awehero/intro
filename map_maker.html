@@ -89,22 +89,22 @@
         <button id="helpButton" onclick="openHelpMenu()">?</button>
         <div id="menu" class="">
             <label>Name:</label><br>
-            <input type="text" id="nameInput"><br><br>
+            <input type="text" id="nameInput" onchange="updateObject()"><br><br>
             <label>Position:</label><br>
-            <input type="text" id="positionX"> X<br>
-            <input type="text" id="positionY"> Y<br>
-            <input type="text" id="positionZ"> Z<br><br>
+            <input type="text" id="positionX" onchange="updateObject()"> X<br>
+            <input type="text" id="positionY" onchange="updateObject()"> Y<br>
+            <input type="text" id="positionZ" onchange="updateObject()"> Z<br><br>
             <label>Rotation:</label><br>
-            <input type="text" id="rotationX"> X<br>
-            <input type="text" id="rotationY"> Y<br>
-            <input type="text" id="rotationZ"> Z<br><br>
+            <input type="text" id="rotationX" onchange="updateObject()"> X<br>
+            <input type="text" id="rotationY" onchange="updateObject()"> Y<br>
+            <input type="text" id="rotationZ" onchange="updateObject()"> Z<br><br>
             <label>Size:</label><br>
             <div id="scaleMenu" style="display: block;">
-            <div><input type="text" id="scaleX"> X</div>
-            <div><input type="text" id="scaleY"> Y</div>
-            <div><input type="text" id="scaleZ"> Z</div></div>
-            <div id="radiusMenu" style="display: none;"><input type="text" id="radius"> R</div><br>
-            <button onclick="updateObject()" style="z-index: 1;">Update</button>
+            <div><input type="text" id="scaleX" onchange="updateObject()"> X</div>
+            <div><input type="text" id="scaleY" onchange="updateObject()"> Y</div>
+            <div><input type="text" id="scaleZ" onchange="updateObject()"> Z</div></div>
+            <div id="radiusMenu" style="display: none;"><input type="text" id="radius" onchange="updateObject()"> R</div><br>
+            <button onclick="duplicateObject()" style="z-index: 1;">Duplicate</button>
             <button id="deleteButton" style="z-index: 1;">Delete</button>
             <button id="closeMenuButton" onclick="closeMenu()" style="z-index: 1;">Close</button>
         </div>
