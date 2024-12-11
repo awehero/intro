@@ -1053,6 +1053,7 @@
                                         }
                                        var objectNameStart = object.name ? object.name : "none";
                                         let inputString = objectNameStart;
+                                        replaceMsgWithASCII(inputString);
                                         const replacements = [
                                             { search: ",t=", replace: ",turn=" },
                                             { search: ", t=", replace: ", turn=" },
@@ -1117,7 +1118,7 @@
                                         dataString += objectData;
                         }
                     });
-                    dataString = replaceMsgWithASCII(dataString);
+                    //dataString = replaceMsgWithASCII(dataString);
                     dataString = "https://icedodo.onionfist.com/creative/?CompilerVersion=v9&CompilerOutput=" + dataString;
                     const replacementsTwo = [
                         { search: "\\.0\\?", replace: "?" },
