@@ -571,17 +571,17 @@
                     }
                 } else if (view == "top") {
                     if (moveForward) {
-                        topCamera.left /= (zoomFactor * speedBooster);
-                        topCamera.right /= (zoomFactor * speedBooster);
-                        topCamera.top /= (zoomFactor * speedBooster);
-                        topCamera.bottom /= (zoomFactor * speedBooster);
+                        topCamera.left /= zoomFactor;
+                        topCamera.right /= zoomFactor;
+                        topCamera.top /= zoomFactor;
+                        topCamera.bottom /= zoomFactor;
                         topCamera.updateProjectionMatrix();
                     }
                     if (moveBackward) {
-                        topCamera.left *= (zoomFactor * speedBooster);
-                        topCamera.right *= (zoomFactor * speedBooster);
-                        topCamera.top *= (zoomFactor * speedBooster);
-                        topCamera.bottom *= (zoomFactor * speedBooster);
+                        topCamera.left *= zoomFactor;
+                        topCamera.right *= zoomFactor;
+                        topCamera.top *= zoomFactor;
+                        topCamera.bottom *= zoomFactor;
                         topCamera.updateProjectionMatrix();
                     }
                     if (moveLeft) {
