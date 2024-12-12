@@ -338,7 +338,7 @@
             var rotateDown = false;
             var cameraSpeed = 0.03;
             var panSpeed = 1;
-            var zoomFactor = 1.1;
+            var zoomFactor = 1.03;
             var speedBooster = 1.5;
             var quickChangeValue = 0.25;
             let lastUpdateTime = 0;
@@ -571,18 +571,10 @@
                     }
                 } else if (view == "top") {
                     if (moveForward) {
-                        topCamera.left /= zoomFactor;
-                        topCamera.right /= zoomFactor;
-                        topCamera.top /= zoomFactor;
-                        topCamera.bottom /= zoomFactor;
-                        topCamera.updateProjectionMatrix();
+                        topCamera.position.z -= panSpeed * speedBooster;
                     }
                     if (moveBackward) {
-                        topCamera.left *= zoomFactor;
-                        topCamera.right *= zoomFactor;
-                        topCamera.top *= zoomFactor;
-                        topCamera.bottom *= zoomFactor;
-                        topCamera.updateProjectionMatrix();
+                        topCamera.position.z += panSpeed * speedBooster;
                     }
                     if (moveLeft) {
                         topCamera.position.x -= panSpeed * speedBooster;
@@ -591,10 +583,20 @@
                         topCamera.position.x += panSpeed * speedBooster;
                     }
                     if (moveUp) {
-                        topCamera.position.z -= panSpeed * speedBooster;
+                        zoomFactor = Math.pow(Math.pow(topCamera.right, 0.01), 1.01);
+                        topCamera.left /= zoomFactor;
+                        topCamera.right /= zoomFactor;
+                        topCamera.top /= zoomFactor;
+                        topCamera.bottom /= zoomFactor;
+                        topCamera.updateProjectionMatrix();
                     }
                     if (moveDown) {
-                        topCamera.position.z += panSpeed * speedBooster;
+                        zoomFactor = Math.pow(Math.pow(topCamera.right, 0.01), 1.01);
+                        topCamera.left *= zoomFactor;
+                        topCamera.right *= zoomFactor;
+                        topCamera.top *= zoomFactor;
+                        topCamera.bottom *= zoomFactor;
+                        topCamera.updateProjectionMatrix();
                     }
                 } else if (view == "side") {
                     if (moveForward) {
