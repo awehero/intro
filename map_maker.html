@@ -81,7 +81,7 @@
         </style>
     </head>
     <body oncopy="copyObject()">
-        <button id="viewChanger" onclick="updateView()">Toggle View</button>
+        <button id="viewChanger" onclick="switchCamera()">Toggle View</button>
         <button id="getMapLinkButton">Get Map Link</button>
         <button id="loadMapButton" onclick="loadMap()">Load Map</button>
         <button id="objectSelect" onclick="addObject()">Add Object</button>
@@ -132,8 +132,10 @@
         <script>
             var scene = new THREE.Scene();
             var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            var topCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.z = 5;
             camera.position.y = 2;
+            let currentCamera = camera;
 
             var renderer = new THREE.WebGLRenderer();
             renderer.setSize(window.innerWidth, window.innerHeight);
@@ -183,6 +185,13 @@
             function onMouseMove(event) {
                 mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
                 mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            }
+            function switchCamera() {
+                if (currentCamera === camera) {
+                    currentCamera = topCamera;
+                } else {
+                    currentCamera = camera;
+                }
             }
 
             function onClick(event) {
@@ -664,7 +673,7 @@
 
             function animate() {
                 requestAnimationFrame(animate);
-                renderer.render(scene, camera);
+                renderer.render(scene, currentCamera);
             }
             animate();
 
