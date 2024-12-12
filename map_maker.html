@@ -217,7 +217,7 @@
                     eventInsideMenu = true;
                 }
                 if (!eventInsideButton && !eventInsideMenu) {
-                    raycaster.setFromCamera(mouse, camera);
+                    raycaster.setFromCamera(mouse, currentCamera);
                     var intersects = raycaster.intersectObjects(scene.children);
                     if(intersects.length > 0) {
                         if (selectedObject !== null) {
