@@ -192,8 +192,10 @@
             function switchCamera() {
                 if (currentCamera === camera) {
                     currentCamera = topCamera;
+                    view = "top";
                 } else {
                     currentCamera = camera;
+                    view = "free";
                 }
             }
 
