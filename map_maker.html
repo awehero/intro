@@ -583,20 +583,24 @@
                         topCamera.position.x += 0.1 panSpeed = 0.01 * ((zoomFactor - 1) * 100) * ((speedBooster / 2) + 0.25);
                     }
                     if (moveUp) {
-                        zoomFactor = Math.pow(Math.pow(topCamera.right, 0.01), 1.01);
-                        topCamera.left /= zoomFactor;
-                        topCamera.right /= zoomFactor;
-                        topCamera.top /= zoomFactor;
-                        topCamera.bottom /= zoomFactor;
-                        topCamera.updateProjectionMatrix();
+                        if (topCamera.right >= 5) {
+                            zoomFactor = Math.pow(Math.pow(topCamera.right, 0.01), 1.01);
+                            topCamera.left /= zoomFactor;
+                            topCamera.right /= zoomFactor;
+                            topCamera.top /= zoomFactor;
+                            topCamera.bottom /= zoomFactor;
+                            topCamera.updateProjectionMatrix();
+                        }
                     }
                     if (moveDown) {
-                        zoomFactor = Math.pow(Math.pow(topCamera.right, 0.01), 1.01);
-                        topCamera.left *= zoomFactor;
-                        topCamera.right *= zoomFactor;
-                        topCamera.top *= zoomFactor;
-                        topCamera.bottom *= zoomFactor;
-                        topCamera.updateProjectionMatrix();
+                        if (topCamera.right <= 2500) {
+                            zoomFactor = Math.pow(Math.pow(topCamera.right, 0.01), 1.01);
+                            topCamera.left *= zoomFactor;
+                            topCamera.right *= zoomFactor;
+                            topCamera.top *= zoomFactor;
+                            topCamera.bottom *= zoomFactor;
+                            topCamera.updateProjectionMatrix();
+                        }
                     }
                 } else if (view == "side") {
                     if (moveForward) {
