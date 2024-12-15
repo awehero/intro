@@ -571,16 +571,16 @@
                     }
                 } else if (view == "top") {
                     if (moveForward) {
-                        topCamera.position.z -= panSpeed * speedBooster;
+                        topCamera.position.z -= 0.1 * panSpeed * speedBooster;
                     }
                     if (moveBackward) {
-                        topCamera.position.z += panSpeed * speedBooster;
+                        topCamera.position.z += 0.1 * panSpeed * speedBooster;
                     }
                     if (moveLeft) {
-                        topCamera.position.x -= panSpeed * speedBooster;
+                        topCamera.position.x -= 0.1 * panSpeed * speedBooster;
                     }
                     if (moveRight) {
-                        topCamera.position.x += panSpeed * speedBooster;
+                        topCamera.position.x += 0.1 * panSpeed * speedBooster;
                     }
                     if (moveUp) {
                         zoomFactor = Math.pow(Math.pow(topCamera.right, 0.01), 1.01);
