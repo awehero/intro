@@ -571,16 +571,16 @@
                     }
                 } else if (view == "top") {
                     if (moveForward) {
-                        topCamera.position.z -= 0.03 * ((zoomFactor - 1) * 100) * ((speedBooster / 2) + 0.25);
+                        topCamera.position.z -= 0.1 * ((zoomFactor - 1) * 100) * ((speedBooster / 2) + 0.25);
                     }
                     if (moveBackward) {
-                        topCamera.position.z += 0.03 * ((zoomFactor - 1) * 100) * ((speedBooster / 2) + 0.25);
+                        topCamera.position.z += 0.1 * ((zoomFactor - 1) * 100) * ((speedBooster / 2) + 0.25);
                     }
                     if (moveLeft) {
-                        topCamera.position.x -= 0.03 * ((zoomFactor - 1) * 100) * ((speedBooster / 2) + 0.25);
+                        topCamera.position.x -= 0.1 * ((zoomFactor - 1) * 100) * ((speedBooster / 2) + 0.25);
                     }
                     if (moveRight) {
-                        topCamera.position.x += 0.03 * ((zoomFactor - 1) * 100) * ((speedBooster / 2) + 0.25);
+                        topCamera.position.x += 0.1 * ((zoomFactor - 1) * 100) * ((speedBooster / 2) + 0.25);
                     }
                     if (moveUp) {
                         if (topCamera.right >= 5) {
