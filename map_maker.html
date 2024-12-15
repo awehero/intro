@@ -571,16 +571,16 @@
                     }
                 } else if (view == "top") {
                     if (moveForward) {
-                        topCamera.position.z -= 0.1 * panSpeed * speedBooster;
+                        topCamera.position.z -= panSpeed = 0.01 * ((zoomFactor - 1) * 100) * ((speedBooster / 2) + 0.25);
                     }
                     if (moveBackward) {
-                        topCamera.position.z += 0.1 * panSpeed * speedBooster;
+                        topCamera.position.z += panSpeed = 0.01 * ((zoomFactor - 1) * 100) * ((speedBooster / 2) + 0.25);
                     }
                     if (moveLeft) {
-                        topCamera.position.x -= 0.1 * panSpeed * speedBooster;
+                        topCamera.position.x -= 0.1 panSpeed = 0.01 * ((zoomFactor - 1) * 100) * ((speedBooster / 2) + 0.25);
                     }
                     if (moveRight) {
-                        topCamera.position.x += 0.1 * panSpeed * speedBooster;
+                        topCamera.position.x += 0.1 panSpeed = 0.01 * ((zoomFactor - 1) * 100) * ((speedBooster / 2) + 0.25);
                     }
                     if (moveUp) {
                         zoomFactor = Math.pow(Math.pow(topCamera.right, 0.01), 1.01);
