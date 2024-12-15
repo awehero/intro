@@ -584,7 +584,7 @@
                     }
                     if (moveUp) {
                         if (topCamera.right >= 5) {
-                            zoomFactor = Math.pow(Math.pow(topCamera.right, 0.01), 1.01);
+                            zoomFactor = ((Math.pow(Math.pow(topCamera.right, 0.01), 1.01) - 1) / 2) + 1;
                             topCamera.left /= zoomFactor;
                             topCamera.right /= zoomFactor;
                             topCamera.top /= zoomFactor;
@@ -594,7 +594,7 @@
                     }
                     if (moveDown) {
                         if (topCamera.right <= 2500) {
-                            zoomFactor = Math.pow(Math.pow(topCamera.right, 0.01), 1.01);
+                            zoomFactor = 1.005;
                             topCamera.left *= zoomFactor;
                             topCamera.right *= zoomFactor;
                             topCamera.top *= zoomFactor;
