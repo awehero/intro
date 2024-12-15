@@ -896,7 +896,6 @@
                                 for (let i = 0; i < deleteNumber; i++) {
                                     scene.remove(scene.children[0]);
                                 }
-                                input = replaceASCIIWithMsg(input);
                                 let dollarIndex = input.indexOf('$');
                                 if (dollarIndex !== -1) {
                                     let endIndex = dollarIndex - 1;
@@ -911,7 +910,10 @@
                                 if (index !== -1) {
                                     input = input.substring(0, index);
                                 }
-                                const objectDataArray = input.split(/(?=[A-Z])/);
+                                let objectDataArray = input.split(/(?=[A-Z])/);
+                                for (var i = 0; i < objectDataArray.length; i++) {
+                                    objectDataArray[i] = replaceASCIIWithMsg(objectDataArray[i]);
+                                }
                                 objectDataArray.forEach(objData => {
                                     const type = objData.charAt(0);
                                     const rest = objData.slice(1);
