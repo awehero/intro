@@ -307,7 +307,7 @@
                                 }
                             }
                         }
-                        selectedObject = intersects[selection].object;
+                        selectedObject = intersects[selection];
                         selectedObject.material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1_selected.png') });
                         transformControls.attach(selectedObject);
                         updateMenu();
@@ -349,8 +349,9 @@
                 setTimeout(function() {
                     if (selectedObject !== null) {
                         selectedObject.material = new THREE.MeshBasicMaterial({ map: texture });
-                        color();
+                        transformControls.detach();
                     }
+                    color();
                     menu.classList.add("hidden");
                 }, 10);
             }
