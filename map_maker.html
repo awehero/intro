@@ -285,18 +285,19 @@
                     raycaster.setFromCamera(mouse, currentCamera);
                     var intersects = raycaster.intersectObjects(scene.children);
                     if (intersects.length > 0) {
-                        let selection = 0;
+                        //let selection = 0;
+                        color();
                         if (selectedObject !== null) {
                             selectedObject.material = new THREE.MeshBasicMaterial({ map: texture });
                         }
-                        if (intersects.length >= 2) {
+                        /*if (intersects.length >= 2) {
                             for (var i = 0; i < intersects.length; i++) {
                                 if (selectedObject == intersects[i].object && i <= intersects.length) {
                                     selection = i + 1;
                                 }
                             }
-                        }
-                        selectedObject = intersects[selection];
+                        }*/
+                        selectedObject = intersects[0];
                         selectedObject.material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1_selected.png') });
                         transformControls.attach(selectedObject);
                         updateMenu();
