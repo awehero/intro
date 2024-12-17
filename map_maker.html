@@ -120,7 +120,7 @@
             <button id="objectSelect" onclick="addObject()">Add Object</button>
             <button id="viewChanger" onclick="switchCamera()">Toggle View</button>
             <div id="snapBox">
-                <button type="button" onclick="handleButtonClick()">Snap</button>
+                <button type="button" onclick="changeSnapValue()">Snap</button>
                 <input type="checkbox" id="snapCheckbox" class="styled-checkbox" onchange="handleChange(this)">
             </div>
             <button id="loadMapButton" onclick="loadMap()">Load Map</button>
@@ -218,6 +218,24 @@
                 //orbitControls.enabled = true;
                 updateMenu();
             });
+            document.getElementById("snapCheckbox").checked = true;
+            let snapped = true;
+            function handleChange(checkbox) {
+                if (checkbox.checked) {
+                    snapped = true;
+                } else {
+                    snapped = false;
+                }
+            }
+            let snapValue = 0.25;
+            function changeSnapValue() {
+                let newValue = prompt("What value do you want it to snap by?");
+                if (newValue > 0) {
+                    snapValue = newValue;
+                } else {
+                    alert("Invalid number!");
+                }
+            }
 
             var isTyping = false;
             document.getElementById("settingsMenu").style.display = "none";
