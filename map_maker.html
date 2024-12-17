@@ -6,10 +6,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/js/controls/OrbitControls.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/js/loaders/TextureLoader.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
-         <script src="https://jscolor.com/release/2.4/jscolor.js"></script>
-         <script src="https://threejs.org/examples/js/postprocessing/EffectComposer.js"></script>
-         <script src="https://threejs.org/examples/js/postprocessing/RenderPass.js"></script>
-         <script src="https://threejs.org/examples/js/postprocessing/UnrealBloomPass.js"></script>
+        <script src="https://jscolor.com/release/2.4/jscolor.js"></script>
+        <script src="https://threejs.org/examples/js/postprocessing/EffectComposer.js"></script>
+        <script src="https://threejs.org/examples/js/postprocessing/RenderPass.js"></script>
+        <script src="https://threejs.org/examples/js/postprocessing/UnrealBloomPass.js"></script>
+        <script src="https://threejs.org/examples/js/controls/TransformControls.js"></script>
         <style>
             #menu {
                 position: absolute;
@@ -130,7 +131,6 @@
             */
          </script>
         <script>
-            import { TransformControls } from 'three/examples/jsm/controls/TransformControls.js';
             var scene = new THREE.Scene();
             let aspect = window.innerWidth / window.innerHeight;
             var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
