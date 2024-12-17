@@ -159,10 +159,11 @@
             const transformControls = new THREE.TransformControls(currentCamera, renderer.domElement);
             scene.add(transformControls);
             transformControls.addEventListener('mouseDown', () => {
-                orbitControls.enabled = false;
+                //orbitControls.enabled = false;
             });
             transformControls.addEventListener('mouseUp', () => {
-                orbitControls.enabled = true;
+                //orbitControls.enabled = true;
+                updateMenu();
             });
 
             var isTyping = false;
