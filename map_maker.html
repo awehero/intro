@@ -66,6 +66,13 @@
                 font-size: large;
                 z-index: 1;
             }
+            #snapCheckbox {
+                position: absolute;
+                top: 95%;
+                left: 2%;
+                font-size: large;
+                z-index: 1;
+            }
             .hidden {
               display: none;
             }
@@ -86,6 +93,7 @@
         <button id="objectSelect" onclick="addObject()">Add Object</button>
         <button id="settingsButton" onclick="openSettings()">Settings</button>
         <button id="helpButton" onclick="openHelpMenu()">?</button>
+        <input type="checkbox" id="snapCheckbox" onchange="handleChange(this)">
         <div id="menu" class="">
             <label>Name:</label><br>
             <input type="text" id="nameInput" onchange="updateObject()"><br><br>
@@ -142,6 +150,9 @@
             var renderer = new THREE.WebGLRenderer();
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
+            let mainCanvas = document.getElementsByTagName("canvas")[0];
+            mainCanvas.style.width = '100%';
+            mainCanvas.style.height = '100%';
 
             var raycaster = new THREE.Raycaster();
             var mouse = new THREE.Vector2();
