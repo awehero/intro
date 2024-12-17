@@ -151,8 +151,14 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
             let mainCanvas = document.getElementsByTagName("canvas")[0];
-            mainCanvas.style.width = '100%';
-            mainCanvas.style.height = '100%';
+            function resizeCanvas() {
+                mainCanvas.style.width = '100%';
+                mainCanvas.style.height = '100%';
+            }
+            resizeCanvas();
+            window.addEventListener('resize', function() {
+              resizeCanvas();
+            });
 
             var raycaster = new THREE.Raycaster();
             var mouse = new THREE.Vector2();
