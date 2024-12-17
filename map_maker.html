@@ -156,6 +156,15 @@
             setTimeout(function() {alert("New? Click the ? in the bottom left to find out how to use the map maker!");}, 100);
             var material = new THREE.MeshBasicMaterial({ map: texture });
 
+            const transformControls = new THREE.TransformControls(currentCamera, renderer.domElement);
+            scene.add(transformControls);
+            transformControls.addEventListener('mouseDown', () => {
+                orbitControls.enabled = false;
+            });
+            transformControls.addEventListener('mouseUp', () => {
+                orbitControls.enabled = true;
+            });
+
             var isTyping = false;
             document.getElementById("settingsMenu").style.display = "none";
             var menu = document.getElementById('menu');
@@ -218,12 +227,21 @@
                 if (!eventInsideButton && !eventInsideMenu) {
                     raycaster.setFromCamera(mouse, currentCamera);
                     var intersects = raycaster.intersectObjects(scene.children);
-                    if(intersects.length > 0) {
+                    if (intersects.length > 0) {
+                        let selection = 0;
                         if (selectedObject !== null) {
                             selectedObject.material = new THREE.MeshBasicMaterial({ map: texture });
                         }
-                        selectedObject = intersects[0].object;
+                        if (intersects.length >= 2) {
+                            for (var i = 0; i < intersects.length; i++) {
+                                if (selectedObject == intersects[i] && i + 1 <= intersects.length) {
+                                    selection = i + 1;
+                                }
+                            }
+                        }
+                        selectedObject = intersects[selection].object;
                         selectedObject.material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1_selected.png') });
+                        transformControls.attach(selectedObject);
                         updateMenu();
                     }
                 }
