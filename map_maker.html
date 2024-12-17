@@ -216,15 +216,16 @@
             });
             transformControls.addEventListener('mouseUp', () => {
                 //orbitControls.enabled = true;
+                snapObject();
                 updateMenu();
             });
             document.getElementById("snapCheckbox").checked = true;
-            let snapped = true;
+            let snappedOn = true;
             function handleChange(checkbox) {
                 if (checkbox.checked) {
-                    snapped = true;
+                    snappedOn = true;
                 } else {
-                    snapped = false;
+                    snappedOn = false;
                 }
             }
             let snapValue = 0.25;
@@ -234,6 +235,17 @@
                     snapValue = newValue;
                 } else {
                     alert("Invalid number!");
+                }
+            }
+            function snapObject() {
+                if (snappedOn == true) {
+                    selectedObject.position.x = Math.round(selectedObject.position.x * (1 / snapValue)) / (1 / snapValue);
+                    selectedObject.position.y = Math.round(selectedObject.position.y * (1 / snapValue)) / (1 / snapValue);
+                    selectedObject.position.z = Math.round(selectedObject.position.z * (1 / snapValue)) / (1 / snapValue);
+                } else {
+                    selectedObject.position.x = Math.round(selectedObject.position.x * 1000) / 1000;
+                    selectedObject.position.y = Math.round(selectedObject.position.y * 1000) / 1000;
+                    selectedObject.position.z = Math.round(selectedObject.position.z * 1000) / 1000;
                 }
             }
 
