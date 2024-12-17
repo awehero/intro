@@ -234,7 +234,7 @@
                         }
                         if (intersects.length >= 2) {
                             for (var i = 0; i < intersects.length; i++) {
-                                if (selectedObject == intersects[i] && i + 1 <= intersects.length) {
+                                if (selectedObject == intersects[i].object && i <= intersects.length) {
                                     selection = i + 1;
                                 }
                             }
