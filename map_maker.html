@@ -21,8 +21,8 @@
             }
             #settingsMenu {
                 position: absolute;
-                top: 50%;
-                left: 20%;
+                top: 25%;
+                left: 35%;
                 background-color: white;
                 padding: 10px;
                 border: 2px solid #ccc;
@@ -157,11 +157,18 @@
             </div>
             Default Camera Speed: <input type="number" id="defaultCameraSpeed" style="width: 40px;"><br><br>
             Fast Camera Speed: <input type="number" id="fastCameraSpeed" style="width: 40px"><br><br>
-            <button id="updateSettingsButton" onclick="updateSettings()">Apply Changes</button><br><br>
-            <button id="savePreferencesButton" onclick="savePreferences()">Save Preferences</button><br>
-            <button id="resetPreferencesButton" onclick="resetPreferences()">Reset Preferences</button>
+            <button id="updateSettingsButton" onclick="updateSettings()">Save Preferences</button><br>
+            <button id="resetSettingsButton" onclick="resetSettings()">Reset Preferences</button><br><br>
+            <button id="savePreferencesButton" onclick="savePreferences()">Save Preferences to Storage</button><br>
+            <button id="resetPreferencesButton" onclick="resetPreferences()">Reset Storage Preferences</button>
+            <button id="closeSettingsButton" onclick="closeSettings()">Close</button>
         </div>
          <script>
+             function updateSettings() {
+                cameraSpeed = 
+                fastCameraSpeed = localStorage.getItem("fastCameraSpeed");
+                snapValue = localStorage.getItem("snapValue");
+             }
              /*
              const customColorPicker = document.getElementById('customColorPicker');
              customColorPicker.addEventListener('change', (event) => {
@@ -443,6 +450,7 @@
             var panSpeed = 1;
             var zoomFactor = 1.03;
             var speedBooster = 1.5;
+            var fastCameraSpeed = 4;
             var quickChangeValue = 0.25;
             let lastUpdateTime = 0;
             const updateInterval = 100;
@@ -463,6 +471,15 @@
                 y: 0,
                 z: 0
             };
+            if (localStorage.getItem("snapValue") == null) {
+                localStorage.setItem("defaultCameraSpeed", 0.03);
+                localStorage.setItem("fastCameraSpeed", 4);
+                localStorage.setItem("snapValue", 0.25);
+            } else {
+                cameraSpeed = localStorage.getItem("defaultCameraSpeed");
+                fastCameraSpeed = localStorage.getItem("fastCameraSpeed");
+                snapValue = localStorage.getItem("snapValue");
+            }
             document.addEventListener('keydown', onKeyDown);
             document.addEventListener('keyup', onKeyUp);
             function onKeyDown(event) {
@@ -519,7 +536,7 @@
                         rotateDown = true;
                         break;
                     case 'Shift':
-                        speedBooster = 4;
+                        speedBooster = fastCameraSpeed;
                         break;
                     case 't':
                         tPressed = true;
@@ -805,7 +822,11 @@
             }
 
             function openSettings() {
-                 alert("No settings exist yet!");
+                 document.getElementById("settingsMenu").style.display = "block";
+            }
+
+            function closeSettings() {
+                document.getElementById("settingsMenu").style.display = "none";
             }
 
             function addObject() {
