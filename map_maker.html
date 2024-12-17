@@ -154,6 +154,8 @@
             function resizeCanvas() {
                 mainCanvas.style.width = '100%';
                 mainCanvas.style.height = '100%';
+                currentCamera.aspect = window.innerWidth / window.outerHeight;
+                currentCamera.updateProjectionMatrix();
             }
             resizeCanvas();
             window.addEventListener('resize', function() {
