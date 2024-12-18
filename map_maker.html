@@ -217,7 +217,7 @@
             setTimeout(function() {alert("New? Click the ? in the bottom left to find out how to use the map maker!");}, 100);
             var material = new THREE.MeshBasicMaterial({ map: texture });
 
-            const transformControls = new THREE.TransformControls(currentCamera, renderer.domElement);
+            let transformControls = new THREE.TransformControls(currentCamera, renderer.domElement);
             scene.add(transformControls);
             transformControls.addEventListener('mouseDown', () => {
                 //orbitControls.enabled = false;
@@ -297,6 +297,7 @@
                     currentCamera = camera;
                     view = "free";
                 }
+                transformControls = new THREE.TransformControls(currentCamera, renderer.domElement);
             }
 
             function onClick(event) {
