@@ -1019,8 +1019,10 @@
                             var warning = prompt("Are you sure you want to load a map? This will delete everything currently on screen! (y/n)");
                             if (warning && (warning.toLowerCase() === 'y')) {
                                 var deleteNumber = scene.children.length;
-                                for (let i = 0; i < deleteNumber; i++) {
-                                    scene.remove(scene.children[0]);
+                                for (let i = deleteNumber; i >= 0; i--) {
+                                    if (scene.children[i].type == 'Mesh') {
+                                        scene.remove(scene.children[0]);
+                                    }
                                 }
                                 let dollarIndex = input.indexOf('$');
                                 if (dollarIndex !== -1) {
