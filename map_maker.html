@@ -240,12 +240,12 @@
             function arrowChange(checkbox) {
                 if (checkbox.checked) {
                     arrowOn = true;
-                    transformControls.enabled = false;
-                    transformControls.visible = false;
-                } else {
-                    arrowOn = false;
                     transformControls.enabled = true;
                     transformControls.visible = true;
+                } else {
+                    arrowOn = false;
+                    transformControls.enabled = false;
+                    transformControls.visible = false;
                 }
             }
             let snappedOn = true;
