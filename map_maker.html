@@ -1184,6 +1184,7 @@
                     });
                 }
                function getMapLinkTest() {
+                    scene.remove(transformControls);
                     var dataString = "";
                     scene.children.forEach(function(object) {
                         if (!!object.scale.x || object.geometry.type == "PlaneGeometry") {
