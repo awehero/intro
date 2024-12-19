@@ -70,6 +70,13 @@
                 font-size: large;
                 z-index: 1;
             }
+            #arrowCheckbox {
+                position: absolute;
+                left: 20%;
+                top: 20px;
+                font-size: large;
+                z-index: 1;
+            }
             .hidden {
               display: none;
             }
@@ -119,9 +126,10 @@
         <div id="topRow">
             <button id="objectSelect" onclick="addObject()">Add Object</button>
             <button id="viewChanger" onclick="switchCamera()">Toggle View</button>
+            <input type="checkbox" id="arrowCheckbox" class="styled-checkbox" onchange="arrowChange(this)">
             <div id="snapBox">
                 <button type="button" id="snapValue" onclick="changeSnapValue()">Snap</button>
-                <input type="checkbox" id="snapCheckbox" class="styled-checkbox" onchange="handleChange(this)">
+                <input type="checkbox" id="snapCheckbox" class="styled-checkbox" onchange="snapChange(this)">
             </div>
             <button id="loadMapButton" onclick="loadMap()">Load Map</button>
             <button id="getMapLinkButton">Get Map Link</button>
@@ -228,8 +236,20 @@
                 updateMenu();
             });
             document.getElementById("snapCheckbox").checked = true;
+            let arrowOn = true;
+            function arrowChange(checkbox) {
+                if (checkbox.checked) {
+                    arrowOn = true;
+                    transformControls.enabled = false;
+                    transformControls.visible = false;
+                } else {
+                    arrowOn = false;
+                    transformControls.enabled = true;
+                    transformControls.visible = true;
+                }
+            }
             let snappedOn = true;
-            function handleChange(checkbox) {
+            function snapChange(checkbox) {
                 if (checkbox.checked) {
                     snappedOn = true;
                 } else {
@@ -335,7 +355,9 @@
                         }*/
                         selectedObject = intersects[0].object;
                         selectedObject.material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('https://awehero.github.io/intro/pm1_selected.png') });
-                        transformControls.attach(selectedObject);
+                        if (arrowOn == true) {
+                            transformControls.attach(selectedObject);
+                        }
                         updateMenu();
                     }
                 }
