@@ -232,7 +232,7 @@
             });
             transformControls.addEventListener('mouseUp', () => {
                 //orbitControls.enabled = true;
-                if (!scene.children.includes(group)) {
+                if (!grouped) {
                     snapObject();
                 }
                 updateMenu();
