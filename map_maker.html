@@ -269,14 +269,19 @@
                 }
             }
             function snapObject() {
-                if (snappedOn == true) {
-                    selectedObject.position.x = Math.round(selectedObject.position.x * (1 / snapValue)) / (1 / snapValue);
-                    selectedObject.position.y = Math.round(selectedObject.position.y * (1 / snapValue)) / (1 / snapValue);
-                    selectedObject.position.z = Math.round(selectedObject.position.z * (1 / snapValue)) / (1 / snapValue);
+                if (grouped) {
+                    snapObject = group;
                 } else {
-                    selectedObject.position.x = Math.round(selectedObject.position.x * 1000) / 1000;
-                    selectedObject.position.y = Math.round(selectedObject.position.y * 1000) / 1000;
-                    selectedObject.position.z = Math.round(selectedObject.position.z * 1000) / 1000;
+                    snapObject = selectedObject;
+                }
+                if (snappedOn == true) {
+                    snapObject.position.x = Math.round(snapObject.position.x * (1 / snapValue)) / (1 / snapValue);
+                    snapObject.position.y = Math.round(snapObject.position.y * (1 / snapValue)) / (1 / snapValue);
+                    snapObject.position.z = Math.round(snapObject.position.z * (1 / snapValue)) / (1 / snapValue);
+                } else {
+                    snapObject.position.x = Math.round(snapObject.position.x * 1000) / 1000;
+                    snapObject.position.y = Math.round(snapObject.position.y * 1000) / 1000;
+                    snapObject.position.z = Math.round(snapObject.position.z * 1000) / 1000;
                 }
             }
 
@@ -298,7 +303,7 @@
             let group = new THREE.Group();
             let grouped = false;
             function removeGroup() {
-                if (scene.children.includes(group)) {
+                if (grouped) {
                     transformControls.detach();
                     for (var i = group.children.length - 1; i >= 0; i--) {
                         group.children[i].material = new THREE.MeshBasicMaterial({ map: texture });
