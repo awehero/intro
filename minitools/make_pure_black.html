@@ -76,6 +76,7 @@
             let inputString = document.getElementById("inputString").value;
             inputString = inputString.replace(/m=00000a/g, "m=a");
             document.getElementById("output").innerText = inputString;
+            document.getElementById("inputString").value = '';
         }
         function copyLink() {
             if (document.getElementById("output").innerText != '') {
