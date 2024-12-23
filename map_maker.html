@@ -1002,12 +1002,13 @@
                 return new THREE.Mesh(geometry, material);
             }
                 function updateObject() {
+                    let geometryType = '';
                     if (grouped) {
                         changeObject = group;
-                        let geometryType = 'group';
+                        geometryType = 'group';
                     } else if (selectedObject) {
                         changeObject = selectedObject;
-                        let geometryType = selectedObject.geometry.type;
+                        geometryType = selectedObject.geometry.type;
                     } else {
                         console.error('Selected object not found');
                         return;
