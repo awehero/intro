@@ -86,7 +86,7 @@ function convert() {
             let rowTwo = rowTwoHelper.substring(rowTwoHelper.indexOf('"')+2);
             const rowTwoValues = rowTwo.split(',');
     
-            // CHANGE THE NUMBER OF VALUES DEPENDING ON IF YOU ARE USING A DIFFERENT DIFFERENT VERSION
+            // CHANGE THE NUMBER OF VALUES DEPENDING ON IF YOU ARE USING A DIFFERENT VERSION
             listRow.push(rowTwoValues[0]);
             listRow.push(rowTwoValues[1]);
             listRow.push(rowTwoValues[2]);
@@ -501,6 +501,62 @@ function convert() {
             }
         }
     }
+    for (var i = 0; i < sectionFive.length; i++) {
+        for (var j = 0; j < sectionFive[i].length; j++) {
+            let tempArray = [];
+            if (sectionFive[i][j] * 0 == 0) {
+                sectionFive[i][j] = (Math.round(sectionFive[i][j] * 1000)) / 1000;
+            } else if (sectionFive[i][j].substring(0,5) == 'a.mov' || sectionFive[i][j].substring(0,5) == 'a.rot') {
+                tempArray = sectionFive[i][j].substring(6,sectionFive[i][j] - 1).split(",");
+                let action = "id=" + (i + 1) + "?" + sectionFive[i][j].substring(2,3) + tempArray[1] + "=" + tempArray[2];
+                let type = tempArray[0].substring(0,1);
+                let number = tempArray[0].substring(1);
+                switch (type) {
+                    case 'P':
+                        if (cubes[number][9] == "_") {
+                            cubes[number][9] = action;
+                        } else {
+                            cubes[number][9] = cubes[number][9] + "?" + action;
+                        }
+                        //Add plane id here
+                        break;
+                    case 'C':
+                        if (cones[number][9] == "_") {
+                            cones[number][9] = action;
+                        } else {
+                            cones[number][9] = cones[number][9] + "?" + action;
+                        }
+                        //Add plane id here
+                        break;
+                    case 'E':
+                        if (endings[number][9] == "_") {
+                            endings[number][9] = action;
+                        } else {
+                            endings[number][9] = endings[number][9] + "?" + action;
+                        }
+                        //Add plane id here
+                        break;
+                    case 'Y':
+                        if (cylinders[number][9] == "_") {
+                            cylinders[number][9] = action;
+                        } else {
+                            cylinders[number][9] = cylinders[number][9] + "?" + action;
+                        }
+                        //Add plane id here
+                        break;
+                    case 'S':
+                        if (spheres[number][9] == "_") {
+                            spheres[number][9] = action;
+                        } else {
+                            spheres[number][9] = spheres[number][9] + "?" + action;
+                        }
+                        //Add plane id here
+                        break;
+                }
+            }
+        }
+    }
+    
 }
 </script>
 </body>
