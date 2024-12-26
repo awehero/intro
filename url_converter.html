@@ -458,18 +458,27 @@ function convert() {
     
     let section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset: function"));
     let sectionTwo = section.replace(/\s+/g, "")
-    .replace(/"/, "")
-    .replace(/'/, "")
-    .replace(/section_update:function\(\){/g, "")
-    .replace(/letPZ=player\.position\.z;switch\(this\.section_id\){/g, "")
-    .replace(/if\(PZ</g, "")
-    .replace(/this\.section_id\+=1}break;/g, "")
-    .replace(/case/g, "");
+                    .replace(/\"/, "")
+                    .replace(/\'/, "")
+                    .replace(/section_update:function\(\){/g, "")
+                    .replace(/letPZ=player\.position\.z;switch\(this\.section_id\){/g, "")
+                    .replace(/if\(PZ</g, "")
+                    .replace(/this\.section_id\+=1}break;/g, "")
+                    .replace(/case/g, "");
     let sectionThree = sectionTwo.split(":");
+    let sectionFour = [];
     for (var i = 1; i < sectionThree.length; i++) {
-        //let sectionFour[i-1] = sectionThree[i].substring(0,sectionThree[i].length - (i.toString().length));
+            sectionFour.push(sectionThree[i].substring(0,sectionThree[i].length - (i.toString().length)));
     }
-        
+    for (var i = 0; i < sectionFour.length; i++) {
+        sectionFour[i] = sectionFour[i].replace(/}/g, "");
+        if (sectionFour[i].substring(sectionFour[i].length - 1) == ';') {
+            sectionFour[i] = sectionFour[i].substring(0,sectionFour[i].length - 1);
+        } else if (sectionFour[i].substring(sectionFour[i].length - 2) == '\)\{') {
+            sectionFour[i] = sectionFour[i].substring(0,sectionFour[i].length - 2);
+        }
+    }
+    
 }
 </script>
 </body>
