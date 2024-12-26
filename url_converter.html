@@ -457,6 +457,14 @@ function convert() {
     monkeys.push(monkeyTemp);
     
     let section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset: function"));
+    function replaceMsgWithASCII(input) {
+        return input.replace(/a\.msg_set\("([^"]*)"\);/g, (match, p1) => {
+            const asciiValues = Array.from(p1).map(char => char.charCodeAt(0));
+            const asciiString = asciiValues.join(':');
+            return `msg=${asciiString};`;
+        });
+    }
+    section = replaceMsgWithASCII(section);
     let sectionTwo = section.replace(/\s+/g, "")
                     .replace(/\"/g, "")
                     .replace(/\'/g, "")
@@ -636,6 +644,9 @@ function convert() {
             } else if (sectionFive[i][j].substring(0,9) == 'light.gro') {
                 let value = "gro=" + sectionFive[i][j].split("=")[1];
                 value = value.substring(0,value.length-1);
+                //Add value to plane
+            } else if (sectionFive[i][j].substring(0,3) == 'msg') {
+                let value = sectionFive[i][j];
                 //Add value to plane
             }
         }
