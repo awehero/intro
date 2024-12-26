@@ -576,6 +576,24 @@ function convert() {
             } else if (sectionFive[i][j].substring(0,6) == 'isSpin') {
                 let value = "sl=" + sectionFive[i][j].split("=")[1];
                 //Add value to plane
+            } else if (sectionFive[i][j].substring(0,5) == 'rotat') {
+                let value = "sr=" + sectionFive[i][j].split("=")[1];
+                //Add value to plane
+            } else if (sectionFive[i][j].substring(0,4) == 'a.jh') {
+                let value = "jh=" + sectionFive[i][j].substring(5,sectionFive[i][j]-1);
+                //Add value to plane
+            } else if (sectionFive[i][j].substring(0,4) == 'a.js') {
+                let value = "js=" + sectionFive[i][j].substring(5,sectionFive[i][j]-1);
+                //Add value to plane
+            } else if (sectionFive[i][j].substring(0,8) == 'a.cam_cd') {
+                let value = "cd=" + sectionFive[i][j].substring(9,sectionFive[i][j]-1);
+                //Add value to plane
+            } else if (sectionFive[i][j].substring(0,5) == 'speed') {
+                let value = sectionFive[i][j];
+                //Add value to plane
+            } else if (sectionFive[i][j].substring(0,5) == 'steer') {
+                let value = "turn=" + sectionFive[i][j].split("=")[1];
+                //Add value to plane
             }
         }
     }
