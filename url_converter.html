@@ -553,7 +553,7 @@ function convert() {
                         //Add plane id here
                         break;
                 }
-            } else if (sectionFive[i][j].substring(0,3) == 'a.g' || sectionFive[i][j].substring(0,3) == 'a.mov') {
+            } else if (sectionFive[i][j].substring(0,3) == 'a.g' || sectionFive[i][j].substring(0,3) == 'a.t' || sectionFive[i][j].substring(0,3) == 'a.d') {
                 tempArray = sectionFive[i][j].substring(4,sectionFive[i][j].length - 1).split(",");
                 let direction = [];
                 let dirOptions = ["x=","y=","z="];
