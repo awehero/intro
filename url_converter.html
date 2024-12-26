@@ -554,8 +554,18 @@ function convert() {
                         break;
                 }
             } else if (sectionFive[i][j].substring(0,3) == 'a.g' || sectionFive[i][j].substring(0,3) == 'a.mov') {
-                tempArray = sectionFive[i][j].substring(6,sectionFive[i][j].length - 1).split(",");
-                let action = "id=" + (i + 1) + "?" + sectionFive[i][j].substring(2,3) + tempArray[1] + "=" + tempArray[2];
+                tempArray = sectionFive[i][j].substring(4,sectionFive[i][j].length - 1).split(",");
+                let direction = [];
+                for (var k = 0; k < 4; k++) {
+                    if (k == 3) {
+                        if (tempArray[k] != null) {
+                            
+                        }
+                        } else {
+                            
+                        }
+                }
+                let action = sectionFive[i][j].substring(2,3) + tempArray[1] + "=" + tempArray[2];
                 let type = tempArray[0].substring(0,1);
                 let number = tempArray[0].substring(1);
                 switch (type) {
