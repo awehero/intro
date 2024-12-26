@@ -31,6 +31,13 @@ let startObjects = [];
 let postObjects = [];
 let version = 8;
 let input = "";
+let planes = [];
+let cubes = [];
+let cones = [];
+let endings = [];
+let cylinders = [];
+let spheres = [];
+let monkeys = [];
 function convert() {
     let mapfile = document.getElementById("query").value;
     
@@ -137,13 +144,13 @@ function convert() {
         }
     });
     console.log(startObjects);
-    let planes = [];
-    let cubes = [];
-    let cones = [];
-    let endings = [];
-    let cylinders = [];
-    let spheres = [];
-    let monkeys = [];
+    planes = [];
+    cubes = [];
+    cones = [];
+    endings = [];
+    cylinders = [];
+    spheres = [];
+    monkeys = [];
     for (var i = 0; i < startObjects.length; i++) {
         let tempArray = [];
         let mat = '';
@@ -428,40 +435,40 @@ function convert() {
             post[i] = dodoHelp;
         }
     }
-        let name = "";
-        for (var i = 0; i < post.length; i++) {
-            if (i != post.length - 1) {
-                name = name + post[i] + "?";
-            } else {
-                name = name + post[i];
-            }
+    let name = "";
+    for (var i = 0; i < post.length; i++) {
+        if (i != post.length - 1) {
+            name = name + post[i] + "?";
+        } else {
+            name = name + post[i];
         }
-        objects.push({
-        "type": "G",
-        "posx": 0,
-        "posy": 1500,
-        "posz": 1500,
-        "rotx": 0,
-        "roty": 0,
-        "rotz": 0,
-        "sizx": 50,
-        "sizy": 50,
-        "sizz": 50,
-        "name": name
-    });
-        /*let section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset: function"));
-        let sectionTwo = section.replace(/\s+/g, "")
-        .replace(/"/, "")
-        .replace(/'/, "")
-        .replace(/section_update:function\(\){/g, "")
-        .replace(/letPZ=player\.position\.z;switch\(this\.section_id\){/g, "")
-        .replace(/if\(PZ</g, "")
-        .replace(/this\.section_id\+=1}break;/g, "")
-        .replace(/case/g, "");
-        let sectionThree = sectionTwo.split(":");
-        for (var i = 1; i < sectionThree.length; i++) {
-            let sectionFour[i-1] = sectionThree[i].substring(0,sectionThree[i].length - (i.toString().length));
-        }*/
+    }
+    let monkeyTemp = [];
+    monkeyTemp.push(0);
+    monkeyTemp.push(1500);
+    monkeyTemp.push(1500);
+    monkeyTemp.push(0);
+    monkeyTemp.push(0);
+    monkeyTemp.push(0);
+    monkeyTemp.push(50);
+    monkeyTemp.push(50);
+    monkeyTemp.push(50);
+    monkeyTemp.push(name);
+    monkeys.push(monkeyTemp);
+    
+    let section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset: function"));
+    let sectionTwo = section.replace(/\s+/g, "")
+    .replace(/"/, "")
+    .replace(/'/, "")
+    .replace(/section_update:function\(\){/g, "")
+    .replace(/letPZ=player\.position\.z;switch\(this\.section_id\){/g, "")
+    .replace(/if\(PZ</g, "")
+    .replace(/this\.section_id\+=1}break;/g, "")
+    .replace(/case/g, "");
+    let sectionThree = sectionTwo.split(":");
+    for (var i = 1; i < sectionThree.length; i++) {
+        let sectionFour[i-1] = sectionThree[i].substring(0,sectionThree[i].length - (i.toString().length));
+    }
         
 }
 </script>
