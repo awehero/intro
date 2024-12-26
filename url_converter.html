@@ -467,8 +467,8 @@ function convert() {
                     .replace(/case/g, "")
                     .replace(/default_speed\*/g, "")
                     .replace(/default_steer\*/g, "")
-                    .replace(/speed=cc.get\(speed\,null\)/g, "")
-                    .replace(/steer=cc.get\(steer\,null\)/g, "")
+                    .replace(/speed=cc.get\(speed\,null\);/g, "")
+                    .replace(/steer=cc.get\(steer\,null\);/g, "")
                     .replace(/\*Math.PI\/180/g, "");
     let sectionThree = sectionTwo.split(":");
     let sectionFour = [];
