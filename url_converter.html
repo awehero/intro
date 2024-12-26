@@ -22,10 +22,14 @@
     <label for="query">Enter the full mapfile here:</label>
     <input type="text" id="query" placeholder="Script goes here..." style="width: 100%;">
     <button onclick="convert()">Go!</button>
+    <button onclick="openConsole()">open</button>
     <div>Made by awehero54</div>
     <div id="result"></div>
 
 <script>
+function openConsole() {
+    window.console.log("hi");
+}
 let objects = [];
 let startObjects = [];
 let postObjects = [];
