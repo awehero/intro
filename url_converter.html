@@ -556,60 +556,19 @@ function convert() {
             } else if (sectionFive[i][j].substring(0,3) == 'a.g' || sectionFive[i][j].substring(0,3) == 'a.mov') {
                 tempArray = sectionFive[i][j].substring(4,sectionFive[i][j].length - 1).split(",");
                 let direction = [];
-                for (var k = 0; k < 4; k++) {
-                    if (k == 3) {
-                        if (tempArray[k] != null) {
-                            
-                        }
-                        } else {
-                            
-                        }
+                let dirOptions = ["x=","y=","z="];
+                let action = sectionFive[i][j].substring(2,3);
+                for (var k = 0; k < 3; k++) {
+                    if (tempArray[k] != null) {
+                        direction[k] = [];
+                        direction.push(action + dirOptions[k] + tempArray[k]);
+                    }
                 }
-                let action = sectionFive[i][j].substring(2,3) + tempArray[1] + "=" + tempArray[2];
-                let type = tempArray[0].substring(0,1);
-                let number = tempArray[0].substring(1);
-                switch (type) {
-                    case 'P':
-                        if (cubes[number][9] == "_") {
-                            cubes[number][9] = action;
-                        } else {
-                            cubes[number][9] = cubes[number][9] + "?" + action;
-                        }
-                        //Add plane id here
-                        break;
-                    case 'C':
-                        if (cones[number][9] == "_") {
-                            cones[number][9] = action;
-                        } else {
-                            cones[number][9] = cones[number][9] + "?" + action;
-                        }
-                        //Add plane id here
-                        break;
-                    case 'E':
-                        if (endings[number][9] == "_") {
-                            endings[number][9] = action;
-                        } else {
-                            endings[number][9] = endings[number][9] + "?" + action;
-                        }
-                        //Add plane id here
-                        break;
-                    case 'Y':
-                        if (cylinders[number][9] == "_") {
-                            cylinders[number][9] = action;
-                        } else {
-                            cylinders[number][9] = cylinders[number][9] + "?" + action;
-                        }
-                        //Add plane id here
-                        break;
-                    case 'S':
-                        if (spheres[number][9] == "_") {
-                            spheres[number][9] = action;
-                        } else {
-                            spheres[number][9] = spheres[number][9] + "?" + action;
-                        }
-                        //Add plane id here
-                        break;
+                let effectName = '';
+                for (var k = 0; direction.length; k++) {
+                    if (effectName == '') effectName = direction[k]; ? effectName = effectName + "?" + direction[k];
                 }
+                //Add effectName to plane
             }
         }
     }
