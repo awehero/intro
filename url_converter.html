@@ -32,241 +32,436 @@ let postObjects = [];
 let version = 8;
 let input = "";
 function convert() {
-let mapfile = document.getElementById("query").value;
-
-let firstIndex = mapfile.indexOf('{');
-let secondIndex = mapfile.indexOf('{', firstIndex + 1);
-if (secondIndex === -1) return;
-mapfile = mapfile.substring(secondIndex);
-
-let firstBraceIndex = mapfile.indexOf('{') + 1;
-let lastBraceIndex = mapfile.indexOf('}');
-if (firstBraceIndex === 0 || lastBraceIndex === -1) return;
-
-let input = mapfile.substring(firstBraceIndex, lastBraceIndex);
-
-function formatString(input) {
-    return input.replace(/[\[\])]/g, "")
-                .replace(/\(/g, ",")
-                .replace(/\s+/g, "");
-}
-
-input = formatString(input);
-const outputArray = input.split(';').map(item => item.trim()).filter(item => item);
-
-outputArray.forEach(row => {
-    let fullRow = row;
-    let rowOne = fullRow.substring(0, 3);
-    fullRow = fullRow.substring(fullRow.indexOf(",") + 1);
-
-    if (rowOne === "a.p" || rowOne === "a.y") {
-        const values = fullRow.split(',');
-        let listRow = [
-            rowOne,
-            values[0],
-            values[1],
-            values[2],
-            values[3],
-            values[4],
-            values[5],
-            values[6],
-            values[7],
-            values[8],
-            values[9],
-        ];
-
-        let rowTwoHelper = fullRow.substring(fullRow.indexOf('"')+1);
-        let rowTwo = rowTwoHelper.substring(rowTwoHelper.indexOf('"')+2);
-        const rowTwoValues = rowTwo.split(',');
-
-        // CHANGE THE NUMBER OF VALUES DEPENDING ON IF YOU ARE USING A DIFFERENT DIFFERENT VERSION
-        listRow.push(rowTwoValues[0]);
-        listRow.push(rowTwoValues[1]);
-        listRow.push(rowTwoValues[2]);
-        listRow.push(rowTwoValues[3]);
-        listRow.push(rowTwoValues[4]);
-        if (version == 8) {listRow.push(rowTwoValues[5]);}
-
-        if (rowOne === "a.p" && rowTwoValues.length > 5 && version == 8) {
-            listRow.push(rowTwoValues[5]);
-        }
-
-        startObjects.push(listRow);
-
-    } else if (rowOne === "a.c") {
-        const values = fullRow.split(',');
-        let listRow = [
-            rowOne,
-            values[0],
-            values[1],
-            values[2],
-            (fullRow.substring(fullRow.indexOf('"') + 1)).substr(0,fullRow.substring(fullRow.indexOf('"')+1).length-1)
-        ];
-        startObjects.push(listRow);
-
-    } else if (rowOne === "a.e") {
-        const values = fullRow.split(',');
-        let listRow = [
-            rowOne,
-            values[0],
-            values[1],
-            values[2]
-        ];
-        startObjects.push(listRow);
-
-    } else if (rowOne === "a.s") {
-        const values = fullRow.split(',');
-        let listRow = [
-            rowOne,
-            values[0],
-            values[1],
-            values[2],
-            values[3]
-        ];
-        let rowTwoHelper = fullRow.substring(fullRow.indexOf('"')+1);
-        let rowTwo = rowTwoHelper.substring(rowTwoHelper.indexOf('"')+2);
-        const rowTwoValues = rowTwo.split(',');
-        if (version == 8) {
+    let mapfile = document.getElementById("query").value;
+    
+    let firstIndex = mapfile.indexOf('{');
+    let secondIndex = mapfile.indexOf('{', firstIndex + 1);
+    if (secondIndex === -1) return;
+    mapfile = mapfile.substring(secondIndex);
+    
+    let firstBraceIndex = mapfile.indexOf('{') + 1;
+    let lastBraceIndex = mapfile.indexOf('}');
+    if (firstBraceIndex === 0 || lastBraceIndex === -1) return;
+    
+    let input = mapfile.substring(firstBraceIndex, lastBraceIndex);
+    
+    function formatString(input) {
+        return input.replace(/[\[\])]/g, "")
+                    .replace(/\(/g, ",")
+                    .replace(/\s+/g, "");
+    }
+    
+    input = formatString(input);
+    const outputArray = input.split(';').map(item => item.trim()).filter(item => item);
+    
+    outputArray.forEach(row => {
+        let fullRow = row;
+        let rowOne = fullRow.substring(0, 3);
+        fullRow = fullRow.substring(fullRow.indexOf(",") + 1);
+    
+        if (rowOne === "a.p" || rowOne === "a.y") {
+            const values = fullRow.split(',');
+            let listRow = [
+                rowOne,
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7],
+                values[8],
+                values[9],
+            ];
+    
+            let rowTwoHelper = fullRow.substring(fullRow.indexOf('"')+1);
+            let rowTwo = rowTwoHelper.substring(rowTwoHelper.indexOf('"')+2);
+            const rowTwoValues = rowTwo.split(',');
+    
+            // CHANGE THE NUMBER OF VALUES DEPENDING ON IF YOU ARE USING A DIFFERENT DIFFERENT VERSION
             listRow.push(rowTwoValues[0]);
             listRow.push(rowTwoValues[1]);
             listRow.push(rowTwoValues[2]);
             listRow.push(rowTwoValues[3]);
             listRow.push(rowTwoValues[4]);
-        }
-        startObjects.push(listRow);
-    }
-});
-console.log(startObjects);
-
-let postOne = input.substring(input.indexOf("post"),input.indexOf("section_id: 0"));
-let post = postOne.substring(postOne.indexOf("cc"));
-post = post.replace(/\s+/g, "")
-            .replace(/"/g, "")
-            .replace(/cc\.set_monkey\(/g, "")
-            .replace(/\)/g, "")
-            .replace(/jumpSpeed/g, "js")
-            .replace(/jumpHeight/g, "jh")
-            .replace(/speed,0.2/g, "")
-            .replace(/steer,0.03/g, "")
-            .replace(/steer,default_steer\*/g, "turn,")
-            .replace(/speed,default_speed\*/g, "speed,")
-            .replace(/radius/g, "d")
-            .replace(/camera\.maxZ/g, "eye")
-            .replace(/camera\.fovmul2/g, "fov")
-            .replace(/cameraDownAngle/g, "cd")
-            .replace(/cameraRightAngle/g, "cr")
-            .replace(/\*Math\.PI\/180/g, "")
-            .replace(/light\.intensity/g, "br")
-            .replace(/scene\.clearColor,newBABYLON\.Color3\.FromHexString\(#/g, "bg,")
-            .replace(/scene\.ambientColor,newBABYLON\.Color3\.FromHexString\(#/g, "amb,")
-            .replace(/light\.groundColor,newBABYLON\.Color3\.FromHexString\(#/g, "gro,")
-            .replace(/light\.diffuse,newBABYLON\.Color3\.FromHexString\(#/g, "dif,")
-            .replace(/light\.specular,newBABYLON\.Color3\.FromHexString\(#/g, "spe,")
-            .replace(/gravity,newBABYLON\.Vector3\(/g, "gravity,")
-            .replace(/camera\.upVector,newBABYLON\.Vector3\(/g, "tilt,")
-            .replace(/player\.scaling,newBABYLON\.Vector3\(/g, "dodoScale,")
-post = post.substring(0,post.length-1);
-post = post.split(";");
-for (var i=0; i < post.length; i++) {
-    if (post[i].length <= 10) {
-        post[i] = post[i].replace(/,/g, "=");
-    } else if (post[i].substring(0,4) == "grav") {
-        let gravHelp = "";
-        if (post[i].split(",")[1] != null) {
-                gravHelp = "gx=" + post[i].split(",")[1];
-        }
-        if (post[i].split(",")[2] != null) {
-            if (gravHelp == "") {
-                gravHelp = "gy=" + post[i].split(",")[2];
-            } else {
-                gravHelp = gravHelp + "?gy=" + post[i].split(",")[2]
-            }
-        }
-        if (post[i].split(",")[3] != null) {
-            if (gravHelp == "") {
-                gravHelp = "gz=" + post[i].split(",")[3];
-            } else {
-                gravHelp = gravHelp + "?gz=" + post[i].split(",")[3]
-            }
-        }
-        post[i] = gravHelp;
-    } else if (post[i].substring(0,4) == "tilt") {
-        let tiltHelp = "";
-        if (post[i].split(",")[1] != null) {
-                tiltHelp = "tx=" + post[i].split(",")[1];
-        }
-        if (post[i].split(",")[2] != null) {
-            if (tiltHelp == "") {
-                tiltHelp = "ty=" + post[i].split(",")[2];
-            } else {
-                tiltHelp = tiltHelp + "?ty=" + post[i].split(",")[2]
-            }
-        }
-        if (post[i].split(",")[3] != null) {
-            if (tiltHelp == "") {
-                tiltHelp = "tz=" + post[i].split(",")[3];
-            } else {
-                tiltHelp = tiltHelp + "?tz=" + post[i].split(",")[3]
-            }
-        }
-        post[i] = tiltHelp;
-    } else if (post[i].substring(0,4) == "dodo") {
-        let dodoHelp = "";
-        if (post[i].split(",")[1] != null) {
-                dodoHelp = "dx=" + post[i].split(",")[1];
-        }
-        if (post[i].split(",")[2] != null) {
-            if (dodoHelp == "") {
-                dodoHelp = "dy=" + post[i].split(",")[2];
-            } else {
-                dodoHelp = dodoHelp + "?dy=" + post[i].split(",")[2]
-            }
-        }
-        if (post[i].split(",")[3] != null) {
-            if (dodoHelp == "") {
-                dodoHelp = "dz=" + post[i].split(",")[3];
-            } else {
-                dodoHelp = dodoHelp + "?dz=" + post[i].split(",")[3]
-            }
-        }
-        post[i] = dodoHelp;
-    }
-}
-    let name = "";
-    for (var i = 0; i < post.length; i++) {
-        if (i != post.length - 1) {
-            name = name + post[i] + "?";
-        } else {
-            name = name + post[i];
-        }
-    }
-    objects.push({
-    "type": "G",
-    "posx": 0,
-    "posy": 1500,
-    "posz": 1500,
-    "rotx": 0,
-    "roty": 0,
-    "rotz": 0,
-    "sizx": 50,
-    "sizy": 50,
-    "sizz": 50,
-    "name": name
-});
-    /*let section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset: function"));
-    let sectionTwo = section.replace(/\s+/g, "")
-    .replace(/"/, "")
-    .replace(/'/, "")
-    .replace(/section_update:function\(\){/g, "")
-    .replace(/letPZ=player\.position\.z;switch\(this\.section_id\){/g, "")
-    .replace(/if\(PZ</g, "")
-    .replace(/this\.section_id\+=1}break;/g, "")
-    .replace(/case/g, "");
-    let sectionThree = sectionTwo.split(":");
-    for (var i = 1; i < sectionThree.length; i++) {
-        let sectionFour[i-1] = sectionThree[i].substring(0,sectionThree[i].length - (i.toString().length));
-    }*/
+            if (version == 8) {listRow.push(rowTwoValues[5]);}
     
+            if (rowOne === "a.p" && rowTwoValues.length > 5 && version == 8) {
+                listRow.push(rowTwoValues[5]);
+            }
+    
+            startObjects.push(listRow);
+    
+        } else if (rowOne === "a.c") {
+            const values = fullRow.split(',');
+            let listRow = [
+                rowOne,
+                values[0],
+                values[1],
+                values[2],
+                (fullRow.substring(fullRow.indexOf('"') + 1)).substr(0,fullRow.substring(fullRow.indexOf('"')+1).length-1)
+            ];
+            startObjects.push(listRow);
+    
+        } else if (rowOne === "a.e") {
+            const values = fullRow.split(',');
+            let listRow = [
+                rowOne,
+                values[0],
+                values[1],
+                values[2]
+            ];
+            startObjects.push(listRow);
+    
+        } else if (rowOne === "a.s") {
+            const values = fullRow.split(',');
+            let listRow = [
+                rowOne,
+                values[0],
+                values[1],
+                values[2],
+                values[3]
+            ];
+            let rowTwoHelper = fullRow.substring(fullRow.indexOf('"')+1);
+            let rowTwo = rowTwoHelper.substring(rowTwoHelper.indexOf('"')+2);
+            const rowTwoValues = rowTwo.split(',');
+            if (version == 8) {
+                listRow.push(rowTwoValues[0]);
+                listRow.push(rowTwoValues[1]);
+                listRow.push(rowTwoValues[2]);
+                listRow.push(rowTwoValues[3]);
+                listRow.push(rowTwoValues[4]);
+            }
+            startObjects.push(listRow);
+        }
+    });
+    console.log(startObjects);
+    let planes = [];
+    let cubes = [];
+    let cones = [];
+    let endings = [];
+    let cylinders = [];
+    let spheres = [];
+    let monkeys = [];
+    for (var i = 0; i < startObjects.length; i++) {
+        let tempArray = [];
+        let mat = '';
+        let effects = [];
+        let type = startObjects[i][0].substring(2);
+        switch (type) {
+            case 'p':
+                tempArray = [];
+                tempArray.push(Math.round(startObjects[i][1] * 1000) / 10);
+                tempArray.push(Math.round(startObjects[i][3] * 1000) / 10);
+                tempArray.push(Math.round(startObjects[i][2] * 1000) / 10);
+                tempArray.push(Math.round(startObjects[i][5] * -1000) / 10);
+                tempArray.push(Math.round(startObjects[i][6] * -1000) / 10);
+                tempArray.push(Math.round(startObjects[i][4] * -1000) / 10);
+                tempArray.push(Math.round(startObjects[i][7] * 500) / 10);
+                tempArray.push(Math.round(startObjects[i][9] * 500) / 10);
+                tempArray.push(Math.round(startObjects[i][8] * 500) / 10);
+                mat = startObjects[i][10];
+                effects = [];
+                if (mat != "1") {
+                    if (!!mat.match(",")) {
+                        mat = "m=" + mat.split(",")[0] + "?o=" + mat.split(",")[1];
+                    } else {
+                        mat = "m=" + mat;
+                    }
+                    effects.push(mat);
+                }
+                if (startObjects[i][11] != 0) {
+                    effects.push("bou=" + startObjects[i][11]);
+                }
+                if (startObjects[i][12] != 0) {
+                    effects.push("mass=" + startObjects[i][12]);
+                }
+                if (startObjects[i][13] != 0.6) {
+                    effects.push("fr=" + startObjects[i][13]);
+                }
+                if (startObjects[i][14] == "true") {
+                    effects.push("jump=on");
+                }
+                if (startObjects[i][15] == "true") {
+                    effects.push("air=on");
+                }
+                if (startObjects[i][16] == "true") {
+                    effects.push("k=on");
+                }
+                if (startObjects[i][17] == "true") {
+                    effects.push("dr=on");
+                }
+                if (effects.length == 0) {
+                    tempArray.push("_");
+                } else {
+                    tempArray.push(effects.join("?"));
+                }
+                cubes.push(tempArray);
+                break;
+            case 'c':
+                tempArray = [];
+                tempArray.push(Math.round(startObjects[i][1] * 1000) / 10);
+                tempArray.push(Math.round(startObjects[i][3] * 1000) / 10);
+                tempArray.push(Math.round((startObjects[i][2] - 0.6) * 1000) / 10);
+                tempArray.push(0);
+                tempArray.push(0);
+                tempArray.push(0);
+                tempArray.push(100);
+                tempArray.push(100);
+                tempArray.push(100);
+                mat = startObjects[i][4];
+                effects = [];
+                if (mat != "true") {
+                    if (!!mat.match(",")) {
+                        mat = "m=" + mat.split(",")[0] + "?o=" + mat.split(",")[1];
+                    } else {
+                        mat = "m=" + mat;
+                    }
+                    effects.push(mat);
+                }
+                if (effects.length == 0) {
+                    tempArray.push("_");
+                } else {
+                    tempArray.push(effects.join("?"));
+                }
+                cones.push(tempArray);
+                break;
+            case 'e':
+                tempArray = [];
+                tempArray.push(Math.round(startObjects[i][1] * 1000) / 10);
+                tempArray.push(Math.round(startObjects[i][3] * 1000) / 10);
+                tempArray.push(Math.round(startObjects[i][2] * 1000) / 10);
+                tempArray.push(0);
+                tempArray.push(0);
+                tempArray.push(0);
+                tempArray.push(300);
+                tempArray.push(300);
+                tempArray.push(300);
+                tempArray.push("_");
+                endings.push(tempArray);
+                break;
+            case 'y':
+                tempArray = [];
+                tempArray.push(Math.round(startObjects[i][1] * 1000) / 10);
+                tempArray.push(Math.round(startObjects[i][3] * 1000) / 10);
+                tempArray.push(Math.round(startObjects[i][2] * 1000) / 10);
+                tempArray.push(Math.round(startObjects[i][5] * -1000) / 10);
+                tempArray.push(Math.round(startObjects[i][6] * -1000) / 10);
+                tempArray.push(Math.round(startObjects[i][4] * -1000) / 10);
+                tempArray.push(Math.round(startObjects[i][7] * 500) / 10);
+                tempArray.push(Math.round(startObjects[i][9] * 500) / 10);
+                tempArray.push(Math.round(startObjects[i][8] * 500) / 10);
+                mat = startObjects[i][10];
+                effects = [];
+                if (mat != "1") {
+                    if (!!mat.match(",")) {
+                        mat = "m=" + mat.split(",")[0] + "?o=" + mat.split(",")[1];
+                    } else {
+                        mat = "m=" + mat;
+                    }
+                    effects.push(mat);
+                }
+                if (startObjects[i][11] != 0) {
+                    effects.push("bou=" + startObjects[i][11]);
+                }
+                if (startObjects[i][12] != 0) {
+                    effects.push("mass=" + startObjects[i][12]);
+                }
+                if (startObjects[i][13] != 0.6) {
+                    effects.push("fr=" + startObjects[i][13]);
+                }
+                if (startObjects[i][14] == "true") {
+                    effects.push("air=on");
+                }
+                if (startObjects[i][15] != 1) {
+                    effects.push("topr=" + startObjects[i][15]);
+                }
+                if (startObjects[i][16] == "true") {
+                    effects.push("k=on");
+                }
+                if (effects.length == 0) {
+                    tempArray.push("_");
+                } else {
+                    tempArray.push(effects.join("?"));
+                }
+                cylinders.push(tempArray);
+                break;
+            case 's':
+                tempArray = [];
+                tempArray.push(Math.round(startObjects[i][1] * 1000) / 10);
+                tempArray.push(Math.round(startObjects[i][3] * 1000) / 10);
+                tempArray.push(Math.round(startObjects[i][2] * 1000) / 10);
+                tempArray.push(0);
+                tempArray.push(0);
+                tempArray.push(0);
+                tempArray.push(Math.round(startObjects[i][4] * 500) / 10);
+                tempArray.push(Math.round(startObjects[i][4] * 500) / 10);
+                tempArray.push(Math.round(startObjects[i][4] * 500) / 10);
+                mat = startObjects[i][5];
+                effects = [];
+                if (mat != "1") {
+                    if (!!mat.match(",")) {
+                        mat = "m=" + mat.split(",")[0] + "?o=" + mat.split(",")[1];
+                    } else {
+                        mat = "m=" + mat;
+                    }
+                    effects.push(mat);
+                }
+                if (startObjects[i][6] != 0) {
+                    effects.push("bou=" + startObjects[i][11]);
+                }
+                if (startObjects[i][7] != 0) {
+                    effects.push("mass=" + startObjects[i][12]);
+                }
+                if (startObjects[i][8] != 0.6) {
+                    effects.push("fr=" + startObjects[i][13]);
+                }
+                if (startObjects[i][9] == "true") {
+                    effects.push("air=on");
+                }
+                if (startObjects[i][10] == "true") {
+                    effects.push("k=on");
+                }
+                if (effects.length == 0) {
+                    tempArray.push("_");
+                } else {
+                    tempArray.push(effects.join("?"));
+                }
+                spheres.push(tempArray);
+                break;
+        }
+    }
+    
+    let postOne = mapfile.substring(mapfile.indexOf("post"),mapfile.indexOf("section_id: 0"));
+    let post = postOne.substring(postOne.indexOf("cc"));
+    post = post.replace(/\s+/g, "")
+                .replace(/"/g, "")
+                .replace(/cc\.set_monkey\(/g, "")
+                .replace(/\)/g, "")
+                .replace(/jumpSpeed/g, "js")
+                .replace(/jumpHeight/g, "jh")
+                .replace(/speed,0.2/g, "")
+                .replace(/steer,0.03/g, "")
+                .replace(/steer,default_steer\*/g, "turn,")
+                .replace(/speed,default_speed\*/g, "speed,")
+                .replace(/radius/g, "d")
+                .replace(/camera\.maxZ/g, "eye")
+                .replace(/camera\.fovmul2/g, "fov")
+                .replace(/cameraDownAngle/g, "cd")
+                .replace(/cameraRightAngle/g, "cr")
+                .replace(/\*Math\.PI\/180/g, "")
+                .replace(/light\.intensity/g, "br")
+                .replace(/scene\.clearColor,newBABYLON\.Color3\.FromHexString\(#/g, "bg,")
+                .replace(/scene\.ambientColor,newBABYLON\.Color3\.FromHexString\(#/g, "amb,")
+                .replace(/light\.groundColor,newBABYLON\.Color3\.FromHexString\(#/g, "gro,")
+                .replace(/light\.diffuse,newBABYLON\.Color3\.FromHexString\(#/g, "dif,")
+                .replace(/light\.specular,newBABYLON\.Color3\.FromHexString\(#/g, "spe,")
+                .replace(/gravity,newBABYLON\.Vector3\(/g, "gravity,")
+                .replace(/camera\.upVector,newBABYLON\.Vector3\(/g, "tilt,")
+                .replace(/player\.scaling,newBABYLON\.Vector3\(/g, "dodoScale,")
+    post = post.substring(0,post.length-1);
+    post = post.split(";");
+    for (var i=0; i < post.length; i++) {
+        if (post[i].length <= 10) {
+            post[i] = post[i].replace(/,/g, "=");
+        } else if (post[i].substring(0,4) == "grav") {
+            let gravHelp = "";
+            if (post[i].split(",")[1] != null) {
+                    gravHelp = "gx=" + post[i].split(",")[1];
+            }
+            if (post[i].split(",")[2] != null) {
+                if (gravHelp == "") {
+                    gravHelp = "gy=" + post[i].split(",")[2];
+                } else {
+                    gravHelp = gravHelp + "?gy=" + post[i].split(",")[2]
+                }
+            }
+            if (post[i].split(",")[3] != null) {
+                if (gravHelp == "") {
+                    gravHelp = "gz=" + post[i].split(",")[3];
+                } else {
+                    gravHelp = gravHelp + "?gz=" + post[i].split(",")[3]
+                }
+            }
+            post[i] = gravHelp;
+        } else if (post[i].substring(0,4) == "tilt") {
+            let tiltHelp = "";
+            if (post[i].split(",")[1] != null) {
+                    tiltHelp = "tx=" + post[i].split(",")[1];
+            }
+            if (post[i].split(",")[2] != null) {
+                if (tiltHelp == "") {
+                    tiltHelp = "ty=" + post[i].split(",")[2];
+                } else {
+                    tiltHelp = tiltHelp + "?ty=" + post[i].split(",")[2]
+                }
+            }
+            if (post[i].split(",")[3] != null) {
+                if (tiltHelp == "") {
+                    tiltHelp = "tz=" + post[i].split(",")[3];
+                } else {
+                    tiltHelp = tiltHelp + "?tz=" + post[i].split(",")[3]
+                }
+            }
+            post[i] = tiltHelp;
+        } else if (post[i].substring(0,4) == "dodo") {
+            let dodoHelp = "";
+            if (post[i].split(",")[1] != null) {
+                    dodoHelp = "dx=" + post[i].split(",")[1];
+            }
+            if (post[i].split(",")[2] != null) {
+                if (dodoHelp == "") {
+                    dodoHelp = "dy=" + post[i].split(",")[2];
+                } else {
+                    dodoHelp = dodoHelp + "?dy=" + post[i].split(",")[2]
+                }
+            }
+            if (post[i].split(",")[3] != null) {
+                if (dodoHelp == "") {
+                    dodoHelp = "dz=" + post[i].split(",")[3];
+                } else {
+                    dodoHelp = dodoHelp + "?dz=" + post[i].split(",")[3]
+                }
+            }
+            post[i] = dodoHelp;
+        }
+    }
+        let name = "";
+        for (var i = 0; i < post.length; i++) {
+            if (i != post.length - 1) {
+                name = name + post[i] + "?";
+            } else {
+                name = name + post[i];
+            }
+        }
+        objects.push({
+        "type": "G",
+        "posx": 0,
+        "posy": 1500,
+        "posz": 1500,
+        "rotx": 0,
+        "roty": 0,
+        "rotz": 0,
+        "sizx": 50,
+        "sizy": 50,
+        "sizz": 50,
+        "name": name
+    });
+        /*let section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset: function"));
+        let sectionTwo = section.replace(/\s+/g, "")
+        .replace(/"/, "")
+        .replace(/'/, "")
+        .replace(/section_update:function\(\){/g, "")
+        .replace(/letPZ=player\.position\.z;switch\(this\.section_id\){/g, "")
+        .replace(/if\(PZ</g, "")
+        .replace(/this\.section_id\+=1}break;/g, "")
+        .replace(/case/g, "");
+        let sectionThree = sectionTwo.split(":");
+        for (var i = 1; i < sectionThree.length; i++) {
+            let sectionFour[i-1] = sectionThree[i].substring(0,sectionThree[i].length - (i.toString().length));
+        }*/
+        
 }
 </script>
 </body>
