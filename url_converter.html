@@ -507,7 +507,7 @@ function convert() {
             if (sectionFive[i][j] * 0 == 0) {
                 sectionFive[i][j] = (Math.round(sectionFive[i][j] * 1000)) / 1000;
             } else if (sectionFive[i][j].substring(0,5) == 'a.mov' || sectionFive[i][j].substring(0,5) == 'a.rot') {
-                tempArray = sectionFive[i][j].substring(6,sectionFive[i][j] - 1).split(",");
+                tempArray = sectionFive[i][j].substring(6,sectionFive[i][j].length - 1).split(",");
                 let action = "id=" + (i + 1) + "?" + sectionFive[i][j].substring(2,3) + tempArray[1] + "=" + tempArray[2];
                 let type = tempArray[0].substring(0,1);
                 let number = tempArray[0].substring(1);
