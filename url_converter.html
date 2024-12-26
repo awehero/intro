@@ -361,7 +361,7 @@ function convert() {
                 .replace(/camera\.upVector,newBABYLON\.Vector3\(/g, "tilt,")
                 .replace(/player\.scaling,newBABYLON\.Vector3\(/g, "dodoScale,")
                 .replace(/cc.refresh\(;/g, "")
-    post = post.substring(0,post.length-1);
+    post = post.substring(0,post.length-2);
     post = post.split(";");
     for (var i=0; i < post.length; i++) {
         if (post[i].length <= 10) {
