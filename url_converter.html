@@ -22,14 +22,10 @@
     <label for="query">Enter the full mapfile here:</label>
     <input type="text" id="query" placeholder="Script goes here..." style="width: 100%;">
     <button onclick="convert()">Go!</button>
-    <button onclick="openConsole()">open</button>
     <div>Made by awehero54</div>
     <div id="result"></div>
 
 <script>
-function openConsole() {
-    window.console.log("hi");
-}
 let objects = [];
 let startObjects = [];
 let postObjects = [];
@@ -511,6 +507,53 @@ function convert() {
             if (sectionFive[i][j] * 0 == 0) {
                 sectionFive[i][j] = (Math.round(sectionFive[i][j] * 1000)) / 1000;
             } else if (sectionFive[i][j].substring(0,5) == 'a.mov' || sectionFive[i][j].substring(0,5) == 'a.rot') {
+                tempArray = sectionFive[i][j].substring(6,sectionFive[i][j].length - 1).split(",");
+                let action = "id=" + (i + 1) + "?" + sectionFive[i][j].substring(2,3) + tempArray[1] + "=" + tempArray[2];
+                let type = tempArray[0].substring(0,1);
+                let number = tempArray[0].substring(1);
+                switch (type) {
+                    case 'P':
+                        if (cubes[number][9] == "_") {
+                            cubes[number][9] = action;
+                        } else {
+                            cubes[number][9] = cubes[number][9] + "?" + action;
+                        }
+                        //Add plane id here
+                        break;
+                    case 'C':
+                        if (cones[number][9] == "_") {
+                            cones[number][9] = action;
+                        } else {
+                            cones[number][9] = cones[number][9] + "?" + action;
+                        }
+                        //Add plane id here
+                        break;
+                    case 'E':
+                        if (endings[number][9] == "_") {
+                            endings[number][9] = action;
+                        } else {
+                            endings[number][9] = endings[number][9] + "?" + action;
+                        }
+                        //Add plane id here
+                        break;
+                    case 'Y':
+                        if (cylinders[number][9] == "_") {
+                            cylinders[number][9] = action;
+                        } else {
+                            cylinders[number][9] = cylinders[number][9] + "?" + action;
+                        }
+                        //Add plane id here
+                        break;
+                    case 'S':
+                        if (spheres[number][9] == "_") {
+                            spheres[number][9] = action;
+                        } else {
+                            spheres[number][9] = spheres[number][9] + "?" + action;
+                        }
+                        //Add plane id here
+                        break;
+                }
+            } else if (sectionFive[i][j].substring(0,3) == 'a.g' || sectionFive[i][j].substring(0,3) == 'a.mov') {
                 tempArray = sectionFive[i][j].substring(6,sectionFive[i][j].length - 1).split(",");
                 let action = "id=" + (i + 1) + "?" + sectionFive[i][j].substring(2,3) + tempArray[1] + "=" + tempArray[2];
                 let type = tempArray[0].substring(0,1);
