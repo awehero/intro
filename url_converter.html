@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL to JS Map Converter</title>
+    <title>Mapfile to URL Converter</title>
     <link rel="icon" href="https://awehero.github.io/intro/awehero.png" type="image/png">
     <style>
         body {
@@ -477,6 +477,7 @@ function convert() {
                     .replace(/light.diffuse=cc.get\(light.diffuse\,null\);/g, "")
                     .replace(/light.specular=cc.get\(light.specular\,null\);/g, "")
                     .replace(/light.groundColor=cc.get\(light.groundColor\,null\);/g, "")
+                    .replace(/newBABYLON.Color3.FromHexString\(\#/g, "")
                     .replace(/a.jh\(null\);/g, "")
                     .replace(/a.js\(null\);/g, "")
                     .replace(/a.cam_cd\(null\);/g, "")
@@ -614,6 +615,26 @@ function convert() {
                 //Add value to plane
             } else if (sectionFive[i][j].substring(0,9) == 'light.int') {
                 let value = "br=" + sectionFive[i][j].split("=")[1];
+                //Add value to plane
+            } else if (sectionFive[i][j].substring(0,9) == 'scene.cle') {
+                let value = "bg=" + sectionFive[i][j].split("=")[1];
+                value = value.substring(0,value.length-1);
+                //Add value to plane
+            } else if (sectionFive[i][j].substring(0,9) == 'scene.amb') {
+                let value = "amb=" + sectionFive[i][j].split("=")[1];
+                value = value.substring(0,value.length-1);
+                //Add value to plane
+            } else if (sectionFive[i][j].substring(0,9) == 'light.dif') {
+                let value = "dif=" + sectionFive[i][j].split("=")[1];
+                value = value.substring(0,value.length-1);
+                //Add value to plane
+            } else if (sectionFive[i][j].substring(0,9) == 'light.spe') {
+                let value = "spe=" + sectionFive[i][j].split("=")[1];
+                value = value.substring(0,value.length-1);
+                //Add value to plane
+            } else if (sectionFive[i][j].substring(0,9) == 'light.gro') {
+                let value = "gro=" + sectionFive[i][j].split("=")[1];
+                value = value.substring(0,value.length-1);
                 //Add value to plane
             }
         }
