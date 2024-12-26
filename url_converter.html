@@ -469,10 +469,14 @@ function convert() {
                     .replace(/default_steer\*/g, "")
                     .replace(/speed=cc.get\(speed\,null\);/g, "")
                     .replace(/steer=cc.get\(steer\,null\);/g, "")
+                    .replace(/camera.maxZ=cc.get\(camera.maxZ\,null\);/g, "")
+                    .replace(/light.intensity=cc.get\(light.intensity\,null\);/g, "")
                     .replace(/spinlock=cc.get\(isSpinLocked\,null\);/g, "")
                     .replace(/a.jh\(null\);/g, "")
                     .replace(/a.js\(null\);/g, "")
                     .replace(/a.cam_cd\(null\);/g, "")
+                    .replace(/a.cam_d\(null\);/g, "")
+                    .replace(/a.fov\(null\);/g, "")
                     .replace(/\*Math.PI\/180/g, "");
     let sectionThree = sectionTwo.split(":");
     let sectionFour = [];
