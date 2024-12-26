@@ -464,7 +464,12 @@ function convert() {
                     .replace(/letPZ=player\.position\.z;switch\(this\.section_id\){/g, "")
                     .replace(/if\(PZ</g, "")
                     .replace(/this\.section_id\+=1}break;/g, "")
-                    .replace(/case/g, "");
+                    .replace(/case/g, "")
+                    .replace(/default_speed\*/g, "")
+                    .replace(/default_steer\*/g, "")
+                    .replace(/speed=cc.get\(speed\,null\)/g, "")
+                    .replace(/steer=cc.get\(steer\,null\)/g, "")
+                    .replace(/\*Math.PI\/180/g, "");
     let sectionThree = sectionTwo.split(":");
     let sectionFour = [];
     for (var i = 1; i < sectionThree.length; i++) {
@@ -477,6 +482,7 @@ function convert() {
         } else if (sectionFour[i].substring(sectionFour[i].length - 2) == '\)\{') {
             sectionFour[i] = sectionFour[i].substring(0,sectionFour[i].length - 2);
         }
+        sectionFour[i] = sectionFour[i].split(/;|\)\{/);
     }
     
 }
