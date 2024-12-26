@@ -484,7 +484,22 @@ function convert() {
         }
         sectionFour[i] = sectionFour[i].split(/;|\)\{/);
     }
-    
+    let sectionFive = [];
+    for (var i = 0; i < sectionFour.length; i++) {
+        let numSpot = 0;
+        for (var j = 0; j < sectionFour[i].length; j++) {
+            if (sectionFour[i][j] * 0 == 0) {
+                numSpot = j;
+            }
+        }
+        for (var j = 0; j < sectionFour[i].length; j++) {
+            if (j < numSpot) {
+                sectionFive[i-1].push(sectionFour[i][j]);
+            } else {
+                sectionFive[i].push(sectionFour[i][j]);
+            }
+        }
+    }
 }
 </script>
 </body>
