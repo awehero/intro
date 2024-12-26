@@ -476,7 +476,7 @@ function convert() {
                     .replace(/a.js\(null\);/g, "")
                     .replace(/a.cam_cd\(null\);/g, "")
                     .replace(/a.cam_d\(null\);/g, "")
-                    .replace(/a.fov\(null\);/g, "")
+                    .replace(/a.fov_mul2\(\);/g, "")
                     .replace(/\*Math.PI\/180/g, "");
     let sectionThree = sectionTwo.split(":");
     let sectionFour = [];
@@ -592,11 +592,23 @@ function convert() {
             } else if (sectionFive[i][j].substring(0,8) == 'a.cam_cd') {
                 let value = "cd=" + sectionFive[i][j].substring(9,sectionFive[i][j]-1);
                 //Add value to plane
+            } else if (sectionFive[i][j].substring(0,7) == 'a.cam_d') {
+                let value = "d=" + sectionFive[i][j].substring(8,sectionFive[i][j]-1);
+                //Add value to plane
+            } else if (sectionFive[i][j].substring(0,10) == 'a.fov_mul2') {
+                let value = "d=" + sectionFive[i][j].substring(8,sectionFive[i][j]-1);
+                //Add value to plane
             } else if (sectionFive[i][j].substring(0,5) == 'speed') {
                 let value = sectionFive[i][j];
                 //Add value to plane
             } else if (sectionFive[i][j].substring(0,5) == 'steer') {
                 let value = "turn=" + sectionFive[i][j].split("=")[1];
+                //Add value to plane
+            } else if (sectionFive[i][j].substring(0,11) == 'camera.maxZ') {
+                let value = "eye=" + sectionFive[i][j].split("=")[1];
+                //Add value to plane
+            } else if (sectionFive[i][j].substring(0,9) == 'light.int') {
+                let value = "br=" + sectionFive[i][j].split("=")[1];
                 //Add value to plane
             }
         }
