@@ -458,8 +458,8 @@ function convert() {
     
     let section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset: function"));
     let sectionTwo = section.replace(/\s+/g, "")
-                    .replace(/\"/, "")
-                    .replace(/\'/, "")
+                    .replace(/\"/g, "")
+                    .replace(/\'/g, "")
                     .replace(/section_update:function\(\){/g, "")
                     .replace(/letPZ=player\.position\.z;switch\(this\.section_id\){/g, "")
                     .replace(/if\(PZ</g, "")
