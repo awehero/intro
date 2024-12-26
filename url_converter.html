@@ -469,6 +469,10 @@ function convert() {
                     .replace(/default_steer\*/g, "")
                     .replace(/speed=cc.get\(speed\,null\);/g, "")
                     .replace(/steer=cc.get\(steer\,null\);/g, "")
+                    .replace(/spinlock=cc.get\(isSpinLocked\,null\);/g, "")
+                    .replace(/a.jh\(null\);/g, "")
+                    .replace(/a.js\(null\);/g, "")
+                    .replace(/a.cam_cd\(null\);/g, "")
                     .replace(/\*Math.PI\/180/g, "");
     let sectionThree = sectionTwo.split(":");
     let sectionFour = [];
@@ -569,6 +573,9 @@ function convert() {
                     if (effectName == '') effectName = direction[k]; ? effectName = effectName + "?" + direction[k];
                 }
                 //Add effectName to plane
+            } else if (sectionFive[i][j].substring(0,6) == 'isSpin') {
+                let value = "sl=" + sectionFive[i][j].split("=")[1];
+                //Add value to plane
             }
         }
     }
