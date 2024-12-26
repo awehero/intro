@@ -483,6 +483,7 @@ function convert() {
                     .replace(/a.cam_cd\(null\);/g, "")
                     .replace(/a.cam_d\(null\);/g, "")
                     .replace(/a.fov_mul2\(\);/g, "")
+                    .replace(/a.msg_del\(\);/g, "")
                     .replace(/\*Math.PI\/180/g, "");
     let sectionThree = sectionTwo.split(":");
     let sectionFour = [];
