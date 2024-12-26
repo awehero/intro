@@ -343,7 +343,7 @@ function convert() {
     let postOne = mapfile.substring(mapfile.indexOf("post"),mapfile.indexOf("section_id: 0"));
     let post = postOne.substring(postOne.indexOf("cc"));
     post = post.replace(/\s+/g, "")
-                .replace(/"/g, "")
+                .replace(/\"/g, "")
                 .replace(/cc\.set_monkey\(/g, "")
                 .replace(/speed,0.2\);/g, "")
                 .replace(/steer,0.03\);/g, "")
