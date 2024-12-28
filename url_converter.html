@@ -455,10 +455,11 @@ function convert() {
     monkeyTemp.push(50);
     monkeyTemp.push(name);
     monkeys.push(monkeyTemp);
+    let section ='';
     if (mapfile.indexOf("reset: function") == -1) {
-        let section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset:function"));
+        section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset:function"));
     } else {
-        let section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset: function"));
+        section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset: function"));
     }
     function replaceMsgWithASCII(input) {
         return input.replace(/a\.msg_set\("([^"]*)"\);/g, (match, p1) => {
