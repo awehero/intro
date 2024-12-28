@@ -553,6 +553,15 @@ function convert() {
         planes[i/2][1] = (((red - orange) / 2) + orange) * 100;
         planes[i/2][7] = (red - orange) / 0.02;
     }
+    function addEffect(planeNum,effect) {
+        let currentValue = planes[planeNum][9];
+        if (currentValue == "") {
+            currentValue = effect;
+        } else {
+            currentValue = currentValue + "?" + effect;
+        }
+        planes[planeNum][9] = currentValue;
+    }
     for (var i = 0; i < sectionFive.length; i++) {
         for (var j = 0; j < sectionFive[i].length; j++) {
             let tempArray = [];
