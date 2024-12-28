@@ -463,7 +463,7 @@ function convert() {
     function replaceMsgWithASCII(input) {
         return input.replace(/a\.msg_set\("([^"]*)"\);/g, (match, p1) => {
             const asciiValues = Array.from(p1).map(char => char.charCodeAt(0));
-            const asciiString = asciiValues.join(':');
+            const asciiString = asciiValues.join('?');
             return `msg=${asciiString};`;
         });
     }
@@ -653,7 +653,7 @@ function convert() {
                 value = value.substring(0,value.length-1);
                 //Add value to plane
             } else if (sectionFive[i][j].substring(0,3) == 'msg') {
-                let value = sectionFive[i][j];
+                let value = sectionFive[i][j].replace(/?/g, ":");
                 //Add value to plane
             }
         }
