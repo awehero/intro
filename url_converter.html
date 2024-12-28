@@ -531,6 +531,20 @@ function convert() {
             }
         }
     }
+    for (var i = 0; i < sectionFive.length / 2; i++) {
+        let planeArray = [];
+        planeArray.push(0);
+        planeArray.push(0);
+        planeArray.push(-2100);
+        planeArray.push(0);
+        planeArray.push(0);
+        planeArray.push(0);
+        planeArray.push(100000);
+        planeArray.push(0);
+        planeArray.push(100);
+        planeArray.push("");
+        planes.push(planeArray);
+    }
     for (var i = 0; i < sectionFive.length; i++) {
         for (var j = 0; j < sectionFive[i].length; j++) {
             let tempArray = [];
