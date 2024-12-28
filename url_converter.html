@@ -589,7 +589,11 @@ function convert() {
                 }
                 let effectName = '';
                 for (var k = 0; direction.length; k++) {
-                    if (effectName == '') effectName = direction[k]; ? effectName = effectName + "?" + direction[k];
+                    if (effectName == '') {
+                        effectName = direction[k];
+                    } else {
+                        effectName = effectName + "?" + direction[k];
+                    }
                 }
                 //Add effectName to plane
             } else if (sectionFive[i][j].substring(0,6) == 'isSpin') {
