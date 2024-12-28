@@ -557,7 +557,7 @@ function convert() {
         let currentValue = planes[planeNum][9];
         if (currentValue == "") {
             currentValue = effect;
-        } else {
+        } else if (currentValue.indexOf("id=") == -1) {
             currentValue = currentValue + "?" + effect;
         }
         planes[planeNum][9] = currentValue;
@@ -579,7 +579,6 @@ function convert() {
                         } else {
                             cubes[number][9] = cubes[number][9] + "?" + action;
                         }
-                        //Add plane id here
                         break;
                     case 'C':
                         if (cones[number][9] == "_") {
@@ -587,7 +586,6 @@ function convert() {
                         } else {
                             cones[number][9] = cones[number][9] + "?" + action;
                         }
-                        //Add plane id here
                         break;
                     case 'E':
                         if (endings[number][9] == "_") {
@@ -595,7 +593,6 @@ function convert() {
                         } else {
                             endings[number][9] = endings[number][9] + "?" + action;
                         }
-                        //Add plane id here
                         break;
                     case 'Y':
                         if (cylinders[number][9] == "_") {
@@ -603,7 +600,6 @@ function convert() {
                         } else {
                             cylinders[number][9] = cylinders[number][9] + "?" + action;
                         }
-                        //Add plane id here
                         break;
                     case 'S':
                         if (spheres[number][9] == "_") {
@@ -611,9 +607,9 @@ function convert() {
                         } else {
                             spheres[number][9] = spheres[number][9] + "?" + action;
                         }
-                        //Add plane id here
                         break;
                 }
+                addEffect(i/2,"id=" + i/2);
             } else if (sectionFive[i][j].substring(0,3) == 'a.g' || sectionFive[i][j].substring(0,3) == 'a.t' || sectionFive[i][j].substring(0,3) == 'a.d') {
                 tempArray = sectionFive[i][j].substring(4,sectionFive[i][j].length - 1).split(",");
                 let direction = [];
@@ -633,63 +629,63 @@ function convert() {
                         effectName = effectName + "?" + direction[k];
                     }
                 }
-                //Add effectName to plane
+                addEffect(i/2,effectName);
             } else if (sectionFive[i][j].substring(0,6) == 'isSpin') {
                 let value = "sl=" + sectionFive[i][j].split("=")[1];
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,5) == 'rotat') {
                 let value = "sr=" + sectionFive[i][j].split("=")[1];
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,4) == 'a.jh') {
                 let value = "jh=" + sectionFive[i][j].substring(5,sectionFive[i][j]-1);
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,4) == 'a.js') {
                 let value = "js=" + sectionFive[i][j].substring(5,sectionFive[i][j]-1);
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,8) == 'a.cam_cd') {
                 let value = "cd=" + sectionFive[i][j].substring(9,sectionFive[i][j]-1);
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,7) == 'a.cam_d') {
                 let value = "d=" + sectionFive[i][j].substring(8,sectionFive[i][j]-1);
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,10) == 'a.fov_mul2') {
                 let value = "d=" + sectionFive[i][j].substring(8,sectionFive[i][j]-1);
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,5) == 'speed') {
                 let value = sectionFive[i][j];
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,5) == 'steer') {
                 let value = "turn=" + sectionFive[i][j].split("=")[1];
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,11) == 'camera.maxZ') {
                 let value = "eye=" + sectionFive[i][j].split("=")[1];
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,9) == 'light.int') {
                 let value = "br=" + sectionFive[i][j].split("=")[1];
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,9) == 'scene.cle') {
                 let value = "bg=" + sectionFive[i][j].split("=")[1];
                 value = value.substring(0,value.length-1);
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,9) == 'scene.amb') {
                 let value = "amb=" + sectionFive[i][j].split("=")[1];
                 value = value.substring(0,value.length-1);
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,9) == 'light.dif') {
                 let value = "dif=" + sectionFive[i][j].split("=")[1];
                 value = value.substring(0,value.length-1);
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,9) == 'light.spe') {
                 let value = "spe=" + sectionFive[i][j].split("=")[1];
                 value = value.substring(0,value.length-1);
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,9) == 'light.gro') {
                 let value = "gro=" + sectionFive[i][j].split("=")[1];
                 value = value.substring(0,value.length-1);
-                //Add value to plane
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,3) == 'msg') {
                 let value = sectionFive[i][j].replace(/?/g, ":");
-                //Add value to plane
+                addEffect(i/2,value);
             }
         }
     }
