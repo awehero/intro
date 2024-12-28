@@ -545,6 +545,14 @@ function convert() {
         planeArray.push("");
         planes.push(planeArray);
     }
+    let red = '';
+    let orange = '';
+    for (var i = 0; i < sectionFive.length / 2; i+=2) {
+        red = parseInt(sectionFive[i][0]);
+        orange = parseInt(sectionFive[i+1][0]);
+        planes[i/2][1] = (((red - orange) / 2) + orange) * 100;
+        planes[i/2][7] = (red - orange) / 0.02;
+    }
     for (var i = 0; i < sectionFive.length; i++) {
         for (var j = 0; j < sectionFive[i].length; j++) {
             let tempArray = [];
