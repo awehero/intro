@@ -86,25 +86,56 @@
     <p>Select what you want to convert your map into</p>
     <div id="typeSelectionDiv">
         <select id="outputTypeBox">
-            <option value="draft">Option 1</option>
-            <option value="tinyurl">Option 2</option>
-            <option value="url">Option 3</option>
-            <option value="mapfile">Option 3</option>
-            <option value="blender">Option 3</option>
+            <option value="0">Draft Link</option>
+            <option value="1">Tinyurl</option>
+            <option value="2">URL</option>
+            <option value="3">Mapfile</option>
+            <option value="4">Blender Data</option>
         </select>
     </div>
-    <p>Enter a Draft Link, Draft Id, URL, Mapfile, or Tinyurl</p>
-    <textarea id="inputString" rows="6" cols="80"></textarea>
+    <p>Enter a Draft Link, Tinyurl, URL, or Mapfile</p>
+    <textarea id="inputText" rows="6" cols="80"></textarea>
     <br>
     <button onclick="convert()">Get Mapfile!</button>
     <br><br>
     <button id="copyButton" onclick="copyLink()">Copy!</button>
     <h2>Output:</h2>
-    <div id="output" style="white-space: pre-wrap;"></div>
+    <div id="outputText" style="white-space: pre-wrap;"></div>
     
     <script>
+    //a draft to mapfile
+    //b tinyurl to url
+    //c url to draft
+    //d url to tinyurl
+    //e url to mapfile
+    //f url to blender
+    //g mapfile to url
+    //draft tinyurl url mapfile blender
+    const processes = [
+        ["","agd","ag","a","agf"],
+        ["bc","","b","be","bf"],
+        ["c","d","","e","f"],
+        ["gc","gd","g","","gf"]
+    ];
     function convert() {
-        
+        let inputType = "";
+        let outputType = document.getElementById("outputTypeBox").value;
+        let input = document.getElementById("inputText");
+        if (input.substring(0,8) == "https://") {
+            input = input.substring(9);//might be 8, just double check later
+        }
+        switch (input.substring(0,7)) {
+            case "var map":
+                inputType = 3;
+                break;
+            case "icedodo":
+                if (input.indexOf("DraftId") == -1) {
+                    inputType = 2;
+                } else {
+                    inoutType = 0;
+                }
+                break;
+        }
     }
     function tinyurlToURL(tinyUrl) {
         fetch(tinyUrl, {
