@@ -693,7 +693,7 @@ function convert() {
                 value = value.substring(0,value.length-1);
                 addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,3) == 'msg') {
-                let value = sectionFive[i][j].replace(/?/g, ":");
+                let value = sectionFive[i][j].replace(/\?/g, ":");
                 addEffect(i/2,value);
             }
         }
