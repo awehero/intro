@@ -697,7 +697,29 @@ function convert() {
             }
         }
     }
-    
+    let url = "https://icedodo.onionfist.com/creative/?CompilerVersion=v9&CompilerOutput=";
+    monkeys.forEach(function(object) {
+        url += "A" + object.join("$");
+    });
+    planes.forEach(function(object) {
+        url += "A" + object.join("$");
+    });
+    cubes.forEach(function(object) {
+        url += "A" + object.join("$");
+    });
+    cones.forEach(function(object) {
+        url += "A" + object.join("$");
+    });
+    cylinders.forEach(function(object) {
+        url += "A" + object.join("$");
+    });
+    spheres.forEach(function(object) {
+        url += "A" + object.join("$");
+    });
+    endings.forEach(function(object) {
+        url += "A" + object.join("$");
+    });
+    document.getElementById("result").innerText = url;
 }
 </script>
 </body>
