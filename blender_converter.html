@@ -142,7 +142,7 @@
                 .replace(/},\[/g, "\],\[");
             realString = realString.substring(0,realString.length-2) + "]]";
             let scriptElement = document.getElementById("script");
-            let updatedScript = scriptElement.innerText.replace("data =", `data = ${realString};`);
+            let updatedScript = scriptElement.innerText.replace("data =", `data = ${realString}`);
             document.getElementById("output").innerText = updatedScript;
         }
 
