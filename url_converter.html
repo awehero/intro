@@ -380,17 +380,17 @@ function convert() {
             post[i] = post[i].replace(/,/g, "=");
         } else if (post[i].substring(0,4) == "grav") {
             let gravHelp = "";
-            if (post[i].split(",")[1] != null) {
+            if (post[i].split(",")[1] != "null") {
                     gravHelp = "gx=" + post[i].split(",")[1];
             }
-            if (post[i].split(",")[2] != null) {
+            if (post[i].split(",")[2] != "null") {
                 if (gravHelp == "") {
                     gravHelp = "gy=" + post[i].split(",")[2];
                 } else {
                     gravHelp = gravHelp + "?gy=" + post[i].split(",")[2]
                 }
             }
-            if (post[i].split(",")[3] != null) {
+            if (post[i].split(",")[3] != "null") {
                 if (gravHelp == "") {
                     gravHelp = "gz=" + post[i].split(",")[3];
                 } else {
@@ -400,17 +400,17 @@ function convert() {
             post[i] = gravHelp;
         } else if (post[i].substring(0,4) == "tilt") {
             let tiltHelp = "";
-            if (post[i].split(",")[1] != null) {
+            if (post[i].split(",")[1] != "null") {
                     tiltHelp = "tx=" + post[i].split(",")[1];
             }
-            if (post[i].split(",")[2] != null) {
+            if (post[i].split(",")[2] != "null") {
                 if (tiltHelp == "") {
                     tiltHelp = "ty=" + post[i].split(",")[2];
                 } else {
                     tiltHelp = tiltHelp + "?ty=" + post[i].split(",")[2]
                 }
             }
-            if (post[i].split(",")[3] != null) {
+            if (post[i].split(",")[3] != "null") {
                 if (tiltHelp == "") {
                     tiltHelp = "tz=" + post[i].split(",")[3];
                 } else {
@@ -420,17 +420,17 @@ function convert() {
             post[i] = tiltHelp;
         } else if (post[i].substring(0,4) == "dodo") {
             let dodoHelp = "";
-            if (post[i].split(",")[1] != null) {
+            if (post[i].split(",")[1] != "null") {
                     dodoHelp = "dx=" + post[i].split(",")[1];
             }
-            if (post[i].split(",")[2] != null) {
+            if (post[i].split(",")[2] != "null") {
                 if (dodoHelp == "") {
                     dodoHelp = "dy=" + post[i].split(",")[2];
                 } else {
                     dodoHelp = dodoHelp + "?dy=" + post[i].split(",")[2]
                 }
             }
-            if (post[i].split(",")[3] != null) {
+            if (post[i].split(",")[3] != "null") {
                 if (dodoHelp == "") {
                     dodoHelp = "dz=" + post[i].split(",")[3];
                 } else {
