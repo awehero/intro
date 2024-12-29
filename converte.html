@@ -72,13 +72,22 @@
     </style>
 </head>
 <body>
-<div id="dropdown-container">
-  <select id="single-select">
-    <option value="option1">Option 1</option>
-    <option value="option2">Option 2</option>
-    <option value="option3">Option 3</option>
-  </select>
-</div>
-
+    <h1>Map Converter</h1>
+    <div>Made by awehero54</div>
+    <p>Enter the Draft Link, Draft Id, hf</p>
+    <textarea id="inputString" rows="6" cols="80"></textarea>
+    <br>
+    <button onclick="processString()">Get Mapfile!</button>
+    <br><br>
+    <button id="copyButton" onclick="copyLink()">Copy!</button>
+    <h2>Mapfile:</h2>
+    <div id="output" style="white-space: pre-wrap;"></div>
+    <div id="typeSelectionDiv">
+        <select id="outputTypeBox">
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </select>
+    </div>
 </body>
 </html>
