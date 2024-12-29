@@ -340,7 +340,12 @@ function convert() {
         }
     }
     
-    let postOne = mapfile.substring(mapfile.indexOf("post"),mapfile.indexOf("section_id: 0"));
+    let postOne = 
+    if (mapfile.indexOf("section_id: 0") == -1) {
+        postOne = mapfile.substring(mapfile.indexOf("post"),mapfile.indexOf("section_id:0"));
+    } else {
+        postOne = mapfile.substring(mapfile.indexOf("post"),mapfile.indexOf("section_id: 0"));
+    }
     let post = postOne.substring(postOne.indexOf("cc"));
     post = post.replace(/\s+/g, "")
                 .replace(/"/g, "")
