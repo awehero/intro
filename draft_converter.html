@@ -77,17 +77,17 @@
               inputString = inputString.substring(inputString.indexOf("DraftId=") + 8);
             }
             
-            let data = {
+            /*let data = {
               compilerOutput: inputString,
               compilerVersion: "v9",
-              //tokenId: ""
-            };
+              tokenId: ""
+            };*/
             const options = {
               method: 'GET',
-              headers: {
+              /*headers: {
                 'Content-Type': 'application/json'
               }
-              body: JSON.stringify(data)
+              body: JSON.stringify(data)*/
             };
             fetch("https://icedodo-api.onionfist.com/api/get_draft_javascript.js?DraftId=" + inputString, options)
               .then(response => response.text())
