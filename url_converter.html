@@ -75,7 +75,7 @@
     <h1>Mapfile to URL Converter</h1>
     <div>Made by awehero54</div>
     <p>Enter the full mapfile here:</p>
-    <input type="text" id="query" placeholder="Mapfile goes here..." style="width: 100%;">
+    <textarea id="inputText" rows="6" cols="80"></textarea>
     <br>
     <button onclick="convert()">Go!</button>
     <br><br>
@@ -102,7 +102,7 @@ function copyLink() {
     }
 }
 function convert() {
-    let mapfile = document.getElementById("query").value;
+    let mapfile = document.getElementById("inputText").value;
     
     let firstIndex = mapfile.indexOf('{');
     let secondIndex = mapfile.indexOf('{', firstIndex + 1);
