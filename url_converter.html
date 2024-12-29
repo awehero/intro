@@ -38,6 +38,7 @@ let endings = [];
 let cylinders = [];
 let spheres = [];
 let monkeys = [];
+let result = document.getElementById("result");
 function convert() {
     let mapfile = document.getElementById("query").value;
     
@@ -507,7 +508,7 @@ function convert() {
                     .replace(/\*Math.PI\/180/g, "");
     let sectionThree = sectionTwo.split(":");
     if (Math.round(sectionThree.length / 2) != sectionThree.length / 2) {
-        document.getElementById("result").innerText = "Invalid number of planes! Please send Awehero the mapfile and ask him to fix the plane count!";
+        result.innerText = "Invalid number of planes! Please send Awehero the mapfile and ask him to fix the plane count!";
     }
     let sectionFour = [];
     for (var i = 1; i < sectionThree.length; i++) {
@@ -569,7 +570,7 @@ function convert() {
             currentValue = currentValue + "?" + effect;
         }
         planes[planeNum][9] = currentValue;
-    }
+    }/*
     for (var i = 0; i < sectionFive.length; i++) {
         for (var j = 0; j < sectionFive[i].length; j++) {
             let tempArray = [];
@@ -696,30 +697,30 @@ function convert() {
                 addEffect(i/2,value);
             }
         }
-    }
+    }*/
     let url = "https://icedodo.onionfist.com/creative/?CompilerVersion=v9&CompilerOutput=";
     monkeys.forEach(function(object) {
-        url += "A" + object.join("$");
+        url += "G" + object.join("$");
     });
     planes.forEach(function(object) {
         url += "A" + object.join("$");
     });
     cubes.forEach(function(object) {
-        url += "A" + object.join("$");
+        url += "B" + object.join("$");
     });
     cones.forEach(function(object) {
-        url += "A" + object.join("$");
+        url += "C" + object.join("$");
     });
     cylinders.forEach(function(object) {
-        url += "A" + object.join("$");
+        url += "E" + object.join("$");
     });
     spheres.forEach(function(object) {
-        url += "A" + object.join("$");
+        url += "F" + object.join("$");
     });
     endings.forEach(function(object) {
-        url += "A" + object.join("$");
+        url += "D" + object.join("$");
     });
-    document.getElementById("result").innerText = url;
+    result.innerText = url;
 }
 </script>
 </body>
