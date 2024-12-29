@@ -507,9 +507,6 @@ function convert() {
                     .replace(/a.msg_del\(\);/g, "")
                     .replace(/\*Math.PI\/180/g, "");
     let sectionThree = sectionTwo.split(":");
-    if (Math.round(sectionThree.length / 2) != sectionThree.length / 2) {
-        result.innerText = "Invalid number of planes! Please send Awehero the mapfile and ask him to fix the plane count!";
-    }
     let sectionFour = [];
     for (var i = 1; i < sectionThree.length; i++) {
             sectionFour.push(sectionThree[i].substring(0,sectionThree[i].length - (i.toString().length)));
@@ -553,6 +550,9 @@ function convert() {
         planeArray.push(100);
         planeArray.push("");
         planes.push(planeArray);
+    }
+    if (Math.round(sectionFive.length / 2) != sectionFive.length / 2) {
+        result.innerText = "Invalid number of planes! Please send Awehero the mapfile and ask him to fix the plane count!";
     }
     let red = '';
     let orange = '';
