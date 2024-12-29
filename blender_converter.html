@@ -141,7 +141,9 @@
                 .replace(/\"z\":/g, "")
                 .replace(/},\[/g, "\],\[");
             realString = realString.substring(0,realString.length-2) + "]]";
-            document.getElementById("output").innerText = realString;
+            let scriptElement = document.getElementById("script");
+            let updatedScript = scriptElement.innerText.replace("data =", `data = ${realString};`);
+            document.getElementById("output").innerText = updatedScript;
         }
 
         function createMesh(type, xPos, yPos, zPos, xRot, yRot, zRot, xSize, ySize, zSize, name) {
@@ -188,5 +190,39 @@
     <button id="copyButton" onclick="copyLink()">Copy!</button>
     <h2>Code:</h2>
     <div id="output" style="white-space: pre-wrap;"></div>
+    <pre id="script">
+import bpy
+import ast
+bpy.ops.object.select_all(action='SELECT')
+bpy.ops.object.delete()
+# THIS WILL DELETE ALL OBJECTS CURRENTLY IN THE SCENE
+# Paste this code and click the arrow to run the script
+data = 
+
+def add_object(position, rotation, size, name, obj_type):
+    if obj_type == "Cube":
+        bpy.ops.mesh.primitive_cube_add(location=position, rotation=tuple(r * 3.141592653589793 / 180 for r in rotation))
+    elif obj_type == "Plane":
+        bpy.ops.mesh.primitive_plane_add(location=position, rotation=tuple(r * 3.141592653589793 / 180 for r in rotation))
+    elif obj_type == "Cone":
+        bpy.ops.mesh.primitive_cone_add(location=position, rotation=tuple(r * 3.141592653589793 / 180 for r in rotation))
+    elif obj_type == "UV Sphere":
+        bpy.ops.mesh.primitive_uv_sphere_add(location=position, rotation=tuple(r * 3.141592653589793 / 180 for r in rotation))
+    elif obj_type == "Cylinder":
+        bpy.ops.mesh.primitive_cylinder_add(location=position, rotation=tuple(r * 3.141592653589793 / 180 for r in rotation))
+    elif obj_type == "Ico Sphere":
+        bpy.ops.mesh.primitive_ico_sphere_add(location=position, rotation=tuple(r * 3.141592653589793 / 180 for r in rotation))
+    elif obj_type == "Monkey":
+        bpy.ops.mesh.primitive_monkey_add(location=position, rotation=tuple(r * 3.141592653589793 / 180 for r in rotation))
+    else:
+        print(f"Unknown object type: {obj_type}")
+        return
+    obj = bpy.context.object
+    obj.scale = size
+    obj.name = name
+for entry in data:
+    position, rotation, size, name, obj_type = entry
+    add_object(position, rotation, size, name, obj_type)
+    </pre>
 </body>
 </html>
