@@ -89,5 +89,23 @@
             <option value="option3">Option 3</option>
         </select>
     </div>
+    <script>
+    function URLToTinyurl(
+        let longUrl = 'https://www.example.com'; // Replace with the URL you want to shorten
+        fetch('https://api.tinyurl.com/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: longUrl })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Shortened URL:', data.tiny_url); // This will log the shortened TinyURL
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    </script>
 </body>
 </html>
