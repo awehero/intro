@@ -76,6 +76,7 @@
     <input type="text" id="query" placeholder="Script goes here..." style="width: 100%;">
     <button onclick="convert()">Go!</button>
     <div>Made by awehero54</div>
+    <button id="copyButton" onclick="copyLink()">Copy!</button>
     <div id="result"></div>
 
 <script>
@@ -92,6 +93,11 @@ let cylinders = [];
 let spheres = [];
 let monkeys = [];
 let result = document.getElementById("result");
+function copyLink() {
+    if (document.getElementById("output").innerText != '') {
+        navigator.clipboard.writeText(document.getElementById("output").innerText);
+    }
+}
 function convert() {
     let mapfile = document.getElementById("query").value;
     
