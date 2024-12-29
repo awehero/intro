@@ -74,10 +74,10 @@
 <body>
     <h1>Map Converter</h1>
     <div>Made by awehero54</div>
-    <p>Enter the Draft Link, Draft Id, hf</p>
+    <p>Enter the Draft Link, Draft Id, URL, Mapfile, Tinyurl</p>
     <textarea id="inputString" rows="6" cols="80"></textarea>
     <br>
-    <button onclick="processString()">Get Mapfile!</button>
+    <button onclick="convert()">Get Mapfile!</button>
     <br><br>
     <button id="copyButton" onclick="copyLink()">Copy!</button>
     <h2>Mapfile:</h2>
@@ -90,8 +90,20 @@
         </select>
     </div>
     <script>
-    function URLToTinyurl(
-        let longUrl = 'https://www.example.com'; // Replace with the URL you want to shorten
+    function tinyurlToURL(tinyUrl) {
+        fetch(tinyUrl, {
+            method: 'HEAD',
+            redirect: 'follow'
+        })
+            .then(response => {
+                const originalUrl = response.url;
+                console.log('Original URL:', originalUrl);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+    function urlToTinyurl(longUrl) {
         fetch('https://api.tinyurl.com/create', {
             method: 'POST',
             headers: {
@@ -106,6 +118,7 @@
             .catch(error => {
                 console.error('Error:', error);
             });
+    }
     </script>
 </body>
 </html>
