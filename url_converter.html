@@ -640,10 +640,11 @@ function convert() {
                 }
                 addEffect(i/2,effectName);
             } else if (sectionFive[i][j].substring(0,6) == 'isSpin') {
+                let value = "";
                 if (sectionFive[i][j].split("=")[1] == "true") {
-                    let value = "sl=on";
+                    value = "sl=on";
                 } else {
-                    let value = "sl=off";
+                    value = "sl=off";
                 }
                 addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,5) == 'rotat') {
