@@ -74,30 +74,36 @@
 <body>
     <h1>Map Converter</h1>
     <div>Made by awehero54</div>
-    <p>Enter the Draft Link, Draft Id, URL, Mapfile, Tinyurl</p>
+    <div id="typeSelectionDiv">
+        <select id="outputTypeBox">
+            <option value="draft">Option 1</option>
+            <option value="tinyurl">Option 2</option>
+            <option value="url">Option 3</option>
+            <option value="mapfile">Option 3</option>
+            <option value="blender">Option 3</option>
+        </select>
+    </div>
+    <br>
+    <p>Enter a Draft Link, Draft Id, URL, Mapfile, or Tinyurl</p>
     <textarea id="inputString" rows="6" cols="80"></textarea>
     <br>
     <button onclick="convert()">Get Mapfile!</button>
     <br><br>
     <button id="copyButton" onclick="copyLink()">Copy!</button>
-    <h2>Mapfile:</h2>
+    <h2>Output:</h2>
     <div id="output" style="white-space: pre-wrap;"></div>
-    <div id="typeSelectionDiv">
-        <select id="outputTypeBox">
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-        </select>
-    </div>
+    
     <script>
+    function convert() {
+        
+    }
     function tinyurlToURL(tinyUrl) {
         fetch(tinyUrl, {
             method: 'HEAD',
             redirect: 'follow'
         })
             .then(response => {
-                const originalUrl = response.url;
-                console.log('Original URL:', originalUrl);
+                return response.url;
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -113,7 +119,7 @@
         })
             .then(response => response.json())
             .then(data => {
-                console.log('Shortened URL:', data.tiny_url); // This will log the shortened TinyURL
+                return data.tiny_url:
             })
             .catch(error => {
                 console.error('Error:', error);
