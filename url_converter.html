@@ -243,7 +243,7 @@ function convert() {
                 tempArray.push(Math.round(startObjects[i][7] * 500) / 10);
                 tempArray.push(Math.round(startObjects[i][9] * 500) / 10);
                 tempArray.push(Math.round(startObjects[i][8] * 500) / 10);
-                mat = startObjects[i][10];
+                mat = startObjects[i][10].replace(/\"/g, "");
                 effects = [];
                 if (mat != "1") {
                     if (!!mat.match(",")) {
