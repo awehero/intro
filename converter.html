@@ -120,7 +120,7 @@
     function convert() {
         let inputType = "";
         let outputType = document.getElementById("outputTypeBox").value;
-        let input = document.getElementById("inputText");
+        let input = document.getElementById("inputText").value;
         if (input.substring(0,8) == "https://") {
             input = input.substring(9);//might be 8, just double check later
         }
