@@ -527,18 +527,20 @@ function convert() {
             name = name + post[i];
         }
     }
-    let monkeyTemp = [];
-    monkeyTemp.push(0);
-    monkeyTemp.push(1500);
-    monkeyTemp.push(1500);
-    monkeyTemp.push(0);
-    monkeyTemp.push(0);
-    monkeyTemp.push(0);
-    monkeyTemp.push(50);
-    monkeyTemp.push(50);
-    monkeyTemp.push(50);
-    monkeyTemp.push(name);
-    monkeys.push(monkeyTemp);
+    if (name.length != 0) {
+        let monkeyTemp = [];
+        monkeyTemp.push(0);
+        monkeyTemp.push(1500);
+        monkeyTemp.push(1500);
+        monkeyTemp.push(0);
+        monkeyTemp.push(0);
+        monkeyTemp.push(0);
+        monkeyTemp.push(50);
+        monkeyTemp.push(50);
+        monkeyTemp.push(50);
+        monkeyTemp.push(name);
+        monkeys.push(monkeyTemp);
+    }
     let section ='';
     if (mapfile.indexOf("reset: function") == -1) {
         section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset:function"));
