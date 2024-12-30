@@ -155,20 +155,16 @@ function convert() {
                 values[9],
             ];
     
-            let rowTwoHelper = fullRow.substring(fullRow.indexOf('"')+1);
-            let rowTwo = rowTwoHelper.substring(rowTwoHelper.indexOf('"')+2);
-            const rowTwoValues = rowTwo.split(',');
-    
-            // CHANGE THE NUMBER OF VALUES DEPENDING ON IF YOU ARE USING A DIFFERENT VERSION
-            listRow.push(rowTwoValues[0]);
-            listRow.push(rowTwoValues[1]);
-            listRow.push(rowTwoValues[2]);
-            listRow.push(rowTwoValues[3]);
-            listRow.push(rowTwoValues[4]);
-            if (version == 8) {listRow.push(rowTwoValues[5]);}
-    
-            if (rowOne === "a.p" && rowTwoValues.length > 5 && version == 8) {
-                listRow.push(rowTwoValues[5]);
+            if (version >= 8) {
+                listRow.push(values[10]);
+                listRow.push(values[11]);
+                listRow.push(values[12]);
+                listRow.push(values[13]);
+                listRow.push(values[14]);
+                listRow.push(values[15]);
+                if (rowOne === "a.p") {
+                    listRow.push(values[16]);
+                }
             }
     
             startObjects.push(listRow);
