@@ -145,19 +145,26 @@
         }
         let process = processes[inputType][outputType];
         for (var i = 0; i < process.length; i++) {
-            
+            urlToTinyurl(input).then(finalUrl => {
+                input = finalURL;
+            });
+            tinyurlToURL(input).then(expandedUrl => {
+                input = expandedUrl;
+            });
+
         }
     }
     function tinyurlToURL(tinyUrl) {
-        fetch(tinyUrl, {
+        return fetch(tinyUrl, { // Add `return` here
             method: 'HEAD',
             redirect: 'follow'
         })
             .then(response => {
-                return response.url;
+                return response.url; // Return the expanded URL
             })
             .catch(error => {
                 console.error('Error:', error);
+                return null; // Return null if there's an error
             });
     }
     function urlToTinyurl(longUrl) {
