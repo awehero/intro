@@ -752,7 +752,7 @@ function convert() {
                 let value = "d=" + sectionFive[i][j].substring(8,sectionFive[i][j].length-1);
                 addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,10) == 'a.fov_mul2') {
-                let value = "d=" + sectionFive[i][j].substring(8,sectionFive[i][j].length-1);
+                let value = "fov=" + sectionFive[i][j].substring(11,sectionFive[i][j].length-1);
                 addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,5) == 'speed') {
                 let value = sectionFive[i][j];
