@@ -209,15 +209,13 @@ function convert() {
                 values[2],
                 values[3]
             ];
-            let rowTwoHelper = fullRow.substring(fullRow.indexOf('"')+1);
-            let rowTwo = rowTwoHelper.substring(rowTwoHelper.indexOf('"')+2);
-            const rowTwoValues = rowTwo.split(',');
-            if (version == 8) {
-                listRow.push(rowTwoValues[0]);
-                listRow.push(rowTwoValues[1]);
-                listRow.push(rowTwoValues[2]);
-                listRow.push(rowTwoValues[3]);
-                listRow.push(rowTwoValues[4]);
+            if (version >= 8) {
+                listRow.push(values[4]);
+                listRow.push(values[5]);
+                listRow.push(values[6]);
+                listRow.push(values[7]);
+                listRow.push(values[8]);
+                listRow.push(values[9]);
             }
             startObjects.push(listRow);
         }
