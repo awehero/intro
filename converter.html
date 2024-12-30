@@ -161,19 +161,19 @@
             });
     }
     function urlToTinyurl(longUrl) {
-        fetch('https://api.tinyurl.com/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ url: longUrl })
-        })
-            .then(response => response.json())
-            .then(data => {
-                return data.tiny_url;
+        return fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status} - ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(shortUrl => {
+                return shortUrl; // Return the shortened URL
             })
             .catch(error => {
                 console.error('Error:', error);
+                return null; // Return null in case of an error
             });
     }
     function copyLink() {
