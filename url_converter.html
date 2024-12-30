@@ -299,7 +299,7 @@ function convert() {
                 mat = startObjects[i][4];
                 effects = [];
                 if (mat != "true") {
-                    if (!!mat.match("?")) {
+                    if (mat.indexOf("?") != -1) {
                         mat = "m=" + mat.split("?")[0] + "?o=" + mat.split("?")[1];
                     } else {
                         mat = "m=" + mat;
@@ -341,7 +341,7 @@ function convert() {
                 mat = startObjects[i][10];
                 effects = [];
                 if (mat != "1") {
-                    if (!!mat.match("?")) {
+                    if (mat.indexOf("?") != -1) {
                         mat = "m=" + mat.split("?")[0] + "?o=" + mat.split("?")[1];
                     } else {
                         mat = "m=" + mat;
@@ -387,7 +387,7 @@ function convert() {
                 mat = startObjects[i][5];
                 effects = [];
                 if (mat != "1") {
-                    if (!!mat.match("?")) {
+                    if (mat.indexOf("?") != -1) {
                         mat = "m=" + mat.split("?")[0] + "?o=" + mat.split("?")[1];
                     } else {
                         mat = "m=" + mat;
