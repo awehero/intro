@@ -134,7 +134,7 @@ function convert() {
             let matOne = fullRow.substring(0,fullRow.indexOf("\""));
             let matTwo = fullRow.substring(fullRow.indexOf("\"")+1).substring(0,fullRow.substring(fullRow.indexOf("\"")+1).indexOf("\"")).replace(/,/g, "?");
             let matThree = fullRow.substring(fullRow.indexOf("\"")+1).substring(fullRow.substring(fullRow.indexOf("\"")+1).indexOf("\"")+1);
-            fullrow = matOne + matTwo + matThree;
+            fullRow = matOne + matTwo + matThree;
         }
         let rowOne = fullRow.substring(0, 3);
         fullRow = fullRow.substring(fullRow.indexOf(",") + 1);
