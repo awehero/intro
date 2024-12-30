@@ -175,12 +175,18 @@ function convert() {
     
         } else if (rowOne === "a.c") {
             const values = fullRow.split(',');
+            let tempMatValue = '';
+            if (fullRow.indexOf("\"") != -1) {
+                tempMatValue = fullRow.substring(fullRow.indexOf('"') + 1).substring(0,fullRow.substring(fullRow.indexOf('"')+1).length-1);
+            } else {
+                tempMatValue = fullRow.substring(fullRow.lastIndexOf(",")+1);
+            }
             let listRow = [
                 rowOne,
                 values[0],
                 values[1],
                 values[2],
-                (fullRow.substring(fullRow.indexOf('"') + 1)).substr(0,fullRow.substring(fullRow.indexOf('"')+1).length-1)
+                tempMatValue
             ];
             startObjects.push(listRow);
     
