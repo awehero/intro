@@ -748,6 +748,9 @@ function convert() {
             } else if (sectionFive[i][j].substring(0,8) == 'a.cam_cd') {
                 let value = "cd=" + sectionFive[i][j].substring(9,sectionFive[i][j].length-1);
                 addEffect(i/2,value);
+            } else if (sectionFive[i][j].substring(0,8) == 'a.cam_cr') {
+                let value = "cr=" + sectionFive[i][j].substring(9,sectionFive[i][j].length-1);
+                addEffect(i/2,value);
             } else if (sectionFive[i][j].substring(0,7) == 'a.cam_d') {
                 let value = "d=" + sectionFive[i][j].substring(8,sectionFive[i][j].length-1);
                 addEffect(i/2,value);
