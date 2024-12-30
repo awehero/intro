@@ -145,8 +145,8 @@
         }
         let process = processes[inputType][outputType];
         for (var i = 0; i < process.length; i++) {
-            urlToTinyurl(input).then(finalUrl => {
-                input = finalURL;
+            urlToTinyurl(input).then(tinyUrl => {
+                input = tinyUrl;
             });
             tinyurlToURL(input).then(expandedUrl => {
                 input = expandedUrl;
