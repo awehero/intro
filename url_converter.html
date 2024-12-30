@@ -102,8 +102,20 @@ function copyLink() {
     }
 }
 function convert() {
-    let mapfile = document.getElementById("inputText").value;
+    let objects = [];
+    let startObjects = [];
+    let postObjects = [];
+    let version = 8;
+    let input = "";
+    let planes = [];
+    let cubes = [];
+    let cones = [];
+    let endings = [];
+    let cylinders = [];
+    let spheres = [];
+    let monkeys = [];
     
+    let mapfile = document.getElementById("inputText").value;
     let firstIndex = mapfile.indexOf('{');
     let secondIndex = mapfile.indexOf('{', firstIndex + 1);
     if (secondIndex === -1) return;
