@@ -176,6 +176,11 @@
                 console.error('Error:', error);
             });
     }
+    function copyLink() {
+        if (document.getElementById("outputText").innerText != '') {
+            navigator.clipboard.writeText(document.getElementById("outputText").innerText);
+        }
+    }
     </script>
 </body>
 </html>
