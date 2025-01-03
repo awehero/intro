@@ -634,8 +634,8 @@ function convert() {
     for (var i = 0; i < sectionFive.length; i+=2) {
         red = Math.round(parseFloat(sectionFive[i][0]) * 1000) / 1000;
         orange = Math.round(parseFloat(sectionFive[i+1][0]) * 1000) / 1000;
-        planes[i/2][1] = (((red - orange) / 2) + orange) * 100;
-        planes[i/2][7] = (red - orange) / 0.02;
+        planes[i/2][1] = Math.round((((red - orange) / 2) + orange) * 10000) / 100;
+        planes[i/2][7] = Math.round((red - orange) / 2) * 100;
     }
     function addEffect(planeNum,effect) {
         let currentValue = planes[planeNum][9];
