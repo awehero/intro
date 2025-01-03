@@ -632,8 +632,8 @@ function convert() {
     let red = '';
     let orange = '';
     for (var i = 0; i < sectionFive.length; i+=2) {
-        red = parseInt(sectionFive[i][0]);
-        orange = parseInt(sectionFive[i+1][0]);
+        red = Math.round(parseFloat(sectionFive[i][0]) * 1000) / 1000;
+        orange = Math.round(parseFloat(sectionFive[i+1][0]) * 1000) / 1000;
         planes[i/2][1] = (((red - orange) / 2) + orange) * 100;
         planes[i/2][7] = (red - orange) / 0.02;
     }
