@@ -637,6 +637,7 @@ function convert() {
         planes[i/2][1] = Math.round((((red - orange) / 2) + orange) * 10000) / 100;
         planes[i/2][7] = Math.round((red - orange) / 2) * 100;
     }
+    let idBlocks = [];
     function addEffect(planeNum,effect) {
         let currentValue = planes[planeNum][9];
         if (currentValue == "") {
@@ -646,7 +647,6 @@ function convert() {
         }
         planes[planeNum][9] = currentValue;
     }
-    let idBlocks = [];
     for (var i = 0; i < sectionFive.length; i++) {
         for (var j = 0; j < sectionFive[i].length; j++) {
             let tempArray = [];
