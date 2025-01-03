@@ -95,6 +95,7 @@ let endings = [];
 let cylinders = [];
 let spheres = [];
 let monkeys = [];
+let idBlocks = [];
 let result = document.getElementById("result");
 function copyLink() {
     if (document.getElementById("result").innerText != '') {
@@ -637,7 +638,7 @@ function convert() {
         planes[i/2][1] = Math.round((((red - orange) / 2) + orange) * 10000) / 100;
         planes[i/2][7] = Math.round((red - orange) / 2) * 100;
     }
-    let idBlocks = [];
+    idBlocks = [];
     function addEffect(planeNum,effect) {
         let currentValue = planes[planeNum][9];
         if (currentValue == "") {
