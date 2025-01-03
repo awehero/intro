@@ -675,6 +675,9 @@ function convert() {
                 let number = tempArray[0].substring(1);
                 switch (type) {
                     case 'P':
+                        if (cubes[number][9].indexOf(sectionFive[i][j].substring(2,3) + tempArray[1]) != -1) {
+                            break;
+                        }
                         if (cubes[number][9] == "_") {
                             cubes[number][9] = action;
                         } else {
@@ -685,6 +688,9 @@ function convert() {
                         }
                         break;
                     case 'C':
+                        if (cones[number][9].indexOf(sectionFive[i][j].substring(2,3) + tempArray[1]) != -1) {
+                            break;
+                        }
                         if (cones[number][9] == "_") {
                             cones[number][9] = action;
                         } else {
@@ -695,6 +701,9 @@ function convert() {
                         }
                         break;
                     case 'E':
+                        if (endings[number][9].indexOf(sectionFive[i][j].substring(2,3) + tempArray[1]) != -1) {
+                            break;
+                        }
                         if (endings[number][9] == "_") {
                             endings[number][9] = action;
                         } else {
@@ -705,6 +714,9 @@ function convert() {
                         }
                         break;
                     case 'Y':
+                        if (cylinders[number][9].indexOf(sectionFive[i][j].substring(2,3) + tempArray[1]) != -1) {
+                            break;
+                        }
                         if (cylinders[number][9] == "_") {
                             cylinders[number][9] = action;
                         } else {
@@ -715,6 +727,9 @@ function convert() {
                         }
                         break;
                     case 'S':
+                        if (spheres[number][9].indexOf(sectionFive[i][j].substring(2,3) + tempArray[1]) != -1) {
+                            break;
+                        }
                         if (spheres[number][9] == "_") {
                             spheres[number][9] = action;
                         } else {
