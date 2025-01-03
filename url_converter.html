@@ -657,7 +657,6 @@ function convert() {
                 let action = sectionFive[i][j].substring(2,3) + tempArray[1] + "=" + tempArray[2];
                 let type = tempArray[0].substring(0,1);
                 let number = tempArray[0].substring(1);
-                idBlocks.push(tempArray[0]);
                 switch (type) {
                     case 'P':
                         if (cubes[number][9] == "_") {
@@ -711,6 +710,7 @@ function convert() {
                         break;
                 }
                 addEffect(i/2,"id=" + ((i / 2) + 1));
+                idBlocks.push([tempArray[0],((i / 2) + 1)]);
             } else if (sectionFive[i][j].substring(0,3) == 'a.g' || sectionFive[i][j].substring(0,3) == 'a.t' || sectionFive[i][j].substring(0,3) == 'a.d') {
                 tempArray = sectionFive[i][j].substring(4,sectionFive[i][j].length - 1).split(",");
                 let direction = [];
