@@ -633,10 +633,10 @@ function convert() {
     let red = '';
     let orange = '';
     for (var i = 0; i < sectionFive.length; i+=2) {
-        red = Math.round(parseFloat(sectionFive[i][0]) * 1000) / 1000;
-        orange = Math.round(parseFloat(sectionFive[i+1][0]) * 1000) / 1000;
-        planes[i/2][1] = Math.round((((red - orange) / 2) + orange) * 10000) / 100;
-        planes[i/2][7] = Math.round((red - orange) / 2) * 100;
+        red = Math.round(parseFloat(sectionFive[i][0]) * 10000) / 10000;
+        orange = Math.round(parseFloat(sectionFive[i+1][0]) * 10000) / 10000;
+        planes[i/2][1] = Math.round((((red - orange) / 2) + orange) * 100000) / 1000;
+        planes[i/2][7] = Math.round((red - orange) / 20) * 1000;
     }
     idBlocks = [];
     function addEffect(planeNum,effect) {
