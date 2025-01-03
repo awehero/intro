@@ -717,7 +717,7 @@ function convert() {
                 for (var k = 0; k < 3; k++) {
                     if (tempArray[k] != "null") {
                         direction[k] = [];
-                        direction.push(action + dirOptions[k] + tempArray[k]);
+                        direction[k].push(action + dirOptions[k] + tempArray[k]);
                     }
                 }
                 let effectName = '';
