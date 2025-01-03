@@ -646,6 +646,7 @@ function convert() {
         }
         planes[planeNum][9] = currentValue;
     }
+    let idBlocks = [];
     for (var i = 0; i < sectionFive.length; i++) {
         for (var j = 0; j < sectionFive[i].length; j++) {
             let tempArray = [];
@@ -656,6 +657,7 @@ function convert() {
                 let action = sectionFive[i][j].substring(2,3) + tempArray[1] + "=" + tempArray[2];
                 let type = tempArray[0].substring(0,1);
                 let number = tempArray[0].substring(1);
+                idBlocks.push(tempArray[0]);
                 switch (type) {
                     case 'P':
                         if (cubes[number][9] == "_") {
