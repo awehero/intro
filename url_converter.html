@@ -636,7 +636,7 @@ function convert() {
         red = Math.round(parseFloat(sectionFive[i][0]) * 10000) / 10000;
         orange = Math.round(parseFloat(sectionFive[i+1][0]) * 10000) / 10000;
         planes[i/2][1] = Math.round((((red - orange) / 2) + orange) * 100000) / 1000;
-        planes[i/2][7] = Math.round((red - orange) / 20) * 1000;
+        planes[i/2][7] = Math.round(((red - orange) / 0.02) * 10000) / 10000
     }
     idBlocks = [];
     function addEffect(planeNum,effect) {
