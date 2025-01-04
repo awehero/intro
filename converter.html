@@ -139,7 +139,7 @@
         }
         let inputTwo = input;
         if (inputTwo.substring(0,8) == "https://") {
-            inputTwo = inputTwo.substring(9);//might be 8, just double check later
+            inputTwo = inputTwo.substring(8);
         }
         switch (inputTwo.substring(0,2)) {
             case "va":
@@ -151,14 +151,14 @@
             case "/*":
                 inputType = 3;
                 break;
-            case "icedodo":
+            case "ic":
                 if (input.indexOf("DraftId") == -1) {
                     inputType = 2;
                 } else {
                     inputType = 0;
                 }
                 break;
-            case "tinyurl":
+            case "ti":
                 inputType = 1;
                 break;
             default:
