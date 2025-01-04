@@ -123,6 +123,20 @@
         let inputType = "";
         let outputType = document.getElementById("outputTypeBox").value;
         let input = document.getElementById("inputText").value;
+        if (input.indexOf("icedodo") != -1) {
+            if (input.indexOf("singleplayer") != -1) {
+                input = input.replace(/https:\/\/icedodo.onionfist.com\/singleplayer\?mapUrl=/g, "https://icedodo.onionfist.com/creative/?CompilerVersion=v9&CompilerOutput=").replace(/&mapCodeVersion=v8/g, "");
+            }
+            if (input.indexOf("https://onionfist.com/icedodo/?mapCodeVersion=v8&mapUrl=") != -1) {
+                input = input.replace(/https:\/\/onionfist.com\/icedodo\/\?mapCodeVersion=v8&mapUrl=/g, "https://icedodo.onionfist.com/creative/?CompilerVersion=v9&CompilerOutput=");
+            }
+            if (input.indexOf("fn.onionfist") != -1) {
+                input = input.replace(/https:\/\/fn.onionfist.com\/icemap\/v7\/world.html\?v7=/g, "https://icedodo.onionfist.com/creative/?CompilerVersion=v9&CompilerOutput=");
+            }
+            if (input.indexOf("v8") != -1) {
+                input = input.replace(/v8/g, "v9");
+            }
+        }
         let inputTwo = input;
         if (inputTwo.substring(0,8) == "https://") {
             inputTwo = inputTwo.substring(9);//might be 8, just double check later
@@ -148,7 +162,7 @@
                 inputType = 1;
                 break;
             default:
-                
+                alert("Invalid input type! Please send what you are trying to convert along with this error message to Awehero and he will try to resolve the issue.");
                 return;
                 break;
         }
@@ -161,8 +175,14 @@
         let process = processes[inputType][outputType];
         for (var i = 0; i < process.length; i++) {
             if (process.substring(i,i+1) == 'a') {
-                input = "https://icedodo-api.onionfist.com/api/get_draft_javascript.js?DraftId=" + input.substring(input.indexOf("=")+1);
-                
+                let draftId = input.substring(input.indexOf("=")+1);
+                let requestUrl = `https://icedodo-api.onionfist.com/api/get_draft_javascript.js?DraftId=${draftId}`;
+                fetch(requestUrl)
+                    .then(response => response.text())
+                    .then(data => {
+                        input = data;
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
             } else if (process.substring(i,i+1) == 'b') {
                 tinyurlToURL(input).then(expandedUrl => {
                     input = expandedUrl;
@@ -174,7 +194,14 @@
                     input = tinyUrl;
                 });
             } else if (process.substring(i,i+1) == 'e') {
-                
+                let urlData = input.substring(input.indexOf("CompilerOutput=")+15);
+                let requestUrl = `icedodo-api.onionfist.com/api/compile_long_map_url.js?longUrl=${urlData}`;
+                fetch(requestUrl)
+                    .then(response => response.text())
+                    .then(data => {
+                        input = data;
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
             } else if (process.substring(i,i+1) == 'f') {
                 
             } else if (process.substring(i,i+1) == 'g') {
