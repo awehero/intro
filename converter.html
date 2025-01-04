@@ -120,6 +120,7 @@
     const inputProcessText = ["Draft","Tinyurl","URL","Mapfile"];
     const outputProcessText = ["Draft","Tinyurl","URL","Mapfile","Blender Data"];
     globalThis.i = 0;
+    globalThis.process = '';
     function convert() {
         i = 0;
         let inputType = "";
@@ -174,7 +175,7 @@
             'event_label': 'Conversion Type',
             'value': processString
         });
-        let process = processes[inputType][outputType];
+        process = processes[inputType][outputType];
         continueProcess(input);
     }
     function continueProcess(input) {
