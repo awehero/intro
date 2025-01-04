@@ -119,7 +119,9 @@
     ];
     const inputProcessText = ["Draft","Tinyurl","URL","Mapfile"];
     const outputProcessText = ["Draft","Tinyurl","URL","Mapfile","Blender Data"];
+    globalThis.i = 0;
     function convert() {
+        i = 0;
         let inputType = "";
         let outputType = document.getElementById("outputTypeBox").value;
         let input = document.getElementById("inputText").value;
@@ -173,41 +175,56 @@
             'value': processString
         });
         let process = processes[inputType][outputType];
-        for (var i = 0; i < process.length; i++) {
-            if (process.substring(i,i+1) == 'a') {
-                let draftId = input.substring(input.indexOf("=")+1);
-                let requestUrl = `https://icedodo-api.onionfist.com/api/get_draft_javascript.js?DraftId=${draftId}`;
-                fetch(requestUrl)
-                    .then(response => response.text())
-                    .then(data => {
-                        input = data;
-                    })
-                    .catch(error => console.error('Error fetching data:', error));
-            } else if (process.substring(i,i+1) == 'b') {
-                tinyurlToURL(input).then(expandedUrl => {
-                    input = expandedUrl;
-                });
-            } else if (process.substring(i,i+1) == 'c') {
-                
-            } else if (process.substring(i,i+1) == 'd') {
-                urlToTinyurl(input).then(tinyUrl => {
-                    input = tinyUrl;
-                });
-            } else if (process.substring(i,i+1) == 'e') {
-                let urlData = input.substring(input.indexOf("CompilerOutput=")+15);
-                let requestUrl = `https://icedodo-api.onionfist.com/api/compile_long_map_url.js?longUrl=${urlData}`;
-                fetch(requestUrl)
-                    .then(response => response.text())
-                    .then(data => {
-                        input = data;
-                    })
-                    .catch(error => console.error('Error fetching data:', error));
-            } else if (process.substring(i,i+1) == 'f') {
-                
-            } else if (process.substring(i,i+1) == 'g') {
-                
-            }
-
+        continueProcess(input);
+    }
+    function continueProcess(input) {
+        if (i < process.length) {
+            convertBetween(input);
+        } else {
+            document.getElementById("outputText").innerText = input;
+        }
+    }
+    function convertBetween(input) {
+        if (process.substring(i,i+1) == 'a') {
+            let draftId = input.substring(input.indexOf("=")+1);
+            let requestUrl = `https://icedodo-api.onionfist.com/api/get_draft_javascript.js?DraftId=${draftId}`;
+            fetch(requestUrl)
+                .then(response => response.text())
+                .then(data => {
+                    input = data;
+                    i++;
+                    continueProcess(input);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        } else if (process.substring(i,i+1) == 'b') {
+            tinyurlToURL(input).then(expandedUrl => {
+                input = expandedUrl;
+                i++;
+                continueProcess(input);
+            });
+        } else if (process.substring(i,i+1) == 'c') {
+            
+        } else if (process.substring(i,i+1) == 'd') {
+            urlToTinyurl(input).then(tinyUrl => {
+                input = tinyUrl;
+                i++;
+                continueProcess(input);
+            });
+        } else if (process.substring(i,i+1) == 'e') {
+            let urlData = input.substring(input.indexOf("CompilerOutput=")+15);
+            let requestUrl = `https://icedodo-api.onionfist.com/api/compile_long_map_url.js?longUrl=${urlData}`;
+            fetch(requestUrl)
+                .then(response => response.text())
+                .then(data => {
+                    input = data;
+                    i++;
+                    continueProcess(input);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        } else if (process.substring(i,i+1) == 'f') {
+            
+        } else if (process.substring(i,i+1) == 'g') {
+            
         }
     }
     function tinyurlToURL(tinyUrl) {
