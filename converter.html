@@ -86,7 +86,7 @@
     <p>Select what you want to convert your map into</p>
     <div id="typeSelectionDiv">
         <select id="outputTypeBox">
-            <option value="0">Draft Link</option>
+            <option value="0" disabled>Draft Link</option>
             <option value="1">Tinyurl</option>
             <option value="2">URL</option>
             <option value="3">Mapfile</option>
@@ -117,15 +117,24 @@
         ["c","d","","e","f"],
         ["gc","gd","g","","gf"]
     ];
+    const inputProcessText = ["Draft","Tinyurl","URL","Mapfile"];
+    const outputProcessText = ["Draft","Tinyurl","URL","Mapfile","Blender Data"];
     function convert() {
         let inputType = "";
         let outputType = document.getElementById("outputTypeBox").value;
         let input = document.getElementById("inputText").value;
-        if (input.substring(0,8) == "https://") {
-            input = input.substring(9);//might be 8, just double check later
+        let inputTwo = input;
+        if (inputTwo.substring(0,8) == "https://") {
+            inputTwo = inputTwo.substring(9);//might be 8, just double check later
         }
-        switch (input.substring(0,7)) {
-            case "var map":
+        switch (inputTwo.substring(0,2)) {
+            case "va":
+                inputType = 3;
+                break;
+            case "//":
+                inputType = 3;
+                break;
+            case "/*":
                 inputType = 3;
                 break;
             case "icedodo":
@@ -138,19 +147,39 @@
             case "tinyurl":
                 inputType = 1;
                 break;
-            /*case default:
-                //Put error here
+            default:
+                
                 return;
-                break;*/
+                break;
         }
+        let processString = inputProcessText[inputType] + " to " + outputProcessText[outputType];
+        gtag('event', 'click', {
+            'event_category': 'Button',
+            'event_label': 'Conversion Type',
+            'value': processString
+        });
         let process = processes[inputType][outputType];
         for (var i = 0; i < process.length; i++) {
-            urlToTinyurl(input).then(tinyUrl => {
-                input = tinyUrl;
-            });
-            tinyurlToURL(input).then(expandedUrl => {
-                input = expandedUrl;
-            });
+            if (process.substring(i,i+1) == 'a') {
+                input = "https://icedodo-api.onionfist.com/api/get_draft_javascript.js?DraftId=" + input.substring(input.indexOf("=")+1);
+                
+            } else if (process.substring(i,i+1) == 'b') {
+                tinyurlToURL(input).then(expandedUrl => {
+                    input = expandedUrl;
+                });
+            } else if (process.substring(i,i+1) == 'c') {
+                
+            } else if (process.substring(i,i+1) == 'd') {
+                urlToTinyurl(input).then(tinyUrl => {
+                    input = tinyUrl;
+                });
+            } else if (process.substring(i,i+1) == 'e') {
+                
+            } else if (process.substring(i,i+1) == 'f') {
+                
+            } else if (process.substring(i,i+1) == 'g') {
+                
+            }
 
         }
     }
