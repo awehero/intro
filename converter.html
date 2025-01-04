@@ -195,7 +195,7 @@
                 });
             } else if (process.substring(i,i+1) == 'e') {
                 let urlData = input.substring(input.indexOf("CompilerOutput=")+15);
-                let requestUrl = `icedodo-api.onionfist.com/api/compile_long_map_url.js?longUrl=${urlData}`;
+                let requestUrl = `https://icedodo-api.onionfist.com/api/compile_long_map_url.js?longUrl=${urlData}`;
                 fetch(requestUrl)
                     .then(response => response.text())
                     .then(data => {
