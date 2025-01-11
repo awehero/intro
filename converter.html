@@ -170,7 +170,7 @@
                 break;
         }
         let processString = inputProcessText[inputType] + " to " + outputProcessText[outputType];
-        gtag('event', 'click', {
+        gtag('event', processString, {
             'event_category': 'Button',
             'event_label': 'Conversion Type',
             'value': processString
