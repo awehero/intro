@@ -77,7 +77,7 @@
     <p>Enter the full mapfile here:</p>
     <textarea id="inputText" rows="6" cols="80"></textarea>
     <br>
-    <button onclick="convert()">Go!</button>
+    <button id="convertButton" onclick="convert()">Go!</button>
     <br><br>
     <button id="copyButton" onclick="copyLink()">Copy!</button>
     <h2>URL:</h2>
@@ -97,6 +97,15 @@ let spheres = [];
 let monkeys = [];
 let idBlocks = [];
 let result = document.getElementById("result");
+
+const urlParams = new URLSearchParams(window.location.search);
+const urlInput = urlParams.get('data');
+// If a 'data' parameter exists, automatically process it
+if (urlInput) {
+    document.getElementById('inputText').value = decodeURIComponent(urlInput);
+    convert();
+}
+
 function copyLink() {
     if (document.getElementById("result").innerText != '') {
         navigator.clipboard.writeText(document.getElementById("result").innerText);
