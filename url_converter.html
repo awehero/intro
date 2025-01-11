@@ -98,14 +98,6 @@ let monkeys = [];
 let idBlocks = [];
 let result = document.getElementById("result");
 
-const urlParams = new URLSearchParams(window.location.search);
-const urlInput = urlParams.get('data');
-// If a 'data' parameter exists, automatically process it
-if (urlInput) {
-    document.getElementById('inputText').value = decodeURIComponent(urlInput);
-    convert();
-}
-
 function copyLink() {
     if (document.getElementById("result").innerText != '') {
         navigator.clipboard.writeText(document.getElementById("result").innerText);
