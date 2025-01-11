@@ -242,7 +242,7 @@
             });
     }
     function urlToTinyurl(longUrl) {
-        return fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`)
+        return fetch(`https://tinyurl.com/api-create.php?url=${longUrl}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status} - ${response.statusText}`);
