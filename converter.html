@@ -136,6 +136,26 @@ def add_object(position, rotation, size, name, obj_type):
 for entry in data:
     position, rotation, size, name, obj_type = entry
     add_object(position, rotation, size, name, obj_type)
+
+import requests
+github_file_url = "https://raw.githubusercontent.com/awehero/intro/main/blender/v9_code.py"
+def fetch_github_file(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.text
+    else:
+        print(f"Failed to fetch file from GitHub. Status Code: {response.status_code}")
+        return None
+def update_scripting_tab(new_content):
+    if bpy.data.texts:
+        script = bpy.data.texts[0]
+    else:
+        script = bpy.data.texts.new("New Script")
+    script.clear()
+    script.write(new_content)
+new_script_content = fetch_github_file(github_file_url)
+if new_script_content:
+    update_scripting_tab(new_script_content)
     </pre>
     
     <script>
