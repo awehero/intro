@@ -382,7 +382,11 @@ if new_script_content:
             if (items.join() != "none" && items.join() != "_") {
                 name = "[" + items.join() + "]";
             } else {
-                name = items.join();
+                if (items.join() == "_") {
+                    name = "Object";
+                } else {
+                    name = items.join();
+                }
             }
             let mesh = createMesh(type, xPos, yPos, zPos, xRot, yRot, zRot, xSize, ySize, zSize, name);
             meshes.push(mesh);
