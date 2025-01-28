@@ -379,7 +379,7 @@ if new_script_content:
                     .replace("dif=", "dif=#")
                     .replace("bg=", "bg=#");
             }
-            if (items.join() != "none") {
+            if (items.join() != "none" && items.join() != "_") {
                 name = "[" + items.join() + "]";
             } else {
                 name = items.join();
