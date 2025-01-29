@@ -5,14 +5,7 @@
     <script>
         async function fetchLinks() {
             const universities = [
-                "Otterbein University", "Ohio State University", "Denison University", "Ohio University", 
-                "University of Dayton", "University of Akron", "Xavier University", "Oberlin College", 
-                "Baldwin Wallace University", "Bowling Green State University", "Kent State University", 
-                "Case Western Reserve University", "John Carroll University", "Miami University", 
-                "University of Michigan-Ann Arbor", "West Virginia University", "Purdue University", 
-                "University of Notre Dame", "University of Chicago", "University of Illinois at Chicago", 
-                "Loyola Chicago", "Duke University", "Drexel University", "University of Pennsylvania", 
-                "New School", "University of California-Berkeley", "Stanford University"
+                "otterbein university"
             ];
             
             const container = document.getElementById("links");
@@ -25,14 +18,14 @@
                 
                 try {
                     let response = await fetch(url);
-                    let html = await response.text();
-                    let link = extractLink(html);
+                    container.innerHTML = await response.text();
+                    /*let link = extractLink(html);
                     
                     if (link) {
                         linksHTML += `<li><a href="${link}" target="_blank">${school}</a></li>`;
                     } else {
                         linksHTML += `<li>${school} - No link found</li>`;
-                    }
+                    }*/
                 } catch (error) {
                     linksHTML += `<li>${school} - Error fetching link</li>`;
                 }
