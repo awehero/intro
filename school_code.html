@@ -14,7 +14,7 @@
             
             for (let school of universities) {
                 let schoolName = school.replace(/\s+/g, "_");
-                let url = "https://www.usnews.com/best-colleges/search?schoolName=" + encodeURIComponent(schoolName) + "&_sort=schoolName&_sortDirection=asc";
+                let url = "https://www.usnews.com/best-colleges/otterbein-university-3110";
                 
                 try {
                     let response = await fetch(url);
@@ -30,8 +30,6 @@
                     linksHTML += `<li>${school} - Error fetching link</li>`;
                 }
             }
-            
-            container.innerHTML = `<ul>${linksHTML}</ul>`;
         }
         
         function extractLink(html) {
