@@ -443,14 +443,6 @@ if new_script_content:
         let monkeys = [];
         let idBlocks = [];
         
-        /*let firstIndex = mapfile.indexOf('{');
-        let secondIndex = mapfile.indexOf('{', firstIndex + 1);
-        if (secondIndex === -1) return;
-        mapfile = mapfile.substring(secondIndex);
-        let firstBraceIndex = mapfile.indexOf('{') + 1;
-        let lastBraceIndex = mapfile.indexOf('}');
-        if (firstBraceIndex === 0 || lastBraceIndex === -1) return;
-        let inputTest = mapfile.substring(firstBraceIndex, lastBraceIndex);*/
         let firstCut = mapfile.substring(mapfile.indexOf("init:"));
         let startCut = firstCut.substring(firstCut.indexOf("a"));
         let inputTest = startCut.substring(0,startCut.indexOf("}"));
@@ -780,6 +772,8 @@ if new_script_content:
                     .replace(/gravity,newBABYLON\.Vector3\(/g, "gravity,")
                     .replace(/camera\.upVector,newBABYLON\.Vector3\(/g, "tilt,")
                     .replace(/player\.scaling,newBABYLON\.Vector3\(/g, "dodoScale,")
+                    .replace(/isSpinLocked,true/, "sl,on")
+                    .replace(/isSpinLocked,false/, "sl,off")
                     .replace(/cc.refresh\(;/g, "")
         post = post.substring(0,post.length-3);
         post = post.split(";");
