@@ -443,14 +443,17 @@ if new_script_content:
         let monkeys = [];
         let idBlocks = [];
         
-        let firstIndex = mapfile.indexOf('{');
+        /*let firstIndex = mapfile.indexOf('{');
         let secondIndex = mapfile.indexOf('{', firstIndex + 1);
         if (secondIndex === -1) return;
         mapfile = mapfile.substring(secondIndex);
         let firstBraceIndex = mapfile.indexOf('{') + 1;
         let lastBraceIndex = mapfile.indexOf('}');
         if (firstBraceIndex === 0 || lastBraceIndex === -1) return;
-        let inputTest = mapfile.substring(firstBraceIndex, lastBraceIndex);
+        let inputTest = mapfile.substring(firstBraceIndex, lastBraceIndex);*/
+        let firstCut = mapfile.substring(mapfile.indexOf("init:"));
+        let startCut = firstCut.substring(firstCut.indexOf("a"));
+        let inputTest = startCut.substring(0,startCut.indexOf("}"));
         
         function formatString(inputFormat) {
             return inputFormat.replace(/[\[\])]/g, "")
