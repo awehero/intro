@@ -449,20 +449,20 @@ function convert() {
         } else if (post[i].substring(0,4) == "grav") {
             let gravHelp = "";
             if (post[i].split(",")[1] != "null") {
-                    gravHelp = "gx=" + post[i].split(",")[1];
+                    gravHelp = "gx=" + post[i].split(",")[1]/-9;
             }
             if (post[i].split(",")[2] != "null") {
                 if (gravHelp == "") {
-                    gravHelp = "gy=" + post[i].split(",")[2];
+                    gravHelp = "gy=" + post[i].split(",")[2]/-9;
                 } else {
-                    gravHelp = gravHelp + "?gy=" + post[i].split(",")[2]
+                    gravHelp = gravHelp + "?gy=" + post[i].split(",")[2]/-9
                 }
             }
             if (post[i].split(",")[3] != "null") {
                 if (gravHelp == "") {
-                    gravHelp = "gz=" + post[i].split(",")[3];
+                    gravHelp = "gz=" + post[i].split(",")[3]/-9;
                 } else {
-                    gravHelp = gravHelp + "?gz=" + post[i].split(",")[3]
+                    gravHelp = gravHelp + "?gz=" + post[i].split(",")[3]/-9
                 }
             }
             post[i] = gravHelp;
