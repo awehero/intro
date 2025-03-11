@@ -110,16 +110,9 @@ function convert() {
     version = 8;
     
     let mapfile = document.getElementById("inputText").value;
-    let firstIndex = mapfile.indexOf('{');
-    let secondIndex = mapfile.indexOf('{', firstIndex + 1);
-    if (secondIndex === -1) return;
-    mapfile = mapfile.substring(secondIndex);
-    
-    let firstBraceIndex = mapfile.indexOf('{') + 1;
-    let lastBraceIndex = mapfile.indexOf('}');
-    if (firstBraceIndex === 0 || lastBraceIndex === -1) return;
-    
-    let input = mapfile.substring(firstBraceIndex, lastBraceIndex);
+    let firstCut = mapfile.substring(mapfile.indexOf("init:"));
+    let startCut = firstCut.substring(firstCut.indexOf("a"));
+    let input = startCut.substring(0,startCut.indexOf("}"));
     
     function formatString(input) {
         return input.replace(/[\[\])]/g, "")
