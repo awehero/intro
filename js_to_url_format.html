@@ -103,7 +103,15 @@ function format() {
             .replace(/"/g, "\\`")
             .replace(/'/g, "\\`")
             .replace(/=/g, "`,cc.set_default.toString().substring(43,44),`")
-            .replace(/BABYLON/g, "`,cc.set_default.toString().substring(826,833),`");
+            .replace(/BABYLON/g, "`,cc.set_default.toString().substring(826,833),`")
+            .replace(/A/g, "`,cc.set_default.toString().substring(260,261),`")
+            .replace(/B/g, "`,cc.set_default.toString().substring(826,827),`")
+            .replace(/C/g, "`,cc.set_default.toString().substring(834,835),`")
+            .replace(/D/g, "`,cc.set_default.toString().substring(256,257),`")
+            .replace(/E/g, "`,cc.set_default.toString().substring(),`")
+            .replace(/F/g, "`,cc.set_default.toString().substring(),`")
+            .replace(/G/g, "`,cc.get.toString().substring(260,261),`")
+            .replace(/H/g, "`,cc.set_default.toString().substring(),`")
     input = "eval([`" + input + "`].join(``))";
     result.innerText = input;
 }
