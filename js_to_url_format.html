@@ -103,6 +103,7 @@ function format() {
             .replace(/'/g, "\\`")
             .replace(/=/g, "`,cc.set_default.toString().substring(43,44),`")
             .replace(/BABYLON/g, "`,cc.set_default.toString().substring(826,833),`");
+    input = "eval([`" + input + "`].join(``))";
     result.innerText = input;
 }
 </script>
