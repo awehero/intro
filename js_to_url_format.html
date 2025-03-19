@@ -93,7 +93,17 @@ function format() {
     let inputText = document.getElementById("inputText");
     let result = document.getElementById("result");
     input = inputText.value;
-
+    input = input.replace(/\s+/g, "")
+            .replace(/\n/g, "")
+            .replace(/let/g, "let ")
+            .replace(/var/g, "var ")
+            .replace(/const/g, "const ")
+            .replace(/newBABYLON/g, "new BABYLON")
+            .replace(/"/g, "\\`")
+            .replace(/'/g, "\\`")
+            .replace(/=/g, "`,cc.set_default.toString().substring(43,44),`")
+            .replace(/BABYLON/g, "`,cc.set_default.toString().substring(826,833),`");
+    result.innerText = input;
 }
 </script>
 </body>
