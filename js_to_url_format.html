@@ -77,19 +77,23 @@
     <p>Enter the javascript code here:</p>
     <textarea id="inputText" rows="6" cols="80"></textarea>
     <br>
-    <button id="convertButton" onclick="format()">Go!</button>
+    <button id="formatButton" onclick="format()">Go!</button>
     <br><br>
     <button id="copyButton" onclick="copyLink()">Copy!</button>
     <h2>URL:</h2>
     <div id="result" style="white-space: pre-wrap;"></div>
 <script>
+let input = "";
 function copyLink() {
     if (document.getElementById("result").innerText != '') {
         navigator.clipboard.writeText(document.getElementById("result").innerText);
     }
 }
 function format() {
-    let input = document.getElementById("inputText");
+    let inputText = document.getElementById("inputText");
+    let result = document.getElementById("result");
+    input = inputText.value;
+
 }
 </script>
 </body>
