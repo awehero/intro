@@ -107,6 +107,7 @@ function format() {
             .replace(/const/g, "const ")
             .replace(/function/g, "function ")
             .replace(/newBABYLON/g, "new BABYLON")
+            .replace(/`/g, "'")
             .replace(/"/g, "\\`")
             .replace(/'/g, "\\`")
             .replace(/=/g, "`,cc.set_default.toString().substring(43,44),`")
