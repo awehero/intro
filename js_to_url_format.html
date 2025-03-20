@@ -120,7 +120,7 @@ function format() {
             .replace(/G/g, "`,alphabet[6],`")
             .replace(/H/g, "`,alphabet[7],`")
     if (capital) {
-        input = "eval([`globalThis.alphabet`,cc.set_default.toString().substring(43,44),`\\`a,b,c,d,e,f,g,h\\`.toUpper`,Object.keys(window).find(k`,cc.set_default.toString().substring(43,44),`>k.includes(\\`allback\\`)).substring(10,11),`ase().split(\`,\`)`" + input + "`].join(``))";
+        input = "eval([`eval([`globalThis.alphabet`,cc.set_default.toString().substring(43,44),`\`a,b,c,d,e,f,g,h\`.toUpper`,eval([`Object.keys(window).find(k`,cc.set_default.toString().substring(43,44),`>k.includes(\`allback\`)).substring(10,11)`].join(``)),`ase().split(\`,\`)`].join(``));`,`" + input + "`].join(``))";
     } else {
         input = "eval([`" + input + "`].join(``))";
     }
