@@ -101,7 +101,9 @@
         input = input.split(",");
         document.querySelectorAll("[id^='row-copy']").forEach(clone => clone.remove());
         for (var i = 0; i < input.length; i++) {
-            row.parentNode.appendChild(row.cloneNode(true));
+            var clone = row.cloneNode(true);
+            clone.textContent = input[i];
+            row.parentNode.appendChild(clone);
         }
     }
     let input = "";
