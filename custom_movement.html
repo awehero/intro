@@ -78,6 +78,7 @@
     <textarea id="inputText" rows="6" cols="80" onchange="load()"></textarea>
     <div id="container">
         <textarea id="row" rows="1" cols="80"></textarea>
+    </div>
     <br>
     <button id="startButton" onclick="start()">Go!</button>
     <br><br>
@@ -87,6 +88,7 @@
 <script>
     let inputText = document.getElementById("inputText");
     let result = document.getElementById("result");
+    let row = document.getElementById('row');
     function load() {
         input = inputText.value;
         input = input.replace(/A/g, ",A")
@@ -97,7 +99,10 @@
                 .replace(/F/g, ",F")
                 .replace(/G/g, ",G");
         input = input.split(",");
-        
+        document.querySelectorAll("[id^='row-copy']").forEach(clone => clone.remove());
+        for (var i = 0; i < input.length; i++) {
+            row.parentNode.appendChild(row.cloneNode(true));
+        }
     }
     let input = "";
     function copyLink() {
