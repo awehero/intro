@@ -121,6 +121,9 @@
                         .replace("gro=", "gro=#")
                         .replace("dif=", "dif=#")
                         .replace("bg=", "bg=#");
+                    if (items[i].substring(items[i].length-2) == ".0") {
+                        items[i] = items[i].substring(0,items[i].length-2);
+                    }
                 }
                 if (items.join() != "none" && items.join() != "_") {
                     name = "[" + items.join() + "]";
