@@ -348,15 +348,15 @@ if new_script_content:
             let type = chunk[0];
             let rest = chunk.slice(1);
             let parts = rest.split('$');
-            let xPos = parseFloat(parts[0]) / 100;
-            let yPos = parseFloat(parts[1]) / 100;
-            let zPos = parseFloat(parts[2]) / 100;
+            let xPos = parseFloat(Math.round(parts[0])) / 100;
+            let yPos = parseFloat(Math.round(parts[1])) / 100;
+            let zPos = parseFloat(Math.round(parts[2])) / 100;
             let xRot = Math.round(parseFloat(parts[3]) / 100 / (Math.PI / 180));
             let yRot = Math.round(parseFloat(parts[4]) / 100 / (Math.PI / 180));
             let zRot = Math.round(parseFloat(parts[5]) / 100 / (Math.PI / 180));
-            let xSize = parseFloat(parts[6]) / 100;
-            let ySize = parseFloat(parts[7]) / 100;
-            let zSize = parseFloat(parts[8]) / 100;
+            let xSize = parseFloat(Math.round(parts[6])) / 100;
+            let ySize = parseFloat(Math.round(parts[7])) / 100;
+            let zSize = parseFloat(Math.round(parts[8])) / 100;
             let name = parts[9];
             let items = name.split("?");
             for (var i = 0; i < items.length; i++) {
@@ -378,6 +378,9 @@ if new_script_content:
                     .replace("gro=", "gro=#")
                     .replace("dif=", "dif=#")
                     .replace("bg=", "bg=#");
+                if (items[i].substring(items[i].length-2) == ".0") {
+                    items[i] = items[i].substring(0,items[i].length-2);
+                }
             }
             if (items.join() != "none" && items.join() != "_") {
                 name = "[" + items.join() + "]";
