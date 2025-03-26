@@ -71,7 +71,7 @@
             max-width: 100%;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         }
-        #copyButton {
+        .copyButton {
             margin-top: 10px;
         }
         .button-group {
@@ -90,10 +90,11 @@
     <br>
     <button id="startButton" onclick="start()">Go!</button>
     <br><br>
-    <button id="copyButton" onclick="copyLink()">Copy!</button>
     <h2>URL:</h2>
+    <button class="copyButton" onclick="copyU()">Copy!</button>
     <div id="resultUrl" style="white-space: pre-wrap;"></div>
     <h2>Data:</h2>
+    <button class="copyButton" onclick="copyD()">Copy!</button>
     <div id="resultData" style="white-space: pre-wrap;"></div>
 <script>
     let inputText = document.getElementById("inputText");
@@ -103,9 +104,14 @@
         
     }
     let input = "";
-    function copyLink() {
-        if (document.getElementById("result").innerText != '') {
-            navigator.clipboard.writeText(document.getElementById("result").innerText);
+    function copyU() {
+        if (resultUrl.innerText != '') {
+            navigator.clipboard.writeText(resultUrl.innerText);
+        }
+    }
+    function copyD() {
+        if (resultData.innerText != '') {
+            navigator.clipboard.writeText(resultData.innerText);
         }
     }
     function start() {
