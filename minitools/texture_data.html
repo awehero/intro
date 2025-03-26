@@ -92,14 +92,24 @@
     <br><br>
     <button id="copyButton" onclick="copyLink()">Copy!</button>
     <h2>URL:</h2>
-    <div id="result" style="white-space: pre-wrap;"></div>
+    <div id="resultUrl" style="white-space: pre-wrap;"></div>
     <h2>Data:</h2>
-    <div id="result" style="white-space: pre-wrap;"></div>
+    <div id="resultData" style="white-space: pre-wrap;"></div>
 <script>
     let inputText = document.getElementById("inputText");
-    let result = document.getElementById("result");
+    let resultUrl = document.getElementById("resultUrl");
+    let resultData = document.getElementById("resultData");
     let row = document.getElementById("row");
     function load() {
+        
+    }
+    let input = "";
+    function copyLink() {
+        if (document.getElementById("result").innerText != '') {
+            navigator.clipboard.writeText(document.getElementById("result").innerText);
+        }
+    }
+    function start() {
         input = inputText.value;
         input = input.replace(/A/g, ",A")
                 .replace(/B/g, ",B")
@@ -109,48 +119,8 @@
                 .replace(/F/g, ",F")
                 .replace(/G/g, ",G");
         input = input.split(",");
-    }
-    let input = "";
-    function copyLink() {
-        if (document.getElementById("result").innerText != '') {
-            navigator.clipboard.writeText(document.getElementById("result").innerText);
-        }
-    }
-    function start() {
-
-        let capital = false;
-        let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"];
-        for (var i = 0; i < alphabet.length; i++) {
-            if (input.indexOf(alphabet[i]) > 0) {
-                capital = true;
-            }
-        }
-        input = input.replace(/\s+/g, "")
-                .replace(/\n/g, "")
-                .replace(/let/g, "let ")
-                .replace(/var/g, "var ")
-                .replace(/const/g, "const ")
-                .replace(/function/g, "function ")
-                .replace(/newBABYLON/g, "new BABYLON")
-                .replace(/`/g, "'")
-                .replace(/"/g, "\\`")
-                .replace(/'/g, "\\`")
-                .replace(/=/g, "`,cc.set_default.toString().substring(43,44),`")
-                .replace(/BABYLON/g, "`,cc.set_default.toString().substring(826,833),`")
-                .replace(/A/g, "`,alphabet[0],`")
-                .replace(/B/g, "`,alphabet[1],`")
-                .replace(/C/g, "`,alphabet[2],`")
-                .replace(/D/g, "`,alphabet[3],`")
-                .replace(/E/g, "`,alphabet[4],`")
-                .replace(/F/g, "`,alphabet[5],`")
-                .replace(/G/g, "`,alphabet[6],`")
-                .replace(/H/g, "`,alphabet[7],`");
-        if (capital) {
-          input = "eye=eval([`globalThis.alphabet`,cc.set_default.toString().substring(43,44),`\\`a,b,c,d,e,f,g,h\\`.toUpper`,eval([`Object.keys(window).find(k`,cc.set_default.toString().substring(43,44),`>k.includes(\\`allback\\`)).substring(10,11)`].join(``)),`ase().split(\\`,\\`)`].join(``))?eye=eval([`" + input + "`].join(``))?eye=300";
-      } else {
-          input = "eval([`" + input + "`].join(``))";
-      }
-      result.innerText = input;
+        
+        result.innerText = input;
   }
 </script>
 </body>
