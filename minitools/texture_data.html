@@ -84,7 +84,7 @@
 <body>
     <h1>Texture Data</h1>
     <div>Made by awehero54</div>
-    <p>Use m=123 or mat=123 to apply data
+    <p>Use m=123456 to apply data
     <p>Enter the URL here:</p>
     <textarea id="inputText" rows="6" cols="80" onchange="load()"></textarea>
     <br>
@@ -99,7 +99,6 @@
     let inputText = document.getElementById("inputText");
     let resultUrl = document.getElementById("resultUrl");
     let resultData = document.getElementById("resultData");
-    let row = document.getElementById("row");
     function load() {
         
     }
@@ -110,6 +109,12 @@
         }
     }
     function start() {
+        let data = [];
+        let other = [];
+        let urlar = [];
+        let url = "";
+        let datatext = "":
+        let cubedata = [];
         input = inputText.value;
         input = input.replace(/A/g, ",A")
                 .replace(/B/g, ",B")
@@ -117,11 +122,43 @@
                 .replace(/D/g, ",D")
                 .replace(/E/g, ",E")
                 .replace(/F/g, ",F")
-                .replace(/G/g, ",G");
+                .replace(/G/g, ",G")
+                .replace(/0.007/g, "")
+                .replace(/0.014/g, "")
+                .replace(/0.021/g, "")
+                .replace(/0.028/g, "")
+                .replace(/0.035/g, "")
+                .replace(/0.042/g, "")
+                .replace(/0.049/g, "");
         input = input.split(",");
-        
-        result.innerText = input;
-  }
+        input.forEach(function(obj) {
+            if (cube.includes("m=123456")) {
+                data.push(obj);
+            } else {
+                other.push(obj);
+            }
+        });
+        for (var i = 0; i < data.length; i++) {
+            data[i] = data[i].substring(1,data[i].length);
+            data[i] = data[i].replace(/m=123456/g, "m=-1");
+            data[i] = data[i].split("$");
+        }
+        for (var i = 0; i < data.length; i++) {
+            for (var j = 0; j < data[i].length-1; j++) {
+                data[i][j] = Math.round(data[i][j]);
+            }
+        }
+        for (var i = 0; i < data.length; i++) {
+            urlar.push("B"+data[i].join("$"));
+        }
+        url = other.join("")+urlar.join("");
+        resultUrl.innerText = url;
+        for (var i = 0; i < data.length; i++) {
+            cubedata.push("{position:new `,cc.set_default.toString().substring(826,833),`.Vector3("+data[i][0]/100+","+data[i][1]/100+","+data[i][2]/100+"),size:{x:"+data[i][6]/50+",y:"+data[i][7]/50+",z:"+data[i][8]/50+"},rY:"+data[i][5]/157+"}");
+        }
+        datatext = "eye=eval([`globalThis.alphabet`,cc.set_default.toString().substring(43,44),`\\`a,b,c,d,e,f,g,h\\`.toUpper`,eval([`Object.keys(window).find(k`,cc.set_default.toString().substring(43,44),`>k.includes(\\`allback\\`)).substring(10,11)`].join(``)),`ase().split(\\`,\\`)`].join(``))?eye=eval([`let cubedata`,cc.set_default.toString().substring(43,44),`["+cubedata.join(",")+"];for(let i`,cc.set_default.toString().substring(43,44),`0;i<cubedata.length;i`,cc.get.toString().substring(572,573),``,cc.get.toString().substring(572,573),`){let data`,cc.set_default.toString().substring(43,44),`cubedata[i];let cube`,cc.set_default.toString().substring(43,44),``,cc.set_default.toString().substring(826,833),`.Mesh`,alphabet[1],`uilder.`,alphabet[2],`reate`,alphabet[1],`ox(\\`cube\\``,cc.get.toString().substring(572,573),`i,{size:1},scene);cube.position`,cc.set_default.toString().substring(43,44),`data.position.clone();cube.scaling`,cc.set_default.toString().substring(43,44),`new `,cc.set_default.toString().substring(826,833),`.Vector3(data.size.x,data.size.y,data.size.z);cube.rotation.y`,cc.set_default.toString().substring(43,44),`data.rY*(Math.PI/2);let material`,cc.set_default.toString().substring(43,44),`new `,cc.set_default.toString().substring(826,833),`.StandardMaterial(\\`material\\``,cc.get.toString().substring(572,573),`i,scene);let texture`,cc.set_default.toString().substring(43,44),`new `,cc.set_default.toString().substring(826,833),`.Texture(\\`https://awehero.github.io/intro/images/tiles.jpg\\`,scene);texture.uScale`,cc.set_default.toString().substring(43,44),`data.size.x/4;texture.vScale`,cc.set_default.toString().substring(43,44),`data.size.y/4;material.diffuseTexture`,cc.set_default.toString().substring(43,44),`texture;cube.material`,cc.set_default.toString().substring(43,44),`material;}`].join(``))?eye=300";
+        resultData.innerText = datatext;
+    }
 </script>
 </body>
 </html>
