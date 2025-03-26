@@ -86,22 +86,23 @@
     <div>Made by awehero54</div>
     <p>Use m=123456 to apply data
     <p>Enter the URL here:</p>
-    <textarea id="inputText" rows="6" cols="80" onchange="load()"></textarea>
+    <textarea id="inputText" rows="6" cols="80"></textarea>
     <br>
     <br><br>
-    <button id="copyButton" onclick="copyU()">Copy!</button>
+    <button id="startButton" onclick="start()">Convert!</button>
+    <button id="copyButton" onclick="copy()">Copy!</button>
     <h2>URL:</h2>
     <div id="result" style="white-space: pre-wrap;"></div>
 <script>
     let inputText = document.getElementById("inputText");
     let result = document.getElementById("result");
     let input = "";
-    function copyU() {
+    function copy() {
         if (result.innerText != '') {
             navigator.clipboard.writeText(result.innerText);
         }
     }
-    function load() {
+    function start() {
         let data = [];
         let other = [];
         let urlar = [];
