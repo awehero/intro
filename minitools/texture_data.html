@@ -71,7 +71,7 @@
             max-width: 100%;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         }
-        .copyButton {
+        #copyButton {
             margin-top: 10px;
         }
         .button-group {
@@ -88,33 +88,20 @@
     <p>Enter the URL here:</p>
     <textarea id="inputText" rows="6" cols="80" onchange="load()"></textarea>
     <br>
-    <button id="startButton" onclick="start()">Go!</button>
     <br><br>
     <h2>URL:</h2>
-    <button class="copyButton" onclick="copyU()">Copy!</button>
-    <div id="resultUrl" style="white-space: pre-wrap;"></div>
-    <h2>Data:</h2>
-    <button class="copyButton" onclick="copyD()">Copy!</button>
-    <div id="resultData" style="white-space: pre-wrap;"></div>
+    <button id="copyButton" onclick="copyU()">Copy!</button>
+    <div id="result" style="white-space: pre-wrap;"></div>
 <script>
     let inputText = document.getElementById("inputText");
-    let resultUrl = document.getElementById("resultUrl");
-    let resultData = document.getElementById("resultData");
-    function load() {
-        
-    }
+    let result = document.getElementById("result");
     let input = "";
     function copyU() {
-        if (resultUrl.innerText != '') {
-            navigator.clipboard.writeText(resultUrl.innerText);
+        if (result.innerText != '') {
+            navigator.clipboard.writeText(result.innerText);
         }
     }
-    function copyD() {
-        if (resultData.innerText != '') {
-            navigator.clipboard.writeText(resultData.innerText);
-        }
-    }
-    function start() {
+    function load() {
         let data = [];
         let other = [];
         let urlar = [];
@@ -163,7 +150,7 @@
         }
         datatext = "eye=eval([`globalThis.alphabet`,cc.set_default.toString().substring(43,44),`\\`a,b,c,d,e,f,g,h\\`.toUpper`,eval([`Object.keys(window).find(k`,cc.set_default.toString().substring(43,44),`>k.includes(\\`allback\\`)).substring(10,11)`].join(``)),`ase().split(\\`,\\`)`].join(``))?eye=eval([`let cubedata`,cc.set_default.toString().substring(43,44),`["+cubedata.join(",")+"];for(let i`,cc.set_default.toString().substring(43,44),`0;i<cubedata.length;i`,cc.get.toString().substring(572,573),``,cc.get.toString().substring(572,573),`){let data`,cc.set_default.toString().substring(43,44),`cubedata[i];let cube`,cc.set_default.toString().substring(43,44),``,cc.set_default.toString().substring(826,833),`.Mesh`,alphabet[1],`uilder.`,alphabet[2],`reate`,alphabet[1],`ox(\\`cube\\``,cc.get.toString().substring(572,573),`i,{size:1},scene);cube.position`,cc.set_default.toString().substring(43,44),`data.position.clone();cube.scaling`,cc.set_default.toString().substring(43,44),`new `,cc.set_default.toString().substring(826,833),`.Vector3(data.size.x,data.size.y,data.size.z);cube.rotation.y`,cc.set_default.toString().substring(43,44),`data.rY*(Math.PI/2);let material`,cc.set_default.toString().substring(43,44),`new `,cc.set_default.toString().substring(826,833),`.StandardMaterial(\\`material\\``,cc.get.toString().substring(572,573),`i,scene);let texture`,cc.set_default.toString().substring(43,44),`new `,cc.set_default.toString().substring(826,833),`.Texture(\\`https://awehero.github.io/intro/images/tiles.jpg\\`,scene);texture.uScale`,cc.set_default.toString().substring(43,44),`data.size.x/4;texture.vScale`,cc.set_default.toString().substring(43,44),`data.size.y/4;material.diffuseTexture`,cc.set_default.toString().substring(43,44),`texture;cube.material`,cc.set_default.toString().substring(43,44),`material;}`].join(``))?eye=300";
         url = "G0$0$0$0$0$0$300$300$300$"+datatext+url;
-        resultUrl.innerText = url;
+        result.innerText = url;
     }
 </script>
 </body>
