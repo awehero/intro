@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texture Data</title>
+    <link rel="icon" href="https://awehero.github.io/intro/awehero.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        div {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        p {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        textarea {
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .rows {
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 0.8em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            max-width: 100%;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #copyButton {
+            margin-top: 10px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Texture Data</h1>
+    <div>Made by awehero54</div>
+    <p>Use m=123 or mat=123 to apply data
+    <p>Enter the URL here:</p>
+    <textarea id="inputText" rows="6" cols="80" onchange="load()"></textarea>
+    <br>
+    <button id="startButton" onclick="start()">Go!</button>
+    <br><br>
+    <button id="copyButton" onclick="copyLink()">Copy!</button>
+    <h2>URL:</h2>
+    <div id="result" style="white-space: pre-wrap;"></div>
+    <h2>Data:</h2>
+    <div id="result" style="white-space: pre-wrap;"></div>
+<script>
+    let inputText = document.getElementById("inputText");
+    let result = document.getElementById("result");
+    let row = document.getElementById("row");
+    function load() {
+        input = inputText.value;
+        input = input.replace(/A/g, ",A")
+                .replace(/B/g, ",B")
+                .replace(/C/g, ",C")
+                .replace(/D/g, ",D")
+                .replace(/E/g, ",E")
+                .replace(/F/g, ",F")
+                .replace(/G/g, ",G");
+        input = input.split(",");
+    }
+    let input = "";
+    function copyLink() {
+        if (document.getElementById("result").innerText != '') {
+            navigator.clipboard.writeText(document.getElementById("result").innerText);
+        }
+    }
+    function start() {
+
+        let capital = false;
+        let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H"];
+        for (var i = 0; i < alphabet.length; i++) {
+            if (input.indexOf(alphabet[i]) > 0) {
+                capital = true;
+            }
+        }
+        input = input.replace(/\s+/g, "")
+                .replace(/\n/g, "")
+                .replace(/let/g, "let ")
+                .replace(/var/g, "var ")
+                .replace(/const/g, "const ")
+                .replace(/function/g, "function ")
+                .replace(/newBABYLON/g, "new BABYLON")
+                .replace(/`/g, "'")
+                .replace(/"/g, "\\`")
+                .replace(/'/g, "\\`")
+                .replace(/=/g, "`,cc.set_default.toString().substring(43,44),`")
+                .replace(/BABYLON/g, "`,cc.set_default.toString().substring(826,833),`")
+                .replace(/A/g, "`,alphabet[0],`")
+                .replace(/B/g, "`,alphabet[1],`")
+                .replace(/C/g, "`,alphabet[2],`")
+                .replace(/D/g, "`,alphabet[3],`")
+                .replace(/E/g, "`,alphabet[4],`")
+                .replace(/F/g, "`,alphabet[5],`")
+                .replace(/G/g, "`,alphabet[6],`")
+                .replace(/H/g, "`,alphabet[7],`");
+        if (capital) {
+          input = "eye=eval([`globalThis.alphabet`,cc.set_default.toString().substring(43,44),`\\`a,b,c,d,e,f,g,h\\`.toUpper`,eval([`Object.keys(window).find(k`,cc.set_default.toString().substring(43,44),`>k.includes(\\`allback\\`)).substring(10,11)`].join(``)),`ase().split(\\`,\\`)`].join(``))?eye=eval([`" + input + "`].join(``))?eye=300";
+      } else {
+          input = "eval([`" + input + "`].join(``))";
+      }
+      result.innerText = input;
+  }
+</script>
+</body>
+</html>
