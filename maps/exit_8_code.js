@@ -2,6 +2,9 @@ globalThis.alpha = 0;
 globalThis.messageCheck = 0;
 let intervalId = setInterval(function() {
     if (!isMapLoaded) {
+        for (var i = 18; i < scene.meshes.length; i++) {
+            scene.removeMesh(scene.meshes[i]);
+        }
         clearInterval(intervalId);
     }
     test();
