@@ -5,6 +5,9 @@ let intervalId = setInterval(function() {
         for (var i = 18; i < scene.meshes.length; i++) {
             scene.removeMesh(scene.meshes[i]);
         }
+        delete globalThis.alpha;
+        delete globalThis.messageCheck;
+        delete globalThis.cubes;
         clearInterval(intervalId);
     }
     test();
