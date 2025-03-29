@@ -28,7 +28,7 @@ for (var i = data.length - 1; i > 0; i-=7) {
 }
 for (var i = 0; i < cubes.length; i++) {
     let data = cubes[i];
-    let cube = new BABYLON.MeshBuilder.CreateBox("cube" + i, {size: 1), scene);
+    let cube = new BABYLON.MeshBuilder.CreateBox("cube" + i, {size: 1}, scene);
     cube.position = new BABYLON.Vector3(data.px, data.py, data.pz);
     cube.scaling = new BABYLON.Vector3(data.sx, data.sy, data.sz);
     cube.rotation.y = data.ry * (Math.PI/2);
