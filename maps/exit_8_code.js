@@ -15,13 +15,13 @@ function test() {
         player.position.z = -100;
     }
     if ((player.position.z < -110) * (player.position.z > -130) * (player.position.x < 14)) {
-        if (messageCheck = 0) {
+        if (messageCheck == 0) {
             window.tsTriggers[Object.keys(window.tsTriggers)[6]]("Exit " + alpha);
             messageCheck = 1;
         }
     } else {
         if (!((player.position.z < -110) * (player.position.z > -130) * (player.position.x < 14))) {
-            if (messageCheck = 1) {
+            if (messageCheck == 1) {
                 window.tsTriggers[Object.keys(window.tsTriggers)[7]]();
                 messageCheck = 0;
             }
