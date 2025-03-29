@@ -2,8 +2,10 @@ globalThis.alpha = 0;
 globalThis.messageCheck = 0;
 let intervalId = setInterval(function() {
     if (!isMapLoaded) {
-        for (var i = 18; i < scene.meshes.length; i++) {
-            scene.removeMesh(scene.meshes[i]);
+        for (var i = scene.meshes.length-1; i > 0; i--) {
+            if (scene.meshes[i].id.substring(0,4) == "cube") {
+                scene.removeMesh(scene.meshes[i]);
+            }
         }
         delete globalThis.alpha;
         delete globalThis.messageCheck;
@@ -37,6 +39,7 @@ function test() {
         player.position.x = -500;
         alert("Welcome to exit 8! Your goal is to get to exit 8, but it won’t be easy. When you start at exit 0, you will see a daycare scene. Make sure to study it carefully! The exits after exit 0 will show the same scene, but something might have changed. If you notice a change, return through the door you entered. If not, go through the door at the other end. If you were right, you will progress to the next exit, and if not, you will be sent back to exit 0. Press P at any time to pause.");
     }
+    
 }
 let data = [   15,9,-140,19.5,18,0.5,1,5,9,-105,30.5,18,0.5,1,10,9,-10,9.5,18,0.5,0,-5,9,-110,40.5,18,0.5,1,15,9,-120,19.5,18,0.5,0,5,9,-130,20.5,18,0.5,0,25,9,-134.75,30,18,0.5,1,35,9,-269.75,20,18,0.5,1,45,9,-264.75,30,18,0.5,1,25,9,-260,20.5,18,0.5,0,35,9,-250,20.5,18,0.5,0,25,9,-240,20.5,18,0.5,1,15,9,-245,30.5,18,0.5,1,5,9,5,10.5,18,0.5,1,15,9,-5,10.5,18,0.5,1,10,9,0,9.5,18,0.5,0,0,9,10,10.5,18,0.5,0,0,9,-90,10.5,18,0.5,0,5,9,-15,10.5,18,0.5,1,-5,9,-5,30.5,18,0.5,1,0,9,-20,10.5,18,0.5,0];
 globalThis.cubes = [];
