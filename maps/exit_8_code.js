@@ -22,7 +22,7 @@ function test() {
     } else {
         if (!((player.position.z < -110) * (player.position.z > -130) * (player.position.x < 14))) {
             if (messageCheck = 1) {
-                console.log("remove message");
+                window.tsTriggers[Object.keys(window.tsTriggers)[7]]();
                 messageCheck = 0;
             }
         }
