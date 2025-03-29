@@ -1,4 +1,5 @@
 globalThis.alpha = 0;
+globalThis.messageCheck = 0;
 let intervalId = setInterval(function() {
     if (!isMapLoaded) {
         clearInterval(intervalId);
@@ -14,7 +15,17 @@ function test() {
         player.position.z = -100;
     }
     if ((player.position.z < -110) * (player.position.z > -130) * (player.position.x < 14)) {
-        window.tsTriggers[Object.keys(window.tsTriggers)[6]]("Exit " + alpha);
+        if (messageCheck = 0) {
+            window.tsTriggers[Object.keys(window.tsTriggers)[6]]("Exit " + alpha);
+            messageCheck = 1;
+        }
+    } else {
+        if (!((player.position.z < -110) * (player.position.z > -130) * (player.position.x < 14))) {
+            if (messageCheck = 1) {
+                console.log("remove message");
+                messageCheck = 0;
+            }
+        }
     }
     if ((player.position.z > -10) * (player.position.x > 14)) {
         player.position.x = -500;
