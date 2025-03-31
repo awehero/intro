@@ -63,7 +63,7 @@ function test() {
                 guess = 0;
                 current = 2;
             }
-            if (player.position.z < -230) {
+            if (player.position.z < -250 && player.position.x > 28) {
                 guess = 1;
                 current = 2;
             }
