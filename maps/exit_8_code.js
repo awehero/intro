@@ -53,9 +53,9 @@ function test() {
             if (player.position.z < -150) {
                 current = 1;
                 if (alpha == 0) {
-                    anum = 0;
+                    anom = 0;
                 } else {
-                    anum = Math.round(Math.random());
+                    anom = Math.round(Math.random());
                 }
             }
             break;
@@ -70,7 +70,7 @@ function test() {
             }
             break;
         case 2:
-            if (guess == anum) {
+            if (guess == anom) {
                 if (guess == 0) {
                     rotation += Math.PI;
                     player.position.z = player.position.z + 30;
