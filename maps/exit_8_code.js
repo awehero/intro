@@ -52,9 +52,9 @@ function test() {
             if (player.position.z < -150) {
                 current = 1;
                 if (alpha == 0) {
-                    anom = 0;
+                    anum = 0;
                 } else {
-                    anom = Math.round(Math.random());
+                    anum = Math.round(Math.random());
                 }
             }
             break;
