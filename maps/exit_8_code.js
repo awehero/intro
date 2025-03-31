@@ -4,6 +4,71 @@ globalThis.current = 0;
 globalThis.anom = 0;
 globalThis.guess = 0;
 globalThis.anomNum = 0;
+globalThis.objects = [];
+objects.shelf = [];
+objects.shelf.blocks = [];
+objects.shelf.shelves = [];
+objects.fort = [];
+objects.kitchen = [];
+objects.table = [];
+objects.table.legs = [];
+objects.table.seattops = [];
+objects.table.seatbottoms = [];
+objects.train = [];
+objects.train.rugs = [];
+objects.other = [];
+
+for (var i = 17; i < scene.meshes.length; i++) {
+    if (scene.meshes[i].position.z < -152 && scene.meshes[i].position.z > -190 && scene.meshes[i].position.x < 58 && scene.meshes[i].position.x > 30) {
+        if (scene.meshes[i].position.z < -179 && scene.meshes[i].position.z > -184 && scene.meshes[i].position.x < 46 && scene.meshes[i].position.x > 39) {
+            objects.shelf.blocks.push(scene.meshes[i]);
+        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#ffffff"))) {
+            objects.shelf.shelves.push(scene.meshes[i]);
+        } else {
+            if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#ff00ff"))) {
+                objects.shelf.pinkoutercube = scene.meshes[i];
+            } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#c30000"))) {
+                objects.shelf.redinnercube = scene.meshes[i];
+            } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#ff0000"))) {
+                objects.shelf.redoutercube = scene.meshes[i];
+            } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#fc7f00"))) {
+                objects.shelf.orangeoutercube = scene.meshes[i];
+            } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#c2c200"))) {
+                objects.shelf.yellowinnercube = scene.meshes[i];
+            } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#ffff00"))) {
+                objects.shelf.yellowoutercube = scene.meshes[i];
+            } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00b800"))) {
+                objects.shelf.greeninnercube = scene.meshes[i];
+            } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00ff00"))) {
+                objects.shelf.greenoutercube = scene.meshes[i];
+            } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00ffff"))) {
+                objects.shelf.cyanoutercube = scene.meshes[i];
+            } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#0000bf"))) {
+                objects.shelf.blueinnercube = scene.meshes[i];
+            } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#0000ff"))) {
+                objects.shelf.blueoutercube = scene.meshes[i];
+            } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#9e00ff"))) {
+                objects.shelf.purpleoutercube = scene.meshes[i];
+            } else {
+                objects.shelf.rug = scene.meshes[i];
+            }
+        }
+    }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f97c00"))) {
+        if (Math.round(scene.meshes[i].position.y*100)/100 == 2) {
+            objects.table.legs.push(scene.meshes[i]);
+        } else if (Math.round(scene.meshes[i].position.y*100)/100 == 3) {
+            objects.table.seattops.push(scene.meshes[i]);
+        } else if (Math.round(scene.meshes[i].position.y*100)/100 == 1.3) {
+            objects.table.seatbottoms.push(scene.meshes[i]);
+        } else {
+            objects.table.table = scene.meshes[i];
+        }
+    }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00df03"))) {
+        objects.train.rugs.push(scene.meshes[i]);
+    }
+}
 let intervalId = setInterval(function() {
     if (!isMapLoaded) {
         for (var i = scene.meshes.length-1; i > 0; i--) {
@@ -18,6 +83,7 @@ let intervalId = setInterval(function() {
         delete globalThis.anomNum;
         delete globalThis.guess;
         delete globalThis.cubes;
+        delete globalThis.objects;
         clearInterval(intervalId);
     }
     test();
