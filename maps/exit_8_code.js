@@ -59,7 +59,7 @@ function test() {
             }
             break;
         case 1:
-            if (player.position.z > -130 && player.position.x < 14) {
+            if (player.position.z > -130 && player.position.x < 12) {
                 guess = 0;
                 current = 2;
             }
@@ -72,13 +72,21 @@ function test() {
             if (guess == anum) {
                 if (guess == 0) {
                     rotation += Math.PI;
+                    player.position.z = player.position.z + 30;
                 } else {
-                    //player.position.x
+                    player.position.z = player.position.z + 160;
                 }
+                player.position.x = -12;
                 alpha++;
                 current = 0;
             } else {
-                //Wrong teleport
+                if (guess == 0) {
+                    rotation += Math.PI;
+                    player.position.z = player.position.z + 30;
+                } else {
+                    player.position.z = player.position.z + 160;
+                }
+                player.position.x = -12;
                 alpha = 0;
                 current = 0;
             }
