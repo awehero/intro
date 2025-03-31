@@ -4,6 +4,7 @@ globalThis.current = 0;
 globalThis.anom = 0;
 globalThis.guess = 0;
 globalThis.anomNum = 0;
+console.log(cheese);
 let intervalId = setInterval(function() {
     if (!isMapLoaded) {
         for (var i = scene.meshes.length-1; i > 0; i--) {
