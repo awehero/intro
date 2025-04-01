@@ -153,6 +153,9 @@ function resetObjects() {
     objects.shelf.blueinnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000bf");
     objects.shelf.blueoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000ff");
     objects.shelf.purpleoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#9e00ff");
+
+    objects.shelf.blocks.forEach(obj=>{obj.position.y = 0.55;});
+    objects.shelf.shelves.forEach(obj=>{obj.position.y = 0.55;});
     
     objects.train.car1.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff0000");
     objects.train.car1.position.y = 0.95165;
