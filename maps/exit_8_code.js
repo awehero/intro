@@ -173,7 +173,7 @@ function test() {
             if (player.position.z < -150) {
                 current = 1;
                 if (alpha == 0) {
-                    anom = 0;
+                    anom = 1;
                 } else {
                     anom = Math.round(Math.random());
                 }
