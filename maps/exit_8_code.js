@@ -140,7 +140,33 @@ let intervalId = setInterval(function() {
     test();
 },100);
 function resetObjects() {
+
+    objects.shelf.pinkoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff00ff");
+    objects.shelf.redinnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#c30000");
+    objects.shelf.redoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff0000");
+    objects.shelf.orangeoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#fc7f00");
+    objects.shelf.yellowinnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#c2c200");
+    objects.shelf.yellowoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ffff00");
+    objects.shelf.greeninnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#00b800");
+    objects.shelf.greenoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#00ff00");
+    objects.shelf.cyanoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#00ffff");
+    objects.shelf.blueinnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000bf");
+    objects.shelf.blueoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000ff");
+    objects.shelf.purpleoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#9e00ff");
     
+    objects.train.car1.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff0000");
+    objects.train.car1.position.y = 0.95165;
+    objects.train.car1.position.z = -199.75;
+    
+    objects.train.car2.material.diffuseColor = new BABYLON.Color3.FromHexString("#ffff00");
+    objects.train.car2.position.y = 0.95165;
+    objects.train.car2.position.z = -199.75;
+    
+    objects.train.car3.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000ff");
+    objects.train.car3.position.y = 0.95165;
+    objects.train.car3.position.z = -199.75;
+    
+    objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#b3ffab");});
 }
 function test() {
     if (!alive) {
