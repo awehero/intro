@@ -26,6 +26,7 @@ objects.train.car2wheels = [];
 objects.train.car3wheels = [];
 objects.train.track = [];
 objects.other = [];
+objects.walls = [];
 
 for (var i = 17; i < scene.meshes.length; i++) {
     if (scene.meshes[i].position.z < -152 && scene.meshes[i].position.z > -190 && scene.meshes[i].position.x < 58 && scene.meshes[i].position.x > 30) {
@@ -113,6 +114,9 @@ for (var i = 17; i < scene.meshes.length; i++) {
                 objects.kitchen.microwave.row4 = scene.meshes[i];
             }
         }
+    }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#b3ffab"))) {
+        objects.walls.push(scene.meshes[i]);
     }
 }
 let intervalId = setInterval(function() {
