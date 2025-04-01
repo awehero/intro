@@ -10,6 +10,9 @@ objects.shelf.blocks = [];
 objects.shelf.shelves = [];
 objects.fort = [];
 objects.kitchen = [];
+objects.kitchen.structure = [];
+objects.kitchen.microwave.row1 = [];
+objects.kitchen.microwave.row2 = [];
 objects.table = [];
 objects.table.legs = [];
 objects.table.seattops = [];
@@ -93,6 +96,21 @@ for (var i = 17; i < scene.meshes.length; i++) {
                 objects.train.car1wheels.push(scene.meshes[i]);
             } else {
                 objects.train.enginewheels.push(scene.meshes[i]);
+            }
+        }
+    }
+    if (scene.meshes[i].position.z < -212 && scene.meshes[i].position.z > -229.85 && scene.meshes[i].position.x < -1 && scene.meshes[i].position.x > -19.85) {
+        if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#fbffff"))) {
+            objects.kitchen.structure.push(scene.meshes[i]);
+        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#b0b0b0"))) {
+            if (scene.meshes[i].position.y > 8.15) {
+                objects.kitchen.microwave.row1.push(scene.meshes[i]);
+            } else if (scene.meshes[i].position.y > 7.85) {
+                objects.kitchen.microwave.row2.push(scene.meshes[i]);
+            } else if (scene.meshes[i].position.y > 7.55) {
+                objects.kitchen.microwave.row3 = scene.meshes[i];
+            } else {
+                objects.kitchen.microwave.row4 = scene.meshes[i];
             }
         }
     }
