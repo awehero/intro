@@ -16,6 +16,12 @@ objects.table.seattops = [];
 objects.table.seatbottoms = [];
 objects.train = [];
 objects.train.rugs = [];
+objects.train.engine = [];
+objects.train.enginewheels = [];
+objects.train.car1wheels = [];
+objects.train.car2wheels = [];
+objects.train.car3wheels = [];
+objects.train.track = [];
 objects.other = [];
 
 for (var i = 17; i < scene.meshes.length; i++) {
@@ -65,8 +71,30 @@ for (var i = 17; i < scene.meshes.length; i++) {
             objects.table.table = scene.meshes[i];
         }
     }
-    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00df03"))) {
-        objects.train.rugs.push(scene.meshes[i]);
+    if (scene.meshes[i].position.z < -187 && scene.meshes[i].position.z > -203 && scene.meshes[i].position.x < 7 && scene.meshes[i].position.x > -13) {
+        if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00df03"))) {
+            objects.train.rugs.push(scene.meshes[i]);
+        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f4cf9c"))) {
+            objects.train.track.push(scene.meshes[i]);
+        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00a2ff"))) {
+            objects.train.engine.push(scene.meshes[i]);
+        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#ff0000"))) {
+            objects.train.car1 = scene.meshes[i];
+        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#ffff00"))) {
+            objects.train.car2 = scene.meshes[i];
+        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#0000ff"))) {
+            objects.train.car3 = scene.meshes[i];
+        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00000a"))) {
+            if (scene.meshes[i].position.x < -3.4) {
+                objects.train.car3wheels.push(scene.meshes[i]);
+            } else if (scene.meshes[i].position.x < -2.2) {
+                objects.train.car2wheels.push(scene.meshes[i]);
+            } else if (scene.meshes[i].position.x < -0.9) {
+                objects.train.car1wheels.push(scene.meshes[i]);
+            } else {
+                objects.train.enginewheels.push(scene.meshes[i]);
+            }
+        }
     }
 }
 let intervalId = setInterval(function() {
@@ -88,6 +116,9 @@ let intervalId = setInterval(function() {
     }
     test();
 },100);
+function resetObjects() {
+    
+}
 function test() {
     if (!alive) {
         alpha = 0;
@@ -123,6 +154,7 @@ function test() {
                 } else {
                     anom = Math.round(Math.random());
                 }
+                resetObjects();
             }
             break;
         case 1:
