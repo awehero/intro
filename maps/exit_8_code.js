@@ -11,6 +11,7 @@ objects.shelf.shelves = [];
 objects.fort = [];
 objects.kitchen = [];
 objects.kitchen.structure = [];
+objects.kitchen.microwave = [];
 objects.kitchen.microwave.row1 = [];
 objects.kitchen.microwave.row2 = [];
 objects.table = [];
