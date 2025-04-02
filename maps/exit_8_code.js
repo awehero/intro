@@ -245,7 +245,7 @@ function test() {
                                     break;
                             }
                         } else if (alpha < 6) {
-                            n = 9;
+                            n = 10;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             switch (anomNum) {
