@@ -178,7 +178,7 @@ function test() {
     if (player.position.z < -19 && player.position.z > -20) {
         player.position.x = 0;
         player.position.z = -100;
-        console.log(cheese);
+        console.log(cheese);                                                                        //DELETE THIS LATER
     }
     if (player.position.z < -110 && player.position.z > -130 && player.position.x < 14) {
         if (messageCheck == 0) {
@@ -201,17 +201,42 @@ function test() {
         case 0:
             if (player.position.z < -150) {
                 current = 1;
+                resetObjects();
                 if (alpha == 0) {
                     anom = 1;
                 } else {
                     anom = Math.round(Math.random());
                     if (anom == 1) {
-                        n = 5;
-                        j = Math.random();
-                        anomNum = (j - (j%(1/n))) * n;
+                        if (alpha < 3) {
+                            n = 5;
+                            j = Math.random();
+                            anomNum = (j - (j%(1/n))) * n;
+                            switch (anomNum) {
+                                case 0:
+                                    
+                                    break;
+                            }
+                        } else if (alpha < 6) {
+                            n = 5;
+                            j = Math.random();
+                            anomNum = (j - (j%(1/n))) * n;
+                            switch (anomNum) {
+                                case 0:
+                                    
+                                    break;
+                            }
+                        } else {
+                            n = 5;
+                            j = Math.random();
+                            anomNum = (j - (j%(1/n))) * n;
+                            switch (anomNum) {
+                                case 0:
+                                    
+                                    break;
+                            }
+                        }
                     }
                 }
-                resetObjects();
             }
             break;
         case 1:
