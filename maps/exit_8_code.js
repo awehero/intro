@@ -206,7 +206,7 @@ function test() {
                     anom = 1;
                 } else {
                     anom = Math.round(Math.random());
-                    if (anom == 1) {
+                    if (anom == 0) {
                         if (alpha < 3) {
                             n = 5;
                             j = Math.random();
@@ -245,11 +245,11 @@ function test() {
             break;
         case 1:
             if (player.position.z > -130 && player.position.x < 12) {
-                guess = 1;
+                guess = 0;
                 current = 2;
             }
             if (player.position.z < -250 && player.position.x > 28) {
-                guess = 0;
+                guess = 1;
                 current = 2;
             }
             break;
