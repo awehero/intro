@@ -170,6 +170,8 @@ function resetObjects() {
     objects.train.car3.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000ff");
     objects.train.car3.position.y = 0.95165;
     objects.train.car3.position.z = -199.75;
+
+    objects.train.rugs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#00df03");});
     
     objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#b3ffab");});
 }
@@ -224,7 +226,7 @@ function test() {
                                     //Table has something on it
                                     break;
                                 case 3:
-                                    //Train rug is a different color
+                                    objects.train.rugs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#df0000");});
                                     break;
                                 case 4:
                                     //Cube rug is a different color
