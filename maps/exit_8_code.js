@@ -205,6 +205,11 @@ function test() {
                     anom = 1;
                 } else {
                     anom = Math.round(Math.random());
+                    if (anom == 1) {
+                        n = 5;
+                        j = Math.random();
+                        anomNum = (j - (j%(1/n))) * n;
+                    }
                 }
                 resetObjects();
             }
