@@ -213,11 +213,23 @@ function test() {
                             anomNum = (j - (j%(1/n))) * n;
                             switch (anomNum) {
                                 case 0:
-                                    
+                                    //Night
+                                    break;
+                                case 1:
+                                    //Different colored walls
+                                    break;
+                                case 2:
+                                    //Table has something on it
+                                    break;
+                                case 3:
+                                    //Train rug is a different color
+                                    break;
+                                case 4:
+                                    //Cube rug is a different color
                                     break;
                             }
                         } else if (alpha < 6) {
-                            n = 5;
+                            n = 9;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             switch (anomNum) {
@@ -226,7 +238,28 @@ function test() {
                                     objects.train.car3wheels.forEach(obj=>{obj.position.y = 1000;});
                                     break;
                                 case 1:
-
+                                    //Something on stove
+                                    break;
+                                case 2:
+                                    //Cube color order is reversed
+                                    break;
+                                case 3:
+                                    //Stools are upside down
+                                    break;
+                                case 4:
+                                    //Person outside window
+                                    break;
+                                case 5:
+                                    //One of the windows is missing
+                                    break;
+                                case 6:
+                                    //Something inside the fort
+                                    break;
+                                case 7:
+                                    //One of the colors of the fort is changed
+                                    break;
+                                case 8:
+                                    //Water coming from sink
                                     break;
                             }
                         } else {
@@ -235,7 +268,16 @@ function test() {
                             anomNum = (j - (j%(1/n))) * n;
                             switch (anomNum) {
                                 case 0:
-                                    
+                                    //Train is on the other side of the track
+                                    break;
+                                case 1:
+                                    //Some blocks are missing
+                                    break;
+                                case 3:
+                                    //Microwave is mising some buttons
+                                    break;
+                                case 4:
+                                    //Some of the cubes are moved
                                     break;
                             }
                         }
