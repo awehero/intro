@@ -235,8 +235,8 @@ function resetObjects() {
     objects.breadby.forEach(obj=>{obj.position.x = 259.6;});
     objects.demon.forEach(obj=>{obj.position.x = -240;});
     objects.drawing.forEach(obj=>{obj.position.y = 104.15;});
-    objects.sun.forEach(obj=>{obj.position.z = -150;});
-    objects.moon.forEach(obj=>{obj.position.z = -450;});
+    objects.sun.forEach(obj=>{obj.isVisible = true;});
+    objects.moon.forEach(obj=>{obj.isVisible = false;});
     objects.pans.forEach(obj=>{obj.position.y = 106.95;});
     objects.water.position.y = 207.25;
 }
@@ -297,8 +297,8 @@ function test() {
                                     objects.shelf.rug.material.diffuseColor = new BABYLON.Color3.FromHexString("#9c6600");
                                     break;
                                 case 5:
-                                    objects.sun.forEach(obj=>{obj.position.z = -450;});
-                                    objects.moon.forEach(obj=>{obj.position.z = -150;});
+                                    objects.sun.forEach(obj=>{obj.isVisible = false;});
+                                    objects.moon.forEach(obj=>{obj.isVisible = true;});
                             }
                         } else if (alpha < 6) {
                             n = 10;
@@ -367,7 +367,7 @@ function test() {
                                     objects.train.engine.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#9300ff");});
                                     break;
                                 case 1:
-                                    //Some blocks are missing
+                                    
                                     break;
                                 case 3:
                                     objects.kitchen.microwave.row4.position.y = 1000;
