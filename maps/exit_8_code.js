@@ -297,25 +297,29 @@ function test() {
             break;
         case 2:
             if (guess == anom) {
-                if (guess == 0) {
-                    rotation += Math.PI;
-                    player.position.z = player.position.z + 30;
-                } else {
-                    player.position.z = player.position.z + 160;
+                if (player.position.z < -50) {
+                    if (guess == 0) {
+                        rotation += Math.PI;
+                        player.position.z = player.position.z + 30;
+                    } else {
+                        player.position.z = player.position.z + 160;
+                    }
+                    player.position.x = -12;
+                    alpha++;
+                    current = 0;
                 }
-                player.position.x = -12;
-                alpha++;
-                current = 0;
             } else {
-                if (guess == 0) {
-                    rotation += Math.PI;
-                    player.position.z = player.position.z + 30;
-                } else {
-                    player.position.z = player.position.z + 160;
+                if (player.position.z < -50) {
+                    if (guess == 0) {
+                        rotation += Math.PI;
+                        player.position.z = player.position.z + 30;
+                    } else {
+                        player.position.z = player.position.z + 160;
+                    }
+                    player.position.x = -12;
+                    alpha = 0;
+                    current = 0;
                 }
-                player.position.x = -12;
-                alpha = 0;
-                current = 0;
             }
             break;
     }
