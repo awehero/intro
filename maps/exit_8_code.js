@@ -149,6 +149,21 @@ for (var i = 17; i < scene.meshes.length; i++) {
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#a0a0a0"))) {
         objects.pans.push(scene.meshes[i]);
     }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#ffff09"))) {
+        objects.sun.push(scene.meshes[i]);
+    }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#ffcd00"))) {
+        objects.sun.push(scene.meshes[i]);
+    }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#ffdc00"))) {
+        objects.sun.push(scene.meshes[i]);
+    }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#d9d9d9"))) {
+        objects.moon.push(scene.meshes[i]);
+    }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#a2a2a2"))) {
+        objects.moon.push(scene.meshes[i]);
+    }
 }
 let intervalId = setInterval(function() {
     if (!isMapLoaded) {
@@ -195,15 +210,23 @@ function resetObjects() {
     
     objects.train.car1.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff0000");
     objects.train.car1.position.y = 0.95165;
-    objects.train.car1.position.z = -199.75;
     
     objects.train.car2.material.diffuseColor = new BABYLON.Color3.FromHexString("#ffff00");
     objects.train.car2.position.y = 0.95165;
-    objects.train.car2.position.z = -199.75;
     
     objects.train.car3.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000ff");
     objects.train.car3.position.y = 0.95165;
+
+    objects.train.car1.position.z = -199.75;
+    objects.train.car2.position.z = -199.75;
     objects.train.car3.position.z = -199.75;
+    objects.train.car1wheels.forEach(obj=>{obj.position.z = -199.75});
+    objects.train.car2wheels.forEach(obj=>{obj.position.z = -199.75});
+    objects.train.car3wheels.forEach(obj=>{obj.position.z = -199.75});
+    objects.train.engine.forEach(obj=>{obj.position.z = -199.75});
+    objects.train.enginewheels.forEach(obj=>{obj.position.z = -199.75});
+
+    objects.train.engine.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#00a2ff");});
 
     objects.train.rugs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#00df03");});
     
@@ -212,6 +235,9 @@ function resetObjects() {
     objects.breadby.forEach(obj=>{obj.position.x = 259.6;});
     objects.demon.forEach(obj=>{obj.position.x = -240;});
     objects.drawing.forEach(obj=>{obj.position.y = 104.15;});
+    objects.sun.forEach(obj=>{obj.position.z = -150;});
+    objects.moon.forEach(obj=>{obj.position.z = -450;});
+    objects.pans.forEach(obj=>{obj.position.y = 106.95;});
     objects.water.position.y = 207.25;
 }
 function test() {
@@ -262,7 +288,7 @@ function test() {
                                     objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#abf7ff");});
                                     break;
                                 case 2:
-                                    //Table has something on it
+                                    objects.drawing.forEach(obj=>{obj.position.y = 4.15;});
                                     break;
                                 case 3:
                                     objects.train.rugs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#df0000");});
@@ -270,6 +296,9 @@ function test() {
                                 case 4:
                                     objects.shelf.rug.material.diffuseColor = new BABYLON.Color3.FromHexString("#9c6600");
                                     break;
+                                case 5:
+                                    objects.sun.forEach(obj=>{obj.position.z = -450;});
+                                    objects.moon.forEach(obj=>{obj.position.z = -150;});
                             }
                         } else if (alpha < 6) {
                             n = 10;
@@ -281,10 +310,21 @@ function test() {
                                     objects.train.car3wheels.forEach(obj=>{obj.position.y = 1000;});
                                     break;
                                 case 1:
-                                    //Something on stove
+                                    objects.pans.forEach(obj=>{obj.position.y = 6.95;});
                                     break;
                                 case 2:
-                                    //Cube color order is reversed
+                                    objects.shelf.pinkoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff00ff");
+                                    objects.shelf.redinnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#c30000");
+                                    objects.shelf.redoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff0000");
+                                    objects.shelf.orangeoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#fc7f00");
+                                    objects.shelf.yellowinnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#c2c200");
+                                    objects.shelf.yellowoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ffff00");
+                                    objects.shelf.greeninnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#00b800");
+                                    objects.shelf.greenoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#00ff00");
+                                    objects.shelf.cyanoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#00ffff");
+                                    objects.shelf.blueinnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000bf");
+                                    objects.shelf.blueoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000ff");
+                                    objects.shelf.purpleoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#9e00ff");
                                     break;
                                 case 3:
                                     //Stools are upside down
@@ -302,10 +342,21 @@ function test() {
                                     objects.fort.blueblocks.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#7f00d1");});
                                     break;
                                 case 8:
-                                    objects.water.position.y = 207.25;
+                                    objects.water.position.y = 7.25;
                                     break;
                                 case 9:
                                     objects.shelf.shelves.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#ffdb97");});
+                                    break;
+                                case 10:
+                                    objects.train.car1.position.z = -190.25;
+                                    objects.train.car2.position.z = -190.25;
+                                    objects.train.car3.position.z = -190.25;
+                                    objects.train.car1wheels.forEach(obj=>{obj.position.z = -190.25});
+                                    objects.train.car2wheels.forEach(obj=>{obj.position.z = -190.25});
+                                    objects.train.car3wheels.forEach(obj=>{obj.position.z = -190.25});
+                                    objects.train.engine.forEach(obj=>{obj.position.z = -190.25});
+                                    objects.train.enginewheels.forEach(obj=>{obj.position.z = -190.25});
+                                    break;
                             }
                         } else {
                             n = 5;
@@ -313,7 +364,7 @@ function test() {
                             anomNum = (j - (j%(1/n))) * n;
                             switch (anomNum) {
                                 case 0:
-                                    //Train is on the other side of the track
+                                    objects.train.engine.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#9300ff");});
                                     break;
                                 case 1:
                                     //Some blocks are missing
@@ -323,6 +374,9 @@ function test() {
                                     break;
                                 case 4:
                                     //Some of the cubes are moved
+                                    break;
+                                case 5:
+                                    //Train car color
                                     break;
                             }
                         }
