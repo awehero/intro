@@ -277,7 +277,7 @@ function test() {
                     anom = Math.round(Math.random());
                     if (anom == 0) {
                         if (alpha < 3) {
-                            n = 5;
+                            n = 6;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             switch (anomNum) {
@@ -301,7 +301,7 @@ function test() {
                                     objects.moon.forEach(obj=>{obj.isVisible = true;});
                             }
                         } else if (alpha < 6) {
-                            n = 10;
+                            n = 11;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             switch (anomNum) {
@@ -359,7 +359,7 @@ function test() {
                                     break;
                             }
                         } else {
-                            n = 5;
+                            n = 6;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             switch (anomNum) {
