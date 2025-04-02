@@ -123,6 +123,9 @@ for (var i = 17; i < scene.meshes.length; i++) {
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#001dd1"))) {
         objects.fort.blueblocks.push(scene.meshes[i]);
     }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#fcfcfc"))) {
+        objects.window1 = scene.meshes[i];
+    }
 }
 let intervalId = setInterval(function() {
     if (!isMapLoaded) {
@@ -182,6 +185,7 @@ function resetObjects() {
     objects.train.rugs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#00df03");});
     
     objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#b3ffab");});
+    objects.window1.material.diffuseColor = new BABYLON.Color3.FromHexString("#fcfcfc");
 }
 function test() {
     if (!alive) {
