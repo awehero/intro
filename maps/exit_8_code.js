@@ -27,9 +27,11 @@ objects.train.car1wheels = [];
 objects.train.car2wheels = [];
 objects.train.car3wheels = [];
 objects.train.track = [];
-objects.other = [];
-objects.other.breadby = [];
-objects.other.demon = [];
+objects.breadby = [];
+objects.demon = [];
+objects.pans = [];
+objects.drawing = [];
+objects.
 objects.walls = [];
 
 for (var i = 17; i < scene.meshes.length; i++) {
@@ -70,15 +72,19 @@ for (var i = 17; i < scene.meshes.length; i++) {
             }
         }
     }
-    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f97c00"))) {
-        if (Math.round(scene.meshes[i].position.y*100)/100 == 2) {
-            objects.table.legs.push(scene.meshes[i]);
-        } else if (Math.round(scene.meshes[i].position.y*100)/100 == 3) {
-            objects.table.seattops.push(scene.meshes[i]);
-        } else if (Math.round(scene.meshes[i].position.y*100)/100 == 1.3) {
-            objects.table.seatbottoms.push(scene.meshes[i]);
+    if (scene.meshes[i].position.z < -155 && scene.meshes[i].position.z > -177 && scene.meshes[i].position.x < 10 && scene.meshes[i].position.x > -13) {
+        if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f97c00"))) {
+            if (Math.round(scene.meshes[i].position.y*100)/100 == 2) {
+                objects.table.legs.push(scene.meshes[i]);
+            } else if (Math.round(scene.meshes[i].position.y*100)/100 == 3) {
+                objects.table.seattops.push(scene.meshes[i]);
+            } else if (Math.round(scene.meshes[i].position.y*100)/100 == 1.3) {
+                objects.table.seatbottoms.push(scene.meshes[i]);
+            } else {
+                objects.table.table = scene.meshes[i];
+            }
         } else {
-            objects.table.table = scene.meshes[i];
+            objects.drawing.push(scene.meshes[i]);
         }
     }
     if (scene.meshes[i].position.z < -187 && scene.meshes[i].position.z > -203 && scene.meshes[i].position.x < 7 && scene.meshes[i].position.x > -13) {
@@ -131,10 +137,16 @@ for (var i = 17; i < scene.meshes.length; i++) {
         objects.window1 = scene.meshes[i];
     }
     if (scene.meshes[i].position.x > 250) {
-        objects.other.breadby.push(scene.meshes[i]);
+        objects.breadby.push(scene.meshes[i]);
     }
     if (scene.meshes[i].position.x < -230) {
-        objects.other.demon.push(scene.meshes[i]);
+        objects.demon.push(scene.meshes[i]);
+    }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#cefeff"))) {
+        objects.water = scene.meshes[i];
+    }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#a0a0a0"))) {
+        objects.pans.push(scene.meshes[i]);
     }
 }
 let intervalId = setInterval(function() {
@@ -196,8 +208,10 @@ function resetObjects() {
     
     objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#b3ffab");});
     objects.window1.isVisible = true;
-    objects.other.breadby.forEach(obj=>{obj.position.x = 259.6;});
-    objects.other.demon.forEach(obj=>{obj.position.x = -240;});
+    objects.breadby.forEach(obj=>{obj.position.x = 259.6;});
+    objects.demon.forEach(obj=>{obj.position.x = -240;});
+    objects.drawing.forEach(obj=>{obj.position.y = 104.15;});
+    objects.water.position.y = 207.25;
 }
 function test() {
     if (!alive) {
@@ -287,7 +301,7 @@ function test() {
                                     objects.fort.blueblocks.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#7f00d1");});
                                     break;
                                 case 8:
-                                    //Water coming from sink
+                                    objects.water.position.y = 207.25;
                                     break;
                                 case 9:
                                     objects.shelf.shelves.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#ffdb97");});
