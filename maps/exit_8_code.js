@@ -222,7 +222,8 @@ function test() {
                             anomNum = (j - (j%(1/n))) * n;
                             switch (anomNum) {
                                 case 0:
-                                    
+                                    objects.train.car3.position.y = 1000;
+                                    objects.train.car3wheels.forEach(obj=>{obj.position.y = 1000;});
                                     break;
                             }
                         } else {
