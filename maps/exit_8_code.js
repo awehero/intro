@@ -31,7 +31,8 @@ objects.breadby = [];
 objects.demon = [];
 objects.pans = [];
 objects.drawing = [];
-objects.
+objects.moon = []
+objects.sun = [];
 objects.walls = [];
 
 for (var i = 17; i < scene.meshes.length; i++) {
