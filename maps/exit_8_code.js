@@ -267,6 +267,8 @@ function test() {
                                 case 8:
                                     //Water coming from sink
                                     break;
+                                case 9:
+                                    objects.shelf.shelves.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#ffdb97");});
                             }
                         } else {
                             n = 5;
