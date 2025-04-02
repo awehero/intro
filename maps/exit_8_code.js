@@ -9,6 +9,7 @@ objects.shelf = [];
 objects.shelf.blocks = [];
 objects.shelf.shelves = [];
 objects.fort = [];
+objects.fort.blueblocks = [];
 objects.kitchen = [];
 objects.kitchen.structure = [];
 objects.kitchen.microwave = [];
@@ -119,6 +120,9 @@ for (var i = 17; i < scene.meshes.length; i++) {
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#b3ffab"))) {
         objects.walls.push(scene.meshes[i]);
     }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#001dd1"))) {
+        objects.fort.blueblocks.push(scene.meshes[i]);
+    }
 }
 let intervalId = setInterval(function() {
     if (!isMapLoaded) {
@@ -158,6 +162,8 @@ function resetObjects() {
     objects.shelf.blocks.forEach(obj=>{obj.position.y = 0.55;});
     objects.shelf.shelves.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#00479c");});
     objects.shelf.rug.material.diffuseColor = new BABYLON.Color3.FromHexString("#00479c");
+
+    objects.fort.blueblocks.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#001dd1");});
 
     objects.kitchen.microwave.row4.position.y = 7.4;
     
@@ -262,7 +268,7 @@ function test() {
                                     //Something inside the fort
                                     break;
                                 case 7:
-                                    //One of the colors of the fort is changed
+                                    objects.fort.blueblocks.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#7f00d1");});
                                     break;
                                 case 8:
                                     //Water coming from sink
