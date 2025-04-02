@@ -156,7 +156,7 @@ function resetObjects() {
     objects.shelf.purpleoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#9e00ff");
 
     objects.shelf.blocks.forEach(obj=>{obj.position.y = 0.55;});
-    objects.shelf.shelves.forEach(obj=>{obj.position.y = 0.55;});
+    objects.shelf.shelves.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#00479c");});
     objects.shelf.rug.material.diffuseColor = new BABYLON.Color3.FromHexString("#00479c");
 
     objects.kitchen.microwave.row4.position.y = 7.4;
