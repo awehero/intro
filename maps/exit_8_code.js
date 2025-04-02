@@ -28,6 +28,8 @@ objects.train.car2wheels = [];
 objects.train.car3wheels = [];
 objects.train.track = [];
 objects.other = [];
+objects.other.breadby = [];
+objects.other.demon = [];
 objects.walls = [];
 
 for (var i = 17; i < scene.meshes.length; i++) {
@@ -61,8 +63,10 @@ for (var i = 17; i < scene.meshes.length; i++) {
                 objects.shelf.blueoutercube = scene.meshes[i];
             } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#9e00ff"))) {
                 objects.shelf.purpleoutercube = scene.meshes[i];
-            } else {
+            } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00479c"))) {
                 objects.shelf.rug = scene.meshes[i];
+            } else {
+                objects.shelf.thecursedcrayon = scene.meshes[i];
             }
         }
     }
@@ -126,6 +130,12 @@ for (var i = 17; i < scene.meshes.length; i++) {
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#fcfcfc"))) {
         objects.window1 = scene.meshes[i];
     }
+    if (scene.meshes[i].position.x > 250) {
+        objects.other.breadby.push(scene.meshes[i]);
+    }
+    if (scene.meshes[i].position.x < -230) {
+        objects.other.demon.push(scene.meshes[i]);
+    }
 }
 let intervalId = setInterval(function() {
     if (!isMapLoaded) {
@@ -186,6 +196,8 @@ function resetObjects() {
     
     objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#b3ffab");});
     objects.window1.isVisible = true;
+    objects.other.breadby.forEach(obj=>{obj.position.x = 259.6;});
+    objects.other.demon.forEach(obj=>{obj.position.x = -240;});
 }
 function test() {
     if (!alive) {
@@ -263,13 +275,13 @@ function test() {
                                     //Stools are upside down
                                     break;
                                 case 4:
-                                    //Person outside window
+                                    objects.other.demon.forEach(obj=>{obj.position.x = -40;});
                                     break;
                                 case 5:
                                     objects.window1.isVisible = false;
                                     break;
                                 case 6:
-                                    //Something inside the fort
+                                    objects.other.breadby.forEach(obj=>{obj.position.x = 59.6;});
                                     break;
                                 case 7:
                                     objects.fort.blueblocks.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#7f00d1");});
