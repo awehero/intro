@@ -185,7 +185,7 @@ function resetObjects() {
     objects.train.rugs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#00df03");});
     
     objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#b3ffab");});
-    objects.window1.material.diffuseColor = new BABYLON.Color3.FromHexString("#fcfcfc");
+    objects.window1.isVisible = true;
 }
 function test() {
     if (!alive) {
@@ -266,7 +266,7 @@ function test() {
                                     //Person outside window
                                     break;
                                 case 5:
-                                    //One of the windows is missing
+                                    objects.window1.isVisible = false;
                                     break;
                                 case 6:
                                     //Something inside the fort
