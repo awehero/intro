@@ -218,7 +218,7 @@ function test() {
                                     //Night
                                     break;
                                 case 1:
-                                    //Different colored walls
+                                    objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#abf7ff");});
                                     break;
                                 case 2:
                                     //Table has something on it
