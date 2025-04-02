@@ -157,6 +157,7 @@ function resetObjects() {
 
     objects.shelf.blocks.forEach(obj=>{obj.position.y = 0.55;});
     objects.shelf.shelves.forEach(obj=>{obj.position.y = 0.55;});
+    objects.shelf.rug.material.diffuseColor = new BABYLON.Color3.FromHexString("#00479c");
 
     objects.kitchen.microwave.row4.position.y = 7.4;
     
@@ -230,7 +231,7 @@ function test() {
                                     objects.train.rugs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#df0000");});
                                     break;
                                 case 4:
-                                    //Cube rug is a different color
+                                    objects.shelf.rug.material.diffuseColor = new BABYLON.Color3.FromHexString("#9c6600");
                                     break;
                             }
                         } else if (alpha < 6) {
