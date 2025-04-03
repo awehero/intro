@@ -288,6 +288,8 @@ function test() {
     }
     if (alpha == 8) {
         objects.finish.position.y = 0;
+    } else {
+        
     }
     switch (current) {
         case 0:
