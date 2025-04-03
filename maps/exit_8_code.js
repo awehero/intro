@@ -338,13 +338,13 @@ function test() {
                                     objects.door2.isVisible = false;
                                     break;
                                 case 4:
-                                    objects.other.demon.forEach(obj=>{obj.position.x = -40;});
+                                    objects.demon.forEach(obj=>{obj.position.x = -40;});
                                     break;
                                 case 5:
                                     objects.window1.isVisible = false;
                                     break;
                                 case 6:
-                                    objects.other.breadby.forEach(obj=>{obj.position.x = 59.6;});
+                                    objects.breadby.forEach(obj=>{obj.position.x = 59.6;});
                                     break;
                                 case 7:
                                     objects.fort.blueblocks.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#7f00d1");});
