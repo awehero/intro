@@ -367,7 +367,8 @@ function test() {
                                     objects.train.engine.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#9300ff");});
                                     break;
                                 case 1:
-                                    
+                                    objects.train.car1.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000ff");
+                                    objects.train.car3.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff0000");
                                     break;
                                 case 2:
                                     objects.kitchen.microwave.row4.position.y = 1000;
