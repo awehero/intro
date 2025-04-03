@@ -287,7 +287,13 @@ function test() {
                 if (alpha == 0) {
                     anom = 1;
                 } else {
-                    anom = Math.round(Math.random());
+                    k = Math.round(Math.random()*15);
+                    if (k < 7) {
+                        anom = 1;
+                    } else {
+                        anom = 0;
+                    }
+                    //anom = Math.round(Math.random());
                     if (anom == 0) {
                         if (alpha < 3) {
                             n = 6;
