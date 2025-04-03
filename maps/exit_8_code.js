@@ -164,6 +164,13 @@ for (var i = 17; i < scene.meshes.length; i++) {
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#a2a2a2"))) {
         objects.moon.push(scene.meshes[i]);
     }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#6f4500"))) {
+        if (scene.meshes[i].position.z < -170) {
+            objects.door2 = scene.meshes[i];
+        } else {
+            objects.door1 = scene.meshes[i];
+        }
+    }
 }
 let intervalId = setInterval(function() {
     if (!isMapLoaded) {
@@ -239,6 +246,7 @@ function resetObjects() {
     objects.moon.forEach(obj=>{obj.isVisible = false;});
     objects.pans.forEach(obj=>{obj.position.y = 106.95;});
     objects.water.position.y = 207.25;
+    objects.door2.isVisible = true;
 }
 function test() {
     if (!alive) {
@@ -327,7 +335,7 @@ function test() {
                                     objects.shelf.purpleoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff00ff");
                                     break;
                                 case 3:
-                                    //Stools are upside down
+                                    objects.door2.isVisible = false;
                                     break;
                                 case 4:
                                     objects.other.demon.forEach(obj=>{obj.position.x = -40;});
@@ -359,7 +367,7 @@ function test() {
                                     break;
                             }
                         } else {
-                            n = 5;
+                            n = 4;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             switch (anomNum) {
@@ -375,9 +383,6 @@ function test() {
                                     break;
                                 case 3:
                                     //Some of the cubes are moved
-                                    break;
-                                case 4:
-                                    //Train car color
                                     break;
                             }
                         }
