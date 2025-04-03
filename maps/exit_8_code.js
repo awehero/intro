@@ -194,6 +194,11 @@ let intervalId = setInterval(function() {
 function resetObjects() {
     scene.clearColor = new BABYLON.Color3.FromHexString("#717aff");
 
+    objects.shelf.yellowinnercube.position.x = 44;
+    objects.shelf.yellowinnercube.position.z = -168;
+    objects.shelf.yellowoutercube.position.x = 44;
+    objects.shelf.yellowoutercube.position.z = -168;
+    
     objects.shelf.pinkoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff00ff");
     objects.shelf.redinnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#c30000");
     objects.shelf.redoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff0000");
@@ -382,7 +387,10 @@ function test() {
                                     objects.kitchen.microwave.row4.position.y = 1000;
                                     break;
                                 case 3:
-                                    //Some of the cubes are moved
+                                    objects.shelf.yellowinnercube.position.x = 38;
+                                    objects.shelf.yellowinnercube.position.z = -170;
+                                    objects.shelf.yellowoutercube.position.x = 38;
+                                    objects.shelf.yellowoutercube.position.z = -170;
                                     break;
                             }
                         }
