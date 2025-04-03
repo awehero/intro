@@ -171,6 +171,13 @@ for (var i = 17; i < scene.meshes.length; i++) {
             objects.door1 = scene.meshes[i];
         }
     }
+    if (scene.meshes[i].material.diffuseColor.equals(new BABYLON.Color3.FromHexString("#24fc03"))) {
+        if (scene.meshes[i].id.substring(0,1) == "E") {
+            objects.finish = scene.meshes[i];
+        } else {
+            objects.fakefinish = scene.meshes[i];
+        }
+    }
 }
 let intervalId = setInterval(function() {
     if (!isMapLoaded) {
@@ -278,6 +285,9 @@ function test() {
     if (player.position.z > -10 && player.position.x > 14) {
         player.position.x = -500;
         alert("Welcome to exit 8! Your goal is to get to exit 8, but it won’t be easy. When you start at exit 0, you will see a daycare scene. Make sure to study it carefully! The exits after exit 0 will show the same scene, but something might have changed. If you notice a change, return through the door you entered. If not, go through the door at the other end. If you were right, you will progress to the next exit, and if not, you will be sent back to exit 0. Press P at any time to pause.");
+    }
+    if (alpha == 8) {
+        objects.finish.position.y = 0;
     }
     switch (current) {
         case 0:
