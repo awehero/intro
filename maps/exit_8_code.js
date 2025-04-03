@@ -268,7 +268,7 @@ function test() {
     }
     switch (current) {
         case 0:
-            if (player.position.z < -150) {
+            if (player.position.z < -149) {
                 current = 1;
                 resetObjects();
                 if (alpha == 0) {
@@ -359,7 +359,7 @@ function test() {
                                     break;
                             }
                         } else {
-                            n = 6;
+                            n = 5;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             switch (anomNum) {
@@ -369,13 +369,13 @@ function test() {
                                 case 1:
                                     
                                     break;
-                                case 3:
+                                case 2:
                                     objects.kitchen.microwave.row4.position.y = 1000;
                                     break;
-                                case 4:
+                                case 3:
                                     //Some of the cubes are moved
                                     break;
-                                case 5:
+                                case 4:
                                     //Train car color
                                     break;
                             }
