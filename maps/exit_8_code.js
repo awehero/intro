@@ -288,8 +288,10 @@ function test() {
     }
     if (alpha == 8) {
         objects.finish.position.y = 0;
+        objects.fakefinish.position.y = 1.5;
     } else {
-        
+        objects.finish.position.y = 100;
+        objects.fakefinish.position.y = 100;
     }
     switch (current) {
         case 0:
