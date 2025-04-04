@@ -235,6 +235,7 @@ function resetObjects() {
     
     objects.train.car3.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000ff");
     objects.train.car3.position.y = 0.95165;
+    objects.train.car3wheels.forEach(obj=>{obj.position.y = 0.58765;});
 
     objects.train.car1.position.z = -199.75;
     objects.train.car2.position.z = -199.75;
