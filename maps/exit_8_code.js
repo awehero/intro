@@ -293,6 +293,9 @@ function test() {
         objects.finish.position.y = 100;
         objects.fakefinish.position.y = 100;
     }
+    if (alpha > 8) {
+        alert("Wait, you're still going?\nWell, I guess if you really want to, you can.");
+    }
     switch (current) {
         case 0:
             if (player.position.z < -149) {
