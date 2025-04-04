@@ -269,13 +269,13 @@ function test() {
         player.position.z = -100;
         console.log(cheese);                                                                        //DELETE THIS LATER
     }
-    if (player.position.z < -110 && player.position.z > -130 && player.position.x < 14) {
+    if (player.position.z < -110 && player.position.z > -130 && player.position.x < 13) {
         if (messageCheck == 0) {
             window.tsTriggers[Object.keys(window.tsTriggers)[6]]("Exit " + alpha);
             messageCheck = 1;
         }
     } else {
-        if (!(player.position.z < -110 && player.position.z > -130 && player.position.x < 14)) {
+        if (!(player.position.z < -110 && player.position.z > -130 && player.position.x < 13)) {
             if (messageCheck == 1) {
                 window.tsTriggers[Object.keys(window.tsTriggers)[7]]();
                 messageCheck = 0;
