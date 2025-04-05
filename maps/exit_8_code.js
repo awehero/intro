@@ -297,7 +297,7 @@ function test() {
     switch (current) {
         case 0:
             if (alpha == 9) {
-                alert("Wait, you're still going?\nWell, I guess if you really want to, you can.");
+                //alert("Wait, you're still going?\nWell, I guess if you really want to, you can.");
             }
             if (player.position.z < -149) {
                 current = 1;
