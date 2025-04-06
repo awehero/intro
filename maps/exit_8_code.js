@@ -438,6 +438,13 @@ function test() {
                     if (guess == 0) {
                         rotation += Math.PI;
                         player.position.z = player.position.z + 30;
+                        let beb = {};
+                        if (localStorage.getItem("beb")) {
+                            beb = localStorage.getItem("beb");
+                        } else {
+                            beb = {beb1:0,beb2:0};
+                        }
+                        
                     } else {
                         player.position.z = player.position.z + 160;
                     }
