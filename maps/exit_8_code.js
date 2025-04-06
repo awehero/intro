@@ -338,7 +338,7 @@ function test() {
                                     objects.moon.forEach(obj=>{obj.isVisible = true;});
                             }
                         } else if (alpha < 6) {
-                            n = 11;
+                            n = 10;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             switch (anomNum) {
@@ -370,21 +370,18 @@ function test() {
                                     objects.demon.forEach(obj=>{obj.position.x = -40;});
                                     break;
                                 case 5:
-                                    objects.window1.isVisible = false;
-                                    break;
-                                case 6:
                                     objects.breadby.forEach(obj=>{obj.position.x = 59.6;});
                                     break;
-                                case 7:
+                                case 6:
                                     objects.fort.blueblocks.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#7f00d1");});
                                     break;
-                                case 8:
+                                case 7:
                                     objects.water.position.y = 7.25;
                                     break;
-                                case 9:
+                                case 8:
                                     objects.shelf.shelves.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#ffdb97");});
                                     break;
-                                case 10:
+                                case 9:
                                     objects.train.car1.position.z = -190.25;
                                     objects.train.car2.position.z = -190.25;
                                     objects.train.car3.position.z = -190.25;
@@ -396,7 +393,7 @@ function test() {
                                     break;
                             }
                         } else {
-                            n = 4;
+                            n = 5;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             switch (anomNum) {
@@ -415,6 +412,9 @@ function test() {
                                     objects.shelf.yellowinnercube.position.z = -170;
                                     objects.shelf.yellowoutercube.position.x = 38;
                                     objects.shelf.yellowoutercube.position.z = -170;
+                                    break;
+                                case 4:
+                                    objects.window1.isVisible = false;
                                     break;
                             }
                         }
@@ -442,7 +442,7 @@ function test() {
                         if (localStorage.getItem("beb")) {
                             beb = localStorage.getItem("beb");
                         } else {
-                            beb = {beb1:0,beb2:0};
+                            beb = {night:0,blue_walls:0,creepy_drawing:0,red_train_rug:0,brown_rug:0,moon:0,missing_train_car:0,pan_on_stove:0,cube_colors_flipped:0,door_missing:0,creepy_guy_outside_window:0,breadby:0,purple_fort_blocks:0,water_in_sink:0,shelves_changed_color:0,train_on_other_side_of_track:0,purple_train_engine:0,red_and_blue_train_cars_are_flipped:0,microwave_missing_button:0,yellow_cube_is_missing:0,window_pane_missing:0};
                         }
                         
                     } else {
