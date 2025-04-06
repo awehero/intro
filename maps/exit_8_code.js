@@ -290,6 +290,7 @@ function test() {
     if (player.position.z > -10 && player.position.x < -14 && player.position.x > -16) {
         player.position.x = -500;
         //night:0,blue_walls:0,creepy_drawing:0,red_train_rug:0,brown_rug:0,moon:0,missing_train_car:0,pan_on_stove:0,cube_colors_flipped:0,door_missing:0,creepy_guy_outside_window:0,breadby:0,purple_fort_blocks:0,water_in_sink:0,shelves_changed_color:0,train_on_other_side_of_track:0,purple_train_engine:0,red_and_blue_train_cars_are_flipped:0,microwave_missing_button:0,yellow_cube_is_missing:0,window_pane_missing:0
+        
         alert("");
     }
     if (alpha == 8) {
