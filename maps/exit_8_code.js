@@ -289,18 +289,21 @@ function test() {
     }
     if (player.position.z > -10 && player.position.x < -14 && player.position.x > -16) {
         player.position.x = -500;
-        //Night:0,Blue_Walls:0,Creepy_Drawing:0,Red_Rug:0,Brown_Rug:0,Moon:0,Missing_Train_Car:0,Pan_on_Stove:0,Cube_Colors_Flipped:0,Door_is_Missing:0,Creepy_Guy_Outside_the_Window:0,Breadby:0,Purple_Fort_Blocks:0,Water_in_Sink:0,Shelves_Color_Changed:0,Train_on_Other_Side_of_the_Track:0,Purple_Train_Engine:0,Red_and_Blue_Train_Cars_are_Flipped:0,Microwave_Missing_Bottom_Button:0,Yellow_Cube_is_Moved:0,Window_Pane_Missing:0
-        let beb = localStorage.getItem("beb");
         let string = "";
-        Object.entries(beb).forEach(([key, value]) => {
-            if (value === 0) {
-                string += "????????????? - Not Discovered!\n";
-            } else if (value === 1) {
-                string += key.replace(/_/g, " ") + " - Found 1 time!\n";
-            } else {
-                string += key.replace(/_/g, " ") + " - Found " + value + " times!\n";
-            }
-        });
+        if (localStorage.getItem("beb") {
+            let beb = localStorage.getItem("beb");
+            Object.entries(beb).forEach(([key, value]) => {
+                if (value === 0) {
+                    string += "????????????? - Not Discovered!\n";
+                } else if (value === 1) {
+                    string += key.replace(/_/g, " ") + " - Found 1 time!\n";
+                } else {
+                    string += key.replace(/_/g, " ") + " - Found " + value + " times!\n";
+                }
+            });
+        } else {
+            string = "You have not discovered any anomalies yet!";
+        }
         alert(string);
     }
     if (alpha == 8) {
