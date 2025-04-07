@@ -460,81 +460,81 @@ function test() {
                         let beb = {};
                         if (localStorage.getItem("beb")) {
                             beb = JSON.parse(localStorage.getItem("beb"));
-                            if (alpha < 3) {
-                                switch (anomNum) {
-                                    case 0:
-                                        beb.Night = beb.Night + 1;
-                                        break;
-                                    case 1:
-                                        beb.Blue_Walls = beb.Blue_Walls + 1;
-                                        break;
-                                    case 2:
-                                        beb.Creepy_Drawing = beb.Creepy_Drawing + 1;
-                                        break;
-                                    case 3:
-                                        beb.Red_Rug = beb.Red_Rug + 1;
-                                        break;
-                                    case 4:
-                                        beb.Brown_Rug = beb.Brown_Rug + 1;
-                                        break;
-                                    case 5:
-                                        beb.Moon = beb.Moon + 1;
-                                        break;
-                                }
-                            } else if (alpha < 6) {
-                                switch (anomNum) {
-                                    case 0:
-                                        beb.Missing_Train_Car = beb.Missing_Train_Car + 1;
-                                        break;
-                                    case 1:
-                                        beb.Pan_on_Stove = beb.Pan_on_Stove + 1;
-                                        break;
-                                    case 2:
-                                        beb.Cube_Colors_Flipped = beb.Cube_Colors_Flipped + 1;
-                                        break;
-                                    case 3:
-                                        beb.Door_is_Missing = beb.Door_is_Missing + 1;
-                                        break;
-                                    case 4:
-                                        beb.Creepy_Guy_Outside_the_Window = beb.Creepy_Guy_Outside_the_Window + 1;
-                                        break;
-                                    case 5:
-                                        beb.Breadby = beb.Breadby + 1;
-                                        break;
-                                    case 6:
-                                        beb.Purple_Fort_Blocks = beb.Purple_Fort_Blocks + 1;
-                                        break;
-                                    case 7:
-                                        beb.Water_in_Sink = beb.Water_in_Sink + 1;
-                                        break;
-                                    case 8:
-                                        beb.Shelves_Color_Changed = beb.Shelves_Color_Changed + 1;
-                                        break;
-                                    case 9:
-                                        beb.Train_on_Other_Side_of_the_Track = beb.Train_on_Other_Side_of_the_Track + 1;
-                                        break;
-                                }
-                            } else {
-                                switch (anomNum) {
-                                    case 0:
-                                        beb.Purple_Train_Engine = beb.Purple_Train_Engine + 1;
-                                        break;
-                                    case 1:
-                                        beb.Red_and_Blue_Train_Cars_are_Flipped = beb.Red_and_Blue_Train_Cars_are_Flipped + 1;
-                                        break;
-                                    case 2:
-                                        beb.Microwave_Missing_Bottom_Button = beb.Microwave_Missing_Bottom_Button + 1;
-                                        break;
-                                    case 3:
-                                        beb.Yellow_Cube_is_Moved = beb.Yellow_Cube_is_Moved + 1;
-                                        break;
-                                    case 4:
-                                        beb.Window_Pane_Missing = beb.Window_Pane_Missing + 1;
-                                        break;
-                                }
-                            }
                         } else {
                             beb = {Night:0,Blue_Walls:0,Creepy_Drawing:0,Red_Rug:0,Brown_Rug:0,Moon:0,Missing_Train_Car:0,Pan_on_Stove:0,Cube_Colors_Flipped:0,Door_is_Missing:0,Creepy_Guy_Outside_the_Window:0,Breadby:0,Purple_Fort_Blocks:0,Water_in_Sink:0,Shelves_Color_Changed:0,Train_on_Other_Side_of_the_Track:0,Purple_Train_Engine:0,Red_and_Blue_Train_Cars_are_Flipped:0,Microwave_Missing_Bottom_Button:0,Yellow_Cube_is_Moved:0,Window_Pane_Missing:0};
+                        }
+                        if (alpha < 3) {
+                            switch (anomNum) {
+                                case 0:
+                                    beb.Night = beb.Night + 1;
+                                    break;
+                                case 1:
+                                    beb.Blue_Walls = beb.Blue_Walls + 1;
+                                    break;
+                                case 2:
+                                    beb.Creepy_Drawing = beb.Creepy_Drawing + 1;
+                                    break;
+                                case 3:
+                                    beb.Red_Rug = beb.Red_Rug + 1;
+                                    break;
+                                case 4:
+                                    beb.Brown_Rug = beb.Brown_Rug + 1;
+                                    break;
+                                case 5:
+                                    beb.Moon = beb.Moon + 1;
+                                    break;
+                            }
+                        } else if (alpha < 6) {
+                            switch (anomNum) {
+                                case 0:
+                                    beb.Missing_Train_Car = beb.Missing_Train_Car + 1;
+                                    break;
+                                case 1:
+                                    beb.Pan_on_Stove = beb.Pan_on_Stove + 1;
+                                    break;
+                                case 2:
+                                    beb.Cube_Colors_Flipped = beb.Cube_Colors_Flipped + 1;
+                                    break;
+                                case 3:
+                                    beb.Door_is_Missing = beb.Door_is_Missing + 1;
+                                    break;
+                                case 4:
+                                    beb.Creepy_Guy_Outside_the_Window = beb.Creepy_Guy_Outside_the_Window + 1;
+                                    break;
+                                case 5:
+                                    beb.Breadby = beb.Breadby + 1;
+                                    break;
+                                case 6:
+                                    beb.Purple_Fort_Blocks = beb.Purple_Fort_Blocks + 1;
+                                    break;
+                                case 7:
+                                    beb.Water_in_Sink = beb.Water_in_Sink + 1;
+                                    break;
+                                case 8:
+                                    beb.Shelves_Color_Changed = beb.Shelves_Color_Changed + 1;
+                                    break;
+                                case 9:
+                                    beb.Train_on_Other_Side_of_the_Track = beb.Train_on_Other_Side_of_the_Track + 1;
+                                    break;
+                            }
+                        } else {
+                            switch (anomNum) {
+                                case 0:
+                                    beb.Purple_Train_Engine = beb.Purple_Train_Engine + 1;
+                                    break;
+                                case 1:
+                                    beb.Red_and_Blue_Train_Cars_are_Flipped = beb.Red_and_Blue_Train_Cars_are_Flipped + 1;
+                                    break;
+                                case 2:
+                                    beb.Microwave_Missing_Bottom_Button = beb.Microwave_Missing_Bottom_Button + 1;
+                                    break;
+                                case 3:
+                                    beb.Yellow_Cube_is_Moved = beb.Yellow_Cube_is_Moved + 1;
+                                    break;
+                                case 4:
+                                    beb.Window_Pane_Missing = beb.Window_Pane_Missing + 1;
+                                    break;
+                            }
                         }
                         localStorage.setItem("beb", JSON.stringify(beb));
                     } else {
