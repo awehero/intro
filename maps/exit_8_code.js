@@ -311,25 +311,46 @@ function test() {
     if (player.position.z > -10 && player.position.x < -14 && player.position.x > -16) {
         player.position.x = -500;
         let string = "";
+        let string2 = "";
+        let track = 0;
         let numFound = 0;
         if (localStorage.getItem("beb")) {
             let beb = JSON.parse(localStorage.getItem("beb"));
             Object.entries(beb).forEach(([key, value]) => {
                 if (value === 0 || value == null) {
-                    string += "????????????? - Not Discovered!\n";
+                    if (track < 22) {
+                        string += "????????????? - Not Discovered!\n";
+                    } else {
+                        string2 += "????????????? - Not Discovered!\n";
+                    }
+                    track++;
                 } else if (value === 1) {
-                    string += key.replace(/_/g, " ") + " - Found 1 time!\n";
+                    if (track < 22) {
+                        string += key.replace(/_/g, " ") + " - Found 1 time!\n";
+                    } else {
+                        string2 += key.replace(/_/g, " ") + " - Found 1 time!\n";
+                    }
                     numFound++;
+                    track++;
                 } else {
-                    string += key.replace(/_/g, " ") + " - Found " + value + " times!\n";
+                    if (track < 22) {
+                        string += key.replace(/_/g, " ") + " - Found " + value + " times!\n";
+                    } else {
+                        string2 += key.replace(/_/g, " ") + " - Found " + value + " times!\n";
+                    }
                     numFound++;
+                    track++;
                 }
             });
-            string = "You have found " + numFound + "/24 anomalies!\n" + string;
+            string = "You have found " + numFound + "/24 anomalies!\n" + string + "Page 1/2";
+            string2 = string2 + "Page 2/2";
         } else {
             string = "You have not discovered any anomalies yet!";
         }
         alert(string);
+        if (track > 21) {
+            alert(string2);
+        }
     }
     if (alpha == 8 || alpha > 19) {
         objects.finish.position.y = 0;
