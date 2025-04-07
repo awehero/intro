@@ -1,5 +1,6 @@
 globalThis.alpha = 0;
 globalThis.messageCheck = 0;
+globalThis.alertCheck = 0;
 globalThis.current = 0;
 globalThis.anom = 0;
 globalThis.guess = 0;
@@ -186,8 +187,10 @@ let intervalId = setInterval(function() {
                 scene.removeMesh(scene.meshes[i]);
             }
         }
+        canvas.style.filter = "none";
         delete globalThis.alpha;
         delete globalThis.messageCheck;
+        delete globalThis.alertCheck;
         delete globalThis.current;
         delete globalThis.anom;
         delete globalThis.anomNum;
@@ -264,6 +267,7 @@ function resetObjects() {
 function test() {
     if (!alive) {
         alpha = 0;
+        canvas.style.filter = "none";
     }
     if (player.position.z < -19 && player.position.z > -20) {
         player.position.x = 0;
@@ -310,7 +314,7 @@ function test() {
         }
         alert(string);
     }
-    if (alpha == 8) {
+    if (alpha == 8 || alpha > 19) {
         objects.finish.position.y = 0;
         objects.fakefinish.position.y = 1.5;
     } else {
@@ -319,11 +323,50 @@ function test() {
     }
     switch (current) {
         case 0:
-            if (alpha == 9) {
-                alert("Wait, you thought you could keep going?\nWell, I guess if you really want to, you can. Good luck though.");
+            if (alertCheck == 0) {
+                if (alpha == 9) {
+                    alert("Wait, you're still going?\nWell, I guess if you really want to, you can.");
+                    alertCheck = 1;
+                }
+                if (alpha == 10) {
+                    alert("You realize there's no point continuing, right?");
+                    alertCheck = 1;
+                }
+                if (alpha == 11) {
+                    alert("Just restart already, there's nothing more");
+                    alertCheck = 1;
+                }
+                if (alpha == 12) {
+                    alert("Like seriously, there's nothing else!");
+                    alertCheck = 1;
+                }
+                if (alpha == 13) {
+                    alert("Please, just restart the level!");
+                    alertCheck = 1;
+                }
+                if (alpha == 14) {
+                    alert("You think there's something else, don't you?");
+                    alertCheck = 1;
+                }
+                if (alpha == 15) {
+                    alert("Try playing like this then!");
+                    canvas.style.filter = "blur(5px)";
+                    alertCheck = 1;
+                }
+                if (alpha == 17) {
+                    alert("Still not bored? How about this?");
+                    canvas.style.filter = "blur(10px)";
+                    alertCheck = 1;
+                }
+                if (alpha == 19) {
+                    alert("Ok, fine I'll give you the finish.");
+                    canvas.style.filter = "none";
+                    alertCheck = 1;
+                }
             }
             if (player.position.z < -149) {
                 current = 1;
+                alertCheck = 0;
                 resetObjects();
                 if (alpha == 0) {
                     anom = 1;
