@@ -290,7 +290,7 @@ function test() {
     if (player.position.z > -10 && player.position.x < -14 && player.position.x > -16) {
         player.position.x = -500;
         let string = "";
-        if (localStorage.getItem("beb") {
+        if (localStorage.getItem("beb")) {
             let beb = localStorage.getItem("beb");
             Object.entries(beb).forEach(([key, value]) => {
                 if (value === 0) {
