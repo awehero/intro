@@ -285,6 +285,8 @@ function resetObjects() {
     objects.shelf.blocks[1].isVisible = true;
     objects.shelf.blocks[2].isVisible = true;
     objects.shelf.blocks[3].isVisible = true;
+
+    objects.table.legs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#f97c00");});
 }
 function test() {
     if (!alive) {
@@ -347,7 +349,7 @@ function test() {
                     track++;
                 }
             });
-            string = "You have found " + numFound + "/25 anomalies!\n" + string + "Page 1/2";
+            string = "You have found " + numFound + "/26 anomalies!\n" + string + "Page 1/2";
             string2 = string2 + "Page 2/2";
         } else {
             string = "You have not discovered any anomalies yet!";
@@ -518,7 +520,7 @@ function test() {
                                     break;
                             }
                         } else {
-                            n = 7;
+                            n = 8;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             anomNum = Math.round(anomNum);
@@ -551,6 +553,9 @@ function test() {
                                     objects.shelf.blocks[2].isVisible = false;
                                     objects.shelf.blocks[3].isVisible = false;
                                     break;
+                                case 7:
+                                    objects.table.legs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#b65b00");});
+                                    break;
                             }
                         }
                     }
@@ -575,31 +580,32 @@ function test() {
                         player.position.z = player.position.z + 30;
                         let beb = JSON.parse(localStorage.getItem("beb"));
                         const defaultAnomalies = {
-                          Night: 0,
-                          Blue_Walls: 0,
-                          Creepy_Drawing: 0,
-                          Red_Rug: 0,
-                          Brown_Rug: 0,
-                          Moon: 0,
-                          Missing_Train_Car: 0,
-                          Pan_on_Stove: 0,
-                          Cube_Colors_Flipped: 0,
-                          Door_is_Missing: 0,
-                          Creepy_Guy_Outside_the_Window: 0,
-                          Breadby: 0,
-                          Purple_Fort_Blocks: 0,
-                          Water_in_Sink: 0,
-                          Shelves_Color_Changed: 0,
-                          Train_on_Other_Side_of_the_Track: 0,
-                          Cursed_Crayon_is_Moved: 0,
-                          Green_Block_is_Missing: 0,
-                          Purple_Train_Engine: 0,
-                          Red_and_Blue_Train_Cars_are_Flipped: 0,
-                          Microwave_Missing_Bottom_Button: 0,
-                          Yellow_Cube_is_Moved: 0,
-                          Window_Pane_Missing: 0,
-                          Doorknob_is_on_the_Wrong_Side: 0,
-                          Some_Wooden_Blocks_are_Missing: 0
+                            Night: 0,
+                            Blue_Walls: 0,
+                            Creepy_Drawing: 0,
+                            Red_Rug: 0,
+                            Brown_Rug: 0,
+                            Moon: 0,
+                            Missing_Train_Car: 0,
+                            Pan_on_Stove: 0,
+                            Cube_Colors_Flipped: 0,
+                            Door_is_Missing: 0,
+                            Creepy_Guy_Outside_the_Window: 0,
+                            Breadby: 0,
+                            Purple_Fort_Blocks: 0,
+                            Water_in_Sink: 0,
+                            Shelves_Color_Changed: 0,
+                            Train_on_Other_Side_of_the_Track: 0,
+                            Cursed_Crayon_is_Moved: 0,
+                            Green_Block_is_Missing: 0,
+                            Purple_Train_Engine: 0,
+                            Red_and_Blue_Train_Cars_are_Flipped: 0,
+                            Microwave_Missing_Bottom_Button: 0,
+                            Yellow_Cube_is_Moved: 0,
+                            Window_Pane_Missing: 0,
+                            Doorknob_is_on_the_Wrong_Side: 0,
+                            Some_Wooden_Blocks_are_Missing: 0,
+                            Table_Legs_Color_Changed: 0
                         };
                         for (const key in defaultAnomalies) {
                           if (!(key in beb)) {
@@ -687,6 +693,9 @@ function test() {
                                     break;
                                 case 6:
                                     beb.Some_Wooden_Blocks_are_Missing = beb.Some_Wooden_Blocks_are_Missing + 1;
+                                    break;
+                                case 7:
+                                    beb.Table_Legs_Color_Changed = beb.Table_Legs_Color_Changed + 1;
                                     break;
                             }
                         }
