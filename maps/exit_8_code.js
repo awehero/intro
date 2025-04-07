@@ -289,8 +289,10 @@ function test() {
     }
     if (player.position.z > -10 && player.position.x < -14 && player.position.x > -16) {
         player.position.x = -500;
-        //night:0,blue_walls:0,creepy_drawing:0,red_train_rug:0,brown_rug:0,moon:0,missing_train_car:0,pan_on_stove:0,cube_colors_flipped:0,door_missing:0,creepy_guy_outside_window:0,breadby:0,purple_fort_blocks:0,water_in_sink:0,shelves_changed_color:0,train_on_other_side_of_track:0,purple_train_engine:0,red_and_blue_train_cars_are_flipped:0,microwave_missing_button:0,yellow_cube_is_missing:0,window_pane_missing:0
-        
+        //Night:0,Blue_Walls:0,Creepy_Drawing:0,Red_Rug:0,Brown_Rug:0,Moon:0,Missing_Train_Car:0,Pan_on_Stove:0,Cube_Colors_Flipped:0,Door_is_Missing:0,Creepy_Guy_Outside_the_Window:0,Breadby:0,Purple_Fort_Blocks:0,Water_in_Sink:0,Shelves_Color_Changed:0,Train_on_Other_Side_of_the_Track:0,Purple_Train_Engine:0,Red_and_Blue_Train_Cars_are_Flipped:0,Microwave_Missing_Bottom_Button:0,Yellow_Cube_is_Moved:0,Window_Pane_Missing:0
+        let string = "";
+        let beb = localStorage.getItem("beb");
+        if (beb.night
         alert("");
     }
     if (alpha == 8) {
@@ -448,7 +450,7 @@ function test() {
                         if (localStorage.getItem("beb")) {
                             beb = localStorage.getItem("beb");
                         } else {
-                            beb = {night:0,blue_walls:0,creepy_drawing:0,red_train_rug:0,brown_rug:0,moon:0,missing_train_car:0,pan_on_stove:0,cube_colors_flipped:0,door_missing:0,creepy_guy_outside_window:0,breadby:0,purple_fort_blocks:0,water_in_sink:0,shelves_changed_color:0,train_on_other_side_of_track:0,purple_train_engine:0,red_and_blue_train_cars_are_flipped:0,microwave_missing_button:0,yellow_cube_is_missing:0,window_pane_missing:0};
+                            beb = {Night:0,Blue_Walls:0,Creepy_Drawing:0,Red_Rug:0,Brown_Rug:0,Moon:0,Missing_Train_Car:0,Pan_on_Stove:0,Cube_Colors_Flipped:0,Door_is_Missing:0,Creepy_Guy_Outside_the_Window:0,Breadby:0,Purple_Fort_Blocks:0,Water_in_Sink:0,Shelves_Color_Changed:0,Train_on_Other_Side_of_the_Track:0,Purple_Train_Engine:0,Red_and_Blue_Train_Cars_are_Flipped:0,Microwave_Missing_Bottom_Button:0,Yellow_Cube_is_Moved:0,Window_Pane_Missing:0};
                         }
                         
                     } else {
