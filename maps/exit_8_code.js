@@ -341,7 +341,7 @@ function test() {
         case 0:
             if (alertCheck == 0) {
                 if (alpha == 9) {
-                    alert("Wait, you're still going?\nWell, I guess if you really want to, you can.");
+                    alert("Wait, you're still going?\nWell, I guess if you really want to, you can, but there's nothing else.");
                     alertCheck = 1;
                 }
                 if (alpha == 10) {
