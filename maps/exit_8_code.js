@@ -291,7 +291,7 @@ function test() {
         player.position.x = -500;
         let string = "";
         if (localStorage.getItem("beb")) {
-            let beb = localStorage.getItem("beb");
+            let beb = JSON.parse(localStorage.getItem("beb"));
             Object.entries(beb).forEach(([key, value]) => {
                 if (value === 0) {
                     string += "????????????? - Not Discovered!\n";
