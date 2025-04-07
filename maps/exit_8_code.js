@@ -273,6 +273,7 @@ function resetObjects() {
     objects.pans.forEach(obj=>{obj.position.y = 106.95;});
     objects.water.position.y = 207.25;
     objects.doorknob2.position.x = 23;
+    objects.doorknob2.isVisible = false;
     objects.door2.isVisible = true;
     objects.fort.greenblock.isVisible = true;
 
@@ -454,6 +455,7 @@ function test() {
                                     break;
                                 case 3:
                                     objects.door2.isVisible = false;
+                                    objects.doorknob2.isVisible = false;
                                     break;
                                 case 4:
                                     objects.demon.forEach(obj=>{obj.position.x = -40;});
