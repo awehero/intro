@@ -263,6 +263,10 @@ function resetObjects() {
     objects.pans.forEach(obj=>{obj.position.y = 106.95;});
     objects.water.position.y = 207.25;
     objects.door2.isVisible = true;
+
+    objects.shelf.thecursedcrayon.position.x = 56;
+    objects.shelf.thecursedcrayon.position.y = 0.84;
+    objects.shelf.thecursedcrayon.position.z = -170.8;
 }
 function test() {
     if (!alive) {
@@ -272,7 +276,7 @@ function test() {
     if (player.position.z < -19 && player.position.z > -20) {
         player.position.x = 0;
         player.position.z = -100;
-        console.log(cheese);                                                                        //DELETE THIS LATER
+        //console.log(cheese);
     }
     if (player.position.z < -110 && player.position.z > -130 && player.position.x < 13) {
         if (messageCheck == 0) {
@@ -308,7 +312,7 @@ function test() {
                     numFound++;
                 }
             });
-            string = "You have found " + numFound + "/21 anomalies!\n" + string;
+            string = "You have found " + numFound + "/22 anomalies!\n" + string;
         } else {
             string = "You have not discovered any anomalies yet!";
         }
@@ -405,7 +409,7 @@ function test() {
                                     objects.moon.forEach(obj=>{obj.isVisible = true;});
                             }
                         } else if (alpha < 6) {
-                            n = 10;
+                            n = 11;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             anomNum = Math.round(anomNum);
@@ -459,6 +463,11 @@ function test() {
                                     objects.train.engine.forEach(obj=>{obj.position.z = -190.25});
                                     objects.train.enginewheels.forEach(obj=>{obj.position.z = -190.25});
                                     break;
+                                case 10:
+                                    objects.shelf.thecursedcrayon.position.x = 50;
+                                    objects.shelf.thecursedcrayon.position.y = 0.35;
+                                    objects.shelf.thecursedcrayon.position.z = -202.8;
+                                    break;
                             }
                         } else {
                             n = 5;
@@ -511,7 +520,7 @@ function test() {
                         if (localStorage.getItem("beb")) {
                             beb = JSON.parse(localStorage.getItem("beb"));
                         } else {
-                            beb = {Night:0,Blue_Walls:0,Creepy_Drawing:0,Red_Rug:0,Brown_Rug:0,Moon:0,Missing_Train_Car:0,Pan_on_Stove:0,Cube_Colors_Flipped:0,Door_is_Missing:0,Creepy_Guy_Outside_the_Window:0,Breadby:0,Purple_Fort_Blocks:0,Water_in_Sink:0,Shelves_Color_Changed:0,Train_on_Other_Side_of_the_Track:0,Purple_Train_Engine:0,Red_and_Blue_Train_Cars_are_Flipped:0,Microwave_Missing_Bottom_Button:0,Yellow_Cube_is_Moved:0,Window_Pane_Missing:0};
+                            beb = {Night:0,Blue_Walls:0,Creepy_Drawing:0,Red_Rug:0,Brown_Rug:0,Moon:0,Missing_Train_Car:0,Pan_on_Stove:0,Cube_Colors_Flipped:0,Door_is_Missing:0,Creepy_Guy_Outside_the_Window:0,Breadby:0,Purple_Fort_Blocks:0,Water_in_Sink:0,Shelves_Color_Changed:0,Train_on_Other_Side_of_the_Track:0,Cursed_Crayon_is_Moved:0,Purple_Train_Engine:0,Red_and_Blue_Train_Cars_are_Flipped:0,Microwave_Missing_Bottom_Button:0,Yellow_Cube_is_Moved:0,Window_Pane_Missing:0};
                         }
                         if (alpha < 3) {
                             switch (anomNum) {
@@ -566,6 +575,8 @@ function test() {
                                 case 9:
                                     beb.Train_on_Other_Side_of_the_Track = beb.Train_on_Other_Side_of_the_Track + 1;
                                     break;
+                                case 10:
+                                    beb.Cursed_Crayon_is_Moved = beb.Cursed_Crayon_is_Moved + 1;
                             }
                         } else {
                             switch (anomNum) {
