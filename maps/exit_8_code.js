@@ -349,7 +349,7 @@ function test() {
                     alertCheck = 1;
                 }
                 if (alpha == 11) {
-                    alert("Just restart already, there's nothing more");
+                    alert("Just restart already, there's nothing more.");
                     alertCheck = 1;
                 }
                 if (alpha == 12) {
