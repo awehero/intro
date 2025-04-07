@@ -290,6 +290,7 @@ function test() {
     if (player.position.z > -10 && player.position.x < -14 && player.position.x > -16) {
         player.position.x = -500;
         let string = "";
+        let numFound = 0;
         if (localStorage.getItem("beb")) {
             let beb = JSON.parse(localStorage.getItem("beb"));
             Object.entries(beb).forEach(([key, value]) => {
@@ -297,10 +298,13 @@ function test() {
                     string += "????????????? - Not Discovered!\n";
                 } else if (value === 1) {
                     string += key.replace(/_/g, " ") + " - Found 1 time!\n";
+                    numFound++;
                 } else {
                     string += key.replace(/_/g, " ") + " - Found " + value + " times!\n";
+                    numFound++;
                 }
             });
+            string = "You have found " + numFound + "/21 anomalies!\n" + string;
         } else {
             string = "You have not discovered any anomalies yet!";
         }
