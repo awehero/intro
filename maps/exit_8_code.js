@@ -379,6 +379,11 @@ function test() {
                     canvas.style.filter = "none";
                     alertCheck = 1;
                 }
+                if (alpha == 21) {
+                    alert("Why?");
+                    change_state.die("Wow, you still didn't give in. Ok, I think you've earned the knowledge of the lore. https://youtube.com/youtubelinkhere");
+                    alertCheck = 1;
+                }
             }
             if (player.position.z < -149) {
                 current = 1;
