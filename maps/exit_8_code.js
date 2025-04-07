@@ -172,6 +172,13 @@ for (var i = 17; i < scene.meshes.length; i++) {
             objects.door1 = scene.meshes[i];
         }
     }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#e6c313"))) {
+        if (scene.meshes[i].position.z < -170) {
+            objects.doorknob2 = scene.meshes[i];
+        } else {
+            objects.doorknob1 = scene.meshes[i];
+        }
+    }
     if (scene.meshes[i].material.diffuseColor.equals(new BABYLON.Color3.FromHexString("#24fc03"))) {
         if (scene.meshes[i].id.substring(0,1) == "E") {
             objects.finish = scene.meshes[i];
@@ -262,7 +269,8 @@ function resetObjects() {
     objects.moon.forEach(obj=>{obj.isVisible = false;});
     objects.pans.forEach(obj=>{obj.position.y = 106.95;});
     objects.water.position.y = 207.25;
-    objects.door2.isVisible = true;
+    objects.door2.position.x = 23;
+    object.doorknob2.isVisible = true;
 
     objects.shelf.thecursedcrayon.position.x = 56;
     objects.shelf.thecursedcrayon.position.y = 0.84;
@@ -312,7 +320,7 @@ function test() {
                     numFound++;
                 }
             });
-            string = "You have found " + numFound + "/22 anomalies!\n" + string;
+            string = "You have found " + numFound + "/23 anomalies!\n" + string;
         } else {
             string = "You have not discovered any anomalies yet!";
         }
@@ -470,7 +478,7 @@ function test() {
                                     break;
                             }
                         } else {
-                            n = 5;
+                            n = 6;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             anomNum = Math.round(anomNum);
@@ -493,6 +501,9 @@ function test() {
                                     break;
                                 case 4:
                                     objects.window1.isVisible = false;
+                                    break;
+                                case 5:
+                                    objects.door2.position.x = 17;
                                     break;
                             }
                         }
@@ -520,7 +531,7 @@ function test() {
                         if (localStorage.getItem("beb")) {
                             beb = JSON.parse(localStorage.getItem("beb"));
                         } else {
-                            beb = {Night:0,Blue_Walls:0,Creepy_Drawing:0,Red_Rug:0,Brown_Rug:0,Moon:0,Missing_Train_Car:0,Pan_on_Stove:0,Cube_Colors_Flipped:0,Door_is_Missing:0,Creepy_Guy_Outside_the_Window:0,Breadby:0,Purple_Fort_Blocks:0,Water_in_Sink:0,Shelves_Color_Changed:0,Train_on_Other_Side_of_the_Track:0,Cursed_Crayon_is_Moved:0,Purple_Train_Engine:0,Red_and_Blue_Train_Cars_are_Flipped:0,Microwave_Missing_Bottom_Button:0,Yellow_Cube_is_Moved:0,Window_Pane_Missing:0};
+                            beb = {Night:0,Blue_Walls:0,Creepy_Drawing:0,Red_Rug:0,Brown_Rug:0,Moon:0,Missing_Train_Car:0,Pan_on_Stove:0,Cube_Colors_Flipped:0,Door_is_Missing:0,Creepy_Guy_Outside_the_Window:0,Breadby:0,Purple_Fort_Blocks:0,Water_in_Sink:0,Shelves_Color_Changed:0,Train_on_Other_Side_of_the_Track:0,Cursed_Crayon_is_Moved:0,Purple_Train_Engine:0,Red_and_Blue_Train_Cars_are_Flipped:0,Microwave_Missing_Bottom_Button:0,Yellow_Cube_is_Moved:0,Window_Pane_Missing:0,Doorknob_is_on_the_Wrong_Side:0};
                         }
                         if (alpha < 3) {
                             switch (anomNum) {
@@ -595,6 +606,8 @@ function test() {
                                 case 4:
                                     beb.Window_Pane_Missing = beb.Window_Pane_Missing + 1;
                                     break;
+                                case 5:
+                                    beb.Doorknob_is_on_the_Wrong_Side = beb.Doorknob_is_on_the_Wrong_Side + 1;
                             }
                         }
                         localStorage.setItem("beb", JSON.stringify(beb));
