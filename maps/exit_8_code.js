@@ -459,7 +459,7 @@ function test() {
                         player.position.z = player.position.z + 30;
                         let beb = {};
                         if (localStorage.getItem("beb")) {
-                            beb = localStorage.getItem("beb");
+                            beb = JSON.parse(localStorage.getItem("beb"));
                             if (alpha < 3) {
                                 switch (anomNum) {
                                     case 0:
@@ -536,7 +536,7 @@ function test() {
                         } else {
                             beb = {Night:0,Blue_Walls:0,Creepy_Drawing:0,Red_Rug:0,Brown_Rug:0,Moon:0,Missing_Train_Car:0,Pan_on_Stove:0,Cube_Colors_Flipped:0,Door_is_Missing:0,Creepy_Guy_Outside_the_Window:0,Breadby:0,Purple_Fort_Blocks:0,Water_in_Sink:0,Shelves_Color_Changed:0,Train_on_Other_Side_of_the_Track:0,Purple_Train_Engine:0,Red_and_Blue_Train_Cars_are_Flipped:0,Microwave_Missing_Bottom_Button:0,Yellow_Cube_is_Moved:0,Window_Pane_Missing:0};
                         }
-                        localStorage.setItem("beb",beb);
+                        localStorage.setItem("beb", JSON.stringify(beb));
                     } else {
                         player.position.z = player.position.z + 160;
                     }
