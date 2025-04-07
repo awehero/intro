@@ -359,7 +359,7 @@ function test() {
             alert(string2);
         }
     }
-    if (alpha == 8 || alpha > 19) {
+    if (alpha == 9 || alpha > 19) {
         objects.finish.position.y = 0;
         objects.fakefinish.position.y = 1.5;
     } else {
@@ -369,36 +369,36 @@ function test() {
     switch (current) {
         case 0:
             if (alertCheck == 0) {
-                if (alpha == 9) {
+                if (alpha == 10) {
                     alert("Wait, you're still going?\nWell, I guess if you really want to, you can, but there's nothing else.");
                     alertCheck = 1;
                 }
-                if (alpha == 10) {
+                if (alpha == 11) {
                     alert("You realize there's no point continuing, right?");
                     alertCheck = 1;
                 }
-                if (alpha == 11) {
+                if (alpha == 12) {
                     alert("Just restart already, there's nothing more.");
                     alertCheck = 1;
                 }
-                if (alpha == 12) {
+                if (alpha == 13) {
                     alert("Like seriously, there's nothing else!");
                     alertCheck = 1;
                 }
-                if (alpha == 13) {
+                if (alpha == 14) {
                     alert("Please, just restart the level!");
                     alertCheck = 1;
                 }
-                if (alpha == 14) {
+                if (alpha == 15) {
                     alert("You think there's something else, don't you?");
                     alertCheck = 1;
                 }
-                if (alpha == 15) {
+                if (alpha == 16) {
                     alert("Try playing like this then!");
                     canvas.style.filter = "blur(5px)";
                     alertCheck = 1;
                 }
-                if (alpha == 17) {
+                if (alpha == 18) {
                     alert("Still not bored? How about this?");
                     canvas.style.filter = "blur(10px)";
                     alertCheck = 1;
