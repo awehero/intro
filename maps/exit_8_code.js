@@ -340,6 +340,7 @@ function test() {
                             n = 6;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
+                            anomNum = Math.round(anomNum);
                             switch (anomNum) {
                                 case 0:
                                     scene.clearColor = new BABYLON.Color3.FromHexString("#0b003e");
@@ -364,6 +365,7 @@ function test() {
                             n = 10;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
+                            anomNum = Math.round(anomNum);
                             switch (anomNum) {
                                 case 0:
                                     objects.train.car3.position.y = 1000;
@@ -419,6 +421,7 @@ function test() {
                             n = 5;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
+                            anomNum = Math.round(anomNum);
                             switch (anomNum) {
                                 case 0:
                                     objects.train.engine.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#9300ff");});
