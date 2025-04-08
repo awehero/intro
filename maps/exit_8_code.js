@@ -266,7 +266,8 @@ function resetObjects() {
     objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#b3ffab");});
     objects.window1.isVisible = true;
     objects.breadby.forEach(obj=>{obj.position.x = 259.6;});
-    objects.demon.forEach(obj=>{obj.position.x = -240;});
+    objects.demon.forEach(obj=>{obj.position.x = -40;});
+    objects.demon.forEach(obj=>{obj.isVisible = false;});
     objects.drawing.forEach(obj=>{obj.position.y = 104.15;});
     objects.sun.forEach(obj=>{obj.isVisible = true;});
     objects.moon.forEach(obj=>{obj.isVisible = false;});
@@ -495,6 +496,7 @@ function test() {
                                     break;
                                 case 4:
                                     objects.demon.forEach(obj=>{obj.position.x = -40;});
+                                    objects.demon.forEach(obj=>{obj.isVisible = true;});
                                     break;
                                 case 5:
                                     objects.breadby.forEach(obj=>{obj.position.x = 59.6;});
