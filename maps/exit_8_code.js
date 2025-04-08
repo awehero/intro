@@ -682,6 +682,7 @@ function test() {
                                     break;
                                 case 11:
                                     beb.Green_Block_is_Missing = beb.Green_Block_is_Missing + 1;
+                                    break;
                             }
                         } else {
                             switch (anomNum) {
