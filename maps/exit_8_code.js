@@ -287,6 +287,9 @@ function resetObjects() {
     objects.shelf.blocks[3].isVisible = true;
 
     objects.table.legs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#f97c00");});
+
+    objects.table.seattops.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#f97c00");});
+    objects.table.seatbottoms.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#f97c00");});
 }
 function test() {
     if (!alive) {
@@ -349,7 +352,7 @@ function test() {
                     track++;
                 }
             });
-            string = "You have found " + numFound + "/26 anomalies!\n" + string + "Page 1/2";
+            string = "You have found " + numFound + "/27 anomalies!\n" + string + "Page 1/2";
             string2 = string2 + "Page 2/2";
         } else {
             string = "You have not discovered any anomalies yet!";
@@ -430,7 +433,7 @@ function test() {
                     //anom = Math.round(Math.random());
                     if (anom == 0) {
                         if (alpha < 3) {
-                            n = 6;
+                            n = 7;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             anomNum = Math.round(anomNum);
@@ -453,6 +456,11 @@ function test() {
                                 case 5:
                                     objects.sun.forEach(obj=>{obj.isVisible = false;});
                                     objects.moon.forEach(obj=>{obj.isVisible = true;});
+                                    break;
+                                case 6:
+                                    objects.table.seattops.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#f97c00");});
+                                    objects.table.seatbottoms.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#f97c00");});
+                                    break;
                             }
                         } else if (alpha < 6) {
                             n = 12;
@@ -586,6 +594,7 @@ function test() {
                             Red_Rug: 0,
                             Brown_Rug: 0,
                             Moon: 0,
+                            Chairs_Changed_Color: 0,
                             Missing_Train_Car: 0,
                             Pan_on_Stove: 0,
                             Cube_Colors_Flipped: 0,
@@ -631,6 +640,9 @@ function test() {
                                     break;
                                 case 5:
                                     beb.Moon = beb.Moon + 1;
+                                    break;
+                                case 6:
+                                    beb.Chairs_Changed_Color = beb.Chairs_Changed_Color + 1;
                                     break;
                             }
                         } else if (alpha < 6) {
