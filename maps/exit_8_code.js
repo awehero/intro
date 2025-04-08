@@ -621,6 +621,14 @@ function test() {
                             beb[key] = 0;
                           }
                         }
+                        let beb2 = {};
+                        for (const key of Object.keys(defaultAnomalies)) {
+                          if (key in beb) {
+                            beb2[key] = beb[key];
+                          }
+                        }
+                        localStorage.setItem("beb", JSON.stringify(beb2));
+                        beb = JSON.parse(localStorage.getItem("beb"));
                         if (alpha < 3) {
                             switch (anomNum) {
                                 case 0:
