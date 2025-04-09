@@ -192,7 +192,7 @@ for (var i = 17; i < scene.meshes.length; i++) {
     }
     if (Math.round(scene.meshes[i].position.x*100) == 6000 || Math.round(scene.meshes[i].position.x*100) == -2000) {
         if (scene.meshes[i].material.diffuseColor.equals(new BABYLON.Color3.FromHexString("#000000"))) {
-            objects.push(scene.meshes[i]);
+            objects.windowframes.push(scene.meshes[i]);
         }
     }
 }
