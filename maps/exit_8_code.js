@@ -466,8 +466,8 @@ function test() {
                                     objects.moon.forEach(obj=>{obj.isVisible = true;});
                                     break;
                                 case 6:
-                                    objects.table.seattops.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#f97c00");});
-                                    objects.table.seatbottoms.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#f97c00");});
+                                    objects.table.seattops.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#fcc300");});
+                                    objects.table.seatbottoms.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#fcc300");});
                                     break;
                             }
                         } else if (alpha < 6) {
