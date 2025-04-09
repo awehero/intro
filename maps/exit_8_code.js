@@ -416,7 +416,7 @@ function test() {
                 }
                 if (alpha == 19) {
                     alert("Ok, fine I'll give you the finish.");
-                    canvas.style.filter = "none";
+                    canvas.style.filter = "grayscale(1)";
                     alertCheck = 1;
                 }
                 if (alpha == 21) {
