@@ -300,7 +300,7 @@ function test() {
     if (player.position.z < -19 && player.position.z > -20) {
         player.position.x = 0;
         player.position.z = -100;
-        //console.log(cheese);
+        console.log(cheese);
     }
     if (player.position.z < -110 && player.position.z > -130 && player.position.x < 13) {
         if (messageCheck == 0) {
