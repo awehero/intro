@@ -588,11 +588,9 @@ function test() {
                     if (guess == 0) {
                         rotation += Math.PI;
                         player.position.z = player.position.z + 30;
+                        let beb = {};
                         if (localStorage.getItem("beb")) {
-                            let beb = JSON.parse(localStorage.getItem("beb"));
-                        } else {
-                            beb = {};
-                        }
+                            beb = JSON.parse(localStorage.getItem("beb"));
                         const defaultAnomalies = {
                             Night: 0,
                             Blue_Walls: 0,
