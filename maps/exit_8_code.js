@@ -270,6 +270,7 @@ function resetObjects() {
     objects.train.rugs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#00df03");});
     
     objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#b3ffab");});
+    objects.windowframes.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#000000");});
     objects.window1.isVisible = true;
     objects.breadby.forEach(obj=>{obj.position.x = 259.6;});
     objects.demon.forEach(obj=>{obj.position.x = -40;});
@@ -359,7 +360,7 @@ function test() {
                     track++;
                 }
             });
-            string = "You have found " + numFound + "/27 anomalies!\n" + string + "Page 1/2";
+            string = "You have found " + numFound + "/28 anomalies!\n" + string + "Page 1/2";
             string2 = string2 + "Page 2/2";
         } else {
             string = "You have not discovered any anomalies yet!";
@@ -536,7 +537,7 @@ function test() {
                                     break;
                             }
                         } else {
-                            n = 8;
+                            n = 9;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             anomNum = Math.round(anomNum);
@@ -571,6 +572,9 @@ function test() {
                                     break;
                                 case 7:
                                     objects.table.legs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#b65b00");});
+                                    break;
+                                case 8:
+                                    objects.windowframes.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#393939");});
                                     break;
                             }
                         }
@@ -625,7 +629,8 @@ function test() {
                             Window_Pane_Missing: 0,
                             Doorknob_is_on_the_Wrong_Side: 0,
                             Some_Wooden_Blocks_are_Missing: 0,
-                            Table_Legs_Color_Changed: 0
+                            Table_Legs_Color_Changed: 0,
+                            Window_Frames_Color_Changed: 0
                         };
                         for (const key in defaultAnomalies) {
                           if (!(key in beb)) {
@@ -728,6 +733,9 @@ function test() {
                                     break;
                                 case 7:
                                     beb.Table_Legs_Color_Changed = beb.Table_Legs_Color_Changed + 1;
+                                    break;
+                                case 8:
+                                    beb.Window_Frames_Color_Changed = beb.Window_Frames_Color_Changed + 1;
                                     break;
                             }
                         }
