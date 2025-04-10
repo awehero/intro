@@ -296,6 +296,7 @@ function resetObjects() {
     objects.shelf.blocks[1].isVisible = true;
     objects.shelf.blocks[2].isVisible = true;
     objects.shelf.blocks[3].isVisible = true;
+    objects.shelf.blocks.forEach(obj=>{obj.isVisible = true;});
 
     objects.table.legs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#f97c00");});
 
@@ -365,7 +366,7 @@ function test() {
                     track++;
                 }
             });
-            string = "You have found " + numFound + "/29 anomalies!\n" + string + "Page 1/2";
+            string = "You have found " + numFound + "/30 anomalies!\n" + string + "Page 1/2";
             string2 = string2 + "Page 2/2";
         } else {
             string = "You have not discovered any anomalies yet!";
@@ -479,7 +480,7 @@ function test() {
                                     break;
                             }
                         } else if (alpha < 6) {
-                            n = 12;
+                            n = 13;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             anomNum = Math.round(anomNum);
@@ -542,6 +543,9 @@ function test() {
                                     break;
                                 case 11:
                                     objects.fort.greenblock.isVisible = false;
+                                    break;
+                                case 12:
+                                    objects.shelf.blocks.forEach(obj=>{obj.isVisible = false;});
                                     break;
                             }
                         } else {
@@ -631,6 +635,7 @@ function test() {
                             Train_on_Other_Side_of_the_Track: 0,
                             Cursed_Crayon_is_Moved: 0,
                             Green_Block_is_Missing: 0,
+                            All_Wooden_Blocks_are_Missing: 0,
                             Purple_Train_Engine: 0,
                             Red_and_Blue_Train_Cars_are_Flipped: 0,
                             Microwave_Missing_Bottom_Button: 0,
@@ -718,6 +723,9 @@ function test() {
                                     break;
                                 case 11:
                                     beb.Green_Block_is_Missing = beb.Green_Block_is_Missing + 1;
+                                    break;
+                                case 12:
+                                    beb.All_Wooden_Blocks_are_Missing = beb.All_Wooden_Blocks_are_Missing + 1;
                                     break;
                             }
                         } else {
