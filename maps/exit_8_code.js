@@ -169,6 +169,9 @@ for (var i = 17; i < scene.meshes.length; i++) {
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#a2a2a2"))) {
         objects.moon.push(scene.meshes[i]);
     }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f2d79e"))) {
+        objects.floor = scene.meshes[i];
+    }
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#6f4500"))) {
         if (scene.meshes[i].position.z < -170) {
             objects.door2 = scene.meshes[i];
@@ -298,6 +301,8 @@ function resetObjects() {
 
     objects.table.seattops.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#f97c00");});
     objects.table.seatbottoms.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#f97c00");});
+
+    objects.floor.material.diffuseColor = new BABYLON.Color3.FromHexString("#f2d79e");
 }
 function test() {
     if (!alive) {
@@ -360,7 +365,7 @@ function test() {
                     track++;
                 }
             });
-            string = "You have found " + numFound + "/28 anomalies!\n" + string + "Page 1/2";
+            string = "You have found " + numFound + "/29 anomalies!\n" + string + "Page 1/2";
             string2 = string2 + "Page 2/2";
         } else {
             string = "You have not discovered any anomalies yet!";
@@ -441,7 +446,7 @@ function test() {
                     //anom = Math.round(Math.random());
                     if (anom == 0) {
                         if (alpha < 3) {
-                            n = 7;
+                            n = 8;
                             j = Math.random();
                             anomNum = (j - (j%(1/n))) * n;
                             anomNum = Math.round(anomNum);
@@ -468,6 +473,9 @@ function test() {
                                 case 6:
                                     objects.table.seattops.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#fcc300");});
                                     objects.table.seatbottoms.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#fcc300");});
+                                    break;
+                                case 7:
+                                    objects.floor.material.diffuseColor = new BABYLON.Color3.FromHexString("#dedede");
                                     break;
                             }
                         } else if (alpha < 6) {
@@ -610,6 +618,7 @@ function test() {
                             Brown_Rug: 0,
                             Moon: 0,
                             Chairs_Changed_Color: 0,
+                            Floor_Changed_Color: 0,
                             Missing_Train_Car: 0,
                             Pan_on_Stove: 0,
                             Cube_Colors_Flipped: 0,
@@ -667,6 +676,9 @@ function test() {
                                     break;
                                 case 6:
                                     beb.Chairs_Changed_Color = beb.Chairs_Changed_Color + 1;
+                                    break;
+                                case 7:
+                                    beb.Floor_Changed_Color = beb.Floor_Changed_Color + 1;
                                     break;
                             }
                         } else if (alpha < 6) {
