@@ -103,7 +103,7 @@ for (var i = 17; i < scene.meshes.length; i++) {
             objects.train.car2 = scene.meshes[i];
         } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#0000ff"))) {
             objects.train.car3 = scene.meshes[i];
-        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00000a"))) {
+        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#000000"))) {
             if (scene.meshes[i].position.x < -3.4) {
                 objects.train.car3wheels.push(scene.meshes[i]);
             } else if (scene.meshes[i].position.x < -2.2) {
