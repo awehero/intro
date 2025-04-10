@@ -511,7 +511,6 @@ function test() {
                                     objects.doorknob2.isVisible = false;
                                     break;
                                 case 4:
-                                    objects.demon.forEach(obj=>{obj.position.x = -40;});
                                     objects.demon.forEach(obj=>{obj.isVisible = true;});
                                     break;
                                 case 5:
