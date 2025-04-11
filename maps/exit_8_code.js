@@ -275,7 +275,7 @@ function resetObjects() {
     objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#b3ffab");});
     objects.windowframes.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#000000");});
     objects.window1.isVisible = true;
-    objects.breadby.forEach(obj=>{obj.position.x = 259.6;});
+    objects.breadby.forEach(obj=>{obj.position.x = 59.6;});
     objects.demon.forEach(obj=>{obj.position.x = -40;});
     objects.demon.forEach(obj=>{obj.isVisible = false;});
     objects.drawing.forEach(obj=>{obj.position.y = 104.15;});
@@ -514,7 +514,7 @@ function test() {
                                     objects.demon.forEach(obj=>{obj.isVisible = true;});
                                     break;
                                 case 5:
-                                    objects.breadby.forEach(obj=>{obj.position.x = 59.6;});
+                                    objects.breadby.forEach(obj=>{obj.position.x = 259.6;});
                                     break;
                                 case 6:
                                     objects.fort.blueblocks.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#7f00d1");});
@@ -627,7 +627,7 @@ function test() {
                             Cube_Colors_Flipped: 0,
                             Door_is_Missing: 0,
                             Creepy_Guy_Outside_the_Window: 0,
-                            Breadby: 0,
+                            Breadby_Missing: 0,
                             Purple_Fort_Blocks: 0,
                             Water_in_Sink: 0,
                             Shelves_Color_Changed: 0,
@@ -703,7 +703,7 @@ function test() {
                                     beb.Creepy_Guy_Outside_the_Window = beb.Creepy_Guy_Outside_the_Window + 1;
                                     break;
                                 case 5:
-                                    beb.Breadby = beb.Breadby + 1;
+                                    beb.Breadby_Missing = beb.Breadby_Missing + 1;
                                     break;
                                 case 6:
                                     beb.Purple_Fort_Blocks = beb.Purple_Fort_Blocks + 1;
