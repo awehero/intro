@@ -428,7 +428,7 @@ function test() {
                 }
                 if (alpha == 21) {
                     alert("Why?");
-                    change_state.die("Wow, you still didn't give in. Ok, I think you've earned the knowledge of the lore. https://youtube.com/youtubelinkhere");
+                    change_state.die("Wow, you still didn't give in. Ok, I think you've earned the knowledge of the lore. https://www.youtube.com/watch?v=wnXVFE8KLo8");
                     alertCheck = 1;
                 }
             }
