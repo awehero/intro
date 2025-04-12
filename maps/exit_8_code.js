@@ -384,6 +384,9 @@ function test() {
         objects.finish.position.y = 100;
         objects.fakefinish.position.y = 100;
     }
+    if (alpha < 15) {
+        canvas.style.filter = "none";
+    }
     switch (current) {
         case 0:
             if (alertCheck == 0) {
