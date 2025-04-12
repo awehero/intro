@@ -433,7 +433,11 @@ function test() {
                 }
             }
             if (player.position.z < -149) {
-                current = 1;
+                if (!alive) {
+                    current = 0;
+                } else {
+                    current = 1;
+                }
                 alertCheck = 0;
                 resetObjects();
                 if (alpha == 0) {
