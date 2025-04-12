@@ -308,6 +308,7 @@ function resetObjects() {
 function test() {
     if (!alive) {
         alpha = 0;
+        current = 0;
         canvas.style.filter = "none";
     }
     if (player.position.z < -19 && player.position.z > -20) {
