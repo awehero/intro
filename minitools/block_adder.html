@@ -156,7 +156,7 @@
             cubedata.push(cubes[i][6]/50);
             cubedata.push(cubes[i][8]/50);
             cubedata.push(cubes[i][7]/50);
-            cubedata.push(cubes[i][9].substring(2,cubes[i][9].length));
+            cubedata.push("\"" + cubes[i][9].substring(2,cubes[i][9].length) + "\"");
         }
         for (var i = 0; i < cylinders.length; i++) {
             cylinderdata.push(cylinders[i][0]/100);
@@ -165,7 +165,7 @@
             cylinderdata.push(cylinders[i][6]/50);
             cylinderdata.push(cylinders[i][8]/50);
             cylinderdata.push(cylinders[i][7]/50);
-            cylinderdata.push(cylinders[i][9].substring(2,cylinders[i][9].length));
+            cylinderdata.push("\"" + cylinders[i][9].substring(2,cylinders[i][9].length) + "\"");
         }
         result.innerText = "cubedata = [" + cubedata.join(",") + "];\ncylinderdata = [" + cylinderdata.join(",") + "];";
     }
