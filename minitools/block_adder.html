@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block Adder</title>
+    <link rel="icon" href="https://awehero.github.io/intro/awehero.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        div {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        p {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        textarea {
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .rows {
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 0.8em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            max-width: 100%;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #copyButton {
+            margin-top: 10px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Block Adder</h1>
+    <div>Made by awehero54</div>
+    <p>Enter the URL here:</p>
+    <textarea id="inputText" rows="6" cols="80"></textarea>
+    <br>
+    <button id="startButton" onclick="start()">Convert!</button>
+    <br><br>
+    <button id="copyButton" onclick="copy()">Copy!</button>
+    <h2>URL:</h2>
+    <div id="result" style="white-space: pre-wrap;"></div>
+<script>
+    let inputText = document.getElementById("inputText");
+    let result = document.getElementById("result");
+    let input = "";
+    function copy() {
+        if (result.innerText != '') {
+            navigator.clipboard.writeText(result.innerText);
+        }
+    }
+    function start() {
+        let data = [];
+        let other = [];
+        let urlar = [];
+        let url = "";
+        let datatext = "";
+        let cubedata = [];
+        input = inputText.value;
+        input = input.replace(/A/g, ",A")
+                .replace(/B/g, ",B")
+                .replace(/C/g, ",C")
+                .replace(/D/g, ",D")
+                .replace(/E/g, ",E")
+                .replace(/F/g, ",F")
+                .replace(/G/g, ",G")
+                .replace(/\.007/g, "")
+                .replace(/\.014/g, "")
+                .replace(/\.021/g, "")
+                .replace(/\.028/g, "")
+                .replace(/\.035/g, "")
+                .replace(/\.042/g, "")
+                .replace(/\.049/g, "");
+        input = input.split(",");
+        input.forEach(function(obj) {
+            if (obj.includes("m=123456")) {
+                data.push(obj);
+            } else {
+                other.push(obj);
+            }
+        });
+        for (var i = 0; i < data.length; i++) {
+            data[i] = data[i].substring(1,data[i].length);
+            data[i] = data[i].replace(/m=123456/g, "m=-1");
+            data[i] = data[i].split("$");
+        }
+        for (var i = 0; i < data.length; i++) {
+            for (var j = 0; j < data[i].length-1; j++) {
+                data[i][j] = Math.round(data[i][j]);
+            }
+        }
+        for (var i = 0; i < data.length; i++) {
+            urlar.push("B"+data[i].join("$"));
+        }
+        url = other.join("")+urlar.join("");
+        for (var i = 0; i < data.length; i++) {
+            cubedata.push(data[i][0]/100);
+            cubedata.push(data[i][2]/100);
+            cubedata.push(data[i][1]/100);
+            cubedata.push(data[i][6]/50);
+            cubedata.push(data[i][8]/50);
+            cubedata.push(data[i][7]/50);
+            cubedata.push(data[i][5]/157);
+        }
+        datatext = "eye=eval([`globalThis.alphabet`,cc.set_default.toString().substring(43,44),`\\`a,b,c,d,e,f,g,h\\`.toUpper`,eval([`Object.keys(window).find(k`,cc.set_default.toString().substring(43,44),`>k.includes(\\`allback\\`)).substring(10,11)`].join(``)),`ase().split(\\`,\\`)`].join(``))?eye=eval([`data`,cc.set_default.toString().substring(43,44),`["+cubedata.join(",")+"];globalThis.cubes`,cc.set_default.toString().substring(43,44),`[];for(let i`,cc.set_default.toString().substring(43,44),`data.length-1;i>0;i-`,cc.set_default.toString().substring(43,44),`7){cubes.push({px:data[i-6],py:data[i-5],pz:data[i-4],sx:data[i-3],sy:data[i-2],sz:data[i-1],ry:data[i]});}for(let i`,cc.set_default.toString().substring(43,44),`0;i<cubes.length;i`,cc.get.toString().substring(572,573),``,cc.get.toString().substring(572,573),`){let data`,cc.set_default.toString().substring(43,44),`cubes[i];let cube`,cc.set_default.toString().substring(43,44),``,cc.set_default.toString().substring(826,833),`.Mesh`,alphabet[1],`uilder.`,alphabet[2],`reate`,alphabet[1],`ox(\\`cube\\``,cc.get.toString().substring(572,573),`i,{size:1},scene);cube.position`,cc.set_default.toString().substring(43,44),``,cc.set_default.toString().substring(822,833),`.Vector3(data.px,data.py,data.pz);cube.scaling`,cc.set_default.toString().substring(43,44),``,cc.set_default.toString().substring(822,833),`.Vector3(data.sx,data.sy,data.sz);cube.rotation.y`,cc.set_default.toString().substring(43,44),`data.ry*(Math.PI/2);let material`,cc.set_default.toString().substring(43,44),``,cc.set_default.toString().substring(822,833),`.StandardMaterial(\\`material\\``,cc.get.toString().substring(572,573),`i,scene);let texture`,cc.set_default.toString().substring(43,44),``,cc.set_default.toString().substring(822,833),`.Texture(\\`https://awehero.github.io/intro/images/tiles.jpg\\`,scene);texture.uScale`,cc.set_default.toString().substring(43,44),`data.sx/4;texture.vScale`,cc.set_default.toString().substring(43,44),`data.sy/4;material.diffuseTexture`,cc.set_default.toString().substring(43,44),`texture;cube.material`,cc.set_default.toString().substring(43,44),`material;}`].join(``))?eye=300";
+        url = "G0$0$0$0$0$0$300$300$300$"+datatext+url;
+        result.innerText = url;
+    }
+</script>
+</body>
+</html>
