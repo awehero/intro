@@ -324,7 +324,7 @@ function test() {
         rotation = 0;
         player.position.x = -1100;
         player.position.z = -501;
-        canvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.7)";
+        canvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
     }
     if (player.position.z < -19 && player.position.z > -20) {
         if (alternate == 0) {
@@ -356,7 +356,7 @@ function test() {
         player.position.z = -501;
         alternate = 1;
         alert("This is the alternate gameplay path for those who don't enjoy playing the actual map.\nTurn around to go back to playing the fun map!");
-        canvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.7)";
+        canvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
     }
     if (player.position.z > -10 && player.position.x < -14 && player.position.x > -16) {
         player.position.x = -500;
