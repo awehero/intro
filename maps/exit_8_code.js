@@ -641,7 +641,7 @@ function test() {
                 if (player.position.z < -50) {
                     if (guess == 0) {
                         rotation += Math.PI;
-                        player.position.z = player.position.z + 30;
+                        player.position.z = -110 - player.position.z - 110;
                         let beb = {};
                         if (localStorage.getItem("beb")) {
                             beb = JSON.parse(localStorage.getItem("beb"));
@@ -803,7 +803,7 @@ function test() {
                 if (player.position.z < -50) {
                     if (guess == 0) {
                         rotation += Math.PI;
-                        player.position.z = player.position.z + 30;
+                        player.position.z = -110 - player.position.z - 110;
                     } else {
                         player.position.z = player.position.z + 160;
                     }
