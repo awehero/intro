@@ -349,7 +349,7 @@ function test() {
         player.position.z = -501;
         alternate = 1;
         alert("This is the alternate gameplay path for those who don't enjoy playing the actual map.");
-        
+        canvas.style.filter = "grayscale(1)";
     }
     if (player.position.z > -10 && player.position.x < -14 && player.position.x > -16) {
         player.position.x = -500;
