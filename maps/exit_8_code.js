@@ -313,12 +313,13 @@ function test() {
         current = 0;
         canvas.style.filter = "none";
     }
+    if (alternate == 1 && player.position.z > -3) {
+        rotation = 0;
+        player.position.x = -1100;
+        player.position.z = -501;
+    }
     if (player.position.z < -19 && player.position.z > -20) {
-        if (alternate == 1) {
-            rotation = 0;
-            player.position.x = -1100;
-            player.position.z = -501;
-        } else {
+        if (alternate == 0) {
             player.position.x = 0;
             player.position.z = -100;
             console.log(cheese);
@@ -830,7 +831,7 @@ for (var i = 0; i < cubedata.length; i+=10) {
 }
 for (var i = 0; i < cubes.length; i++) {
     let data = cubes[i];
-    let cube = BABYLON.MeshBuilder.CreateBox("cube" + i, {size: 1}, scene);
+    let cube = BABYLON.MeshBuilder.CreateBox("cube2" + i, {size: 1}, scene);
     cube.position = new BABYLON.Vector3(data.px, data.py, data.pz);
     cube.scaling = new BABYLON.Vector3(data.sx, data.sy, data.sz);
     let material = new BABYLON.StandardMaterial("material" + i, scene);
@@ -840,4 +841,22 @@ for (var i = 0; i < cubes.length; i++) {
     cube.rotation.y = -1*data.ry;
     cube.rotation.z = -1*data.rz;
     cube.physicsImpostor = new BABYLON.PhysicsImpostor(cube, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
+}
+cylinderdata = [-1096,3,-570,4,4,4,0,0,0,"9300ff",-1099,3,-530,2,10,2,0,0,0,"ff0000",-1101,0,-543,2,10,2,0,0,0,"ff0000",-1104,3,-558,2,10,2,0,0,0,"ff0000",-1101,3,-548,2,10,2,0,0,0,"ff0000",-1100,0,-534,2,10,2,0,0,0,"ff00ff",-1102,0,-553,2,10,2,0,0,0,"ffff00",-1101,3,-539,2,10,2,0,0,0,"ffff00",-1102,0,-562,2,10,2,0,0,0,"0000ff",-1097,3,-563,2,10,2,0,0,0,"ff00ff",-1095,3,-520,10,10,10,0,0,0,"ff0000",-1093,3,-567,2,10,2,0,0,0,"ffff00"];
+globalThis.cubes = [];
+for (var i = 0; i < cylinderdata.length; i+=10) {
+    cubes.push({px:cylinderdata[i], py:cylinderdata[i+1], pz:cylinderdata[i+2], sx:cylinderdata[i+3], sy:cylinderdata[i+4], sz:cylinderdata[i+5],  rx:cylinderdata[i+6], ry:cylinderdata[i+7], rz:cylinderdata[i+8], mat:cylinderdata[i+9]});
+}
+for (var i = 0; i < cubes.length; i++) {
+    let data = cubes[i];
+    let cylinder = BABYLON.MeshBuilder.CreateCylinder("cube3" + i, {diameterTop: 1, diameterBottom: 1, height: 1}, scene);
+    cylinder.position = new BABYLON.Vector3(data.px, data.py, data.pz);
+    cylinder.scaling = new BABYLON.Vector3(data.sx, data.sy, data.sz);
+    let material = new BABYLON.StandardMaterial("material" + i, scene);
+    material.diffuseColor = new BABYLON.Color3.FromHexString("#" + data.mat);
+    cylinder.material = material;
+    cylinder.rotation.x = data.rx;
+    cylinder.rotation.y = -1*data.ry;
+    cylinder.rotation.z = -1*data.rz;
+    cylinder.physicsImpostor = new BABYLON.PhysicsImpostor(cylinder, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
 }
