@@ -317,7 +317,7 @@ function test() {
         score = 60000;
         change_state.win();
     }
-    if (alternate == 1 && player.position.z > -498) {
+    if (alternate == 1 && player.position.z > -498 && player.position.z < -200) {
         alternate = 0;
     }
     if (alternate == 1 && player.position.z > -3) {
