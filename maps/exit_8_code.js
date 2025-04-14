@@ -317,6 +317,9 @@ function test() {
         score = 60000;
         change_state.win();
     }
+    if (alternate == 1 && player.position.z > -498) {
+        alternate = 0;
+    }
     if (alternate == 1 && player.position.z > -3) {
         rotation = 0;
         player.position.x = -1100;
