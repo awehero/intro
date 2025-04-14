@@ -173,9 +173,6 @@ for (var i = 17; i < scene.meshes.length; i++) {
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f2d79e"))) {
         objects.floor = scene.meshes[i];
     }
-    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#9300f7"))) {
-        objects.alternatefinish = scene.meshes[i];
-    }
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#6f4500"))) {
         if (scene.meshes[i].position.z < -170) {
             objects.door2 = scene.meshes[i];
@@ -867,4 +864,9 @@ for (var i = 0; i < cubes.length; i++) {
     cylinder.rotation.y = -1*data.ry;
     cylinder.rotation.z = -1*data.rz;
     cylinder.physicsImpostor = new BABYLON.PhysicsImpostor(cylinder, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
+}
+for (var i = 17; i < scene.meshes.length; i++) {
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#9300f7"))) {
+        objects.alternatefinish = scene.meshes[i];
+    }
 }
