@@ -173,6 +173,9 @@ for (var i = 17; i < scene.meshes.length; i++) {
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f2d79e"))) {
         objects.floor = scene.meshes[i];
     }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#9300f7"))) {
+        objects.alternatefinish = scene.meshes[i];
+    }
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#6f4500"))) {
         if (scene.meshes[i].position.z < -170) {
             objects.door2 = scene.meshes[i];
@@ -312,6 +315,10 @@ function test() {
         alpha = 0;
         current = 0;
         canvas.style.filter = "none";
+    }
+    if (player.intersectsMesh(objects.alternatefinish, true)) {
+        score = 60000;
+        change_state.win();
     }
     if (alternate == 1 && player.position.z > -3) {
         rotation = 0;
