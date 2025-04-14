@@ -5,6 +5,7 @@ globalThis.current = 0;
 globalThis.anom = 0;
 globalThis.guess = 0;
 globalThis.anomNum = 0;
+globalThis.alternate = 0;
 globalThis.objects = [];
 objects.shelf = [];
 objects.shelf.blocks = [];
@@ -215,6 +216,7 @@ let intervalId = setInterval(function() {
         delete globalThis.anomNum;
         delete globalThis.guess;
         delete globalThis.cubes;
+        delete globalThis.alternate;
         delete globalThis.objects;
         clearInterval(intervalId);
     }
@@ -312,9 +314,15 @@ function test() {
         canvas.style.filter = "none";
     }
     if (player.position.z < -19 && player.position.z > -20) {
-        player.position.x = 0;
-        player.position.z = -100;
-        console.log(cheese);
+        if (alternate == 1) {
+            rotation = 0;
+            player.position.x = -1100;
+            player.position.z = -501;
+        } else {
+            player.position.x = 0;
+            player.position.z = -100;
+            console.log(cheese);
+        }
     }
     if (player.position.z < -110 && player.position.z > -130 && player.position.x < 13) {
         if (messageCheck == 0) {
@@ -337,6 +345,8 @@ function test() {
         rotation = 0;
         player.position.x = -1100;
         player.position.z = -501;
+        alternate = 1;
+        alert("This is the alternate gameplay path for those who don't enjoy playing the actual map.");
     }
     if (player.position.z > -10 && player.position.x < -14 && player.position.x > -16) {
         player.position.x = -500;
@@ -812,4 +822,22 @@ for (var i = 0; i < cubes.length; i++) {
     texture.vScale = data.sy / 4;
     material.diffuseTexture = texture;
     cube.material = material;
+}
+cubedata = [-1104,0.9,-530,6,0.5,6,0,0,0,"0000ff",-1108,3,-540,2,10,2,0,0,0,"0000ff",-1103.8,0.9,-547.6,2,0.5,1.4,0,0.17,0,"0000ff",-1111,0,-555,2,10,2,0,0,0,"0000ff",-1112,3,-507,6,10,6,0,0,0,"0000ff",-1107,0,-569,2,10,2,0,0,0,"0000ff",-1100,0,-505,6,0.5,10,0,0,0,"ff0000",-1104,0.9,-538,2,0.5,2,0,0,0,"ff0000",-1109,3,-550,2,10,2,0,0,0,"ff0000",-1102,3,-571,2,10,2,0,0,0,"ff0000",-1106,0.9,-564.7,2,0.5,6,0,0.79,0,"ff0000",-1104,0.9,-549.7,2,0.5,1.4,0,-0.26,0,"ff00ff",-1109,0,-535,2,10,2,0,0,0,"ff00ff",-1110,3,-565,2,10,2,0,0,0,"ff00ff",-1105,1.9,-513,6,0.5,10,0,0,0.7,"ffff00",-1110,3,-530,2,10,2,0,0,0,"ffff00",-1104,0.9,-545.7,2,0.5,1.4,0,0,0,"ffff00",-1111,3,-560,2,10,2,0,0,0,"ffff00",-1101.59,0.9,-566.55,2,0.5,6,0,1.57,0,"ffff00",-1108,5.9,-521,6,0.5,10,0,0,1.13,"ffffff",-1104,0.9,-535,4,0.5,4,0,0,0,"ffffff",-1104,0.9,-542,0.4,0.5,6,0,0,0,"ffffff",-1108,0.9,-560.7,2,0.5,6,0,0,0,"ffffff",-1097.18,0.9,-568.4,2,0.5,6,0,0.79,0,"ffffff",-1106,0.9,-553.7,2,0.5,6,0,-0.52,0,"ff0000",-1107,0,-545,2,10,2,0,0,0,"ffffff"];
+globalThis.cubes = [];
+for (var i = 0; i < cubedata.length; i+=10) {
+    cubes.push({px:cubedata[i], py:cubedata[i+1], pz:cubedata[i+2], sx:cubedata[i+3], sy:cubedata[i+4], sz:cubedata[i+5],  rx:cubedata[i+6], ry:cubedata[i+7], rz:cubedata[i+8], mat:cubedata[i+9]});
+}
+for (var i = 0; i < cubes.length; i++) {
+    let data = cubes[i];
+    let cube = BABYLON.MeshBuilder.CreateBox("cube" + i, {size: 1}, scene);
+    cube.position = new BABYLON.Vector3(data.px, data.py, data.pz);
+    cube.scaling = new BABYLON.Vector3(data.sx, data.sy, data.sz);
+    let material = new BABYLON.StandardMaterial("material" + i, scene);
+    material.diffuseColor = new BABYLON.Color3.FromHexString("#" + data.mat);
+    cube.material = material;
+    cube.rotation.x = data.rx;
+    cube.rotation.y = -1*data.ry;
+    cube.rotation.z = -1*data.rz;
+    cube.physicsImpostor = new BABYLON.PhysicsImpostor(cube, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
 }
