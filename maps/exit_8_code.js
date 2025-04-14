@@ -860,8 +860,8 @@ for (var i = 0; i < cubes.length; i++) {
     let material = new BABYLON.StandardMaterial("material" + i, scene);
     material.diffuseColor = new BABYLON.Color3.FromHexString("#" + data.mat);
     cylinder.material = material;
-    cylinder.rotation.x = data.rx;
-    cylinder.rotation.y = -1*data.ry;
+    cylinder.rotation.x = data.ry;
+    cylinder.rotation.y = data.rx;
     cylinder.rotation.z = -1*data.rz;
     cylinder.physicsImpostor = new BABYLON.PhysicsImpostor(cylinder, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
 }
