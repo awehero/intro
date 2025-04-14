@@ -840,9 +840,8 @@ for (var i = 0; i < cubedata.length; i+=10) {
 }
 for (var i = 0; i < cubes.length; i++) {
     let data = cubes[i];
-    let cube = BABYLON.MeshBuilder.CreateBox("cube2" + i, {size: 1}, scene);
+    let cube = BABYLON.MeshBuilder.CreateBox("cube2" + i, {width: data.sx, height: data.sy, depth: data.sz}, scene);
     cube.position = new BABYLON.Vector3(data.px, data.py, data.pz);
-    cube.scaling = new BABYLON.Vector3(data.sx, data.sy, data.sz);
     let material = new BABYLON.StandardMaterial("material" + i, scene);
     material.diffuseColor = new BABYLON.Color3.FromHexString("#" + data.mat);
     cube.material = material;
