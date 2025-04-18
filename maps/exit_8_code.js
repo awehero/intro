@@ -38,7 +38,7 @@ objects.sun = [];
 objects.windowframes = [];
 objects.walls = [];
 
-for (var i = 17; i < scene.meshes.length; i++) {
+for (var i = 19; i < scene.meshes.length; i++) {
     if (scene.meshes[i].position.z < -152 && scene.meshes[i].position.z > -190 && scene.meshes[i].position.x < 58 && scene.meshes[i].position.x > 30) {
         if (scene.meshes[i].position.z < -179 && scene.meshes[i].position.z > -184 && scene.meshes[i].position.x < 46 && scene.meshes[i].position.x > 39) {
             objects.shelf.blocks.push(scene.meshes[i]);
