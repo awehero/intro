@@ -330,7 +330,7 @@ function test() {
         if (alternate == 0) {
             player.position.x = 0;
             player.position.z = -100;
-            console.log(cheese);
+            //console.log(cheese);
         }
     }
     if (player.position.z < -110 && player.position.z > -130 && player.position.x < 13) {
