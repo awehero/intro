@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Converter</title>
+    <link rel="icon" href="https://awehero.github.io/intro/awehero.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        div {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        p {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        textarea {
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #outputText {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            max-width: 100%;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #copyButton {
+            margin-top: 10px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Map Converter</h1>
+    <div>Made by awehero54</div>
+    <p>Select what you want to convert your map into</p>
+    <div id="typeSelectionDiv">
+        <select id="outputTypeBox">
+            <option value="0" disabled>Draft Link</option>
+            <option value="1">Tinyurl</option>
+            <option value="2">URL</option>
+            <option value="3">Mapfile</option>
+            <option value="4">Blender Data</option>
+        </select>
+    </div>
+    <p>Enter a Draft Link, Tinyurl, URL, or Mapfile</p>
+    <textarea id="inputText" rows="6" cols="80"></textarea>
+    <br>
+    <button id="startButton" onclick="convert()">Convert!</button>
+    <br><br>
+    <button id="copyButton" onclick="copyLink()">Copy!</button>
+    <h2>Output:</h2>
+    <div id="outputText" style="white-space: pre-wrap;"></div>
+    
+</body>
+</html>
