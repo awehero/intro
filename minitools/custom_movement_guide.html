@@ -76,15 +76,15 @@
     <div>Made by awehero54</div>
     <button onclick="copyToClipboard()">Copy Blender Code</button>
     <h2>Effects</h2>
-    <p> - amx</p>
-    <p> - amy</p>
-    <p> - amz</p><br>
+    <p> - amox</p>
+    <p> - amoy</p>
+    <p> - amoz</p><br>
     <h2>Format</h2>
-    <h3>amx/amy/amz</h3>
+    <h3>amox/amoy/amoz</h3>
     <p>effect=#a#a#</p>
     <h4>Values</h2>
     <p> - First # - Strength of oscillation</p>
-    <p> - Second # - 1 for sin, 2 for cos</p>
+    <p> - Second # - 1 for sine movement, 2 for cosine movement</p>
     <p> - Third # - Speed of oscillation</p><br>
     <script>
         function copyToClipboard() {
@@ -576,26 +576,26 @@ try:
             'val': lambda x: True if x.lower() in ["on", "off"] else False
         },
         {
-            'ids': ["amx", "mx"],
+            'ids': ["amox", "mx"],
             'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere'],
-            'map': lambda x: custom_mx(x),
+            'map': lambda x: amox(x),
             'val': lambda x: True
         },
         {
-            'ids': ["amy", "my"],
+            'ids': ["amoy", "my"],
             'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere'],
-            'map': lambda x: custom_my(x),
+            'map': lambda x: amoy(x),
             'val': lambda x: True
         },
         {
-            'ids': ["amz", "mz"],
+            'ids': ["amoz", "mz"],
             'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere'],
-            'map': lambda x: custom_mz(x),
+            'map': lambda x: amoz(x),
             'val': lambda x: True
         }
     ]
     
-    def custom_mx(x):
+    def amox(x):
         string = ""
         b = x.split("a")
         
@@ -611,7 +611,7 @@ try:
                 string += b[i] + ")"
         
         return string
-    def custom_my(x):
+    def amoy(x):
         string = ""
         b = x.split("a")
         
@@ -627,7 +627,7 @@ try:
                 string += b[i] + ")"
         
         return string
-    def custom_mz(x):
+    def amoz(x):
         string = ""
         b = x.split("a")
         
