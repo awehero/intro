@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Map Converter</title>
+    <title>Custom Movement Guide</title>
     <link rel="icon" href="https://awehero.github.io/intro/awehero.png" type="image/png">
     <style>
         body {
@@ -72,26 +72,19 @@
     </style>
 </head>
 <body>
-    <h1>Map Converter</h1>
+    <h1>Custom Movement Guide</h1>
     <div>Made by awehero54</div>
-    <p>Select what you want to convert your map into</p>
-    <div id="typeSelectionDiv">
-        <select id="outputTypeBox">
-            <option value="0" disabled>Draft Link</option>
-            <option value="1">Tinyurl</option>
-            <option value="2">URL</option>
-            <option value="3">Mapfile</option>
-            <option value="4">Blender Data</option>
-        </select>
-    </div>
-    <p>Enter a Draft Link, Tinyurl, URL, or Mapfile</p>
-    <textarea id="inputText" rows="6" cols="80"></textarea>
+    <h2>Effects</h2>
+    <p>amx</p><br>
+    <p>amy</p><br>
+    <p>amz</p><br>
     <br>
-    <button id="startButton" onclick="convert()">Convert!</button>
-    <br><br>
-    <button id="copyButton" onclick="copyLink()">Copy!</button>
-    <h2>Output:</h2>
-    <div id="outputText" style="white-space: pre-wrap;"></div>
-    
+    <h2>Format</h2>
+    <p>effect=#a#a#</p><br>
+    <br>
+    <h2>Values</h2>
+    <p>First a - Strength of oscillation</p><br>
+    <p>Second a - 1 for sin, 2 for cos</p><br>
+    <p>Third a - Speed of oscillation</p><br>
 </body>
 </html>
