@@ -84,7 +84,7 @@
     <p> - aroz - Rotates an object in a sinusoidal pattern about the z-axis</p><br>
     <h2>Format</h2>
     <h3>amox/amoy/amoz/arox/aroy/aroz</h3>
-    <p>effect=#a#a#</p>
+    <p>effect=#:#:#</p>
     <h4>Values</h2>
     <p> - First # - Strength of oscillation</p>
     <p> - Second # - 1 for sine movement/rotation, 2 for cosine movement/rotation</p>
@@ -618,7 +618,7 @@ try:
     
     def aox(x):
         string = ""
-        b = x.split("a")
+        b = x.split(":")
         
         for i in range(len(b)):
             if i == 0:
@@ -634,7 +634,7 @@ try:
         return string
     def aoy(x):
         string = ""
-        b = x.split("a")
+        b = x.split(":")
         
         for i in range(len(b)):
             if i == 0:
@@ -650,7 +650,7 @@ try:
         return string
     def aoz(x):
         string = ""
-        b = x.split("a")
+        b = x.split(":")
         
         for i in range(len(b)):
             if i == 0:
