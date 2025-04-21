@@ -78,13 +78,16 @@
     <h2>Effects</h2>
     <p> - amox - Moves an object in a sinusoidal pattern along the x-axis</p>
     <p> - amoy - Moves an object in a sinusoidal pattern along the y-axis</p>
-    <p> - amoz - Moves an object in a sinusoidal pattern along the z-axis</p><br>
+    <p> - amoz - Moves an object in a sinusoidal pattern along the z-axis</p>
+    <p> - arox - Rotates an object in a sinusoidal pattern about the x-axis</p>
+    <p> - aroy - Rotates an object in a sinusoidal pattern about the y-axis</p>
+    <p> - aroz - Rotates an object in a sinusoidal pattern about the z-axis</p><br>
     <h2>Format</h2>
-    <h3>amox/amoy/amoz</h3>
+    <h3>amox/amoy/amoz/arox/aroy/aroz</h3>
     <p>effect=#a#a#</p>
     <h4>Values</h2>
     <p> - First # - Strength of oscillation</p>
-    <p> - Second # - 1 for sine movement, 2 for cosine movement</p>
+    <p> - Second # - 1 for sine movement/rotation, 2 for cosine movement/rotation</p>
     <p> - Third # - Speed of oscillation</p><br>
     <script>
         function copyToClipboard() {
@@ -170,7 +173,7 @@ try:
         elif item['type'] == "E_Cylinder":
             if list(obj.scale)[0] != list(obj.scale)[1]:
                 print("Note: Cylinder has been standard-ized.")
-                if float(obj.scale[0]) &gt; float(obj.scale[1]):
+                if float(obj.scale[0]) > float(obj.scale[1]):
                     obj.scale[1] = obj.scale[0]
                 else:
                     obj.scale[0] = obj.scale[1]
@@ -230,7 +233,7 @@ try:
 
     def positive_val(x):
         try:
-            if float(x) &gt;= 0:
+            if float(x) >= 0:
                 return True;
             else:
                 return False
@@ -239,7 +242,7 @@ try:
 
     def decimal_val(x):
         try:
-            if float(x) * float(x) &gt;= 0:
+            if float(x) * float(x) >= 0:
                 return True;
             else:
                 return False
@@ -507,7 +510,7 @@ try:
             'ids': ["cameraDownAngle", "cd"],
             'type': ['A_Section', 'G_Monkey', 'G_Monkey'],
             'map': decimal_map,
-            'val': lambda x: True if -60 &lt; int(x) &lt; 60 else False
+            'val': lambda x: True if -60 < int(x) < 60 else False
         },
         {
             'ids': ["cameraRightAngle", "cr"],
@@ -578,24 +581,42 @@ try:
         {
             'ids': ["amox", "mx"],
             'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere'],
-            'map': lambda x: amox(x),
+            'map': lambda x: aox(x),
             'val': lambda x: True
         },
         {
             'ids': ["amoy", "my"],
             'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere'],
-            'map': lambda x: amoy(x),
+            'map': lambda x: aoy(x),
             'val': lambda x: True
         },
         {
             'ids': ["amoz", "mz"],
             'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere'],
-            'map': lambda x: amoz(x),
+            'map': lambda x: aoz(x),
+            'val': lambda x: True
+        },
+        {
+            'ids': ["arox", "rx"],
+            'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere'],
+            'map': lambda x: aox(x),
+            'val': lambda x: True
+        },
+        {
+            'ids': ["aroy", "ry"],
+            'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere'],
+            'map': lambda x: aoy(x),
+            'val': lambda x: True
+        },
+        {
+            'ids': ["aroz", "rz"],
+            'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere'],
+            'map': lambda x: aoz(x),
             'val': lambda x: True
         }
     ]
     
-    def amox(x):
+    def aox(x):
         string = ""
         b = x.split("a")
         
@@ -611,7 +632,7 @@ try:
                 string += b[i] + ")"
         
         return string
-    def amoy(x):
+    def aoy(x):
         string = ""
         b = x.split("a")
         
@@ -627,7 +648,7 @@ try:
                 string += b[i] + ")"
         
         return string
-    def amoz(x):
+    def aoz(x):
         string = ""
         b = x.split("a")
         
@@ -771,10 +792,10 @@ try:
     ### FATAL ERROR CHECK
     # item count
     fatal_errors = []
-    if len(items) &gt; 100:
+    if len(items) > 100:
         print("Warning: You have " + str(len(items)) + " / 300 objects in this map.")
-    elif len(items) &gt; 300:
-        fatal_errors.append("There are too many items in this map. " + str(len(items)) + " &gt; 300")
+    elif len(items) > 300:
+        fatal_errors.append("There are too many items in this map. " + str(len(items)) + " > 300")
 
     # item errors
     for item in items:
@@ -791,9 +812,9 @@ try:
                 section_list.append([loc, sca])
 
         section_list = list(reversed(sorted(section_list, key=lambda x: x[0])))
-        if len(section_list) &gt; 0:
+        if len(section_list) > 0:
             # behind spawn
-            if section_list[0][0] + abs(section_list[0][1]) &gt; 0:
+            if section_list[0][0] + abs(section_list[0][1]) > 0:
                 fatal_errors.append("Planes can not extend behind the spawnpoint.")
 
             # overlaps
@@ -803,7 +824,7 @@ try:
                     s2 = section_list[i+1]
                     a1 = abs(float(s1[0])) + abs(float(s1[1]))
                     a2 = abs(float(s2[0])) - abs(float(s2[1]))
-                    if (a2 &lt; a1):
+                    if (a2 < a1):
                         fatal_errors.append("Overlapping planes are not permitted.")
                         break;
 
@@ -815,7 +836,7 @@ try:
                 ending_count += 1
 
         if ending_count == 0:
-            fatal_errors.append("Please add an ending. Add &gt; Mesh &gt; UV Sphere")
+            fatal_errors.append("Please add an ending. Add > Mesh > UV Sphere")
 
 
     # ID match
@@ -836,21 +857,21 @@ try:
      #   for item in items:
      #       if "o=" in item['eff'] and "gro=" not in item['eff']:
      #           spl = item['eff'].split("m=")
-      #          if len(spl) != 2 or len(spl[1].split(",")[0]) &lt; 6:
+      #          if len(spl) != 2 or len(spl[1].split(",")[0]) < 6:
          #           fatal_errors.append("Opacity requires HEX material. Item name = " + str(item['name']));
 
-    if len(fatal_errors) &gt; 0:
+    if len(fatal_errors) > 0:
         print("")
         print("FATAL ERRORS:")
         for fatal_error in fatal_errors:
             print("- " + str(fatal_error))
         print("")
     else:
-        URL = "https://icedodo.onionfist.com/creative/?CompilerVersion=v9&amp;CompilerOutput="
+        URL = "https://icedodo.onionfist.com/creative/?CompilerVersion=v9&CompilerOutput="
         for item in items:
             URL += item['type'][0] + "$".join(list(map(str, item['pos'] + item['rot'] + item['siz']))) + "$" + item['eff']
 
-        if len(URL) &gt; 8938:
+        if len(URL) > 8938:
             print("Warning: URL Length exceeds 8938 characters. This may or may not cause an issue.")
 
         print("")
