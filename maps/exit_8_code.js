@@ -5,7 +5,7 @@ globalThis.current = 0;
 globalThis.anom = 0;
 globalThis.guess = 0;
 globalThis.anomNum = 0;
-globalThis.alternate = 0;
+globalThis.alternate = 1;
 globalThis.objects = [];
 objects.shelf = [];
 objects.shelf.blocks = [];
@@ -338,12 +338,15 @@ function test() {
             window.tsTriggers[Object.keys(window.tsTriggers)[6]]("Exit " + alpha);
             messageCheck = 1;
         }
+    } else if (player.position.z < -500 && player.position.z > -510) {
+        if (messageCheck == 0) {
+            window.tsTriggers[Object.keys(window.tsTriggers)[6]]("Turn around to go back to playing the exit 8 map!");
+            messageCheck = 1;
+        }
     } else {
-        if (!(player.position.z < -110 && player.position.z > -130 && player.position.x < 13)) {
-            if (messageCheck == 1) {
-                window.tsTriggers[Object.keys(window.tsTriggers)[7]]();
-                messageCheck = 0;
-            }
+        if (messageCheck == 1) {
+            window.tsTriggers[Object.keys(window.tsTriggers)[7]]();
+            messageCheck = 0;
         }
     }
     if (player.position.z > -10 && player.position.x > 14 && player.position.x < 16) {
