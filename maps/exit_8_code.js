@@ -833,8 +833,8 @@ for (var i = 0; i < cubes.length; i++) {
     cube.rotation.y = data.ry * (Math.PI/2);
     let material = new BABYLON.StandardMaterial("material" + i, scene);
     let texture = new BABYLON.Texture("https://awehero.github.io/intro/images/tiles2.jpg", scene);
-    texture.uScale = data.sx / 4;
-    texture.vScale = data.sy / 4;
+    texture.uScale = data.sx / 8;
+    texture.vScale = data.sy / 8;
     material.diffuseTexture = texture;
     cube.material = material;
 }
