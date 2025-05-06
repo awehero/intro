@@ -340,7 +340,9 @@ function test() {
         }
     } else if (player.position.z < -500 && player.position.z > -510) {
         if (messageCheck == 0) {
-            window.tsTriggers[Object.keys(window.tsTriggers)[6]]("Turn around to go back to playing the exit 8 map!");
+            setTimeout(function() {
+                window.tsTriggers[Object.keys(window.tsTriggers)[6]]("Turn around to go back to playing the exit 8 map!");
+            },10);
             messageCheck = 1;
         }
     } else {
