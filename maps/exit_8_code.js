@@ -307,7 +307,14 @@ function resetObjects() {
 
     objects.floor.material.diffuseColor = new BABYLON.Color3.FromHexString("#f2d79e");
 }
+let start = 1; //remove
 function test() {
+    if (start == 1 && alternate == 1) {
+        rotation = 0;
+        player.position.x = -1100;
+        player.position.z = -501;
+        start = 0;
+    }
     if (!alive) {
         alpha = 0;
         current = 0;
