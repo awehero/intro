@@ -5,7 +5,7 @@ globalThis.current = 0;
 globalThis.anom = 0;
 globalThis.guess = 0;
 globalThis.anomNum = 0;
-globalThis.alternate = 1;
+globalThis.alternate = 0;
 globalThis.objects = [];
 objects.shelf = [];
 objects.shelf.blocks = [];
@@ -307,7 +307,7 @@ function resetObjects() {
 
     objects.floor.material.diffuseColor = new BABYLON.Color3.FromHexString("#f2d79e");
 }
-let start = 1; //remove
+let start = 0; //remove
 function test() {
     if (start == 1 && alternate == 1) {
         rotation = 0;
