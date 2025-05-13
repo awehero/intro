@@ -249,7 +249,7 @@ if new_script_content:
         if (process.substring(ii,ii+1) == 'a') {
             let draftId = input.substring(input.indexOf("=")+1);
             let requestUrl = `https://icedodo-api.onionfist.com/api/get_draft_javascript.js?DraftId=${draftId}`;
-            fetch(requestUrl)
+            fetch(`https://corsproxy.io/?${encodeURIComponent(requestUrl)}`)
                 .then(response => response.text())
                 .then(data => {
                     input = data;
@@ -274,7 +274,7 @@ if new_script_content:
         } else if (process.substring(ii,ii+1) == 'e') {
             let urlData = input.substring(input.indexOf("CompilerOutput=")+15);
             let requestUrl = `https://icedodo-api.onionfist.com/api/compile_long_map_url.js?longUrl=${urlData}`;
-            fetch(requestUrl)
+            fetch(`https://corsproxy.io/?${encodeURIComponent(requestUrl)}`)
                 .then(response => response.text())
                 .then(data => {
                     input = data;
