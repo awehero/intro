@@ -207,7 +207,7 @@ let intervalId = setInterval(function() {
                 scene.removeMesh(scene.meshes[i]);
             }
         }
-        canvas.style.filter = "none";
+        babylonCanvas.style.filter = "none";
         delete globalThis.alpha;
         delete globalThis.messageCheck;
         delete globalThis.alertCheck;
@@ -318,7 +318,7 @@ function test() {
     if (!alive) {
         alpha = 0;
         current = 0;
-        canvas.style.filter = "none";
+        babylonCanvas.style.filter = "none";
     }
     if (player.intersectsMesh(objects.alternatefinish, true)) {
         score = 60000;
@@ -331,7 +331,7 @@ function test() {
         rotation = 0;
         player.position.x = -1100;
         player.position.z = -501;
-        canvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
+        babylonCanvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
     }
     if (player.position.z < -19 && player.position.z > -20) {
         if (alternate == 0) {
@@ -373,7 +373,7 @@ function test() {
         player.position.z = -501;
         alternate = 1;
         alert("This is the alternate gameplay path for those who don't enjoy playing the actual map.\nTurn around to go back to playing the fun map!");
-        canvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
+        babylonCanvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
     }
     if (player.position.z > -10 && player.position.x < -14 && player.position.x > -16) {
         player.position.x = -500;
@@ -427,7 +427,7 @@ function test() {
         objects.fakefinish.position.y = 100;
     }
     if (alpha < 15 && alternate == 0) {
-        canvas.style.filter = "none";
+        babylonCanvas.style.filter = "none";
     }
     switch (current) {
         case 0:
@@ -458,17 +458,17 @@ function test() {
                 }
                 if (alpha == 16) {
                     alert("Try playing like this then!");
-                    canvas.style.filter = "blur(5px)";
+                    babylonCanvas.style.filter = "blur(5px)";
                     alertCheck = 1;
                 }
                 if (alpha == 18) {
                     alert("Still not bored? How about this?");
-                    canvas.style.filter = "blur(10px)";
+                    babylonCanvas.style.filter = "blur(10px)";
                     alertCheck = 1;
                 }
                 if (alpha == 19) {
                     alert("Ok, fine I'll give you the finish.");
-                    canvas.style.filter = "grayscale(1)";
+                    babylonCanvas.style.filter = "grayscale(1)";
                     alertCheck = 1;
                 }
                 if (alpha == 21) {
