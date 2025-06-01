@@ -104,7 +104,7 @@ for (var i = 19; i < scene.meshes.length; i++) {
             objects.train.car2 = scene.meshes[i];
         } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#0000ff"))) {
             objects.train.car3 = scene.meshes[i];
-        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#000000"))) {
+        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00000a"))) {
             if (scene.meshes[i].position.x < -3.4) {
                 objects.train.car3wheels.push(scene.meshes[i]);
             } else if (scene.meshes[i].position.x < -2.2) {
@@ -195,7 +195,7 @@ for (var i = 19; i < scene.meshes.length; i++) {
         }
     }
     if (Math.round(scene.meshes[i].position.x*100) == 6000 || Math.round(scene.meshes[i].position.x*100) == -2000) {
-        if (scene.meshes[i].material.diffuseColor.equals(new BABYLON.Color3.FromHexString("#000000"))) {
+        if (scene.meshes[i].material.diffuseColor.equals(new BABYLON.Color3.FromHexString("#00000a"))) {
             objects.windowframes.push(scene.meshes[i]);
         }
     }
@@ -275,7 +275,7 @@ function resetObjects() {
     objects.train.rugs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#00df03");});
     
     objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#b3ffab");});
-    objects.windowframes.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#000000");});
+    objects.windowframes.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#00000a");});
     objects.window1.isVisible = true;
     objects.breadby.forEach(obj=>{obj.position.x = 59.6;});
     objects.demon.forEach(obj=>{obj.position.x = -40;});
