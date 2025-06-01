@@ -323,7 +323,7 @@ function test() {
         current = 0;
         babylonCanvas.style.filter = "none";
     }
-    if (player.intersectsMesh(objects.alternatefinish, true)) {
+    if (player.intersectsMesh(objects.thecursedcrayon, true) && alternate == 1) {
         score = 60000;
         change_state.win();
     }
@@ -966,8 +966,8 @@ for (var i = 0; i < cubes.length; i++) {
 
 
 
-for (var i = 17; i < scene.meshes.length; i++) {
+/*for (var i = 17; i < scene.meshes.length; i++) {
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#9300f7"))) {
         objects.alternatefinish = scene.meshes[i];
     }
-}
+}*/
