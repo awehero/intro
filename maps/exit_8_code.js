@@ -7,6 +7,7 @@ globalThis.guess = 0;
 globalThis.anomNum = 0;
 globalThis.alternate = 0;
 globalThis.objects = [];
+globalThis.killBlocks = [];
 objects.shelf = [];
 objects.shelf.blocks = [];
 objects.shelf.shelves = [];
@@ -218,6 +219,7 @@ let intervalId = setInterval(function() {
         delete globalThis.cubes;
         delete globalThis.alternate;
         delete globalThis.objects;
+        delete globalThis.killBlocks
         clearInterval(intervalId);
     }
     test();
@@ -338,6 +340,11 @@ function test() {
             player.position.x = 0;
             player.position.z = -100;
             //console.log(cheese);
+        }
+    }
+    for (var i = 0; i < killBlocks.length; i++) {
+        if (player.intersectsMesh(killBlocks[i],scene)) {
+            change_state.die('You died. How unfortunate...');
         }
     }
     if (player.position.z < -110 && player.position.z > -130 && player.position.x < 13) {
