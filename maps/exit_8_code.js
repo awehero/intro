@@ -323,7 +323,7 @@ function test() {
         current = 0;
         babylonCanvas.style.filter = "none";
     }
-    if (player.intersectsMesh(objects.thecursedcrayon, true) && alternate == 1) {
+    if (player.intersectsMesh(objects.shelf.thecursedcrayon, true) && alternate == 1) {
         score = 60000;
         change_state.win();
     }
