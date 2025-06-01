@@ -38,6 +38,7 @@ objects.moon = []
 objects.sun = [];
 objects.windowframes = [];
 objects.walls = [];
+objects.alternate = [];
 
 for (var i = 19; i < scene.meshes.length; i++) {
     if (scene.meshes[i].position.z < -152 && scene.meshes[i].position.z > -190 && scene.meshes[i].position.x < 58 && scene.meshes[i].position.x > 30) {
@@ -873,6 +874,29 @@ for (var i = 0; i < cubes.length; i++) {
     cube.rotation.y = -1*data.ry;
     cube.rotation.z = -1*data.rz;
     cube.physicsImpostor = new BABYLON.PhysicsImpostor(cube, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
+}
+cubedata = [20,0,-190,80,0.5,80,0,0,0,"ff5900"];
+globalThis.cubes = [];
+for (var i = 0; i < cubedata.length; i+=10) {
+    cubes.push({px:cubedata[i], py:cubedata[i+1], pz:cubedata[i+2], sx:cubedata[i+3], sy:cubedata[i+4], sz:cubedata[i+5],  rx:cubedata[i+6], ry:cubedata[i+7], rz:cubedata[i+8], mat:cubedata[i+9]});
+}
+for (var i = 0; i < cubes.length; i++) {
+    let data = cubes[i];
+    let cube = BABYLON.MeshBuilder.CreateBox("cube2" + i, {width: data.sx, height: data.sy, depth: data.sz}, scene);
+    cube.position = new BABYLON.Vector3(data.px, data.py, data.pz);
+    let material = new BABYLON.StandardMaterial("material" + i, scene);
+    material.diffuseColor = new BABYLON.Color3.FromHexString("#" + data.mat);
+    cube.material = material;
+    cube.rotation.x = data.rx;
+    cube.rotation.y = -1*data.ry;
+    cube.rotation.z = -1*data.rz;
+    cube.physicsImpostor = new BABYLON.PhysicsImpostor(cube, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
+    if (cube.mat == "ff5900") {
+        objects.killfloor = cube;
+        killBlocks.push(cube);
+    }
+    objects.alternate.push(cube);
+    cube.isVisible = false;
 }
 cylinderdata = [-1091,0,-579,2,10,2,0,0,0,"0000ff",-1102,0,-562,2,10,2,0,0,0,"0000ff",-1099,3,-609,2,10,2,0,0,0,"0000ff",-1106,3,-625,2,10,2,0,0,0,"0000ff",-1111.6,0,-623,1.4,6,1.4,0.79,0,1.57,"0000ff",-1100.4,1,-641.8,2,2,2,0,0,0,"9300f7",-1090,3,-573,2,10,2,0,0,0,"ff0000",-1099,3,-530,2,10,2,0,0,0,"ff0000",-1101,0,-543,2,10,2,0,0,0,"ff0000",-1104,3,-558,2,10,2,0,0,0,"ff0000",-1101,3,-548,2,10,2,0,0,0,"ff0000",-1095,3,-597,2,10,2,0,0,0,"ff0000",-1100,0,-603,2,4,2,0,0,1.57,"ff0000",-1110,3,-616,2,10,2,0,0,0,"ff0000",-1102,3,-635,2,10,2,0,0,0,"ff0000",-1111.6,0,-611.4,1.4,6,1.4,-0.79,0,1.57,"ff0000",-1097,3,-563,2,10,2,0,0,0,"ff00ff",-1094,3,-584,2,10,2,0,0,0,"ff00ff",-1100,0,-534,2,10,2,0,0,0,"ff00ff",-1105,0,-612,2,10,2,0,0,0,"ff00ff",-1104,0,-630,2,10,2,0,0,0,"ff00ff",-1093,0,-567,2,10,2,0,0,0,"ffff00",-1096,0,-590,2,10,2,0,0,0,"ffff00",-1102,0,-553,2,10,2,0,0,0,"ffff00",-1101,3,-539,2,10,2,0,0,0,"ffff00",-1114,0,-617.3,1.4,6,1.4,-1.57,0,1.57,"ffff00",-1102,0,-605,2,4,2,0,0,1.57,"ffff00",-1095,0,-604,2,10,2,0,0,0,"ffff00",-1109,0,-621,2,10,2,0,0,0,"ffff00",-1098,0,-639,2,10,2,0,0,0,"ffff00",-1107,0,-608.5,2,4,2,0,0,1.57,"ffffff",-1099,0,-601,2,2,2,0,0,1.57,"ffffff",-1095,3,-520,10,10,10,0,0,0,"ff0000",-1104,0,-606.8,1,6,1,0,0,1.57,"0000ff"];
 globalThis.cubes = [];
