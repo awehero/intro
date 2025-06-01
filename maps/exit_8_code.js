@@ -73,7 +73,7 @@ for (var i = 19; i < scene.meshes.length; i++) {
                 objects.shelf.purpleoutercube = scene.meshes[i];
             } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00479c"))) {
                 objects.shelf.rug = scene.meshes[i];
-            } else {
+            } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#9300ff"))) {
                 objects.shelf.thecursedcrayon = scene.meshes[i];
             }
         }
@@ -89,7 +89,7 @@ for (var i = 19; i < scene.meshes.length; i++) {
             } else {
                 objects.table.table = scene.meshes[i];
             }
-        } else {
+        } else if (scene.meshes[i].position.y > 50) {
             objects.drawing.push(scene.meshes[i]);
         }
     }
