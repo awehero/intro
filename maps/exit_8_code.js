@@ -350,7 +350,7 @@ function test() {
         for (var i = 0; i < objects.alternate.length; i++) {
             objects.alternate[i].position.y = objects.altspots[i] + 100;
         }
-        change_state.die("Switching gameplay...");
+        change_state.die("Gameplay switched!");
         alpha = 0;
     }
     if (alternate == 1 && player.position.z > -3) {
@@ -405,7 +405,7 @@ function test() {
             objects.alternate[i].position.y = objects.altspots[i];
         }
         alert("Your goal is to try to get to the cursed crayon, but be careful to avoid the lava!\n*You cannot save replays in this mode.*\nTouch the stool closest to the sun to go back to playing the full map!");
-        change_state.die("Switching gameplay...");
+        change_state.die("Gameplay switched!");
         //babylonCanvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
     }
     if (player.position.z > -10 && player.position.x < -14 && player.position.x > -16) {
