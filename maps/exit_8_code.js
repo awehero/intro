@@ -404,7 +404,7 @@ function test() {
         for (var i = 0; i < objects.alternate.length; i++) {
             objects.alternate[i].position.y = objects.altspots[i];
         }
-        alert("Your goal is to try to get to the cursed crayon, but be careful to avoid the lava!.\n*You cannot save replays in this mode.*\nTouch the stool closest to the sun to go back to playing the full map!");
+        alert("Your goal is to try to get to the cursed crayon, but be careful to avoid the lava!\n*You cannot save replays in this mode.*\nTouch the stool closest to the sun to go back to playing the full map!");
         change_state.die("Switching gameplay...");
         //babylonCanvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
     }
