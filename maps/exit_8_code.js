@@ -84,6 +84,9 @@ for (var i = 19; i < scene.meshes.length; i++) {
                 objects.table.legs.push(scene.meshes[i]);
             } else if (Math.round(scene.meshes[i].position.y*100)/100 == 3) {
                 objects.table.seattops.push(scene.meshes[i]);
+                if (scene.meshes[i].position.z > -160) {
+                    objects.table.altswitch = scene.meshes[i];
+                }
             } else if (Math.round(scene.meshes[i].position.y*100)/100 == 1.3) {
                 objects.table.seatbottoms.push(scene.meshes[i]);
             } else {
@@ -287,8 +290,8 @@ function resetObjects() {
     objects.demon.forEach(obj=>{obj.position.x = -40;});
     objects.demon.forEach(obj=>{obj.isVisible = false;});
     objects.drawing.forEach(obj=>{obj.position.y = 104.15;});
-    objects.sun.forEach(obj=>{obj.isVisible = true;});
-    objects.moon.forEach(obj=>{obj.isVisible = false;});
+    objects.sun.forEach(obj=>{obj.position.z = -150});
+    objects.moon.forEach(obj=>{obj.position.z = -450});
     objects.pans.forEach(obj=>{obj.position.y = 106.95;});
     objects.water.position.y = 207.25;
     objects.doorknob2.position.x = 23;
@@ -313,12 +316,16 @@ function resetObjects() {
 
     objects.floor.material.diffuseColor = new BABYLON.Color3.FromHexString("#f2d79e");
 }
+for (var i = 0; i < objects.alternate.length; i++) {
+    objects.alternate[i].isVisible = false;
+}
 let start = 0; //remove
 function test() {
     if (start == 1 && alternate == 1) {
         rotation = 0;
-        player.position.x = -1100;
-        player.position.z = -501;
+        player.position.x = 20;
+        player.position.y = 1;
+        player.position.z = -152;
         start = 0;
     }
     if (!alive) {
@@ -330,14 +337,20 @@ function test() {
         score = 60000;
         change_state.win();
     }
-    if (alternate == 1 && player.position.z > -498 && player.position.z < -200) {
+    if (player.intersectsMesh(objects.table.altswitch, true) && alternate == 1) {
         alternate = 0;
+        change_state.die("Switching gameplay...");
+        alpha = 0;
+        for (var i = 0; i < objects.alternate.length; i++) {
+            objects.alternate[i].isVisible = false;
+        }
     }
     if (alternate == 1 && player.position.z > -3) {
         rotation = 0;
-        player.position.x = -1100;
-        player.position.z = -501;
-        babylonCanvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
+        player.position.x = 20;
+        player.position.y = 1;
+        player.position.z = -152;
+        //babylonCanvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
     }
     if (player.position.z < -19 && player.position.z > -20) {
         if (alternate == 0) {
@@ -351,16 +364,9 @@ function test() {
             change_state.die('You died. How unfortunate...');
         }
     }*/
-    if (player.position.z < -110 && player.position.z > -130 && player.position.x < 13) {
+    if (player.position.z < -110 && player.position.z > -130 && player.position.x < 13 && alternate == 0) {
         if (messageCheck == 0) {
             window.tsTriggers[Object.keys(window.tsTriggers)[6]]("Exit " + alpha);
-            messageCheck = 1;
-        }
-    } else if (player.position.z < -500 && player.position.z > -510) {
-        if (messageCheck == 0) {
-            setTimeout(function() {
-                window.tsTriggers[Object.keys(window.tsTriggers)[6]]("Turn around to go back to playing the exit 8 map!");
-            },10);
             messageCheck = 1;
         }
     } else {
@@ -380,11 +386,15 @@ function test() {
     }
     if (player.position.z > 8) {
         rotation = 0;
-        player.position.x = -1100;
-        player.position.z = -501;
+        player.position.x = 20;
+        player.position.y = 1;
+        player.position.z = -152;
         alternate = 1;
-        alert("This is the alternate gameplay path for those who don't enjoy playing the actual map.\nTurn around to go back to playing the fun map!");
-        babylonCanvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
+        for (var i = 0; i < objects.alternate.length; i++) {
+            objects.alternate[i].isVisible = true;
+        }
+        alert("Your goal is to try to get to the cursed crayon, but be careful to avoid the lava!.\n*You cannot save replays in this mode.*\nTouch the stool closest to the sun to go back to playing the full map!");
+        //babylonCanvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
     }
     if (player.position.z > -10 && player.position.x < -14 && player.position.x > -16) {
         player.position.x = -500;
@@ -440,407 +450,409 @@ function test() {
     if (alpha < 15 && alternate == 0) {
         babylonCanvas.style.filter = "none";
     }
-    switch (current) {
-        case 0:
-            if (alertCheck == 0) {
-                if (alpha == 10) {
-                    alert("Wait, you're still going?\nWell, I guess if you really want to, you can, but there's nothing else.");
-                    alertCheck = 1;
+    if (alternate == 0) {
+        switch (current) {
+            case 0:
+                if (alertCheck == 0) {
+                    if (alpha == 10) {
+                        alert("Wait, you're still going?\nWell, I guess if you really want to, you can, but there's nothing else.");
+                        alertCheck = 1;
+                    }
+                    if (alpha == 11) {
+                        alert("You realize there's no point continuing, right?");
+                        alertCheck = 1;
+                    }
+                    if (alpha == 12) {
+                        alert("Just restart already, there's nothing more.");
+                        alertCheck = 1;
+                    }
+                    if (alpha == 13) {
+                        alert("Like seriously, there's nothing else!");
+                        alertCheck = 1;
+                    }
+                    if (alpha == 14) {
+                        alert("Please, just restart the level!");
+                        alertCheck = 1;
+                    }
+                    if (alpha == 15) {
+                        alert("You think there's something else, don't you?");
+                        alertCheck = 1;
+                    }
+                    if (alpha == 16) {
+                        alert("Try playing like this then!");
+                        babylonCanvas.style.filter = "blur(5px)";
+                        alertCheck = 1;
+                    }
+                    if (alpha == 18) {
+                        alert("Still not bored? How about this?");
+                        babylonCanvas.style.filter = "blur(10px)";
+                        alertCheck = 1;
+                    }
+                    if (alpha == 19) {
+                        alert("Ok, fine I'll give you the finish.");
+                        babylonCanvas.style.filter = "grayscale(1)";
+                        alertCheck = 1;
+                    }
+                    if (alpha == 21) {
+                        alert("Why?");
+                        change_state.die("Wow, you still didn't give in. Ok, I think you've earned the knowledge of the lore. https://www.youtube.com/watch?v=wnXVFE8KLo8");
+                        alertCheck = 1;
+                    }
                 }
-                if (alpha == 11) {
-                    alert("You realize there's no point continuing, right?");
-                    alertCheck = 1;
-                }
-                if (alpha == 12) {
-                    alert("Just restart already, there's nothing more.");
-                    alertCheck = 1;
-                }
-                if (alpha == 13) {
-                    alert("Like seriously, there's nothing else!");
-                    alertCheck = 1;
-                }
-                if (alpha == 14) {
-                    alert("Please, just restart the level!");
-                    alertCheck = 1;
-                }
-                if (alpha == 15) {
-                    alert("You think there's something else, don't you?");
-                    alertCheck = 1;
-                }
-                if (alpha == 16) {
-                    alert("Try playing like this then!");
-                    babylonCanvas.style.filter = "blur(5px)";
-                    alertCheck = 1;
-                }
-                if (alpha == 18) {
-                    alert("Still not bored? How about this?");
-                    babylonCanvas.style.filter = "blur(10px)";
-                    alertCheck = 1;
-                }
-                if (alpha == 19) {
-                    alert("Ok, fine I'll give you the finish.");
-                    babylonCanvas.style.filter = "grayscale(1)";
-                    alertCheck = 1;
-                }
-                if (alpha == 21) {
-                    alert("Why?");
-                    change_state.die("Wow, you still didn't give in. Ok, I think you've earned the knowledge of the lore. https://www.youtube.com/watch?v=wnXVFE8KLo8");
-                    alertCheck = 1;
-                }
-            }
-            if (player.position.z < -149) {
-                if (!alive) {
-                    current = 0;
-                } else {
-                    current = 1;
-                }
-                alertCheck = 0;
-                resetObjects();
-                if (alpha == 0) {
-                    anom = 1;
-                } else {
-                    k = Math.round(Math.random()*15);
-                    if (k < 7) {
+                if (player.position.z < -149) {
+                    if (!alive) {
+                        current = 0;
+                    } else {
+                        current = 1;
+                    }
+                    alertCheck = 0;
+                    resetObjects();
+                    if (alpha == 0) {
                         anom = 1;
                     } else {
-                        anom = 0;
-                    }
-                    //anom = Math.round(Math.random());
-                    if (anom == 0) {
-                        if (alpha < 3) {
-                            n = 8;
-                            j = Math.random();
-                            anomNum = (j - (j%(1/n))) * n;
-                            anomNum = Math.round(anomNum);
-                            switch (anomNum) {
-                                case 0:
-                                    scene.clearColor = new BABYLON.Color3.FromHexString("#0b003e");
-                                    break;
-                                case 1:
-                                    objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#abf7ff");});
-                                    break;
-                                case 2:
-                                    objects.drawing.forEach(obj=>{obj.position.y = 4.15;});
-                                    break;
-                                case 3:
-                                    objects.train.rugs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#df0000");});
-                                    break;
-                                case 4:
-                                    objects.shelf.rug.material.diffuseColor = new BABYLON.Color3.FromHexString("#9c6600");
-                                    break;
-                                case 5:
-                                    objects.sun.forEach(obj=>{obj.isVisible = false;});
-                                    objects.moon.forEach(obj=>{obj.isVisible = true;});
-                                    break;
-                                case 6:
-                                    objects.table.seattops.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#fcc300");});
-                                    objects.table.seatbottoms.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#fcc300");});
-                                    break;
-                                case 7:
-                                    objects.floor.material.diffuseColor = new BABYLON.Color3.FromHexString("#dedede");
-                                    break;
-                            }
-                        } else if (alpha < 6) {
-                            n = 13;
-                            j = Math.random();
-                            anomNum = (j - (j%(1/n))) * n;
-                            anomNum = Math.round(anomNum);
-                            switch (anomNum) {
-                                case 0:
-                                    objects.train.car3.position.y = 1000;
-                                    objects.train.car3wheels.forEach(obj=>{obj.position.y = 1000;});
-                                    break;
-                                case 1:
-                                    objects.pans.forEach(obj=>{obj.position.y = 6.95;});
-                                    break;
-                                case 2:
-                                    objects.shelf.pinkoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#9e00ff");
-                                    objects.shelf.redinnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000bf");
-                                    objects.shelf.redoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000ff");
-                                    objects.shelf.orangeoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#00ffff");
-                                    objects.shelf.yellowinnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#00b800");
-                                    objects.shelf.yellowoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#00ff00");
-                                    objects.shelf.greeninnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#c2c200");
-                                    objects.shelf.greenoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ffff00");
-                                    objects.shelf.cyanoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#fc7f00");
-                                    objects.shelf.blueinnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#c30000");
-                                    objects.shelf.blueoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff0000");
-                                    objects.shelf.purpleoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff00ff");
-                                    break;
-                                case 3:
-                                    objects.door2.isVisible = false;
-                                    objects.doorknob2.isVisible = false;
-                                    break;
-                                case 4:
-                                    objects.demon.forEach(obj=>{obj.isVisible = true;});
-                                    break;
-                                case 5:
-                                    objects.breadby.forEach(obj=>{obj.position.x = 259.6;});
-                                    break;
-                                case 6:
-                                    objects.fort.blueblocks.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#7f00d1");});
-                                    break;
-                                case 7:
-                                    objects.water.position.y = 7.25;
-                                    break;
-                                case 8:
-                                    objects.shelf.shelves.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#ffdb97");});
-                                    break;
-                                case 9:
-                                    objects.train.car1.position.z = -190.25;
-                                    objects.train.car2.position.z = -190.25;
-                                    objects.train.car3.position.z = -190.25;
-                                    objects.train.car1wheels.forEach(obj=>{obj.position.z = -190.25});
-                                    objects.train.car2wheels.forEach(obj=>{obj.position.z = -190.25});
-                                    objects.train.car3wheels.forEach(obj=>{obj.position.z = -190.25});
-                                    objects.train.engine.forEach(obj=>{obj.position.z = -190.25});
-                                    objects.train.enginewheels.forEach(obj=>{obj.position.z = -190.25});
-                                    break;
-                                case 10:
-                                    objects.shelf.thecursedcrayon.position.x = 50;
-                                    objects.shelf.thecursedcrayon.position.y = 0.35;
-                                    objects.shelf.thecursedcrayon.position.z = -202.8;
-                                    break;
-                                case 11:
-                                    objects.fort.greenblock.isVisible = false;
-                                    break;
-                                case 12:
-                                    objects.shelf.blocks.forEach(obj=>{obj.isVisible = false;});
-                                    break;
-                            }
+                        k = Math.round(Math.random()*15);
+                        if (k < 7) {
+                            anom = 1;
                         } else {
-                            n = 9;
-                            j = Math.random();
-                            anomNum = (j - (j%(1/n))) * n;
-                            anomNum = Math.round(anomNum);
-                            switch (anomNum) {
-                                case 0:
-                                    objects.train.engine.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#9300ff");});
-                                    break;
-                                case 1:
-                                    objects.train.car1.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000ff");
-                                    objects.train.car3.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff0000");
-                                    break;
-                                case 2:
-                                    objects.kitchen.microwave.row4.position.y = 1000;
-                                    break;
-                                case 3:
-                                    objects.shelf.yellowinnercube.position.x = 38;
-                                    objects.shelf.yellowinnercube.position.z = -170;
-                                    objects.shelf.yellowoutercube.position.x = 38;
-                                    objects.shelf.yellowoutercube.position.z = -170;
-                                    break;
-                                case 4:
-                                    objects.window1.isVisible = false;
-                                    break;
-                                case 5:
-                                    objects.doorknob2.position.x = 17;
-                                    break;
-                                case 6:
-                                    objects.shelf.blocks[0].isVisible = false;
-                                    objects.shelf.blocks[1].isVisible = false;
-                                    objects.shelf.blocks[2].isVisible = false;
-                                    objects.shelf.blocks[3].isVisible = false;
-                                    break;
-                                case 7:
-                                    objects.table.legs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#b65b00");});
-                                    break;
-                                case 8:
-                                    objects.windowframes.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#393939");});
-                                    break;
+                            anom = 0;
+                        }
+                        //anom = Math.round(Math.random());
+                        if (anom == 0) {
+                            if (alpha < 3) {
+                                n = 8;
+                                j = Math.random();
+                                anomNum = (j - (j%(1/n))) * n;
+                                anomNum = Math.round(anomNum);
+                                switch (anomNum) {
+                                    case 0:
+                                        scene.clearColor = new BABYLON.Color3.FromHexString("#0b003e");
+                                        break;
+                                    case 1:
+                                        objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#abf7ff");});
+                                        break;
+                                    case 2:
+                                        objects.drawing.forEach(obj=>{obj.position.y = 4.15;});
+                                        break;
+                                    case 3:
+                                        objects.train.rugs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#df0000");});
+                                        break;
+                                    case 4:
+                                        objects.shelf.rug.material.diffuseColor = new BABYLON.Color3.FromHexString("#9c6600");
+                                        break;
+                                    case 5:
+                                        objects.sun.forEach(obj=>{obj.position.z = -450});
+                                        objects.moon.forEach(obj=>{obj.position.z = -150});
+                                        break;
+                                    case 6:
+                                        objects.table.seattops.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#fcc300");});
+                                        objects.table.seatbottoms.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#fcc300");});
+                                        break;
+                                    case 7:
+                                        objects.floor.material.diffuseColor = new BABYLON.Color3.FromHexString("#dedede");
+                                        break;
+                                }
+                            } else if (alpha < 6) {
+                                n = 13;
+                                j = Math.random();
+                                anomNum = (j - (j%(1/n))) * n;
+                                anomNum = Math.round(anomNum);
+                                switch (anomNum) {
+                                    case 0:
+                                        objects.train.car3.position.y = 1000;
+                                        objects.train.car3wheels.forEach(obj=>{obj.position.y = 1000;});
+                                        break;
+                                    case 1:
+                                        objects.pans.forEach(obj=>{obj.position.y = 6.95;});
+                                        break;
+                                    case 2:
+                                        objects.shelf.pinkoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#9e00ff");
+                                        objects.shelf.redinnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000bf");
+                                        objects.shelf.redoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000ff");
+                                        objects.shelf.orangeoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#00ffff");
+                                        objects.shelf.yellowinnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#00b800");
+                                        objects.shelf.yellowoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#00ff00");
+                                        objects.shelf.greeninnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#c2c200");
+                                        objects.shelf.greenoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ffff00");
+                                        objects.shelf.cyanoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#fc7f00");
+                                        objects.shelf.blueinnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#c30000");
+                                        objects.shelf.blueoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff0000");
+                                        objects.shelf.purpleoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff00ff");
+                                        break;
+                                    case 3:
+                                        objects.door2.isVisible = false;
+                                        objects.doorknob2.isVisible = false;
+                                        break;
+                                    case 4:
+                                        objects.demon.forEach(obj=>{obj.isVisible = true;});
+                                        break;
+                                    case 5:
+                                        objects.breadby.forEach(obj=>{obj.position.x = 259.6;});
+                                        break;
+                                    case 6:
+                                        objects.fort.blueblocks.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#7f00d1");});
+                                        break;
+                                    case 7:
+                                        objects.water.position.y = 7.25;
+                                        break;
+                                    case 8:
+                                        objects.shelf.shelves.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#ffdb97");});
+                                        break;
+                                    case 9:
+                                        objects.train.car1.position.z = -190.25;
+                                        objects.train.car2.position.z = -190.25;
+                                        objects.train.car3.position.z = -190.25;
+                                        objects.train.car1wheels.forEach(obj=>{obj.position.z = -190.25});
+                                        objects.train.car2wheels.forEach(obj=>{obj.position.z = -190.25});
+                                        objects.train.car3wheels.forEach(obj=>{obj.position.z = -190.25});
+                                        objects.train.engine.forEach(obj=>{obj.position.z = -190.25});
+                                        objects.train.enginewheels.forEach(obj=>{obj.position.z = -190.25});
+                                        break;
+                                    case 10:
+                                        objects.shelf.thecursedcrayon.position.x = 50;
+                                        objects.shelf.thecursedcrayon.position.y = 0.35;
+                                        objects.shelf.thecursedcrayon.position.z = -202.8;
+                                        break;
+                                    case 11:
+                                        objects.fort.greenblock.isVisible = false;
+                                        break;
+                                    case 12:
+                                        objects.shelf.blocks.forEach(obj=>{obj.isVisible = false;});
+                                        break;
+                                }
+                            } else {
+                                n = 9;
+                                j = Math.random();
+                                anomNum = (j - (j%(1/n))) * n;
+                                anomNum = Math.round(anomNum);
+                                switch (anomNum) {
+                                    case 0:
+                                        objects.train.engine.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#9300ff");});
+                                        break;
+                                    case 1:
+                                        objects.train.car1.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000ff");
+                                        objects.train.car3.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff0000");
+                                        break;
+                                    case 2:
+                                        objects.kitchen.microwave.row4.position.y = 1000;
+                                        break;
+                                    case 3:
+                                        objects.shelf.yellowinnercube.position.x = 38;
+                                        objects.shelf.yellowinnercube.position.z = -170;
+                                        objects.shelf.yellowoutercube.position.x = 38;
+                                        objects.shelf.yellowoutercube.position.z = -170;
+                                        break;
+                                    case 4:
+                                        objects.window1.isVisible = false;
+                                        break;
+                                    case 5:
+                                        objects.doorknob2.position.x = 17;
+                                        break;
+                                    case 6:
+                                        objects.shelf.blocks[0].isVisible = false;
+                                        objects.shelf.blocks[1].isVisible = false;
+                                        objects.shelf.blocks[2].isVisible = false;
+                                        objects.shelf.blocks[3].isVisible = false;
+                                        break;
+                                    case 7:
+                                        objects.table.legs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#b65b00");});
+                                        break;
+                                    case 8:
+                                        objects.windowframes.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#393939");});
+                                        break;
+                                }
                             }
                         }
                     }
                 }
-            }
-            break;
-        case 1:
-            if (player.position.z > -130 && player.position.x < 12) {
-                guess = 0;
-                current = 2;
-            }
-            if (player.position.z < -250 && player.position.x > 28) {
-                guess = 1;
-                current = 2;
-            }
-            break;
-        case 2:
-            if (guess == anom) {
-                if (player.position.z < -50) {
-                    if (guess == 0) {
-                        rotation += Math.PI;
-                        player.position.z = -110 - player.position.z - 110;
-                        let beb = {};
-                        if (localStorage.getItem("beb")) {
+                break;
+            case 1:
+                if (player.position.z > -130 && player.position.x < 12) {
+                    guess = 0;
+                    current = 2;
+                }
+                if (player.position.z < -250 && player.position.x > 28) {
+                    guess = 1;
+                    current = 2;
+                }
+                break;
+            case 2:
+                if (guess == anom) {
+                    if (player.position.z < -50) {
+                        if (guess == 0) {
+                            rotation += Math.PI;
+                            player.position.z = -110 - player.position.z - 110;
+                            let beb = {};
+                            if (localStorage.getItem("beb")) {
+                                beb = JSON.parse(localStorage.getItem("beb"));
+                            }
+                            const defaultAnomalies = {
+                                Night: 0,
+                                Blue_Walls: 0,
+                                Creepy_Drawing: 0,
+                                Red_Rug: 0,
+                                Brown_Rug: 0,
+                                Moon: 0,
+                                Chairs_Changed_Color: 0,
+                                Floor_Changed_Color: 0,
+                                Missing_Train_Car: 0,
+                                Pan_on_Stove: 0,
+                                Cube_Colors_Flipped: 0,
+                                Door_is_Missing: 0,
+                                Creepy_Guy_Outside_the_Window: 0,
+                                Breadby_Missing: 0,
+                                Purple_Fort_Blocks: 0,
+                                Water_in_Sink: 0,
+                                Shelves_Color_Changed: 0,
+                                Train_on_Other_Side_of_the_Track: 0,
+                                Cursed_Crayon_is_Moved: 0,
+                                Green_Block_is_Missing: 0,
+                                All_Wooden_Blocks_are_Missing: 0,
+                                Purple_Train_Engine: 0,
+                                Red_and_Blue_Train_Cars_are_Flipped: 0,
+                                Microwave_Missing_Bottom_Button: 0,
+                                Yellow_Cube_is_Moved: 0,
+                                Window_Pane_Missing: 0,
+                                Doorknob_is_on_the_Wrong_Side: 0,
+                                Some_Wooden_Blocks_are_Missing: 0,
+                                Table_Legs_Color_Changed: 0,
+                                Window_Frames_Color_Changed: 0
+                            };
+                            for (const key in defaultAnomalies) {
+                              if (!(key in beb)) {
+                                beb[key] = 0;
+                              }
+                            }
+                            let beb2 = {};
+                            for (const key of Object.keys(defaultAnomalies)) {
+                              if (key in beb) {
+                                beb2[key] = beb[key];
+                              }
+                            }
+                            localStorage.setItem("beb", JSON.stringify(beb2));
                             beb = JSON.parse(localStorage.getItem("beb"));
-                        }
-                        const defaultAnomalies = {
-                            Night: 0,
-                            Blue_Walls: 0,
-                            Creepy_Drawing: 0,
-                            Red_Rug: 0,
-                            Brown_Rug: 0,
-                            Moon: 0,
-                            Chairs_Changed_Color: 0,
-                            Floor_Changed_Color: 0,
-                            Missing_Train_Car: 0,
-                            Pan_on_Stove: 0,
-                            Cube_Colors_Flipped: 0,
-                            Door_is_Missing: 0,
-                            Creepy_Guy_Outside_the_Window: 0,
-                            Breadby_Missing: 0,
-                            Purple_Fort_Blocks: 0,
-                            Water_in_Sink: 0,
-                            Shelves_Color_Changed: 0,
-                            Train_on_Other_Side_of_the_Track: 0,
-                            Cursed_Crayon_is_Moved: 0,
-                            Green_Block_is_Missing: 0,
-                            All_Wooden_Blocks_are_Missing: 0,
-                            Purple_Train_Engine: 0,
-                            Red_and_Blue_Train_Cars_are_Flipped: 0,
-                            Microwave_Missing_Bottom_Button: 0,
-                            Yellow_Cube_is_Moved: 0,
-                            Window_Pane_Missing: 0,
-                            Doorknob_is_on_the_Wrong_Side: 0,
-                            Some_Wooden_Blocks_are_Missing: 0,
-                            Table_Legs_Color_Changed: 0,
-                            Window_Frames_Color_Changed: 0
-                        };
-                        for (const key in defaultAnomalies) {
-                          if (!(key in beb)) {
-                            beb[key] = 0;
-                          }
-                        }
-                        let beb2 = {};
-                        for (const key of Object.keys(defaultAnomalies)) {
-                          if (key in beb) {
-                            beb2[key] = beb[key];
-                          }
-                        }
-                        localStorage.setItem("beb", JSON.stringify(beb2));
-                        beb = JSON.parse(localStorage.getItem("beb"));
-                        if (alpha < 3) {
-                            switch (anomNum) {
-                                case 0:
-                                    beb.Night = beb.Night + 1;
-                                    break;
-                                case 1:
-                                    beb.Blue_Walls = beb.Blue_Walls + 1;
-                                    break;
-                                case 2:
-                                    beb.Creepy_Drawing = beb.Creepy_Drawing + 1;
-                                    break;
-                                case 3:
-                                    beb.Red_Rug = beb.Red_Rug + 1;
-                                    break;
-                                case 4:
-                                    beb.Brown_Rug = beb.Brown_Rug + 1;
-                                    break;
-                                case 5:
-                                    beb.Moon = beb.Moon + 1;
-                                    break;
-                                case 6:
-                                    beb.Chairs_Changed_Color = beb.Chairs_Changed_Color + 1;
-                                    break;
-                                case 7:
-                                    beb.Floor_Changed_Color = beb.Floor_Changed_Color + 1;
-                                    break;
+                            if (alpha < 3) {
+                                switch (anomNum) {
+                                    case 0:
+                                        beb.Night = beb.Night + 1;
+                                        break;
+                                    case 1:
+                                        beb.Blue_Walls = beb.Blue_Walls + 1;
+                                        break;
+                                    case 2:
+                                        beb.Creepy_Drawing = beb.Creepy_Drawing + 1;
+                                        break;
+                                    case 3:
+                                        beb.Red_Rug = beb.Red_Rug + 1;
+                                        break;
+                                    case 4:
+                                        beb.Brown_Rug = beb.Brown_Rug + 1;
+                                        break;
+                                    case 5:
+                                        beb.Moon = beb.Moon + 1;
+                                        break;
+                                    case 6:
+                                        beb.Chairs_Changed_Color = beb.Chairs_Changed_Color + 1;
+                                        break;
+                                    case 7:
+                                        beb.Floor_Changed_Color = beb.Floor_Changed_Color + 1;
+                                        break;
+                                }
+                            } else if (alpha < 6) {
+                                switch (anomNum) {
+                                    case 0:
+                                        beb.Missing_Train_Car = beb.Missing_Train_Car + 1;
+                                        break;
+                                    case 1:
+                                        beb.Pan_on_Stove = beb.Pan_on_Stove + 1;
+                                        break;
+                                    case 2:
+                                        beb.Cube_Colors_Flipped = beb.Cube_Colors_Flipped + 1;
+                                        break;
+                                    case 3:
+                                        beb.Door_is_Missing = beb.Door_is_Missing + 1;
+                                        break;
+                                    case 4:
+                                        beb.Creepy_Guy_Outside_the_Window = beb.Creepy_Guy_Outside_the_Window + 1;
+                                        break;
+                                    case 5:
+                                        beb.Breadby_Missing = beb.Breadby_Missing + 1;
+                                        break;
+                                    case 6:
+                                        beb.Purple_Fort_Blocks = beb.Purple_Fort_Blocks + 1;
+                                        break;
+                                    case 7:
+                                        beb.Water_in_Sink = beb.Water_in_Sink + 1;
+                                        break;
+                                    case 8:
+                                        beb.Shelves_Color_Changed = beb.Shelves_Color_Changed + 1;
+                                        break;
+                                    case 9:
+                                        beb.Train_on_Other_Side_of_the_Track = beb.Train_on_Other_Side_of_the_Track + 1;
+                                        break;
+                                    case 10:
+                                        beb.Cursed_Crayon_is_Moved = beb.Cursed_Crayon_is_Moved + 1;
+                                        break;
+                                    case 11:
+                                        beb.Green_Block_is_Missing = beb.Green_Block_is_Missing + 1;
+                                        break;
+                                    case 12:
+                                        beb.All_Wooden_Blocks_are_Missing = beb.All_Wooden_Blocks_are_Missing + 1;
+                                        break;
+                                }
+                            } else {
+                                switch (anomNum) {
+                                    case 0:
+                                        beb.Purple_Train_Engine = beb.Purple_Train_Engine + 1;
+                                        break;
+                                    case 1:
+                                        beb.Red_and_Blue_Train_Cars_are_Flipped = beb.Red_and_Blue_Train_Cars_are_Flipped + 1;
+                                        break;
+                                    case 2:
+                                        beb.Microwave_Missing_Bottom_Button = beb.Microwave_Missing_Bottom_Button + 1;
+                                        break;
+                                    case 3:
+                                        beb.Yellow_Cube_is_Moved = beb.Yellow_Cube_is_Moved + 1;
+                                        break;
+                                    case 4:
+                                        beb.Window_Pane_Missing = beb.Window_Pane_Missing + 1;
+                                        break;
+                                    case 5:
+                                        beb.Doorknob_is_on_the_Wrong_Side = beb.Doorknob_is_on_the_Wrong_Side + 1;
+                                        break;
+                                    case 6:
+                                        beb.Some_Wooden_Blocks_are_Missing = beb.Some_Wooden_Blocks_are_Missing + 1;
+                                        break;
+                                    case 7:
+                                        beb.Table_Legs_Color_Changed = beb.Table_Legs_Color_Changed + 1;
+                                        break;
+                                    case 8:
+                                        beb.Window_Frames_Color_Changed = beb.Window_Frames_Color_Changed + 1;
+                                        break;
+                                }
                             }
-                        } else if (alpha < 6) {
-                            switch (anomNum) {
-                                case 0:
-                                    beb.Missing_Train_Car = beb.Missing_Train_Car + 1;
-                                    break;
-                                case 1:
-                                    beb.Pan_on_Stove = beb.Pan_on_Stove + 1;
-                                    break;
-                                case 2:
-                                    beb.Cube_Colors_Flipped = beb.Cube_Colors_Flipped + 1;
-                                    break;
-                                case 3:
-                                    beb.Door_is_Missing = beb.Door_is_Missing + 1;
-                                    break;
-                                case 4:
-                                    beb.Creepy_Guy_Outside_the_Window = beb.Creepy_Guy_Outside_the_Window + 1;
-                                    break;
-                                case 5:
-                                    beb.Breadby_Missing = beb.Breadby_Missing + 1;
-                                    break;
-                                case 6:
-                                    beb.Purple_Fort_Blocks = beb.Purple_Fort_Blocks + 1;
-                                    break;
-                                case 7:
-                                    beb.Water_in_Sink = beb.Water_in_Sink + 1;
-                                    break;
-                                case 8:
-                                    beb.Shelves_Color_Changed = beb.Shelves_Color_Changed + 1;
-                                    break;
-                                case 9:
-                                    beb.Train_on_Other_Side_of_the_Track = beb.Train_on_Other_Side_of_the_Track + 1;
-                                    break;
-                                case 10:
-                                    beb.Cursed_Crayon_is_Moved = beb.Cursed_Crayon_is_Moved + 1;
-                                    break;
-                                case 11:
-                                    beb.Green_Block_is_Missing = beb.Green_Block_is_Missing + 1;
-                                    break;
-                                case 12:
-                                    beb.All_Wooden_Blocks_are_Missing = beb.All_Wooden_Blocks_are_Missing + 1;
-                                    break;
-                            }
+                            localStorage.setItem("beb", JSON.stringify(beb));
                         } else {
-                            switch (anomNum) {
-                                case 0:
-                                    beb.Purple_Train_Engine = beb.Purple_Train_Engine + 1;
-                                    break;
-                                case 1:
-                                    beb.Red_and_Blue_Train_Cars_are_Flipped = beb.Red_and_Blue_Train_Cars_are_Flipped + 1;
-                                    break;
-                                case 2:
-                                    beb.Microwave_Missing_Bottom_Button = beb.Microwave_Missing_Bottom_Button + 1;
-                                    break;
-                                case 3:
-                                    beb.Yellow_Cube_is_Moved = beb.Yellow_Cube_is_Moved + 1;
-                                    break;
-                                case 4:
-                                    beb.Window_Pane_Missing = beb.Window_Pane_Missing + 1;
-                                    break;
-                                case 5:
-                                    beb.Doorknob_is_on_the_Wrong_Side = beb.Doorknob_is_on_the_Wrong_Side + 1;
-                                    break;
-                                case 6:
-                                    beb.Some_Wooden_Blocks_are_Missing = beb.Some_Wooden_Blocks_are_Missing + 1;
-                                    break;
-                                case 7:
-                                    beb.Table_Legs_Color_Changed = beb.Table_Legs_Color_Changed + 1;
-                                    break;
-                                case 8:
-                                    beb.Window_Frames_Color_Changed = beb.Window_Frames_Color_Changed + 1;
-                                    break;
-                            }
+                            player.position.z = player.position.z + 160;
                         }
-                        localStorage.setItem("beb", JSON.stringify(beb));
-                    } else {
-                        player.position.z = player.position.z + 160;
+                        player.position.x = -12;
+                        alpha++;
+                        current = 0;
                     }
-                    player.position.x = -12;
-                    alpha++;
-                    current = 0;
-                }
-            } else {
-                if (player.position.z < -50) {
-                    if (guess == 0) {
-                        rotation += Math.PI;
-                        player.position.z = -110 - player.position.z - 110;
-                    } else {
-                        player.position.z = player.position.z + 160;
+                } else {
+                    if (player.position.z < -50) {
+                        if (guess == 0) {
+                            rotation += Math.PI;
+                            player.position.z = -110 - player.position.z - 110;
+                        } else {
+                            player.position.z = player.position.z + 160;
+                        }
+                        player.position.x = -12;
+                        alpha = 0;
+                        current = 0;
                     }
-                    player.position.x = -12;
-                    alpha = 0;
-                    current = 0;
                 }
-            }
-            break;
+                break;
+        }
     }
 }
 let data = [15,9,-140.25,20,18,0.5,1,5,9,-105,30.5,18,0.5,1,10,9,-10,9.5,18,0.5,0,-5,9,-115,30.5,18,0.5,1,15,9,-120,19.5,18,0.5,0,5,9,-130,20.5,18,0.5,0,25,9,-135,30.5,18,0.5,1,35,9,-269.75,20,18,0.5,1,45,9,-264.75,30,18,0.5,1,25,9,-260,20.5,18,0.5,0,35,9,-250,20.5,18,0.5,0,25,9,-240,20.5,18,0.5,1,15,9,-245,30.5,18,0.5,1,5,9,5,10.5,18,0.5,1,15,9,-5,10.5,18,0.5,1,10,9,0,9.5,18,0.5,0,0,9,10,10.5,18,0.5,0,-10,9,-90,30.5,18,0.5,0,5,9,-15,10.5,18,0.5,1,-5,9,5,10.5,18,0.5,1,0,9,-20,10.5,18,0.5,0,-15,9,-100,20.5,18,0.5,0,-25,9,-95,10.5,18,0.5,1,-10,9,-10,9.5,18,0.5,0,-10,9,0,9.5,18,0.5,0,-15,9,-5,10.5,18,0.5,1,-5,9,-15,10.5,18,0.5,1];
