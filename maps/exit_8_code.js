@@ -390,7 +390,7 @@ function test() {
     }
     if ((player.position.z < -90 && player.position.z > -150) || (player.position.z < -230 && player.position.z > -280)) {
         speed = 0.3;
-    } else if (player.position.z < -153 && player.position.z > -174 && player.position.x < 60 && player.position.x > 31) {
+    } else if (player.position.z < -153 && player.position.z > -174 && player.position.x < 60 && player.position.x > 31 && alternate == 1) {
         speed = 0.1;
     } else {
         speed = 0.196;
