@@ -314,6 +314,9 @@ function resetObjects() {
     objects.table.seatbottoms.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#f97c00");});
 
     objects.floor.material.diffuseColor = new BABYLON.Color3.FromHexString("#f2d79e");
+    for (var i = 0; i < objects.alternate.length; i++) {
+        objects.alternate[i].position.y = objects.altspots[i] + 100;
+    }
 }
 for (var i = 0; i < objects.alternate.length; i++) {
     objects.altspots.push('');
