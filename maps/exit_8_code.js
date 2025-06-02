@@ -7,7 +7,6 @@ globalThis.guess = 0;
 globalThis.anomNum = 0;
 globalThis.alternate = 0;
 globalThis.objects = [];
-//globalThis.killBlocks = [];
 objects.shelf = [];
 objects.shelf.blocks = [];
 objects.shelf.shelves = [];
@@ -226,7 +225,6 @@ let intervalId = setInterval(function() {
         delete globalThis.cubes;
         delete globalThis.alternate;
         delete globalThis.objects;
-        //delete globalThis.killBlocks;
         clearInterval(intervalId);
     }
     test();
