@@ -314,6 +314,8 @@ function resetObjects() {
     objects.table.seatbottoms.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#f97c00");});
 
     objects.floor.material.diffuseColor = new BABYLON.Color3.FromHexString("#f2d79e");
+}
+function fixAlt() {
     for (var i = 0; i < objects.alternate.length; i++) {
         objects.alternate[i].position.y = objects.altspots[i] + 100;
     }
@@ -373,6 +375,7 @@ function test() {
     if (player.position.z < -110 && player.position.z > -130 && player.position.x < 13 && alternate == 0) {
         if (messageCheck == 0) {
             window.tsTriggers[Object.keys(window.tsTriggers)[6]]("Exit " + alpha);
+            fixAlt();
             messageCheck = 1;
         }
     } else {
