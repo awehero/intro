@@ -201,7 +201,7 @@ for (var i = 19; i < scene.meshes.length; i++) {
             objects.windowframes.push(scene.meshes[i]);
         }
     }
-    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#b03e00")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#9201fe")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f8ffff")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f0f0f0")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#bdbcbc"))) {
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#ff5900")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#b03e00")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#9201fe")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f8ffff")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f0f0f0")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#bdbcbc"))) {
         objects.alternate.push(scene.meshes[i]);
     }
 }
