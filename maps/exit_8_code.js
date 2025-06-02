@@ -37,7 +37,7 @@ objects.moon = []
 objects.sun = [];
 objects.windowframes = [];
 objects.walls = [];
- = [];
+objects.alternate = [];
 
 for (var i = 19; i < scene.meshes.length; i++) {
     if (scene.meshes[i].position.z < -152 && scene.meshes[i].position.z > -190 && scene.meshes[i].position.x < 58 && scene.meshes[i].position.x > 30) {
@@ -315,7 +315,7 @@ function resetObjects() {
     objects.floor.material.diffuseColor = new BABYLON.Color3.FromHexString("#f2d79e");
 }
 for (var i = 0; i < objects.alternate.length; i++) {
-    objects.alternate[i].setEnabled(false);
+    objects.alternate[i].position.y += 100;
 }
 let start = 0; //remove
 function test() {
@@ -340,7 +340,7 @@ function test() {
         change_state.die("Switching gameplay...");
         alpha = 0;
         for (var i = 0; i < objects.alternate.length; i++) {
-            objects.alternate[i].setEnabled(false);;
+            objects.alternate[i].position.y -= 100;
         }
     }
     if (alternate == 1 && player.position.z > -3) {
@@ -382,14 +382,14 @@ function test() {
     } else {
         speed = 0.196;
     }
-    if (player.position.z > 8) {
+    if (player.position.z > 8 && alternate == 0) {
         rotation = 0;
         player.position.x = 20;
         player.position.y = 1;
         player.position.z = -152;
         alternate = 1;
         for (var i = 0; i < objects.alternate.length; i++) {
-            objects.alternate[i].setEnabled(true);;
+            objects.alternate[i].position.y -= 100;
         }
         alert("Your goal is to try to get to the cursed crayon, but be careful to avoid the lava!.\n*You cannot save replays in this mode.*\nTouch the stool closest to the sun to go back to playing the full map!");
         //babylonCanvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
