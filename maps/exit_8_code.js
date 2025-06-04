@@ -41,8 +41,8 @@ objects.alternate = [];
 objects.altspots = [];
 
 for (var i = 19; i < scene.meshes.length; i++) {
-    if (scene.meshes[i].position.z < -152 && scene.meshes[i].position.z > -190 && scene.meshes[i].position.x < 58 && scene.meshes[i].position.x > 30) {
-        if (scene.meshes[i].position.z < -179 && scene.meshes[i].position.z > -184 && scene.meshes[i].position.x < 46 && scene.meshes[i].position.x > 39) {
+    if (scene.meshes[i].position._z < -152 && scene.meshes[i].position._z > -190 && scene.meshes[i].position._x < 58 && scene.meshes[i].position._x > 30) {
+        if (scene.meshes[i].position._z < -179 && scene.meshes[i].position._z > -184 && scene.meshes[i].position._x < 46 && scene.meshes[i].position._x > 39) {
             objects.shelf.blocks.push(scene.meshes[i]);
         } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#ffffff"))) {
             objects.shelf.shelves.push(scene.meshes[i]);
@@ -78,25 +78,25 @@ for (var i = 19; i < scene.meshes.length; i++) {
             }
         }
     }
-    if (scene.meshes[i].position.z < -155 && scene.meshes[i].position.z > -177 && scene.meshes[i].position.x < 10 && scene.meshes[i].position.x > -13) {
+    if (scene.meshes[i].position._z < -155 && scene.meshes[i].position._z > -177 && scene.meshes[i].position._x < 10 && scene.meshes[i].position._x > -13) {
         if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f97c00"))) {
-            if (Math.round(scene.meshes[i].position.y*100)/100 == 2) {
+            if (Math.round(scene.meshes[i].position._y*100)/100 == 2) {
                 objects.table.legs.push(scene.meshes[i]);
-            } else if (Math.round(scene.meshes[i].position.y*100)/100 == 3) {
+            } else if (Math.round(scene.meshes[i].position._y*100)/100 == 3) {
                 objects.table.seattops.push(scene.meshes[i]);
-                if (scene.meshes[i].position.z > -160) {
+                if (scene.meshes[i].position._z > -160) {
                     objects.table.altswitch = scene.meshes[i];
                 }
-            } else if (Math.round(scene.meshes[i].position.y*100)/100 == 1.3) {
+            } else if (Math.round(scene.meshes[i].position._y*100)/100 == 1.3) {
                 objects.table.seatbottoms.push(scene.meshes[i]);
             } else {
                 objects.table.table = scene.meshes[i];
             }
-        } else if (scene.meshes[i].position.y > 50) {
+        } else if (scene.meshes[i].position._y > 50) {
             objects.drawing.push(scene.meshes[i]);
         }
     }
-    if (scene.meshes[i].position.z < -187 && scene.meshes[i].position.z > -203 && scene.meshes[i].position.x < 7 && scene.meshes[i].position.x > -13) {
+    if (scene.meshes[i].position._z < -187 && scene.meshes[i].position._z > -203 && scene.meshes[i].position._x < 7 && scene.meshes[i].position._x > -13) {
         if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00df03"))) {
             objects.train.rugs.push(scene.meshes[i]);
         } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f4cf9c"))) {
@@ -110,26 +110,26 @@ for (var i = 19; i < scene.meshes.length; i++) {
         } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#0000ff"))) {
             objects.train.car3 = scene.meshes[i];
         } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00000a"))) {
-            if (scene.meshes[i].position.x < -3.4) {
+            if (scene.meshes[i].position._x < -3.4) {
                 objects.train.car3wheels.push(scene.meshes[i]);
-            } else if (scene.meshes[i].position.x < -2.2) {
+            } else if (scene.meshes[i].position._x < -2.2) {
                 objects.train.car2wheels.push(scene.meshes[i]);
-            } else if (scene.meshes[i].position.x < -0.9) {
+            } else if (scene.meshes[i].position._x < -0.9) {
                 objects.train.car1wheels.push(scene.meshes[i]);
             } else {
                 objects.train.enginewheels.push(scene.meshes[i]);
             }
         }
     }
-    if (scene.meshes[i].position.z < -212 && scene.meshes[i].position.z > -229.85 && scene.meshes[i].position.x < -1 && scene.meshes[i].position.x > -19.85) {
+    if (scene.meshes[i].position._z < -212 && scene.meshes[i].position._z > -229.85 && scene.meshes[i].position._x < -1 && scene.meshes[i].position._x > -19.85) {
         if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#fbffff"))) {
             objects.kitchen.structure.push(scene.meshes[i]);
         } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#b0b0b0"))) {
-            if (scene.meshes[i].position.y > 8.15) {
+            if (scene.meshes[i].position._y > 8.15) {
                 objects.kitchen.microwave.row1.push(scene.meshes[i]);
-            } else if (scene.meshes[i].position.y > 7.85) {
+            } else if (scene.meshes[i].position._y > 7.85) {
                 objects.kitchen.microwave.row2.push(scene.meshes[i]);
-            } else if (scene.meshes[i].position.y > 7.55) {
+            } else if (scene.meshes[i].position._y > 7.55) {
                 objects.kitchen.microwave.row3 = scene.meshes[i];
             } else {
                 objects.kitchen.microwave.row4 = scene.meshes[i];
@@ -148,10 +148,10 @@ for (var i = 19; i < scene.meshes.length; i++) {
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#fcfcfc"))) {
         objects.window1 = scene.meshes[i];
     }
-    if (scene.meshes[i].position.x > 250) {
+    if (scene.meshes[i].position._x > 250) {
         objects.breadby.push(scene.meshes[i]);
     }
-    if (scene.meshes[i].position.x < -230) {
+    if (scene.meshes[i].position._x < -230) {
         objects.demon.push(scene.meshes[i]);
     }
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#cefeff"))) {
@@ -179,14 +179,14 @@ for (var i = 19; i < scene.meshes.length; i++) {
         objects.floor = scene.meshes[i];
     }
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#6f4500"))) {
-        if (scene.meshes[i].position.z < -170) {
+        if (scene.meshes[i].position._z < -170) {
             objects.door2 = scene.meshes[i];
         } else {
             objects.door1 = scene.meshes[i];
         }
     }
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#e6c313"))) {
-        if (scene.meshes[i].position.z < -170) {
+        if (scene.meshes[i].position._z < -170) {
             objects.doorknob2 = scene.meshes[i];
         } else {
             objects.doorknob1 = scene.meshes[i];
@@ -199,7 +199,7 @@ for (var i = 19; i < scene.meshes.length; i++) {
             objects.fakefinish = scene.meshes[i];
         }
     }
-    if (Math.round(scene.meshes[i].position.x*100) == 6000 || Math.round(scene.meshes[i].position.x*100) == -2000) {
+    if (Math.round(scene.meshes[i].position._x*100) == 6000 || Math.round(scene.meshes[i].position._x*100) == -2000) {
         if (scene.meshes[i].material.diffuseColor.equals(new BABYLON.Color3.FromHexString("#00000a"))) {
             objects.windowframes.push(scene.meshes[i]);
         }
@@ -233,10 +233,10 @@ let intervalId = setInterval(function() {
 function resetObjects() {
     scene.clearColor = new BABYLON.Color3.FromHexString("#717aff");
 
-    objects.shelf.yellowinnercube.position.x = 44;
-    objects.shelf.yellowinnercube.position.z = -168;
-    objects.shelf.yellowoutercube.position.x = 44;
-    objects.shelf.yellowoutercube.position.z = -168;
+    objects.shelf.yellowinnercube.position._x = 44;
+    objects.shelf.yellowinnercube.position._z = -168;
+    objects.shelf.yellowoutercube.position._x = 44;
+    objects.shelf.yellowoutercube.position._z = -168;
     
     objects.shelf.pinkoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff00ff");
     objects.shelf.redinnercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#c30000");
@@ -251,32 +251,32 @@ function resetObjects() {
     objects.shelf.blueoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000ff");
     objects.shelf.purpleoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#9e00ff");
 
-    objects.shelf.blocks.forEach(obj=>{obj.position.y = 0.55;});
+    objects.shelf.blocks.forEach(obj=>{obj.position._y = 0.55;});
     objects.shelf.shelves.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#ffffff");});
     objects.shelf.rug.material.diffuseColor = new BABYLON.Color3.FromHexString("#00479c");
 
     objects.fort.blueblocks.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#001dd1");});
 
-    objects.kitchen.microwave.row4.position.y = 7.4;
+    objects.kitchen.microwave.row4.position._y = 7.4;
     
     objects.train.car1.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff0000");
-    objects.train.car1.position.y = 0.95165;
+    objects.train.car1.position._y = 0.95165;
     
     objects.train.car2.material.diffuseColor = new BABYLON.Color3.FromHexString("#ffff00");
-    objects.train.car2.position.y = 0.95165;
+    objects.train.car2.position._y = 0.95165;
     
     objects.train.car3.material.diffuseColor = new BABYLON.Color3.FromHexString("#0000ff");
-    objects.train.car3.position.y = 0.95165;
-    objects.train.car3wheels.forEach(obj=>{obj.position.y = 0.58765;});
+    objects.train.car3.position._y = 0.95165;
+    objects.train.car3wheels.forEach(obj=>{obj.position._y = 0.58765;});
 
-    objects.train.car1.position.z = -199.75;
-    objects.train.car2.position.z = -199.75;
-    objects.train.car3.position.z = -199.75;
-    objects.train.car1wheels.forEach(obj=>{obj.position.z = -199.75});
-    objects.train.car2wheels.forEach(obj=>{obj.position.z = -199.75});
-    objects.train.car3wheels.forEach(obj=>{obj.position.z = -199.75});
-    objects.train.engine.forEach(obj=>{obj.position.z = -199.75});
-    objects.train.enginewheels.forEach(obj=>{obj.position.z = -199.75});
+    objects.train.car1.position._z = -199.75;
+    objects.train.car2.position._z = -199.75;
+    objects.train.car3.position._z = -199.75;
+    objects.train.car1wheels.forEach(obj=>{obj.position._z = -199.75});
+    objects.train.car2wheels.forEach(obj=>{obj.position._z = -199.75});
+    objects.train.car3wheels.forEach(obj=>{obj.position._z = -199.75});
+    objects.train.engine.forEach(obj=>{obj.position._z = -199.75});
+    objects.train.enginewheels.forEach(obj=>{obj.position._z = -199.75});
 
     objects.train.engine.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#00a2ff");});
 
@@ -285,22 +285,22 @@ function resetObjects() {
     objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#b3ffab");});
     objects.windowframes.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#00000a");});
     objects.window1.isVisible = true;
-    objects.breadby.forEach(obj=>{obj.position.x = 59.6;});
-    objects.demon.forEach(obj=>{obj.position.x = -40;});
+    objects.breadby.forEach(obj=>{obj.position._x = 59.6;});
+    objects.demon.forEach(obj=>{obj.position._x = -40;});
     objects.demon.forEach(obj=>{obj.isVisible = false;});
-    objects.drawing.forEach(obj=>{obj.position.y = 104.15;});
-    objects.sun.forEach(obj=>{obj.position.z = -150});
-    objects.moon.forEach(obj=>{obj.position.z = -450});
-    objects.pans.forEach(obj=>{obj.position.y = 106.95;});
-    objects.water.position.y = 207.25;
-    objects.doorknob2.position.x = 23;
+    objects.drawing.forEach(obj=>{obj.position._y = 104.15;});
+    objects.sun.forEach(obj=>{obj.position._z = -150});
+    objects.moon.forEach(obj=>{obj.position._z = -450});
+    objects.pans.forEach(obj=>{obj.position._y = 106.95;});
+    objects.water.position._y = 207.25;
+    objects.doorknob2.position._x = 23;
     objects.doorknob2.isVisible = true;
     objects.door2.isVisible = true;
     objects.fort.greenblock.isVisible = true;
 
-    objects.shelf.thecursedcrayon.position.x = 56;
-    objects.shelf.thecursedcrayon.position.y = 0.84;
-    objects.shelf.thecursedcrayon.position.z = -170.8;
+    objects.shelf.thecursedcrayon.position._x = 56;
+    objects.shelf.thecursedcrayon.position._y = 0.84;
+    objects.shelf.thecursedcrayon.position._z = -170.8;
 
     objects.shelf.blocks[0].isVisible = true;
     objects.shelf.blocks[1].isVisible = true;
@@ -317,23 +317,23 @@ function resetObjects() {
 }
 function fixAlt() {
     for (var i = 0; i < objects.alternate.length; i++) {
-        objects.alternate[i].position.y = objects.altspots[i] + 100;
+        objects.alternate[i].position._y = objects.altspots[i] + 100;
     }
 }
 for (var i = 0; i < objects.alternate.length; i++) {
     objects.altspots.push('');
-    objects.altspots[i] = objects.alternate[i].position.y;
+    objects.altspots[i] = objects.alternate[i].position._y;
 }
 for (var i = 0; i < objects.alternate.length; i++) {
-    objects.alternate[i].position.y = objects.altspots[i] + 100;
+    objects.alternate[i].position._y = objects.altspots[i] + 100;
 }
 let start = 0; //remove
 function test() {
     if (start == 1 && alternate == 1) {
         rotation = 0;
-        player.position.x = 20;
-        player.position.y = 1;
-        player.position.z = -152;
+        player.position._x = 20;
+        player.position._y = 1;
+        player.position._z = -152;
         start = 0;
     }
     if (!alive) {
@@ -348,22 +348,22 @@ function test() {
     if (player.intersectsMesh(objects.table.altswitch, true) && alternate == 1) {
         alternate = 0;
         for (var i = 0; i < objects.alternate.length; i++) {
-            objects.alternate[i].position.y = objects.altspots[i] + 100;
+            objects.alternate[i].position._y = objects.altspots[i] + 100;
         }
         change_state.die("Gameplay switched!");
         alpha = 0;
     }
-    if (alternate == 1 && player.position.z > -3) {
+    if (alternate == 1 && player.position._z > -3) {
         rotation = 0;
-        player.position.x = 20;
-        player.position.y = 1;
-        player.position.z = -152;
+        player.position._x = 20;
+        player.position._y = 1;
+        player.position._z = -152;
         //babylonCanvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
     }
-    if (player.position.z < -19 && player.position.z > -20) {
+    if (player.position._z < -19 && player.position._z > -20) {
         if (alternate == 0) {
-            player.position.x = 0;
-            player.position.z = -100;
+            player.position._x = 0;
+            player.position._z = -100;
             console.log(cheese);
         }
     }
@@ -372,7 +372,7 @@ function test() {
             change_state.die('You died. How unfortunate...');
         }
     }*/
-    if (player.position.z < -110 && player.position.z > -130 && player.position.x < 13 && alternate == 0) {
+    if (player.position._z < -110 && player.position._z > -130 && player.position._x < 13 && alternate == 0) {
         if (messageCheck == 0) {
             window.tsTriggers[Object.keys(window.tsTriggers)[6]]("Exit " + alpha);
             fixAlt();
@@ -384,32 +384,32 @@ function test() {
             messageCheck = 0;
         }
     }
-    if (player.position.z > -10 && player.position.x > 14 && player.position.x < 16) {
-        player.position.x = -500;
+    if (player.position._z > -10 && player.position._x > 14 && player.position._x < 16) {
+        player.position._x = -500;
         alert("Welcome to Exit 8! Your goal is to get to exit 8, but it won’t be easy. When you start at exit 0, you will see a daycare scene. Make sure to study it carefully! The exits after exit 0 will show the same scene, but something might have changed. If you notice a change, return through the door you entered. If not, go through the door at the other end. If you were right, you will progress to the next exit, and if not, you will be sent back to exit 0. Press P at any time to pause.");
     }
-    if ((player.position.z < -90 && player.position.z > -150) || (player.position.z < -230 && player.position.z > -280)) {
+    if ((player.position._z < -90 && player.position._z > -150) || (player.position._z < -230 && player.position._z > -280)) {
         speed = 0.3;
-    } else if (player.position.z < -153 && player.position.z > -174 && player.position.x < 60 && player.position.x > 31 && alternate == 1) {
+    } else if (player.position._z < -153 && player.position._z > -174 && player.position._x < 60 && player.position._x > 31 && alternate == 1) {
         speed = 0.1;
     } else {
         speed = 0.196;
     }
-    if (player.position.z > 8 && alternate == 0) {
+    if (player.position._z > 8 && alternate == 0) {
         rotation = 0;
-        player.position.x = 20;
-        player.position.y = 1;
-        player.position.z = -152;
+        player.position._x = 20;
+        player.position._y = 1;
+        player.position._z = -152;
         alternate = 1;
         for (var i = 0; i < objects.alternate.length; i++) {
-            objects.alternate[i].position.y = objects.altspots[i];
+            objects.alternate[i].position._y = objects.altspots[i];
         }
         alert("Your goal is to try to get to the cursed crayon, but be careful to avoid the lava!\n*You cannot save replays in this mode.*\nTouch the stool closest to the sun to go back to playing the full map!");
         change_state.die("Gameplay switched!");
         //babylonCanvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
     }
-    if (player.position.z > -10 && player.position.x < -14 && player.position.x > -16) {
-        player.position.x = -500;
+    if (player.position._z > -10 && player.position._x < -14 && player.position._x > -16) {
+        player.position._x = -500;
         let string = "";
         let string2 = "";
         let track = 0;
@@ -453,11 +453,11 @@ function test() {
         }
     }
     if (alpha == 9 || alpha > 19) {
-        objects.finish.position.y = 0;
-        objects.fakefinish.position.y = 1.5;
+        objects.finish.position._y = 0;
+        objects.fakefinish.position._y = 1.5;
     } else {
-        objects.finish.position.y = 100;
-        objects.fakefinish.position.y = 100;
+        objects.finish.position._y = 100;
+        objects.fakefinish.position._y = 100;
     }
     if (alpha < 15 && alternate == 0) {
         babylonCanvas.style.filter = "none";
@@ -511,7 +511,7 @@ function test() {
                         alertCheck = 1;
                     }
                 }
-                if (player.position.z < -149) {
+                if (player.position._z < -149) {
                     if (!alive) {
                         current = 0;
                     } else {
@@ -543,7 +543,7 @@ function test() {
                                         objects.walls.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#abf7ff");});
                                         break;
                                     case 2:
-                                        objects.drawing.forEach(obj=>{obj.position.y = 4.15;});
+                                        objects.drawing.forEach(obj=>{obj.position._y = 4.15;});
                                         break;
                                     case 3:
                                         objects.train.rugs.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#df0000");});
@@ -552,8 +552,8 @@ function test() {
                                         objects.shelf.rug.material.diffuseColor = new BABYLON.Color3.FromHexString("#9c6600");
                                         break;
                                     case 5:
-                                        objects.sun.forEach(obj=>{obj.position.z = -450});
-                                        objects.moon.forEach(obj=>{obj.position.z = -150});
+                                        objects.sun.forEach(obj=>{obj.position._z = -450});
+                                        objects.moon.forEach(obj=>{obj.position._z = -150});
                                         break;
                                     case 6:
                                         objects.table.seattops.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#fcc300");});
@@ -570,11 +570,11 @@ function test() {
                                 anomNum = Math.round(anomNum);
                                 switch (anomNum) {
                                     case 0:
-                                        objects.train.car3.position.y = 1000;
-                                        objects.train.car3wheels.forEach(obj=>{obj.position.y = 1000;});
+                                        objects.train.car3.position._y = 1000;
+                                        objects.train.car3wheels.forEach(obj=>{obj.position._y = 1000;});
                                         break;
                                     case 1:
-                                        objects.pans.forEach(obj=>{obj.position.y = 6.95;});
+                                        objects.pans.forEach(obj=>{obj.position._y = 6.95;});
                                         break;
                                     case 2:
                                         objects.shelf.pinkoutercube.material.diffuseColor = new BABYLON.Color3.FromHexString("#9e00ff");
@@ -598,31 +598,31 @@ function test() {
                                         objects.demon.forEach(obj=>{obj.isVisible = true;});
                                         break;
                                     case 5:
-                                        objects.breadby.forEach(obj=>{obj.position.x = 259.6;});
+                                        objects.breadby.forEach(obj=>{obj.position._x = 259.6;});
                                         break;
                                     case 6:
                                         objects.fort.blueblocks.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#7f00d1");});
                                         break;
                                     case 7:
-                                        objects.water.position.y = 7.25;
+                                        objects.water.position._y = 7.25;
                                         break;
                                     case 8:
                                         objects.shelf.shelves.forEach(obj=>{obj.material.diffuseColor = new BABYLON.Color3.FromHexString("#ffdb97");});
                                         break;
                                     case 9:
-                                        objects.train.car1.position.z = -190.25;
-                                        objects.train.car2.position.z = -190.25;
-                                        objects.train.car3.position.z = -190.25;
-                                        objects.train.car1wheels.forEach(obj=>{obj.position.z = -190.25});
-                                        objects.train.car2wheels.forEach(obj=>{obj.position.z = -190.25});
-                                        objects.train.car3wheels.forEach(obj=>{obj.position.z = -190.25});
-                                        objects.train.engine.forEach(obj=>{obj.position.z = -190.25});
-                                        objects.train.enginewheels.forEach(obj=>{obj.position.z = -190.25});
+                                        objects.train.car1.position._z = -190.25;
+                                        objects.train.car2.position._z = -190.25;
+                                        objects.train.car3.position._z = -190.25;
+                                        objects.train.car1wheels.forEach(obj=>{obj.position._z = -190.25});
+                                        objects.train.car2wheels.forEach(obj=>{obj.position._z = -190.25});
+                                        objects.train.car3wheels.forEach(obj=>{obj.position._z = -190.25});
+                                        objects.train.engine.forEach(obj=>{obj.position._z = -190.25});
+                                        objects.train.enginewheels.forEach(obj=>{obj.position._z = -190.25});
                                         break;
                                     case 10:
-                                        objects.shelf.thecursedcrayon.position.x = 50;
-                                        objects.shelf.thecursedcrayon.position.y = 0.35;
-                                        objects.shelf.thecursedcrayon.position.z = -202.8;
+                                        objects.shelf.thecursedcrayon.position._x = 50;
+                                        objects.shelf.thecursedcrayon.position._y = 0.35;
+                                        objects.shelf.thecursedcrayon.position._z = -202.8;
                                         break;
                                     case 11:
                                         objects.fort.greenblock.isVisible = false;
@@ -645,19 +645,19 @@ function test() {
                                         objects.train.car3.material.diffuseColor = new BABYLON.Color3.FromHexString("#ff0000");
                                         break;
                                     case 2:
-                                        objects.kitchen.microwave.row4.position.y = 1000;
+                                        objects.kitchen.microwave.row4.position._y = 1000;
                                         break;
                                     case 3:
-                                        objects.shelf.yellowinnercube.position.x = 38;
-                                        objects.shelf.yellowinnercube.position.z = -170;
-                                        objects.shelf.yellowoutercube.position.x = 38;
-                                        objects.shelf.yellowoutercube.position.z = -170;
+                                        objects.shelf.yellowinnercube.position._x = 38;
+                                        objects.shelf.yellowinnercube.position._z = -170;
+                                        objects.shelf.yellowoutercube.position._x = 38;
+                                        objects.shelf.yellowoutercube.position._z = -170;
                                         break;
                                     case 4:
                                         objects.window1.isVisible = false;
                                         break;
                                     case 5:
-                                        objects.doorknob2.position.x = 17;
+                                        objects.doorknob2.position._x = 17;
                                         break;
                                     case 6:
                                         objects.shelf.blocks[0].isVisible = false;
@@ -678,21 +678,21 @@ function test() {
                 }
                 break;
             case 1:
-                if (player.position.z > -130 && player.position.x < 12) {
+                if (player.position._z > -130 && player.position._x < 12) {
                     guess = 0;
                     current = 2;
                 }
-                if (player.position.z < -250 && player.position.x > 28) {
+                if (player.position._z < -250 && player.position._x > 28) {
                     guess = 1;
                     current = 2;
                 }
                 break;
             case 2:
                 if (guess == anom) {
-                    if (player.position.z < -50) {
+                    if (player.position._z < -50) {
                         if (guess == 0) {
                             rotation += Math.PI;
-                            player.position.z = -110 - player.position.z - 110;
+                            player.position._z = -110 - player.position._z - 110;
                             let beb = {};
                             if (localStorage.getItem("beb")) {
                                 beb = JSON.parse(localStorage.getItem("beb"));
@@ -844,21 +844,21 @@ function test() {
                             }
                             localStorage.setItem("beb", JSON.stringify(beb));
                         } else {
-                            player.position.z = player.position.z + 160;
+                            player.position._z = player.position._z + 160;
                         }
-                        player.position.x = -12;
+                        player.position._x = -12;
                         alpha++;
                         current = 0;
                     }
                 } else {
-                    if (player.position.z < -50) {
+                    if (player.position._z < -50) {
                         if (guess == 0) {
                             rotation += Math.PI;
-                            player.position.z = -110 - player.position.z - 110;
+                            player.position._z = -110 - player.position._z - 110;
                         } else {
-                            player.position.z = player.position.z + 160;
+                            player.position._z = player.position._z + 160;
                         }
-                        player.position.x = -12;
+                        player.position._x = -12;
                         alpha = 0;
                         current = 0;
                     }
@@ -877,7 +877,7 @@ for (var i = 0; i < cubes.length; i++) {
     let cube = BABYLON.MeshBuilder.CreateBox("cube" + i, {size: 1}, scene);
     cube.position = new BABYLON.Vector3(data.px, data.py, data.pz);
     cube.scaling = new BABYLON.Vector3(data.sx, data.sy, data.sz);
-    cube.rotation.y = data.ry * (Math.PI/2);
+    cube.rotation._y = data.ry * (Math.PI/2);
     let material = new BABYLON.StandardMaterial("material" + i, scene);
     let texture = new BABYLON.Texture("https://awehero.github.io/intro/images/tiles2.jpg", scene);
     texture.uScale = data.sx / 8;
@@ -897,9 +897,9 @@ for (var i = 0; i < cubes.length; i++) {
     let material = new BABYLON.StandardMaterial("material" + i, scene);
     material.diffuseColor = new BABYLON.Color3.FromHexString("#" + data.mat);
     cube.material = material;
-    cube.rotation.x = data.rx;
-    cube.rotation.y = -1*data.ry;
-    cube.rotation.z = -1*data.rz;
+    cube.rotation._x = data.rx;
+    cube.rotation._y = -1*data.ry;
+    cube.rotation._z = -1*data.rz;
     cube.physicsImpostor = new BABYLON.PhysicsImpostor(cube, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
 }
 cubedata = [20,0.25,-157,10,0.5,14,0,0,0,"9201fe",10,2,-163,12,0.5,2,0,0,0.35,"9201fe",-5.5,2,-180,1,0.5,12,0,0.26,0,"9201fe",-1.5,2,-208.27,1.4,0.5,12,-0.35,0,0,"9201fe",-8.5,5.15,-215.3,1.4,0.5,12,-0.21,-1.57,0,"9201fe",47,2,-194.2,4,4,8,0,0.79,0,"9201fe",42.2,2,-205.7,4,4,4,0,-0.35,0,"9201fe",39.6,2,-215.3,4,4,4,0,0.35,0,"9201fe",41,2,-210.2,4,4,8,0,1.31,0,"9201fe",29,2,-223,4,4,4,0,-0.44,0,"9201fe",34.7,2,-219.9,4,4,8,0,-0.09,0,"9201fe",28.7,3.75,-226.5,4,0.5,0.6,0,-0.61,0,"9201fe",27,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",25,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",21.75,3.75,-226,4,0.5,0.6,0,-0.61,0,"9201fe",21,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",19,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",17,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",16,3.75,-228,4,0.5,0.6,0,-0.61,0,"9201fe",13,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",10,3.75,-226,4,0.5,0.6,0,-0.61,0,"9201fe",8,3.75,-226,4,0.5,0.6,0,-0.61,0,"9201fe",7,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",5,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",0,2,-225,4,4,4,0,0,0,"9201fe",3,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",-1.49,4.15,-166.8,1.36,0.26,0.44,0,-0.79,0,"b03e00",45.6,1.86,-161.8,2.6,2.8,2.6,0,-1.31,0,"b03e00",41.6,1.86,-159.8,2.6,2.8,2.6,0,-1.83,0,"b03e00",36.6,1.86,-157.8,2.6,2.8,2.6,0,-1.13,0,"b03e00",31.6,1.86,-160.8,2.6,2.8,2.6,0,-2.27,0,"b03e00",36.6,1.86,-163.8,2.6,2.8,2.6,0,-1.57,0,"b03e00",40.6,1.86,-165.8,2.6,2.8,2.6,0,-0.7,0,"b03e00",31.6,1.86,-167.8,2.6,2.8,2.6,0,-0.17,0,"b03e00",33.6,1.86,-171.8,2.6,2.8,2.6,0,0.52,0,"b03e00",38.2,1.86,-172.2,2.6,2.8,2.6,0,-0.61,0,"b03e00",47.6,1.86,-170.8,2.6,2.8,2.6,0,0.17,0,"b03e00",51.5,1.86,-172.7,2.6,2.8,2.6,0,-0.96,0,"b03e00",-3.6,4.15,-171.6,3.6,0.26,0.9,0,0.87,0,"b03e00",2.25,4.15,-166.2,2.7,0.26,0.9,0,-0.87,0,"b03e00",-3.6,4.15,-164.4,3.6,0.26,0.9,0,-0.87,0,"b03e00",2.25,4.15,-169.8,2.7,0.26,0.9,0,0.87,0,"b03e00",-1.49,4.15,-169.2,1.36,0.26,0.44,0,0.79,0,"b03e00",3.02,4.15,-168,2.1,0.26,0.9,0,1.57,0,"b03e00",-7.17,3.5,-223.56,0.2,2,0.4,0,-0.09,0,"bcbcbc",-5.24,3.5,-226.72,5.4,6,6,0,-0.09,0,"f1f1f1",15,9,-230,0.5,18,0.5,0,0,0,"f8ffff",25,9,-230,0.5,18,0.5,0,0,0,"f8ffff",15,9,-150,0.5,18,0.5,0,0,0,"f8ffff",25,9,-150,0.5,18,0.5,0,0,0,"f8ffff",20,0.01,-190,80,0.5,80,0,0,0,"ff5900",-16.5,3.27,-221,3.02,6.5,4.02,0,0,0,"ff5900",-14.4,6.27,-221,1.2,0.5,1,0,0,0,"ff5900",-13.85,3.27,-221,0.3,6.5,1,0,0,0,"ff5900",39,0.55,-186.6,0.4,0.4,0.8,0,-0.79,0,"ff5900",36,0.55,-188.6,0.4,0.4,0.8,0,1.05,0,"ff5900",32,0.55,-182.6,0.4,0.4,0.8,0,-1.57,0,"ff5900",37,0.55,-179.6,0.4,0.4,0.8,0,-0.61,0,"ff5900",42,0.55,-177.6,0.4,0.4,0.8,0,0.26,0,"ff5900",48,0.55,-178.6,0.4,0.4,0.8,0,0.7,0,"ff5900",55,0.55,-180.6,0.4,0.4,0.8,0,2.18,0,"ff5900",52,0.55,-183.6,0.4,0.4,0.8,0,-0.79,0,"ff5900",53,0.55,-186.6,0.4,0.4,0.8,0,0.52,0,"ff5900",47,0.55,-183.6,0.4,0.4,0.8,0,-0.26,0,"ff5900",52,0.55,-176.6,0.4,0.4,1.6,0,0.35,0,"ff5900",57,0.55,-183.6,0.4,0.4,1.6,0,2.62,0,"ff5900",49,0.55,-181.6,0.4,0.4,1.6,0,0,0,"ff5900",51,0.55,-188.6,0.4,0.4,1.6,0,-1.22,0,"ff5900",41,0.55,-174.6,0.4,0.4,1.6,0,-0.09,0,"ff5900",34,0.55,-180.6,0.4,0.4,1.6,0,0.79,0,"ff5900",32,0.55,-188.6,0.4,0.4,1.6,0,-0.26,0,"ff5900",44,0.55,-185.6,0.4,0.4,1.6,0,0.87,0,"ff5900",45.6,1.75,-161.8,3,3,3,0,-1.31,0,"ff5900",41.6,1.75,-159.8,3,3,3,0,-1.83,0,"ff5900",36.6,1.75,-157.8,3,3,3,0,-1.13,0,"ff5900",31.6,1.75,-160.8,3,3,3,0,-2.27,0,"ff5900",36.6,1.75,-163.8,3,3,3,0,-1.57,0,"ff5900",40.6,1.75,-165.8,3,3,3,0,-0.7,0,"ff5900",31.6,1.75,-167.8,3,3,3,0,-0.17,0,"ff5900",33.6,1.75,-171.8,3,3,3,0,0.52,0,"ff5900",38.2,1.75,-172.2,3,3,3,0,-0.61,0,"ff5900",47.6,1.75,-170.8,3,3,3,0,0.17,0,"ff5900",51.5,1.75,-172.7,3,3,3,0,-0.96,0,"ff5900",57,0.5,-175,6.02,0.52,4.52,0,0,0,"ff5900",57,4.5,-169,6.02,0.52,16.52,0,0,0,"ff5900",57,4.5,-161,6.02,8.52,0.52,0,0,0,"ff5900",57,8.5,-169,6.02,0.52,16.52,0,0,0,"ff5900",57,4.5,-165,6.02,8.52,0.52,0,0,0,"ff5900",57,4.5,-169,6.02,8.52,0.52,0,0,0,"ff5900",57,4.5,-173,6.02,8.52,0.52,0,0,0,"ff5900",57,4.5,-177,6.02,8.52,0.52,0,0,0,"ff5900",57,0.5,-165,6.02,0.52,8.52,0,0,0,"ff5900",-3,0.41,-195,8,0.12,9,0,0,0,"ff5900"];
@@ -914,9 +914,9 @@ for (var i = 0; i < cubes.length; i++) {
     let material = new BABYLON.StandardMaterial("material" + i, scene);
     material.diffuseColor = new BABYLON.Color3.FromHexString("#" + data.mat);
     cube.material = material;
-    cube.rotation.x = data.rx;
-    cube.rotation.y = -1*data.ry;
-    cube.rotation.z = -1*data.rz;
+    cube.rotation._x = data.rx;
+    cube.rotation._y = -1*data.ry;
+    cube.rotation._z = -1*data.rz;
     cube.physicsImpostor = new BABYLON.PhysicsImpostor(cube, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
     if (cube.mat == "ff5900") {
         objects.killfloor = cube;
@@ -938,9 +938,9 @@ for (var i = 0; i < cubes.length; i++) {
     let material = new BABYLON.StandardMaterial("material" + i, scene);
     material.diffuseColor = new BABYLON.Color3.FromHexString("#" + data.mat);
     cylinder.material = material;
-    cylinder.rotation.x = data.ry;
-    cylinder.rotation.y = data.rx;
-    cylinder.rotation.z = -1*data.rz;
+    cylinder.rotation._x = data.ry;
+    cylinder.rotation._y = data.rx;
+    cylinder.rotation._z = -1*data.rz;
     cylinder.physicsImpostor = new BABYLON.PhysicsImpostor(cylinder, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
 }
 
@@ -957,9 +957,9 @@ for (var i = 0; i < cubes.length; i++) {
     let material = new BABYLON.StandardMaterial("material" + i, scene);
     material.diffuseColor = new BABYLON.Color3.FromHexString("#" + data.mat);
     cube.material = material;
-    cube.rotation.x = data.rx;
-    cube.rotation.y = -1*data.ry;
-    cube.rotation.z = -1*data.rz;
+    cube.rotation._x = data.rx;
+    cube.rotation._y = -1*data.ry;
+    cube.rotation._z = -1*data.rz;
     cube.physicsImpostor = new BABYLON.PhysicsImpostor(cube, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
     if (cube.mat == "ff5900" || cube.mat == "b03e00") {
         killBlocks.push(cube);
@@ -980,9 +980,9 @@ for (var i = 0; i < cubes.length; i++) {
     let material = new BABYLON.StandardMaterial("material" + i, scene);
     material.diffuseColor = new BABYLON.Color3.FromHexString("#" + data.mat);
     cylinder.material = material;
-    cylinder.rotation.x = data.ry;
-    cylinder.rotation.y = data.rx;
-    cylinder.rotation.z = -1*data.rz;
+    cylinder.rotation._x = data.ry;
+    cylinder.rotation._y = data.rx;
+    cylinder.rotation._z = -1*data.rz;
     cylinder.physicsImpostor = new BABYLON.PhysicsImpostor(cylinder, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
     if (cylinder.mat == "ff5900" || cylinder.mat == "b03e00") {
         killBlocks.push(cylinder);
