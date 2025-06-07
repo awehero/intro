@@ -571,7 +571,9 @@ if new_script_content:
                     tempArray.push(Math.round(startObjects[i][7] * 500) / 10);
                     tempArray.push(Math.round(startObjects[i][9] * 500) / 10);
                     tempArray.push(Math.round(startObjects[i][8] * 500) / 10);
-                    mat = startObjects[i][10].replace(/\"/g, "");
+                    if (!(startObjects[i][10] == null)) {
+                        mat = startObjects[i][10].replace(/\"/g, "");
+                    }
                     effects = [];
                     if (mat != "1") {
                         if (mat.indexOf("?") != -1) {
