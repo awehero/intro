@@ -376,13 +376,13 @@ function test() {
     }*/
     if (player.position._z < -110 && player.position._z > -130 && player.position._x < 13 && alternate == 0) {
         if (messageCheck == 0) {
-            window.tsTriggers[Object.keys(window.tsTriggers)[6]]("Exit " + alpha);
+            window.tsTriggers[Object.keys(window.tsTriggers)[0]]("Exit " + alpha);
             fixAlt();
             messageCheck = 1;
         }
     } else {
         if (messageCheck == 1) {
-            window.tsTriggers[Object.keys(window.tsTriggers)[7]]();
+            window.tsTriggers[Object.keys(window.tsTriggers)[1]]();
             messageCheck = 0;
         }
     }
