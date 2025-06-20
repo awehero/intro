@@ -877,7 +877,7 @@ for (var i = 0; i < cubes.length; i++) {
     let cube = BABYLON.MeshBuilder.CreateBox("cube" + i, {size: 1}, scene);
     cube.position = new BABYLON.Vector3(data.px, data.py, data.pz);
     cube.scaling = new BABYLON.Vector3(data.sx, data.sy, data.sz);
-    cube.rotation._y = data.ry * (Math.PI/2);
+    cube.rotation.y = data.ry * (Math.PI/2);
     let material = new BABYLON.StandardMaterial("material" + i, scene);
     let texture = new BABYLON.Texture("https://awehero.github.io/intro/images/tiles2.jpg", scene);
     texture.uScale = data.sx / 8;
@@ -897,9 +897,9 @@ for (var i = 0; i < cubes.length; i++) {
     let material = new BABYLON.StandardMaterial("material" + i, scene);
     material.diffuseColor = new BABYLON.Color3.FromHexString("#" + data.mat);
     cube.material = material;
-    cube.rotation._x = data.rx;
-    cube.rotation._y = -1*data.ry;
-    cube.rotation._z = -1*data.rz;
+    cube.rotation.x = data.rx;
+    cube.rotation.y = -1*data.ry;
+    cube.rotation.z = -1*data.rz;
     cube.physicsImpostor = new BABYLON.PhysicsImpostor(cube, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
 }
 cubedata = [20,0.25,-157,10,0.5,14,0,0,0,"9201fe",10,2,-163,12,0.5,2,0,0,0.35,"9201fe",-5.5,2,-180,1,0.5,12,0,0.26,0,"9201fe",-1.5,2,-208.27,1.4,0.5,12,-0.35,0,0,"9201fe",-8.5,5.15,-215.3,1.4,0.5,12,-0.21,-1.57,0,"9201fe",47,2,-194.2,4,4,8,0,0.79,0,"9201fe",42.2,2,-205.7,4,4,4,0,-0.35,0,"9201fe",39.6,2,-215.3,4,4,4,0,0.35,0,"9201fe",41,2,-210.2,4,4,8,0,1.31,0,"9201fe",29,2,-223,4,4,4,0,-0.44,0,"9201fe",34.7,2,-219.9,4,4,8,0,-0.09,0,"9201fe",28.7,3.75,-226.5,4,0.5,0.6,0,-0.61,0,"9201fe",27,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",25,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",21.75,3.75,-226,4,0.5,0.6,0,-0.61,0,"9201fe",21,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",19,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",17,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",16,3.75,-228,4,0.5,0.6,0,-0.61,0,"9201fe",13,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",10,3.75,-226,4,0.5,0.6,0,-0.61,0,"9201fe",8,3.75,-226,4,0.5,0.6,0,-0.61,0,"9201fe",7,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",5,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",0,2,-225,4,4,4,0,0,0,"9201fe",3,3.75,-227,4,0.5,0.6,0,-0.61,0,"9201fe",-1.49,4.15,-166.8,1.36,0.26,0.44,0,-0.79,0,"b03e00",45.6,1.86,-161.8,2.6,2.8,2.6,0,-1.31,0,"b03e00",41.6,1.86,-159.8,2.6,2.8,2.6,0,-1.83,0,"b03e00",36.6,1.86,-157.8,2.6,2.8,2.6,0,-1.13,0,"b03e00",31.6,1.86,-160.8,2.6,2.8,2.6,0,-2.27,0,"b03e00",36.6,1.86,-163.8,2.6,2.8,2.6,0,-1.57,0,"b03e00",40.6,1.86,-165.8,2.6,2.8,2.6,0,-0.7,0,"b03e00",31.6,1.86,-167.8,2.6,2.8,2.6,0,-0.17,0,"b03e00",33.6,1.86,-171.8,2.6,2.8,2.6,0,0.52,0,"b03e00",38.2,1.86,-172.2,2.6,2.8,2.6,0,-0.61,0,"b03e00",47.6,1.86,-170.8,2.6,2.8,2.6,0,0.17,0,"b03e00",51.5,1.86,-172.7,2.6,2.8,2.6,0,-0.96,0,"b03e00",-3.6,4.15,-171.6,3.6,0.26,0.9,0,0.87,0,"b03e00",2.25,4.15,-166.2,2.7,0.26,0.9,0,-0.87,0,"b03e00",-3.6,4.15,-164.4,3.6,0.26,0.9,0,-0.87,0,"b03e00",2.25,4.15,-169.8,2.7,0.26,0.9,0,0.87,0,"b03e00",-1.49,4.15,-169.2,1.36,0.26,0.44,0,0.79,0,"b03e00",3.02,4.15,-168,2.1,0.26,0.9,0,1.57,0,"b03e00",-7.17,3.5,-223.56,0.2,2,0.4,0,-0.09,0,"bcbcbc",-5.24,3.5,-226.72,5.4,6,6,0,-0.09,0,"f1f1f1",15,9,-230,0.5,18,0.5,0,0,0,"f8ffff",25,9,-230,0.5,18,0.5,0,0,0,"f8ffff",15,9,-150,0.5,18,0.5,0,0,0,"f8ffff",25,9,-150,0.5,18,0.5,0,0,0,"f8ffff",20,0.01,-190,80,0.5,80,0,0,0,"ff5900",-16.5,3.27,-221,3.02,6.5,4.02,0,0,0,"ff5900",-14.4,6.27,-221,1.2,0.5,1,0,0,0,"ff5900",-13.85,3.27,-221,0.3,6.5,1,0,0,0,"ff5900",39,0.55,-186.6,0.4,0.4,0.8,0,-0.79,0,"ff5900",36,0.55,-188.6,0.4,0.4,0.8,0,1.05,0,"ff5900",32,0.55,-182.6,0.4,0.4,0.8,0,-1.57,0,"ff5900",37,0.55,-179.6,0.4,0.4,0.8,0,-0.61,0,"ff5900",42,0.55,-177.6,0.4,0.4,0.8,0,0.26,0,"ff5900",48,0.55,-178.6,0.4,0.4,0.8,0,0.7,0,"ff5900",55,0.55,-180.6,0.4,0.4,0.8,0,2.18,0,"ff5900",52,0.55,-183.6,0.4,0.4,0.8,0,-0.79,0,"ff5900",53,0.55,-186.6,0.4,0.4,0.8,0,0.52,0,"ff5900",47,0.55,-183.6,0.4,0.4,0.8,0,-0.26,0,"ff5900",52,0.55,-176.6,0.4,0.4,1.6,0,0.35,0,"ff5900",57,0.55,-183.6,0.4,0.4,1.6,0,2.62,0,"ff5900",49,0.55,-181.6,0.4,0.4,1.6,0,0,0,"ff5900",51,0.55,-188.6,0.4,0.4,1.6,0,-1.22,0,"ff5900",41,0.55,-174.6,0.4,0.4,1.6,0,-0.09,0,"ff5900",34,0.55,-180.6,0.4,0.4,1.6,0,0.79,0,"ff5900",32,0.55,-188.6,0.4,0.4,1.6,0,-0.26,0,"ff5900",44,0.55,-185.6,0.4,0.4,1.6,0,0.87,0,"ff5900",45.6,1.75,-161.8,3,3,3,0,-1.31,0,"ff5900",41.6,1.75,-159.8,3,3,3,0,-1.83,0,"ff5900",36.6,1.75,-157.8,3,3,3,0,-1.13,0,"ff5900",31.6,1.75,-160.8,3,3,3,0,-2.27,0,"ff5900",36.6,1.75,-163.8,3,3,3,0,-1.57,0,"ff5900",40.6,1.75,-165.8,3,3,3,0,-0.7,0,"ff5900",31.6,1.75,-167.8,3,3,3,0,-0.17,0,"ff5900",33.6,1.75,-171.8,3,3,3,0,0.52,0,"ff5900",38.2,1.75,-172.2,3,3,3,0,-0.61,0,"ff5900",47.6,1.75,-170.8,3,3,3,0,0.17,0,"ff5900",51.5,1.75,-172.7,3,3,3,0,-0.96,0,"ff5900",57,0.5,-175,6.02,0.52,4.52,0,0,0,"ff5900",57,4.5,-169,6.02,0.52,16.52,0,0,0,"ff5900",57,4.5,-161,6.02,8.52,0.52,0,0,0,"ff5900",57,8.5,-169,6.02,0.52,16.52,0,0,0,"ff5900",57,4.5,-165,6.02,8.52,0.52,0,0,0,"ff5900",57,4.5,-169,6.02,8.52,0.52,0,0,0,"ff5900",57,4.5,-173,6.02,8.52,0.52,0,0,0,"ff5900",57,4.5,-177,6.02,8.52,0.52,0,0,0,"ff5900",57,0.5,-165,6.02,0.52,8.52,0,0,0,"ff5900",-3,0.41,-195,8,0.12,9,0,0,0,"ff5900"];
@@ -914,9 +914,9 @@ for (var i = 0; i < cubes.length; i++) {
     let material = new BABYLON.StandardMaterial("material" + i, scene);
     material.diffuseColor = new BABYLON.Color3.FromHexString("#" + data.mat);
     cube.material = material;
-    cube.rotation._x = data.rx;
-    cube.rotation._y = -1*data.ry;
-    cube.rotation._z = -1*data.rz;
+    cube.rotation.x = data.rx;
+    cube.rotation.y = -1*data.ry;
+    cube.rotation.z = -1*data.rz;
     cube.physicsImpostor = new BABYLON.PhysicsImpostor(cube, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
     if (cube.mat == "ff5900") {
         objects.killfloor = cube;
@@ -938,9 +938,9 @@ for (var i = 0; i < cubes.length; i++) {
     let material = new BABYLON.StandardMaterial("material" + i, scene);
     material.diffuseColor = new BABYLON.Color3.FromHexString("#" + data.mat);
     cylinder.material = material;
-    cylinder.rotation._x = data.ry;
-    cylinder.rotation._y = data.rx;
-    cylinder.rotation._z = -1*data.rz;
+    cylinder.rotation.x = data.ry;
+    cylinder.rotation.y = data.rx;
+    cylinder.rotation.z = -1*data.rz;
     cylinder.physicsImpostor = new BABYLON.PhysicsImpostor(cylinder, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
 }
 
@@ -957,9 +957,9 @@ for (var i = 0; i < cubes.length; i++) {
     let material = new BABYLON.StandardMaterial("material" + i, scene);
     material.diffuseColor = new BABYLON.Color3.FromHexString("#" + data.mat);
     cube.material = material;
-    cube.rotation._x = data.rx;
-    cube.rotation._y = -1*data.ry;
-    cube.rotation._z = -1*data.rz;
+    cube.rotation.x = data.rx;
+    cube.rotation.y = -1*data.ry;
+    cube.rotation.z = -1*data.rz;
     cube.physicsImpostor = new BABYLON.PhysicsImpostor(cube, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
     if (cube.mat == "ff5900" || cube.mat == "b03e00") {
         killBlocks.push(cube);
@@ -980,9 +980,9 @@ for (var i = 0; i < cubes.length; i++) {
     let material = new BABYLON.StandardMaterial("material" + i, scene);
     material.diffuseColor = new BABYLON.Color3.FromHexString("#" + data.mat);
     cylinder.material = material;
-    cylinder.rotation._x = data.ry;
-    cylinder.rotation._y = data.rx;
-    cylinder.rotation._z = -1*data.rz;
+    cylinder.rotation.x = data.ry;
+    cylinder.rotation.y = data.rx;
+    cylinder.rotation.z = -1*data.rz;
     cylinder.physicsImpostor = new BABYLON.PhysicsImpostor(cylinder, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 0, restitution: 0, friction: 0.6}, scene);
     if (cylinder.mat == "ff5900" || cylinder.mat == "b03e00") {
         killBlocks.push(cylinder);
