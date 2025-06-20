@@ -366,7 +366,7 @@ function test() {
         if (alternate == 0) {
             player.position._x = 0;
             player.position._z = -100;
-            console.log(cheese);
+            //console.log(cheese);
         }
     }
     /*for (var i = 0; i < killBlocks.length; i++) {
