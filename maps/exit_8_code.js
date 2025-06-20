@@ -194,7 +194,11 @@ for (var i = 19; i < scene.meshes.length; i++) {
     }
     if (scene.meshes[i].material.diffuseColor.equals(new BABYLON.Color3.FromHexString("#24fc03"))) {
         if (scene.meshes[i].id.substring(0,1) == "E") {
-            objects.finish = scene.meshes[i];
+            if (scene.meshes[i].id.substring(1,2) == "0") {
+                objects.finish = scene.meshes[i];
+            } else {
+                objects.alternatefinish = scene.meshes[i];
+            }
         } else {
             objects.fakefinish = scene.meshes[i];
         }
@@ -343,7 +347,9 @@ function test() {
     }
     if (player.intersectsMesh(objects.shelf.thecursedcrayon, true) && alternate == 1) {
         score = 60000;
-        change_state.win();
+        player.position._x = objects.alternatefinish.position._x;
+        player.position._y = objects.alternatefinish.position._y;
+        player.position._z = objects.alternatefinish.position._z;
     }
     if (player.intersectsMesh(objects.table.altswitch, true) && alternate == 1) {
         alternate = 0;
