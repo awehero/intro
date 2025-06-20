@@ -352,7 +352,7 @@ function test() {
         for (var i = 0; i < objects.alternate.length; i++) {
             objects.alternate[i].position._y = objects.altspots[i] + 100;
         }
-        change_state.die("Gameplay switched!");
+        player.position._y = 100; //change_state.Gameplay switched!");
         alpha = 0;
     }
     if (alternate == 1 && player.position._z > -3) {
@@ -407,7 +407,7 @@ function test() {
             objects.alternate[i].position._y = objects.altspots[i];
         }
         alert("Your goal is to try to get to the cursed crayon, but be careful to avoid the lava!\n*You cannot save replays in this mode.*\nTouch the stool closest to the sun to go back to playing the full map!");
-        change_state.die("Gameplay switched!");
+        player.position._y = 100; //change_state.die("Gameplay switched!");
         //babylonCanvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
     }
     if (player.position._z > -10 && player.position._x < -14 && player.position._x > -16) {
@@ -509,7 +509,8 @@ function test() {
                     }
                     if (alpha == 21) {
                         alert("Why?");
-                        change_state.die("Wow, you still didn't give in. Ok, I think you've earned the knowledge of the lore. https://www.youtube.com/watch?v=wnXVFE8KLo8");
+                        alert("Wow, you still didn't give in. Ok, I think you've earned the knowledge of the lore. https://www.youtube.com/watch?v=wnXVFE8KLo8");
+                        player.position._y = 100;
                         alertCheck = 1;
                     }
                 }
