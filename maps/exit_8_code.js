@@ -397,6 +397,9 @@ function test() {
     } else {
         speed = 0.196;
     }
+    if (alternate == 1) {
+        steer = 0.04;
+    }
     if (player.position._z > 8 && alternate == 0) {
         rotation = 0;
         player.position._x = 20;
