@@ -556,7 +556,7 @@ function test() {
                                         objects.walls.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#abf7ff");});
                                         break;
                                     case 2:
-                                        objects.drawing.forEach(obj=>{setColorUpdate(obj.position._y = 4.15;});
+                                        objects.drawing.forEach(obj=>{obj.position._y = 4.15;});
                                         break;
                                     case 3:
                                         objects.train.rugs.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#df0000");});
