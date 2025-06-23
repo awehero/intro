@@ -193,9 +193,9 @@ for (var i = 19; i < scene.meshes.length; i++) {
         }
     }
     if (scene.meshes[i].material.diffuseColor.equals(new BABYLON.Color3.FromHexString("#24fc03"))) {
-        if (scene.meshes[i].id.substring(0,1) == "E") {
+        if (scene.meshes[i].id.substring(0,2) == "E0") {
             objects.finish = scene.meshes[i];
-        } else {
+        } else if (!(scene.meshes[i].id.substring(0,2) == "E1")) {
             objects.fakefinish = scene.meshes[i];
         }
     }
