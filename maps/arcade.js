@@ -299,37 +299,37 @@ var map = {
                 if (PY < 0.9 && currentBall == activeBall && PZ < -215) {
                     if (PX < 1.1 && PX > -1.1 && PZ < -220.38 && PZ > -222.3) {
                         tickets += 10;
-                        ticketElement.innerText = 'Tickets: ' + tickets;
+                        bestElement.innerText = 'Tickets: ' + tickets;
                         activeBall += 1;
                         this.section_id += 1
                     } else if (PX < 0.9 && PX > -0.9 && PZ < -222.5 && PZ > -224.24) {
                         tickets += 20;
-                        ticketElement.innerText = 'Tickets: ' + tickets;
+                        bestElement.innerText = 'Tickets: ' + tickets;
                         activeBall += 1;
                         this.section_id += 1
                     } else if (PX < 0.9 && PX > -0.9 && PZ < -224.43 && PZ > -226.17) {
                         tickets += 30;
-                        ticketElement.innerText = 'Tickets: ' + tickets;
+                        bestElement.innerText = 'Tickets: ' + tickets;
                         activeBall += 1;
                         this.section_id += 1
                     } else if (PX < 0.9 && PX > -0.9 && PZ < -226.36 && PZ > -228.1) {
                         tickets += 40;
-                        ticketElement.innerText = 'Tickets: ' + tickets;
+                        bestElement.innerText = 'Tickets: ' + tickets;
                         activeBall += 1;
                         this.section_id += 1
                     } else if (PX < 0.9 && PX > -0.9 && PZ < -228.29 && PZ > -230.03) {
                         tickets += 50;
-                        ticketElement.innerText = 'Tickets: ' + tickets;
+                        bestElement.innerText = 'Tickets: ' + tickets;
                         activeBall += 1;
                         this.section_id += 1
                     } else if (PX < -2.1 && PX > -3.7 && PZ < -228.29 && PZ > -230.03) {
                         tickets += 100;
-                        ticketElement.innerText = 'Tickets: ' + tickets;
+                        bestElement.innerText = 'Tickets: ' + tickets;
                         activeBall += 1;
                         this.section_id += 1
                     } else if (PX < 3.7 && PX > 2.1 && PZ < -228.29 && PZ > -230.03) {
                         tickets += 100;
-                        ticketElement.innerText = 'Tickets: ' + tickets;
+                        bestElement.innerText = 'Tickets: ' + tickets;
                         activeBall += 1;
                         this.section_id += 1
                     } else {
