@@ -72,6 +72,7 @@
     </style>
     <script>
         function fetchLeaderboard() {
+            let output = "";
             let map = document.getElementById("input").value;
             const data = {
                 mapId: map,
@@ -90,39 +91,11 @@
             })
             .then(response => response.json())
             .then(result => {
-                console.log(result.leaderboardRows);
+                output = result.leaderboardRows;
             })
             .catch(error => {
-                console.error('Error:', error);
+                alert('Error:', error);
             });
-
-            
-            /*let data = {
-              compilerOutput: inputString,
-              compilerVersion: "v9",
-              tokenId: ""
-            };*/
-            const options = {
-              method: 'GET'//,
-              /*headers: {
-                'Content-Type': 'application/json'
-              }
-              body: JSON.stringify(data)*/
-            };
-            fetch("https://icedodo-api.onionfist.com/api/get_draft_javascript.js?DraftId=" + inputString, options)
-              .then(response => response.text())
-              .then(text => {
-                document.getElementById("output").innerText = text.replace(/\{/g, '{\n')
-                    .replace(/;/g, ';\n')
-                    .replace(/\n\s*\n/g, '\n')
-                    .replace(/^\s+/gm, '')
-                    .replace(/(\n)/g, '\n    ');
-              })
-              .catch(error => {
-                console.error('Error fetching mapfile:', error);
-                document.getElementById("output").innerText = 'Error fetching map link.';
-              });
-              }
     </script>
 </head>
 <body>
