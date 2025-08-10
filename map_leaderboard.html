@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Draft to Mapfile Converter</title>
+    <title>Map Leaderboard</title>
     <link rel="icon" href="https://awehero.github.io/intro/awehero.png" type="image/png">
     <style>
         body {
@@ -71,11 +71,31 @@
         }
     </style>
     <script>
-        function processString() {
-            let inputString = document.getElementById("inputString").value;
-            if (inputString.includes("DraftId=")) {
-              inputString = inputString.substring(inputString.indexOf("DraftId=") + 8);
-            }
+        function fetchLeaderboard() {
+            let map = document.getElementById("input").value;
+            const data = {
+                mapId: map,
+                isSortedByCompletion: false,
+                includeBanned: false,
+                isFromEnding: false,
+                maxResults: 999
+            };
+            
+            fetch('https://icedodo-api.onionfist.com/api/get_map_leaderboard_rows', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result.leaderboardRows);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
             
             /*let data = {
               compilerOutput: inputString,
@@ -103,23 +123,17 @@
                 document.getElementById("output").innerText = 'Error fetching map link.';
               });
               }
-        function copyLink() {
-            if (document.getElementById("output").innerText != '') {
-                navigator.clipboard.writeText(document.getElementById("output").innerText);
-            }
-        }
     </script>
 </head>
 <body>
-    <h1>Draft to Mapfile Converter</h1>
+    <h1>Map Leaderboard</h1>
     <div>Made by awehero54</div>
-    <p>Enter the Draft Link or Id below</p>
-    <textarea id="inputString" rows="6" cols="80"></textarea>
+    <p>Enter a mapid</p>
+    <textarea id="input" rows="6" cols="80"></textarea>
     <br>
-    <button onclick="processString()">Get Mapfile!</button>
+    <button onclick="fetchLeaderboard()">Go!</button>
     <br><br>
-    <button id="copyButton" onclick="copyLink()">Copy!</button>
-    <h2>Mapfile:</h2>
+    <h2>Leaderboard:</h2>
     <div id="output" style="white-space: pre-wrap;"></div>
 </body>
 </html>
