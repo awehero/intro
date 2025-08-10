@@ -95,7 +95,19 @@
             })
             .catch(error => {
                 alert('Error:', error);
+                break;
             });
+            const $output = document.getElementById("output");
+            for (var i = 0; i < output.length; i++) {
+                const $row = $(`
+        			<div class="live_lb_player_row" id="live_lb_player_${output[i].username}">
+        				<span class="live_lb_rank">#${i+1}</span>
+        				<span class="live_lb_name">${output[i].username}</span> - 
+        				<span class="live_lb_score">${output[i].}</span>
+        			</div>
+        		`);
+                $output.append($row);
+            }
     </script>
 </head>
 <body>
