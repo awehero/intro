@@ -71,9 +71,10 @@
         }
     </style>
     <script>
+        let map = document.getElementById("input").value;
+        let $output = document.getElementById("output");
         function fetchLeaderboard() {
             let output = "";
-            let map = document.getElementById("input").value;
             const data = {
                 mapId: map,
                 isSortedByCompletion: false,
@@ -95,18 +96,20 @@
             })
             .catch(error => {
                 alert('Error:', error);
-                break;
             });
-            const $output = document.getElementById("output");
-            for (var i = 0; i < output.length; i++) {
-                const $row = $(`
-        			<div class="live_lb_player_row" id="live_lb_player_${output[i].username}">
-        				<span class="live_lb_rank">#${i+1}</span>
-        				<span class="live_lb_name">${output[i].username}</span> - 
-        				<span class="live_lb_score">${output[i].}</span>
-        			</div>
-        		`);
-                $output.append($row);
+            $output.empty();
+            if (output && output.length > 0) {
+                for (var i = 0; i < output.length; i++) {
+                    const $row = $(`
+                        <div class="player_row"}">
+                            <span class="rank">#${i + 1}</span>
+                            <span class="username">${output[i].username}</span>
+                            <span class="time">${output[i].}</span>
+                            <span class="completions">${output[i].completions}</span>
+                        </div>
+                    `);
+                    $output.append($row);
+                }
             }
     </script>
 </head>
