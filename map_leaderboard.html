@@ -136,7 +136,7 @@
                         tr.innerHTML = `
                             <td>#${index + 1}</td>
                             <td>${row.username}</td>
-                            <td>${row.time}</td>
+                            <td>${Math.round(row.time/60*100)/100}s</td>
                             <td>${row.completions}</td>
                         `;
                         tableBody.appendChild(tr);
