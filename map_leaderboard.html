@@ -138,17 +138,17 @@
                             case 2:
                                 speedrun += ".00s";
                                 break;
-                            case 3:
+                            case 4:
                                 speedrun += "0s";
                                 break;
-                            case 4:
+                            case 5:
                                 speedrun += "s";
                                 break;
                         }
                         tr.innerHTML = `
                             <td>#${index + 1}</td>
                             <td>${row.username}</td>
-                            <td>${speedrun}s</td>
+                            <td>${speedrun}</td>
                             <td>${row.completions}</td>
                         `;
                         tableBody.appendChild(tr);
