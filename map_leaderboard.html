@@ -133,10 +133,22 @@
                     });
                     output.forEach((row, index) => {
                         const tr = document.createElement("tr");
+                        let speedrun = Math.round(row.time/60*100)/100 + "";
+                        switch (speedrun.length) {
+                            case 2:
+                                speedrun += ".00s";
+                                break;
+                            case 3:
+                                speedrun += "0s";
+                                break;
+                            case 4:
+                                speedrun += "s";
+                                break;
+                        }
                         tr.innerHTML = `
                             <td>#${index + 1}</td>
                             <td>${row.username}</td>
-                            <td>${Math.round(row.time/60*100)/100}s</td>
+                            <td>${d}s</td>
                             <td>${row.completions}</td>
                         `;
                         tableBody.appendChild(tr);
