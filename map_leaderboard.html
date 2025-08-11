@@ -97,11 +97,11 @@
         
         <script>
         function fetchLeaderboard() {
-            const map = document.getElementById("input").value.trim();
-            const tableBody = document.querySelector("#outputTable tbody");
+            let map = document.getElementById("input").value.trim();
+            let tableBody = document.querySelector("#outputTable tbody");
             tableBody.innerHTML = "";
         
-            const data = {
+            let data = {
                 mapId: map,
                 isSortedByCompletion: false,
                 includeBanned: false,
@@ -116,7 +116,7 @@
             })
             .then(response => response.json())
             .then(result => {
-                const output = result.leaderboardRows;
+                let output = result.leaderboardRows;
                 if (output && output.length > 0) {
                     output = output.sort((a, b) => {
                         if (a.time !== b.time) {
