@@ -6,6 +6,12 @@
     <title>Map Leaderboard</title>
     <link rel="icon" href="https://awehero.github.io/intro/awehero.png" type="image/png">
     <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; background: #fff; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        textarea { width: 100%; padding: 10px; font-family: monospace; }
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
@@ -70,11 +76,31 @@
             margin: 10px 0;
         }
     </style>
-    <script>
-        let $output = document.getElementById("output");
+    <body>
+        <h1>Map Leaderboard</h1>
+        <p>Enter a map ID:</p>
+        <textarea id="input" rows="2" cols="40"></textarea><br>
+        <button onclick="fetchLeaderboard()">Go!</button>
+        
+        <h2>Leaderboard:</h2>
+        <table id="outputTable">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Time</th>
+                    <th>Completions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        
+        <script>
         function fetchLeaderboard() {
-            let map = document.getElementById("input").value;
-            let output = "";
+            const map = document.getElementById("input").value.trim();
+            const tableBody = document.querySelector("#outputTable tbody");
+            tableBody.innerHTML = "";
+        
             const data = {
                 mapId: map,
                 isSortedByCompletion: false,
@@ -82,46 +108,36 @@
                 isFromEnding: false,
                 maxResults: 999
             };
-            
+        
             fetch('https://icedodo-api.onionfist.com/api/get_map_leaderboard_rows', { 
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             })
             .then(response => response.json())
             .then(result => {
-                output = result.leaderboardRows;
+                const output = result.leaderboardRows;
+                if (output && output.length > 0) {
+                    output.forEach((row, index) => {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+                            <td>#${index + 1}</td>
+                            <td>${row.username}</td>
+                            <td>${row.time}</td>
+                            <td>${row.completions}</td>
+                        `;
+                        tableBody.appendChild(tr);
+                    });
+                } else {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `<td colspan="4">No results found, make sure have the correct mapid!</td>`;
+                    tableBody.appendChild(tr);
+                }
             })
             .catch(error => {
-                alert('Error:', error);
+                alert("Error: " + error);
             });
-            $output.empty();
-            if (output && output.length > 0) {
-                for (var i = 0; i < output.length; i++) {
-                    const $row = $(`
-                        <div class="player_row"}">
-                            <span class="rank">#${i + 1}</span>
-                            <span class="username">${output[i].username}</span>
-                            <span class="time">${output[i].}</span>
-                            <span class="completions">${output[i].completions}</span>
-                        </div>
-                    `);
-                    $output.append($row);
-                }
-            }
-    </script>
-</head>
-<body>
-    <h1>Map Leaderboard</h1>
-    <div>Made by awehero54</div>
-    <p>Enter a mapid</p>
-    <textarea id="input" rows="6" cols="80"></textarea>
-    <br>
-    <button onclick="fetchLeaderboard()">Go!</button>
-    <br><br>
-    <h2>Leaderboard:</h2>
-    <div id="output" style="white-space: pre-wrap;"></div>
-</body>
+        }
+        </script>
+    </body>
 </html>
