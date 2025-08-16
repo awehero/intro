@@ -1,5 +1,5 @@
 {
-    "113": { "round": "Round of 16", "players": ["Awehero", "Z-Ray"], "diff_min": "4", "diff_max": "7", "timer": "M" },
-    "116": { "round": "Round of 16", "players": ["Well", "Golden"], "diff_min": "4", "diff_max": "7", "timer": "M" },
-    "122": { "round": "Quarter Finals", "players": ["Mars", "Darrk"], "diff_min": "4", "diff_max": "7", "timer": "M" }
+    "113": { "players": ["Awehero", "Z-Ray"], "diff_min": "4", "diff_max": "7", "timer": "M" },
+    "116": { "players": ["Well", "Golden"], "diff_min": "4", "diff_max": "7", "timer": "M" },
+    "122": { "players": ["Mars", "Darrk"], "diff_min": "4", "diff_max": "7", "timer": "M" }
 }
