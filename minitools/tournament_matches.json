@@ -1,5 +1,5 @@
 {
     "113": { "players": ["Awehero", "Z-Ray"], "diff_min": "4", "diff_max": "7", "timer": "M" },
     "116": { "players": ["Well", "Golden"], "diff_min": "4", "diff_max": "7", "timer": "M" },
-    "122": { "players": ["Mars", "Darrk"], "diff_min": "4", "diff_max": "7", "timer": "M" }
+    "122": { "players": ["Mars", "Darrk"], "diff_min": "5", "diff_max": "8", "timer": "M" }
 }
