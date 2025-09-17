@@ -42,7 +42,8 @@ objects.altspots = [];
 
 function setColorUpdate(mesh, hexColor) {
   if (!mesh || !mesh.material) return;
-  mesh.material.diffuseColor = BABYLON.Color3.FromHexString(hexColor);
+  const newColor = BABYLON.Color3.FromHexString(hexColor);
+  mesh.material.diffuseColor.copyFrom(newColor);
   mesh.material = mesh.material.clone(mesh.material.name + "_clone");
 }
 
@@ -214,6 +215,9 @@ for (var i = 19; i < scene.meshes.length; i++) {
         objects.alternate.push(scene.meshes[i]);
     }
 }
+let colors = [
+  
+]
 let intervalId = setInterval(function() {
     if (!isMapLoaded) {
         for (var i = scene.meshes.length-1; i > 0; i--) {
@@ -244,35 +248,35 @@ function resetObjects() {
     objects.shelf.yellowoutercube.position._x = 44;
     objects.shelf.yellowoutercube.position._z = -168;
 
-    setColorUpdate(objects.shelf.pinkoutercube.material.diffuseColor, "ff00ff");
-    setColorUpdate(objects.shelf.pinkoutercube.material.diffuseColor, "#ff00ff");
-    setColorUpdate(objects.shelf.redinnercube.material.diffuseColor, "#c30000");
-    setColorUpdate(objects.shelf.redoutercube.material.diffuseColor, "#ff0000");
-    setColorUpdate(objects.shelf.orangeoutercube.material.diffuseColor, "#fc7f00");
-    setColorUpdate(objects.shelf.yellowinnercube.material.diffuseColor, "#c2c200");
-    setColorUpdate(objects.shelf.yellowoutercube.material.diffuseColor, "#ffff00");
-    setColorUpdate(objects.shelf.greeninnercube.material.diffuseColor, "#00b800");
-    setColorUpdate(objects.shelf.greenoutercube.material.diffuseColor, "#00ff00");
-    setColorUpdate(objects.shelf.cyanoutercube.material.diffuseColor, "#00ffff");
-    setColorUpdate(objects.shelf.blueinnercube.material.diffuseColor, "#0000bf");
-    setColorUpdate(objects.shelf.blueoutercube.material.diffuseColor, "#0000ff");
-    setColorUpdate(objects.shelf.purpleoutercube.material.diffuseColor, "#9e00ff");
+    setColorUpdate(objects.shelf.pinkoutercube, "ff00ff");
+    setColorUpdate(objects.shelf.pinkoutercube, "#ff00ff");
+    setColorUpdate(objects.shelf.redinnercube, "#c30000");
+    setColorUpdate(objects.shelf.redoutercube, "#ff0000");
+    setColorUpdate(objects.shelf.orangeoutercube, "#fc7f00");
+    setColorUpdate(objects.shelf.yellowinnercube, "#c2c200");
+    setColorUpdate(objects.shelf.yellowoutercube, "#ffff00");
+    setColorUpdate(objects.shelf.greeninnercube, "#00b800");
+    setColorUpdate(objects.shelf.greenoutercube, "#00ff00");
+    setColorUpdate(objects.shelf.cyanoutercube, "#00ffff");
+    setColorUpdate(objects.shelf.blueinnercube, "#0000bf");
+    setColorUpdate(objects.shelf.blueoutercube, "#0000ff");
+    setColorUpdate(objects.shelf.purpleoutercube, "#9e00ff");
 
     objects.shelf.blocks.forEach(obj=>{obj.position._y = 0.55;});
-    objects.shelf.shelves.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#ffffff");});
-    setColorUpdate(objects.shelf.rug.material.diffuseColor, "#00479c");
+    objects.shelf.shelves.forEach(obj=>{setColorUpdate(obj, "#ffffff");});
+    setColorUpdate(objects.shelf.rug, "#00479c");
 
-    objects.fort.blueblocks.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#001dd1");});
+    objects.fort.blueblocks.forEach(obj=>{setColorUpdate(obj, "#001dd1");});
 
     objects.kitchen.microwave.row4.position._y = 7.4;
     
-    setColorUpdate(objects.train.car1.material.diffuseColor, "#ff0000");
+    setColorUpdate(objects.train.car1, "#ff0000");
     objects.train.car1.position._y = 0.95165;
     
-    setColorUpdate(objects.train.car2.material.diffuseColor, "#ffff00");
+    setColorUpdate(objects.train.car2, "#ffff00");
     objects.train.car2.position._y = 0.95165;
     
-    setColorUpdate(objects.train.car3.material.diffuseColor, "#0000ff");
+    setColorUpdate(objects.train.car3, "#0000ff");
     objects.train.car3.position._y = 0.95165;
     objects.train.car3wheels.forEach(obj=>{obj.position._y = 0.58765;});
 
@@ -285,12 +289,12 @@ function resetObjects() {
     objects.train.engine.forEach(obj=>{obj.position._z = -199.75});
     objects.train.enginewheels.forEach(obj=>{obj.position._z = -199.75});
 
-    objects.train.engine.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#00a2ff");});
+    objects.train.engine.forEach(obj=>{setColorUpdate(obj, "#00a2ff");});
 
-    objects.train.rugs.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#00df03");});
+    objects.train.rugs.forEach(obj=>{setColorUpdate(obj, "#00df03");});
     
-    objects.walls.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#b3ffab");});
-    objects.windowframes.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#00000a");});
+    objects.walls.forEach(obj=>{setColorUpdate(obj, "#b3ffab");});
+    objects.windowframes.forEach(obj=>{setColorUpdate(obj, "#00000a");});
     objects.window1.isVisible = true;
     objects.breadby.forEach(obj=>{obj.position._x = 59.6;});
     objects.demon.forEach(obj=>{obj.position._x = -40;});
@@ -315,12 +319,12 @@ function resetObjects() {
     objects.shelf.blocks[3].isVisible = true;
     objects.shelf.blocks.forEach(obj=>{obj.isVisible = true;});
 
-    objects.table.legs.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#f97c00");});
+    objects.table.legs.forEach(obj=>{setColorUpdate(obj, "#f97c00");});
 
-    objects.table.seattops.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#f97c00");});
-    objects.table.seatbottoms.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#f97c00");});
+    objects.table.seattops.forEach(obj=>{setColorUpdate(obj, "#f97c00");});
+    objects.table.seatbottoms.forEach(obj=>{setColorUpdate(obj, "#f97c00");});
 
-    setColorUpdate(objects.floor.material.diffuseColor, "#f2d79e");
+    setColorUpdate(objects.floor, "#f2d79e");
 }
 function fixAlt() {
     for (var i = 0; i < objects.alternate.length; i++) {
@@ -553,27 +557,27 @@ function test() {
                                         scene.clearColor = new BABYLON.Color3.FromHexString("#0b003e");
                                         break;
                                     case 1:
-                                        objects.walls.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#abf7ff");});
+                                        objects.walls.forEach(obj=>{setColorUpdate(obj, "#abf7ff");});
                                         break;
                                     case 2:
                                         objects.drawing.forEach(obj=>{obj.position._y = 4.15;});
                                         break;
                                     case 3:
-                                        objects.train.rugs.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#df0000");});
+                                        objects.train.rugs.forEach(obj=>{setColorUpdate(obj, "#df0000");});
                                         break;
                                     case 4:
-                                        setColorUpdate(objects.shelf.rug.material.diffuseColor, "#9c6600");
+                                        setColorUpdate(objects.shelf.rug, "#9c6600");
                                         break;
                                     case 5:
                                         objects.sun.forEach(obj=>{obj.position._z = -450});
                                         objects.moon.forEach(obj=>{obj.position._z = -150});
                                         break;
                                     case 6:
-                                        objects.table.seattops.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#fcc300");});
-                                        objects.table.seatbottoms.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#fcc300");});
+                                        objects.table.seattops.forEach(obj=>{setColorUpdate(obj, "#fcc300");});
+                                        objects.table.seatbottoms.forEach(obj=>{setColorUpdate(obj, "#fcc300");});
                                         break;
                                     case 7:
-                                        setColorUpdate(objects.floor.material.diffuseColor, "#dedede");
+                                        setColorUpdate(objects.floor, "#dedede");
                                         break;
                                 }
                             } else if (alpha < 6) {
@@ -590,18 +594,18 @@ function test() {
                                         objects.pans.forEach(obj=>{obj.position._y = 6.95;});
                                         break;
                                     case 2:
-                                        setColorUpdate(objects.shelf.pinkoutercube.material.diffuseColor, "#9e00ff");
-                                        setColorUpdate(objects.shelf.redinnercube.material.diffuseColor, "#0000bf");
-                                        setColorUpdate(objects.shelf.redoutercube.material.diffuseColor, "#0000ff");
-                                        setColorUpdate(objects.shelf.orangeoutercube.material.diffuseColor, "#00ffff");
-                                        setColorUpdate(objects.shelf.yellowinnercube.material.diffuseColor, "#00b800");
-                                        setColorUpdate(objects.shelf.yellowoutercube.material.diffuseColor, "#00ff00");
-                                        setColorUpdate(objects.shelf.greeninnercube.material.diffuseColor, "#c2c200");
-                                        setColorUpdate(objects.shelf.greenoutercube.material.diffuseColor, "#ffff00");
-                                        setColorUpdate(objects.shelf.cyanoutercube.material.diffuseColor, "#fc7f00");
-                                        setColorUpdate(objects.shelf.blueinnercube.material.diffuseColor, "#c30000");
-                                        setColorUpdate(objects.shelf.blueoutercube.material.diffuseColor, "#ff0000");
-                                        setColorUpdate(objects.shelf.purpleoutercube.material.diffuseColor, "#ff00ff");
+                                        setColorUpdate(objects.shelf.pinkoutercube, "#9e00ff");
+                                        setColorUpdate(objects.shelf.redinnercube, "#0000bf");
+                                        setColorUpdate(objects.shelf.redoutercube, "#0000ff");
+                                        setColorUpdate(objects.shelf.orangeoutercube, "#00ffff");
+                                        setColorUpdate(objects.shelf.yellowinnercube, "#00b800");
+                                        setColorUpdate(objects.shelf.yellowoutercube, "#00ff00");
+                                        setColorUpdate(objects.shelf.greeninnercube, "#c2c200");
+                                        setColorUpdate(objects.shelf.greenoutercube, "#ffff00");
+                                        setColorUpdate(objects.shelf.cyanoutercube, "#fc7f00");
+                                        setColorUpdate(objects.shelf.blueinnercube, "#c30000");
+                                        setColorUpdate(objects.shelf.blueoutercube, "#ff0000");
+                                        setColorUpdate(objects.shelf.purpleoutercube, "#ff00ff");
                                         break;
                                     case 3:
                                         objects.door2.isVisible = false;
@@ -614,13 +618,13 @@ function test() {
                                         objects.breadby.forEach(obj=>{obj.position._x = 259.6;});
                                         break;
                                     case 6:
-                                        objects.fort.blueblocks.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#7f00d1");});
+                                        objects.fort.blueblocks.forEach(obj=>{setColorUpdate(obj, "#7f00d1");});
                                         break;
                                     case 7:
                                         objects.water.position._y = 7.25;
                                         break;
                                     case 8:
-                                        objects.shelf.shelves.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#ffdb97");});
+                                        objects.shelf.shelves.forEach(obj=>{setColorUpdate(obj, "#ffdb97");});
                                         break;
                                     case 9:
                                         objects.train.car1.position._z = -190.25;
@@ -651,11 +655,11 @@ function test() {
                                 anomNum = Math.round(anomNum);
                                 switch (anomNum) {
                                     case 0:
-                                        objects.train.engine.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#9300ff");});
+                                        objects.train.engine.forEach(obj=>{setColorUpdate(obj, "#9300ff");});
                                         break;
                                     case 1:
-                                        setColorUpdate(objects.train.car1.material.diffuseColor, "#0000ff");
-                                        setColorUpdate(objects.train.car3.material.diffuseColor, "#ff0000");
+                                        setColorUpdate(objects.train.car1, "#0000ff");
+                                        setColorUpdate(objects.train.car3, "#ff0000");
                                         break;
                                     case 2:
                                         objects.kitchen.microwave.row4.position._y = 1000;
@@ -679,10 +683,10 @@ function test() {
                                         objects.shelf.blocks[3].isVisible = false;
                                         break;
                                     case 7:
-                                        objects.table.legs.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#b65b00");});
+                                        objects.table.legs.forEach(obj=>{setColorUpdate(obj, "#b65b00");});
                                         break;
                                     case 8:
-                                        objects.windowframes.forEach(obj=>{setColorUpdate(obj.material.diffuseColor, "#393939");});
+                                        objects.windowframes.forEach(obj=>{setColorUpdate(obj, "#393939");});
                                         break;
                                 }
                             }
