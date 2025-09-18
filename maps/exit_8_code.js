@@ -217,6 +217,7 @@ for (var i = 19; i < scene.meshes.length; i++) {
         objects.alternate.push(scene.meshes[i]);
     }
 }
+light.direction = new BABYLON.Vector3(0, 1, 0.2);
 let intervalId = setInterval(function() {
     if (!isMapLoaded) {
         for (var i = scene.meshes.length-1; i > 0; i--) {
