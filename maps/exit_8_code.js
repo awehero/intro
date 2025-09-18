@@ -358,7 +358,7 @@ function test() {
         /*player.position._x = 50;
         player.position._y = 15;
         player.position._z = -1000;*/
-        player.position = objects.fakefinish.position
+        player.position = objects.fakefinish.position;
     }
     if (player.intersectsMesh(objects.table.altswitch, true) && alternate == 1) {
         alternate = 0;
@@ -477,7 +477,7 @@ function test() {
     } else {
         objects.finish.position._y = 100;
         objects.visualfinish.position._y = 100;
-        objects.fakefinish.position._y = 100;
+        objects.fakefinish.position._y = 80;
     }
     if (alpha < 15 && alternate == 0) {
         babylonCanvas.style.filter = "none";
