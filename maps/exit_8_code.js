@@ -204,6 +204,8 @@ for (var i = 19; i < scene.meshes.length; i++) {
             objects.finish = scene.meshes[i];
         } else if (scene.meshes[i].id.substring(0,2) == "E1") {
             objects.fakefinish = scene.meshes[i];
+        } else if (scene.meshes[i].id.substring(0,1) == "Y") {
+            objects.visualfinish = scene.meshes[i];
         }
     }
     if (Math.round(scene.meshes[i].position._x*100) == 6000 || Math.round(scene.meshes[i].position._x*100) == -2000) {
@@ -215,9 +217,6 @@ for (var i = 19; i < scene.meshes.length; i++) {
         objects.alternate.push(scene.meshes[i]);
     }
 }
-let colors = [
-  
-]
 let intervalId = setInterval(function() {
     if (!isMapLoaded) {
         for (var i = scene.meshes.length-1; i > 0; i--) {
@@ -470,9 +469,11 @@ function test() {
     }
     if (alpha == 9 || alpha > 19) {
         objects.finish.position._y = 0;
+        objects.visualfinish.position._y = 0;
         objects.fakefinish.position._y = 1.5;
     } else {
         objects.finish.position._y = 100;
+        objects.visualfinish.position._y = 100;
         objects.fakefinish.position._y = 100;
     }
     if (alpha < 15 && alternate == 0) {
