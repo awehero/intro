@@ -341,6 +341,7 @@ for (var i = 0; i < objects.alternate.length; i++) {
 }
 let start = 0; //remove
 function test() {
+    if (!isMapLoaded) break;
     if (start == 1 && alternate == 1) {
         rotation = 0;
         player.position._x = 20;
