@@ -355,9 +355,10 @@ function test() {
     }
     if (player.intersectsMesh(objects.shelf.thecursedcrayon, true) && alternate == 1) {
         score = 60000;
-        player.position._x = 50;
+        /*player.position._x = 50;
         player.position._y = 15;
-        player.position._z = -1000;
+        player.position._z = -1000;*/
+        player.position = objects.fakefinish.position
     }
     if (player.intersectsMesh(objects.table.altswitch, true) && alternate == 1) {
         alternate = 0;
