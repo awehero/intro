@@ -451,10 +451,10 @@ function test() {
                         break;
                 }
             } 
-        } else {
-            if (!(player.position._z > 8 && alternate == 0)) {
-                switchCheck = 0;
-            }
+        }
+    } else {
+        if (player.position._z > 5 && player.position._z < 7 && alternate == 0) {
+            switchCheck = 0;
         }
     }
     if (player.position._z > -10 && player.position._x < -14 && player.position._x > -16) {
