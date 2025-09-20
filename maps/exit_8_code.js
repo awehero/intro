@@ -342,6 +342,7 @@ for (var i = 0; i < objects.alternate.length; i++) {
     objects.alternate[i].position._y = objects.altspots[i] + 100;
 }
 let start = 0; //remove
+let switchCheck = 0;
 if (localStorage.getItem("beb2") == null) {
     localStorage.setItem("beb2", "0");
 } else {
@@ -418,38 +419,42 @@ function test() {
         steer = 0.04;
     }
     if (player.position._z > 8 && alternate == 0) {
-        let gp = prompt("0 - Alternate Gameplay\n1 - Easy\n2 - Hard\n3 - Cancel");
-        let options = [0, 1, 2, 3];
-        while (!(gp in options)) {
-            gp = prompt("Please type 0, 1, 2, or 3!\n0 - Alternate Gameplay\n1 - Easy\n2 - Hard\n3 - Cancel");
-        }
-        switch (gp) {
-            case "0":
-                rotation = 0;
-                player.position._x = 20;
-                player.position._y = 1;
-                player.position._z = -152;
-                alternate = 1;
-                for (var i = 0; i < objects.alternate.length; i++) {
-                    objects.alternate[i].position._y = objects.altspots[i];
+        if (switchCheck == 0) {
+            switchCheck = 1;
+            let gp = prompt("0 - Alternate Gameplay\n1 - Easy\n2 - Hard");
+            let options = [0, 1, 2];
+            if (gp in options) {
+                switch (gp) {
+                    case "0":
+                        rotation = 0;
+                        player.position._x = 20;
+                        player.position._y = 1;
+                        player.position._z = -152;
+                        alternate = 1;
+                        for (var i = 0; i < objects.alternate.length; i++) {
+                            objects.alternate[i].position._y = objects.altspots[i];
+                        }
+                        alert("Your goal is to try to get to the cursed crayon, but be careful to avoid the lava!\n*You cannot save replays in this mode.*\nTouch the stool closest to the sun to go back to playing the full map!");
+                        player.position._y = 100;
+                        break;
+                    case "1":
+                        beta = 0;
+                        localStorage.setItem("beb2", "0");
+                        alert("You are now in easy mode!");
+                        player.position._y = 100;
+                        break;
+                    case "2":
+                        beta = 1;
+                        localStorage.setItem("beb2", "1");
+                        alert("You are now in hard mode!");
+                        player.position._y = 100;
+                        break;
                 }
-                alert("Your goal is to try to get to the cursed crayon, but be careful to avoid the lava!\n*You cannot save replays in this mode.*\nTouch the stool closest to the sun to go back to playing the full map!");
-                player.position._y = 100;
-                break;
-            case "1":
-                beta = 0;
-                localStorage.setItem("beb2", "0");
-                alert("You are now in easy mode!");
-                player.position._y = 100;
-                break;
-            case "2":
-                beta = 1;
-                localStorage.setItem("beb2", "1");
-                alert("You are now in hard mode!");
-                player.position._y = 100;
-                break;
-            case "3":
-                break;
+            } 
+        } else {
+            if (!(player.position._z > 8 && alternate == 0)) {
+                switchCheck = 0;
+            }
         }
     }
     if (player.position._z > -10 && player.position._x < -14 && player.position._x > -16) {
