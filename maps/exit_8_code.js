@@ -401,7 +401,7 @@ function test() {
     }
     if (player.position._z > -10 && player.position._x > 14 && player.position._x < 16) {
         player.position._x = -500;
-        alert("Welcome to Exit 8! Your goal is to get to exit 8, but it won’t be easy. When you start at exit 0, you will see a daycare scene. Make sure to study it carefully! The exits after exit 0 will show the same scene, but something might have changed. If you notice a change, return through the door you entered. If not, go through the door at the other end. If you were right, you will progress to the next exit, and if not, you will be sent back to exit 0. Press P at any time to pause.");
+        alert("At exit 0, study the scene. Later exits show the same scene with possible changes. If you spot a change, return through your entry door, and if not, go through the other. Correct choices advance you, wrong ones send you back to exit 0.");
     }
     if ((player.position._z < -90 && player.position._z > -150) || (player.position._z < -230 && player.position._z > -280)) {
         speed = 0.3;
