@@ -1,4 +1,5 @@
 globalThis.alpha = 0;
+globalThis.beta = 0;
 globalThis.messageCheck = 0;
 globalThis.alertCheck = 0;
 globalThis.current = 0;
@@ -228,6 +229,7 @@ let intervalId = setInterval(function() {
         babylonCanvas.style.filter = "none";
         light.direction = new BABYLON.Vector3(0, 1, 0);
         delete globalThis.alpha;
+        delete globalThis.beta;
         delete globalThis.messageCheck;
         delete globalThis.alertCheck;
         delete globalThis.current;
@@ -340,6 +342,11 @@ for (var i = 0; i < objects.alternate.length; i++) {
     objects.alternate[i].position._y = objects.altspots[i] + 100;
 }
 let start = 0; //remove
+if (localStorage.getItem("beb2") == null) {
+    localStorage.setItem("beb2", "0");
+} else {
+    beta = Number(localStorage.getItem("beb2"));
+}
 function test() {
     if (start == 1 && alternate == 1) {
         rotation = 0;
@@ -355,9 +362,12 @@ function test() {
     }
     if (player.intersectsMesh(objects.shelf.thecursedcrayon, true) && alternate == 1) {
         score = 59998;
-        /*player.position._x = 50;
-        player.position._y = 15;
-        player.position._z = -1000;*/
+        player.position = objects.fakefinish.position;
+    }
+    if (player.intersectsMesh(objects.visualfinish, true) && alternate == 0) {
+        if (beta == 0) {
+            score = score * 2;
+        }
         player.position = objects.fakefinish.position;
     }
     if (player.intersectsMesh(objects.table.altswitch, true) && alternate == 1) {
@@ -365,7 +375,7 @@ function test() {
         for (var i = 0; i < objects.alternate.length; i++) {
             objects.alternate[i].position._y = objects.altspots[i] + 100;
         }
-        player.position._y = 100; //change_state.Gameplay switched!");
+        player.position._y = 100;
         alpha = 0;
     }
     if (alternate == 1 && player.position._z > -3) {
@@ -373,7 +383,6 @@ function test() {
         player.position._x = 20;
         player.position._y = 1;
         player.position._z = -152;
-        //babylonCanvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
     }
     if (player.position._z < -19 && player.position._z > -20) {
         if (alternate == 0) {
@@ -382,11 +391,6 @@ function test() {
             //console.log(cheese);
         }
     }
-    /*for (var i = 0; i < killBlocks.length; i++) {
-        if (player.intersectsMesh(killBlocks[i],scene)) {
-            change_state.die('You died. How unfortunate...');
-        }
-    }*/
     if (player.position._z < -110 && player.position._z > -130 && player.position._x < 13 && alternate == 0) {
         if (messageCheck == 0) {
             window.tsTriggers[Object.keys(window.tsTriggers)[0]]("Exit " + alpha);
@@ -414,17 +418,39 @@ function test() {
         steer = 0.04;
     }
     if (player.position._z > 8 && alternate == 0) {
-        rotation = 0;
-        player.position._x = 20;
-        player.position._y = 1;
-        player.position._z = -152;
-        alternate = 1;
-        for (var i = 0; i < objects.alternate.length; i++) {
-            objects.alternate[i].position._y = objects.altspots[i];
+        let gp = prompt("0 - Alternate Gameplay\n1 - Easy\n2 - Hard\n3 - Cancel");
+        let options = [0, 1, 2, 3];
+        while (!(gp in options)) {
+            gp = prompt("Please type 0, 1, 2, or 3!\n0 - Alternate Gameplay\n1 - Easy\n2 - Hard\n3 - Cancel");
         }
-        alert("Your goal is to try to get to the cursed crayon, but be careful to avoid the lava!\n*You cannot save replays in this mode.*\nTouch the stool closest to the sun to go back to playing the full map!");
-        player.position._y = 100; //change_state.die("Gameplay switched!");
-        //babylonCanvas.style.filter = "hue-rotate("+Math.round(Math.random()*360)+"deg) sepia(0.5)";
+        switch (gp) {
+            case "0":
+                rotation = 0;
+                player.position._x = 20;
+                player.position._y = 1;
+                player.position._z = -152;
+                alternate = 1;
+                for (var i = 0; i < objects.alternate.length; i++) {
+                    objects.alternate[i].position._y = objects.altspots[i];
+                }
+                alert("Your goal is to try to get to the cursed crayon, but be careful to avoid the lava!\n*You cannot save replays in this mode.*\nTouch the stool closest to the sun to go back to playing the full map!");
+                player.position._y = 100;
+                break;
+            case "1":
+                beta = 0;
+                localStorage.setItem("beb2", "0");
+                alert("You are now in easy mode!");
+                player.position._y = 100;
+                break;
+            case "2":
+                beta = 1;
+                localStorage.setItem("beb2", "1");
+                alert("You are now in hard mode!");
+                player.position._y = 100;
+                break;
+            case "3":
+                break;
+        }
     }
     if (player.position._z > -10 && player.position._x < -14 && player.position._x > -16) {
         player.position._x = -500;
@@ -471,7 +497,7 @@ function test() {
         }
     }
     if (alpha == 9 || alpha > 19) {
-        objects.finish.position._y = 0;
+        //objects.finish.position._y = 0;
         objects.visualfinish.position._y = 0;
         objects.fakefinish.position._y = 1.5;
     } else {
@@ -487,7 +513,12 @@ function test() {
             case 0:
                 if (alertCheck == 0) {
                     if (alpha == 10) {
-                        alert("Wait, you're still going?\nWell, I guess if you really want to, you can, but there's nothing else.");
+                        if (beta == 0) {
+                            alert("Hey. You can't keep going. At least not in easy mode...");
+                            player.position._y = 100;
+                        } else {
+                            alert("Wait, you're still going?\nWell, I guess if you really want to, you can, but there's nothing else.");
+                        }
                         alertCheck = 1;
                     }
                     if (alpha == 11) {
@@ -521,7 +552,7 @@ function test() {
                         alertCheck = 1;
                     }
                     if (alpha == 19) {
-                        alert("Ok, fine I'll give you the finish.");
+                        alert("Ok fine, I'll give you the finish... after this last thing.");
                         babylonCanvas.style.filter = "grayscale(1)";
                         alertCheck = 1;
                     }
@@ -551,7 +582,7 @@ function test() {
                         }
                         //anom = Math.round(Math.random());
                         if (anom == 0) {
-                            if (alpha < 3) {
+                            if (alpha < 3 || beta == 0) {
                                 n = 8;
                                 j = Math.random();
                                 anomNum = (j - (j%(1/n))) * n;
@@ -763,7 +794,7 @@ function test() {
                             }
                             localStorage.setItem("beb", JSON.stringify(beb2));
                             beb = JSON.parse(localStorage.getItem("beb"));
-                            if (alpha < 3) {
+                            if (alpha < 3 || beta == 0) {
                                 switch (anomNum) {
                                     case 0:
                                         beb.Night = beb.Night + 1;
