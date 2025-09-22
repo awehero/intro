@@ -533,28 +533,34 @@ function test() {
                         if (beta == 0) {
                             alert("Hey. You can't keep going. At least not in easy mode...");
                             player.position._y = 100;
-                        } else if (beta == 1) {
-                            alert("Hey. You can't keep going. At least not in medium mode...");
-                            player.position._y = 100;
                         } else {
                             alert("Wait, you're still going?\nWell, I guess if you really want to, you can, but there's nothing else.");
                         }
                         alertCheck = 1;
                     }
                     if (alpha == 11) {
-                        alert("You realize there's no point continuing, right?");
+                        alert("Umm... you do realize there's no point continuing, right?");
                         alertCheck = 1;
                     }
                     if (alpha == 12) {
-                        alert("Just restart already, there's nothing more.");
+                        if (beta == 1) {
+                            alert("Here, I'll even give you a finish.");
+                        } else {
+                            alert("There's nothing more, just restart the level");
+                        }
                         alertCheck = 1;
                     }
                     if (alpha == 13) {
-                        alert("Like seriously, there's nothing else!");
+                        alert("Just what could be so interesting?");
+                        if (beta == 1) {
+                            alert("I'll guess you'll never know.");
+                            alert("Especially since you're only playing the game on MEDIUM difficulty...");
+                            player.position._y = 100;
+                        }
                         alertCheck = 1;
                     }
                     if (alpha == 14) {
-                        alert("Please, just restart the level!");
+                        alert("Why are you even doing this?");
                         alertCheck = 1;
                     }
                     if (alpha == 15) {
@@ -562,23 +568,23 @@ function test() {
                         alertCheck = 1;
                     }
                     if (alpha == 16) {
-                        alert("Try playing like this then!");
+                        alert("I guess I'll just have to FORCE you to restart!");
                         babylonCanvas.style.filter = "blur(5px)";
                         alertCheck = 1;
                     }
                     if (alpha == 18) {
-                        alert("Still not bored? How about this?");
+                        alert("You're still alive? How about THIS?");
                         babylonCanvas.style.filter = "blur(10px)";
                         alertCheck = 1;
                     }
                     if (alpha == 19) {
-                        alert("Ok fine, I'll give you the finish... after this last thing.");
+                        alert("Ok fine, I'll give you what you're looking for... if you can REALLY prove yourself.");
                         babylonCanvas.style.filter = "grayscale(0.99)";
                         alertCheck = 1;
                     }
                     if (alpha == 21) {
                         alert("Why?");
-                        alert("Wow, you still didn't give in. Ok, I think you've earned the knowledge of the lore. https://www.youtube.com/watch?v=wnXVFE8KLo8");
+                        alert("Wow, you managed to get through that. I think you've earned the knowledge of the lore. https://www.youtube.com/watch?v=wnXVFE8KLo8");
                         player.position._y = 100;
                         alertCheck = 1;
                     }
