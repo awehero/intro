@@ -594,7 +594,7 @@ function test() {
                                 anomNum = Math.round(anomNum);
                                 switch (anomNum) {
                                     case 0:
-                                        scene.clearColor = new BABYLON.Color3.FromHexString("#0b003e");
+                                        scene.clearColor = new BABYLON.Color3.FromHexString("#02000a");
                                         break;
                                     case 1:
                                         objects.walls.forEach(obj=>{setColorUpdate(obj, "#abf7ff");});
