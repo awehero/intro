@@ -214,8 +214,11 @@ for (var i = 19; i < scene.meshes.length; i++) {
             objects.windowframes.push(scene.meshes[i]);
         }
     }
-    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#ff5900")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#b03e00")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#9201fe")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f8ffff")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f0f0f0")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#bdbcbc"))) {
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#ff5900")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#b03e00")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#9201fe")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f8ffff")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f0f0f0")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#acf5a4")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#bdbcbc"))) {
         objects.alternate.push(scene.meshes[i]);
+    }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#acf5a4"))) {
+        objects.mysticcube = scene.meshes[i];
     }
 }
 light.direction = new BABYLON.Vector3(0, 1, 0.2);
@@ -384,6 +387,9 @@ function test() {
         }
         player.position._y = 100;
         alpha = 0;
+    }
+    if (player.intersectsMesh(objects.table.mysticcube, true) && alternate == 1) {
+        alert("You've found the mystic cube... what does it do?");
     }
     if (alternate == 1 && player.position._z > -3) {
         rotation = 0;
