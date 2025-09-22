@@ -513,7 +513,7 @@ function test() {
             alert(string2);
         }
     }
-    if (alpha == 9 || alpha > 19) {
+    if ((alpha == 9 || alpha > 19) || (alpha == 12 && beta == 1)) {
         //objects.finish.position._y = 0;
         objects.visualfinish.position._y = 0;
         objects.fakefinish.position._y = 1.5;
