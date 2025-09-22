@@ -423,6 +423,7 @@ function test() {
     }
     if (alternate == 1) {
         steer = 0.04;
+        a.cam_d(1.5);
     }
     if (player.position._z > 8 && alternate == 0) {
         if (switchCheck == 0) {
