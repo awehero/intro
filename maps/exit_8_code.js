@@ -388,9 +388,9 @@ function test() {
         player.position._y = 100;
         alpha = 0;
     }
-    /*if (player.intersectsMesh(objects.mysticcube, true) && alternate == 1) {
+    if (player.intersectsMesh(objects.mysticcube, true) && alternate == 1) {
         alert("You've found the mystic cube... what does it do?");
-    }*/
+    }
     if (alternate == 1 && player.position._z > -3) {
         rotation = 0;
         player.position._x = 20;
