@@ -573,7 +573,7 @@ function test() {
                     }
                     if (alpha == 19) {
                         alert("Ok fine, I'll give you the finish... after this last thing.");
-                        babylonCanvas.style.filter = "grayscale(0.98)";
+                        babylonCanvas.style.filter = "grayscale(0.99)";
                         alertCheck = 1;
                     }
                     if (alpha == 21) {
