@@ -343,6 +343,7 @@ for (var i = 0; i < objects.alternate.length; i++) {
 }
 let start = 0; //remove
 let switchCheck = 0;
+let tpCheck = 0;
 if (localStorage.getItem("beb2") == null) {
     localStorage.setItem("beb2", "0");
 } else {
@@ -366,10 +367,13 @@ function test() {
         player.position = objects.fakefinish.position;
     }
     if (player.intersectsMesh(objects.visualfinish, true) && alternate == 0) {
-        if (beta == 0) {
-            score = score * 2;
-        } else if (beta == 1) {
-            score = score * 1.5;
+        if (tpCheck == 0) {
+            tpCheck = 1;
+            if (beta == 0) {
+                score = score * 2;
+            } else if (beta == 1) {
+                score = score * 1.5;
+            }
         }
         player.position = objects.fakefinish.position;
     }
