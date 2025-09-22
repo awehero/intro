@@ -368,6 +368,8 @@ function test() {
     if (player.intersectsMesh(objects.visualfinish, true) && alternate == 0) {
         if (beta == 0) {
             score = score * 2;
+        } else if (beta == 1) {
+            score = score * 1.5;
         }
         player.position = objects.fakefinish.position;
     }
@@ -421,8 +423,8 @@ function test() {
     if (player.position._z > 8 && alternate == 0) {
         if (switchCheck == 0) {
             switchCheck = 1;
-            let gp = prompt("0 - Alternate Gameplay\n1 - Easy\n2 - Hard");
-            let options = [0, 1, 2];
+            let gp = prompt("0 - Alternate Gameplay\n1 - Easy\n2 - Medium\n3 - Hard");
+            let options = [0, 1, 2, 3];
             if (gp in options) {
                 switch (gp) {
                     case "0":
@@ -446,6 +448,12 @@ function test() {
                     case "2":
                         beta = 1;
                         localStorage.setItem("beb2", "1");
+                        alert("You are now in medium mode!");
+                        player.position._y = 100;
+                        break;
+                    case "3":
+                        beta = 2;
+                        localStorage.setItem("beb2", "2");
                         alert("You are now in hard mode!");
                         player.position._y = 100;
                         break;
@@ -520,6 +528,9 @@ function test() {
                     if (alpha == 10) {
                         if (beta == 0) {
                             alert("Hey. You can't keep going. At least not in easy mode...");
+                            player.position._y = 100;
+                        } else if (beta == 1) {
+                            alert("Hey. You can't keep going. At least not in medium mode...");
                             player.position._y = 100;
                         } else {
                             alert("Wait, you're still going?\nWell, I guess if you really want to, you can, but there's nothing else.");
@@ -620,7 +631,7 @@ function test() {
                                         setColorUpdate(objects.floor, "#dedede");
                                         break;
                                 }
-                            } else if (alpha < 6) {
+                            } else if (alpha < 6 || beta == 1) {
                                 n = 13;
                                 j = Math.random();
                                 anomNum = (j - (j%(1/n))) * n;
@@ -826,7 +837,7 @@ function test() {
                                         beb.Floor_Changed_Color = beb.Floor_Changed_Color + 1;
                                         break;
                                 }
-                            } else if (alpha < 6) {
+                            } else if (alpha < 6 || beta == 1) {
                                 switch (anomNum) {
                                     case 0:
                                         beb.Missing_Train_Car = beb.Missing_Train_Car + 1;
