@@ -134,6 +134,11 @@
                     output.forEach((row, index) => {
                         const tr = document.createElement("tr");
                         let speedrun = Math.round(row.time/60*100)/100 + "";
+                        if (speedrun.indexOf(".") == -1) {
+                            speedrun += ".00";
+                        } else if (speedrun.length-speedrun.indexOf(".") == 2) {
+                            speedrun += "0";
+                        }
                         /*switch (speedrun.index(".")) {
                             case -1:
                                 speedrun += ".00s";
