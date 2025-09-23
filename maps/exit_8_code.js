@@ -356,6 +356,9 @@ if (localStorage.getItem("beb2") == null) {
 function test() {
     if (player.position._z > -5) {
         tpCheck = 0;
+        if (!(backCheck == Math.round(backCheck))) {
+            backCheck += 0.5;
+        }
     }
     if (start == 1 && alternate == 1) {
         rotation = 0;
@@ -395,26 +398,26 @@ function test() {
     if (player.intersectsMesh(objects.mysticcube, true) && alternate == 1) {
         alert("You've found the mystic cube... what does it do?");
     }
-    if (player.position._z < -260 && alternate == 1 && backCheck == 0) {
-        backCheck++;
-        if (backCheck == 1) {
+    if (player.position._z < -260 && alternate == 1 && (backCheck == Math.round(backCheck))) {
+        if (backCheck == 0) {
             alert("Oops... you weren't supposed to see this... let me do something real quick.");
             setTimeout(function(){
                 babylonCanvas.style.filter = "blur(25px)";
                 alert("There we go. That should do the trick");
             },500);
-        } else if (backCheck == 2) {
+        } else if (backCheck == 1) {
             alert("Oh, you're back again? You're not really supposed to be here.");
             babylonCanvas.style.filter = "blur(37px)";
-        } else if (backCheck == 3) {
+        } else if (backCheck == 2) {
             alert("Stop coming here!");
             babylonCanvas.style.filter = "blur(50px)";
-        } else if (backCheck == 4) {
+        } else if (backCheck == 3) {
             alert("You really don't seem to get it, do you?");
             babylonCanvas.style.filter = "blur(25px) contrast(50)";
         } else {
             babylonCanvas.style.filter = "blur(25px) contrast(50)";
         }
+        backCheck = backCheck + 0.5;
     }
     if (alternate == 1 && player.position._z > -3) {
         rotation = 0;
