@@ -347,12 +347,17 @@ for (var i = 0; i < objects.alternate.length; i++) {
 let start = 0; //remove
 let switchCheck = 0;
 let tpCheck = 0;
+let backCheck = 0;
 if (localStorage.getItem("beb2") == null) {
     localStorage.setItem("beb2", "0");
 } else {
     beta = Number(localStorage.getItem("beb2"));
 }
 function test() {
+    if (player.position._z > -5) {
+        tpCheck = 0;
+        backCheck = 0;
+    }
     if (start == 1 && alternate == 1) {
         rotation = 0;
         player.position._x = 20;
@@ -390,6 +395,14 @@ function test() {
     }
     if (player.intersectsMesh(objects.mysticcube, true) && alternate == 1) {
         alert("You've found the mystic cube... what does it do?");
+    }
+    if (player.position._z < -260 && alternate == 1 && backCheck == 0) {
+        backCheck = 1;
+        alert("Oops... you weren't supposed to see this... let me do something real quick.");
+        setTimeout(function(){
+            babylonCanvas.style.filter = "blur(50px)";
+            alert("There we go. That should do the trick");
+        },1500);
     }
     if (alternate == 1 && player.position._z > -3) {
         rotation = 0;
