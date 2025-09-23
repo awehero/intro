@@ -367,6 +367,11 @@ function test() {
         player.position._z = -152;
         start = 0;
     }
+    if (alternate == 1) {
+        objects.shelf.thecursedcrayon.showBoundingBox = true;
+    } else {
+        objects.shelf.thecursedcrayon.showBoundingBox = false;
+    }
     if (!alive) {
         alpha = 0;
         current = 0;
