@@ -79,7 +79,7 @@
     <body>
         <h1>Map Leaderboard</h1>
         <p>Enter a map ID:</p>
-        <textarea id="input" rows="2" cols="40"></textarea><br>
+        <textarea id="input" rows="2" cols="40" onchange="search(this.value)"></textarea><br>
         <button onclick="fetchLeaderboard()">Go!</button>
         
         <h2>Leaderboard:</h2>
@@ -100,6 +100,14 @@
 			mapData = mapData.replace(/\;/g, "$").split("$");
 			for (var i = 0; i < mapData.length; i++) {
 			    mapData[i] = mapData[i].split("|");
+			}
+			function search(input) {
+				let maps = mapData.filter(function(map) {
+				    return (map[0].indexOf(input) != -1) || (map[1].indexOf(input) != -1)
+				});
+				for (var i = 0; i < maps.length; i++) {
+					
+				}
 			}
 			function fetchLeaderboard() {
             let map = document.getElementById("input").value.trim();
