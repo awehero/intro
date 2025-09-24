@@ -403,7 +403,7 @@ function test() {
     if (player.intersectsMesh(objects.mysticcube, true) && alternate == 1) {
         alert("You've found the mystic cube... what does it do?");
     }
-    if (player.position._z < -260 && alternate == 1 && (backCheck == Math.round(backCheck))) {
+    if (player.position._z < -260 && player.position._z > -300 && alternate == 1 && (backCheck == Math.round(backCheck))) {
         if (backCheck == 0) {
             alert("Oops... you weren't supposed to see this... let me do something real quick.");
             setTimeout(function(){
