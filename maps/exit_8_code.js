@@ -434,7 +434,7 @@ function test() {
         if (alternate == 0) {
             player.position._x = 0;
             player.position._z = -100;
-            //console.log(cheese);
+            console.log(cheese);
         }
     }
     if (player.position._z < -110 && player.position._z > -130 && player.position._x < 13 && alternate == 0) {
