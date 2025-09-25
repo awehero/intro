@@ -147,7 +147,7 @@ for (var i = 0; i < scene.meshes.length; i++) {
             }
         }
         if (scene.meshes[i].position._z > -218 && scene.meshes[i].position._y > 6.5) {
-            object.kitchen.microwave.all.push(scene.meshes[i]);
+            objects.kitchen.microwave.all.push(scene.meshes[i]);
         }
     }
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#b3ffab"))) {
