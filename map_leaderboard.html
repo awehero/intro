@@ -75,11 +75,25 @@
             gap: 10px;
             margin: 10px 0;
         }
+		#suggestionsContainer {
+			border: 1px solid #ccc;
+			max-height: 150px;
+			overflow-y: auto;
+			display: none;
+		}
+		.suggestion-item {
+			padding: 8px;
+			cursor: pointer;
+		}
+		.suggestion-item:hover {
+			background-color: #f0f0f0;
+		}
     </style>
     <body>
         <h1>Map Leaderboard</h1>
         <p>Enter a map ID:</p>
-        <textarea id="input" rows="2" cols="40" onchange="search(this.value)"></textarea><br>
+        <input id="input" onchange="search()"></input><br>
+		<div id="suggestions"></div>
         <button onclick="fetchLeaderboard()">Go!</button>
         
         <h2>Leaderboard:</h2>
@@ -101,14 +115,30 @@
 			for (var i = 0; i < mapData.length; i++) {
 			    mapData[i] = mapData[i].split("|");
 			}
-			function search(input) {
+			function search() {
+				let input = document.getElementById("input");
+				let suggestions = document.getElementById("suggestions");
+				let text = input.value.toLowerCase();
 				let maps = mapData.filter(function(map) {
-				    return (map[0].indexOf(input) != -1) || (map[1].indexOf(input) != -1)
+				    return (map[0].indexOf(text) != -1) || (map[1].indexOf(text) != -1)
 				});
-				for (var i = 0; i < maps.length; i++) {
-					
+				if (maps.length > 0 {
+					maps.forEach(map=>{
+						let suggestionItem = document.createElement("div");
+						suggestionItem.classList.add("suggestion-item");
+						suggestionItem.textContent = map[0];
+						suggestionItem.addEventListener("click", function() {
+							input.value = this.textContent;
+							suggestions.style.display = "none";
+						});
+						suggestions.appendChild(suggestionItem);
+					});
+					suggestions.style.display = "block";
+				} else {
+					suggestions.style.display = "none";
 				}
 			}
+			
 			function fetchLeaderboard() {
             let map = document.getElementById("input").value.trim();
             let tableBody = document.querySelector("#outputTable tbody");
