@@ -41,6 +41,7 @@ objects.walls = [];
 objects.alternate = [];
 objects.altspots = [];
 objects.table.altswitch = [];
+objects.fort.extrablocks = [];
 
 function setColorUpdate(mesh, hexColor) {
   if (!mesh || !mesh.material) return;
@@ -226,6 +227,11 @@ for (var i = 0; i < scene.meshes.length; i++) {
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#acf5a4"))) {
         objects.mysticcube = scene.meshes[i];
     }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#d1d100") || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00d110")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#c30000")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#001dd1"))) {
+        if ((scene.meshes[i].position._y > -213 && scene.meshes[i].position._y < -194) || (scene.meshes[i].position._x < 41) {
+            objects.fort.extrablocks.push(scene.meshes[i]);
+        }
+    }
 }
 light.direction = new BABYLON.Vector3(0, 1, 0.2);
 let intervalId = setInterval(function() {
@@ -337,6 +343,27 @@ function resetObjects() {
     objects.table.seatbottoms.forEach(obj=>{setColorUpdate(obj, "#f97c00");});
 
     setColorUpdate(objects.floor, "#f2d79e");
+
+    //maybe remove later cmVtb3ZlIG9uY2UgYXBwcm92ZWQ/
+    if (beta == 0) {
+        objects.shelf.blocks.forEach(obj=>{obj.isVisible = false});
+        objects.train.car1wheels.forEach(obj=>{obj.isVisible = false});
+        objects.train.car2wheels.forEach(obj=>{obj.isVisible = false});
+        objects.train.car3wheels.forEach(obj=>{obj.isVisible = false});
+        objects.train.enginewheels.forEach(obj=>{obj.isVisible = false});
+        objects.train.engine.forEach(obj=>{obj.isVisible = false});
+        objects.train.car1.isVisible = false;
+        objects.train.car2.isVisible = false;
+        objects.train.car3.isVisible = false;
+        for (key in objects.shelf) {
+            if (key.indexOf("innercube") != -1) {
+                objects.shelf[key].isVisible = false;
+                objects.shelf[key.split("innercube")[0] + "outercube"].isVisible = false;
+            }
+        }
+        objects.shelf.thecursedcrayon.isVisible = false;
+    }
+    
 }
 function fixAlt() {
     for (var i = 0; i < objects.alternate.length; i++) {
