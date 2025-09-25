@@ -40,6 +40,7 @@ objects.windowframes = [];
 objects.walls = [];
 objects.alternate = [];
 objects.altspots = [];
+objects.xswitch = [];
 
 function setColorUpdate(mesh, hexColor) {
   if (!mesh || !mesh.material) return;
@@ -216,6 +217,11 @@ for (var i = 0; i < scene.meshes.length; i++) {
     }
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#ff5900")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#b03e00")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#9201fe")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f8ffff")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f0f0f0")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#acf5a4")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#bdbcbc"))) {
         objects.alternate.push(scene.meshes[i]);
+    }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#9201fe"))) {
+        if (Math.round(scene.meshes[i].position._y) == 3 && Math.round(scene.meshes[i].position._z) == -158) {
+            objects.xswitch.push(scene.meshes[i]);
+        }
     }
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#acf5a4"))) {
         objects.mysticcube = scene.meshes[i];
