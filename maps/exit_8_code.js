@@ -228,7 +228,7 @@ for (var i = 0; i < scene.meshes.length; i++) {
         objects.mysticcube = scene.meshes[i];
     }
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#d1d100")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#00d110")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#c30000")) || scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#001dd1"))) {
-        if ((scene.meshes[i].position._y > -213 && scene.meshes[i].position._y < -194) || (scene.meshes[i].position._x < 41) {
+        if ((scene.meshes[i].position._y > -213 && scene.meshes[i].position._y < -194) || (scene.meshes[i].position._x < 41)) {
             objects.fort.extrablocks.push(scene.meshes[i]);
         }
     }
