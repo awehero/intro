@@ -75,14 +75,16 @@
             gap: 10px;
             margin: 10px 0;
         }
-		#suggestionsContainer {
-			border: 1px solid #ccc;
-			max-height: 150px;
-			overflow-y: auto;
+		#suggestions {
+			position: absolute;
+		    height: 12em;
+		    overflow: auto;
+		    background-color: white;
+		    border: 1px solid black;
 			display: none;
 		}
 		.suggestion-item {
-			padding: 8px;
+			font-size: 1em;
 			cursor: pointer;
 		}
 		.suggestion-item:hover {
@@ -127,8 +129,9 @@
 						let suggestionItem = document.createElement("div");
 						suggestionItem.classList.add("suggestion-item");
 						suggestionItem.textContent = map[0];
+						suggestionItem.id = map[1];
 						suggestionItem.addEventListener("click", function() {
-							input.value = this.textContent;
+							input.value = this.id;
 							suggestions.style.display = "none";
 						});
 						suggestions.appendChild(suggestionItem);
