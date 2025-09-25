@@ -40,7 +40,7 @@ objects.windowframes = [];
 objects.walls = [];
 objects.alternate = [];
 objects.altspots = [];
-objects.xswitch = [];
+objects.table.altswitch = [];
 
 function setColorUpdate(mesh, hexColor) {
   if (!mesh || !mesh.material) return;
@@ -94,7 +94,7 @@ for (var i = 0; i < scene.meshes.length; i++) {
             } else if (Math.round(scene.meshes[i].position._y*100)/100 == 3) {
                 objects.table.seattops.push(scene.meshes[i]);
                 if (scene.meshes[i].position._z > -160) {
-                    objects.table.altswitch = scene.meshes[i];
+                    objects.table.altswitch.push(scene.meshes[i]);
                 }
             } else if (Math.round(scene.meshes[i].position._y*100)/100 == 1.3) {
                 objects.table.seatbottoms.push(scene.meshes[i]);
@@ -220,7 +220,7 @@ for (var i = 0; i < scene.meshes.length; i++) {
     }
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#9201fe"))) {
         if (Math.round(scene.meshes[i].position._y) == 3 && Math.round(scene.meshes[i].position._z) == -158) {
-            objects.xswitch.push(scene.meshes[i]);
+            objects.table.altswitch.push(scene.meshes[i]);
         }
     }
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#acf5a4"))) {
@@ -398,7 +398,7 @@ function test() {
         }
         player.position = objects.fakefinish.position;
     }
-    if (player.intersectsMesh(objects.table.altswitch, true) && alternate == 1) {
+    if ((player.intersectsMesh(objects.table.altswitch[0], true) || player.intersectsMesh(objects.table.altswitch[1], true) || player.intersectsMesh(objects.table.altswitch[2], true)) && alternate == 1) {
         alternate = 0;
         for (var i = 0; i < objects.alternate.length; i++) {
             objects.alternate[i].position._y = objects.altspots[i] + 100;
