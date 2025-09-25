@@ -13,9 +13,11 @@ objects.shelf.blocks = [];
 objects.shelf.shelves = [];
 objects.fort = [];
 objects.fort.blueblocks = [];
+objects.fort.extrablocks = [];
 objects.kitchen = [];
 objects.kitchen.structure = [];
 objects.kitchen.microwave = [];
+objects.kitchen.microwave.all = [];
 objects.kitchen.microwave.row1 = [];
 objects.kitchen.microwave.row2 = [];
 objects.table = [];
@@ -41,7 +43,6 @@ objects.walls = [];
 objects.alternate = [];
 objects.altspots = [];
 objects.table.altswitch = [];
-objects.fort.extrablocks = [];
 
 function setColorUpdate(mesh, hexColor) {
   if (!mesh || !mesh.material) return;
@@ -144,6 +145,9 @@ for (var i = 0; i < scene.meshes.length; i++) {
             } else {
                 objects.kitchen.microwave.row4 = scene.meshes[i];
             }
+        }
+        if (scene.meshes[i].position._z > -218 && scene.meshes[i].position._y > 6.5) {
+            object.kitchen.microwave.all.push(scene.meshes[i]);
         }
     }
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#b3ffab"))) {
@@ -349,7 +353,6 @@ function resetObjects() {
 
     //maybe remove later cmVtb3ZlIG9uY2UgYXBwcm92ZWQ/
     if (beta == 0) {
-        objects.shelf.blocks.forEach(obj=>{obj.isVisible = false});
         objects.train.car1wheels.forEach(obj=>{obj.isVisible = false});
         objects.train.car2wheels.forEach(obj=>{obj.isVisible = false});
         objects.train.car3wheels.forEach(obj=>{obj.isVisible = false});
@@ -365,6 +368,9 @@ function resetObjects() {
             }
         }
         objects.shelf.thecursedcrayon.isVisible = false;
+        objects.shelf.blocks.forEach(obj=>{obj.isVisible = false});
+        objects.fort.extrablocks.forEach(obj=>{obj.isVisible = false});
+        objects.kitchen.microwave.all.forEach(obj=>{obj.isVisible = false});
     }
     
 }
