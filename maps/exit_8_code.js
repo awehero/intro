@@ -48,7 +48,7 @@ function setColorUpdate(mesh, hexColor) {
   mesh.material = mesh.material.clone(mesh.material.name + "_clone");
 }
 
-for (var i = 19; i < scene.meshes.length; i++) {
+for (var i = 0; i < scene.meshes.length; i++) {
     if (scene.meshes[i].position._z < -152 && scene.meshes[i].position._z > -190 && scene.meshes[i].position._x < 58 && scene.meshes[i].position._x > 30) {
         if (scene.meshes[i].position._z < -179 && scene.meshes[i].position._z > -184 && scene.meshes[i].position._x < 46 && scene.meshes[i].position._x > 39) {
             objects.shelf.blocks.push(scene.meshes[i]);
