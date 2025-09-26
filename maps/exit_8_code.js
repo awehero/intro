@@ -505,11 +505,13 @@ function test() {
     } else if (player.position._z < -153 && player.position._z > -174 && player.position._x < 60 && player.position._x > 31 && alternate == 1) {
         speed = 0.1;
     } else {
-        speed = 0.196;
+        speed = 0.25;
     }
     if (alternate == 1) {
         steer = 0.04;
         a.cam_d(1.5);
+    } else {
+        steer = 0.05;
     }
     if (player.position._z > 8 && alternate == 0) {
         if (switchCheck == 0) {
