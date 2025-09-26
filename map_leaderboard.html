@@ -94,7 +94,7 @@
     <body>
         <h1>Map Leaderboard</h1>
         <p>Enter a map ID:</p>
-        <input id="input"></input><br>
+        <input type="search" id="input"></input><br>
 		<div id="suggestions"></div>
         <button onclick="fetchLeaderboard()">Go!</button>
         
@@ -119,8 +119,7 @@
 			}
 			let input = document.getElementById("input");
 			let suggestions = document.getElementById("suggestions");
-			input.addEventListener('input', search());
-			function search() {
+			input.addEventListener('input', function() {
 				let text = input.value.toLowerCase();
 				let maps = mapData.filter(function(map) {
 				    return (map[0].indexOf(text) != -1) || (map[1].indexOf(text) != -1)
@@ -141,7 +140,7 @@
 				} else {
 					suggestions.style.display = "none";
 				}
-			}
+			});
 			
 			function fetchLeaderboard() {
             let map = document.getElementById("input").value.trim();
