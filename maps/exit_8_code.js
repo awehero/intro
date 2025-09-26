@@ -270,7 +270,7 @@ function resetObjects() {
     scene.clearColor = new BABYLON.Color3.FromHexString("#717aff");
     light.direction = new BABYLON.Vector3(0, 1, 0.2);
     light.intensity = 1;
-    scene.clearColor = new BABYLON.Color3.FromHexString("#00000a");
+    scene.specular = new BABYLON.Color3.FromHexString("#00000a");
     light.groundColor = new BABYLON.Color3(0, 0, 0);
 
     objects.shelf.yellowinnercube.position._x = 44;
