@@ -248,6 +248,7 @@ let intervalId = setInterval(function() {
                 scene.removeMesh(scene.meshes[i]);
             }
         }
+        resetObjects();
         babylonCanvas.style.filter = "none";
         light.direction = new BABYLON.Vector3(0, 1, 0);
         delete globalThis.alpha;
