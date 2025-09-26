@@ -267,6 +267,10 @@ let intervalId = setInterval(function() {
 },100);
 function resetObjects() {
     scene.clearColor = new BABYLON.Color3.FromHexString("#717aff");
+    light.direction = new BABYLON.Vector3(0, 1, 0.2);
+    light.intensity = 1;
+    scene.clearColor = new BABYLON.Color3.FromHexString("#00000a");
+    light.groundColor = new BABYLON.Color3(0, 0, 0);
 
     objects.shelf.yellowinnercube.position._x = 44;
     objects.shelf.yellowinnercube.position._z = -168;
@@ -697,7 +701,11 @@ function test() {
                                 anomNum = Math.round(anomNum);
                                 switch (anomNum) {
                                     case 0:
-                                        scene.clearColor = new BABYLON.Color3.FromHexString("#02000a");
+                                        scene.clearColor = new BABYLON.Color3.FromHexString("#01001f");
+                                        light.direction = new BABYLON.Vector3(-2, -2, 0);
+                                        light.intensity = 0.3;
+                                        light.specular = new BABYLON.Color3(1,0,0);
+                                        light.groundColor = new BABYLON.Color3(0.2,0,0);
                                         break;
                                     case 1:
                                         objects.walls.forEach(obj=>{setColorUpdate(obj, "#abf7ff");});
@@ -906,6 +914,7 @@ function test() {
                                 switch (anomNum) {
                                     case 0:
                                         beb.Night = beb.Night + 1;
+                                        resetObjects();
                                         break;
                                     case 1:
                                         beb.Blue_Walls = beb.Blue_Walls + 1;
