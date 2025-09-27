@@ -1091,7 +1091,7 @@ function test() {
                             let mode = 0;
                             if (alpha < 3 || beta == 0) {
                                 mode = 0;
-                            } else if (alpha < 3 || beta == 0) {
+                            } else if (alpha < 6 || beta == 1) {
                                 mode = 1;
                             } else {
                                 mode = 2;
