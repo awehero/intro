@@ -515,7 +515,7 @@ function test() {
     }
     if (player.position._z > -10 && player.position._x > 14 && player.position._x < 16) {
         player.position._x = -500;
-        alert("At exit 0, study the scene. Later exits show the same scene with possible changes. If you spot a change, return through your entry door, and if not, go through the other. Correct choices advance you, wrong ones send you back to exit 0.\nWatch the video to see a bit of the lore behind the map!\nhttps://www.youtube.com/watch?v=wnXVFE8KLo8");
+        prompt("At exit 0, study the scene. Later exits show the same scene with possible changes. If you spot a change, return through your entry door, and if not, go through the other. Correct choices advance you, wrong ones send you back to exit 0.\nWatch the video to see a bit of the lore behind the map!","https://www.youtube.com/watch?v=wnXVFE8KLo8");
     }
     if ((player.position._z < -90 && player.position._z > -150) || (player.position._z < -230 && player.position._z > -280)) {
         speed = 0.3;
@@ -1050,58 +1050,58 @@ function test() {
                             rotation += Math.PI;
                             player.position._z = -110 - player.position._z - 110;
                         } else {
+                            let hints = [
+                                [
+                                    'If you missed this, then you really must not be able to see. I wonder why...',
+                                    'You felt as though you were in the sky...',
+                                    'Artwork usually looks nice... yet that one filled you with a sense of dread...',
+                                    "The tracks didn't travel over the plains...",
+                                    'That golden brown color made you feel at home...',
+                                    "Victor's powers grew with the new presence...",
+                                    'You were standing, because something seemed off...',
+                                    'The ground felt cold...'
+                                ],
+                                [
+                                    'The line could not operate at full capacity...',
+                                    'A secret was left simmering...',
+                                    'redro wobniar',
+                                    'The gateway to this place was open...',
+                                    'You felt like somebody was watching you...',
+                                    "The watchtower's post was abandoned...",
+                                    'The fortress emitted a strange hue...',
+                                    "The room's going to start flooding soon...",
+                                    "Storage now, storage then... it's there through it all...",
+                                    'Next stop, home...',
+                                    'You must go and scour... for this object of power...',
+                                    'Where did the green materials go?',
+                                    'The fallen army had been swept away...'
+                                ],
+                                [
+                                    'A leopard cannot change its spots... but a leader can...',
+                                    'The travelers were lined up in reverse...',
+                                    "What a useless piece of junk... it didn't even work!...",
+                                    'Who moved it?...',
+                                    'What was once framed, was not any longer...',
+                                    'The circle greeted the wrong hand...',
+                                    'Not all that fell remained...',
+                                    'The pillars felt a deeper burn...',
+                                    'The skeleton of the vision that lies beyond lightened...'
+                                ]
+                            ];
+                            let mode = 0;
+                            if (alpha < 3 || beta == 0) {
+                                mode = 0;
+                            } else if (alpha < 3 || beta == 0) {
+                                mode = 1;
+                            } else {
+                                mode = 2;
+                            }
+                            alert(hints[mode][anomNum]);
                             player.position._z = player.position._z + 160;
                         }
                         player.position._x = -12;
                         alpha = 0;
                         current = 0;
-                        let hints = [
-                            [
-                                '0',
-                                '1',
-                                '2',
-                                '3',
-                                '4',
-                                '5',
-                                '6',
-                                '7'
-                            ],
-                            [
-                                '0',
-                                '1',
-                                '2',
-                                '3',
-                                '4',
-                                '5',
-                                '6',
-                                '7',
-                                '8',
-                                '9',
-                                '10',
-                                '11',
-                                '12'
-                            ],
-                            [
-                                '0',
-                                '1',
-                                '2',
-                                '3',
-                                '4',
-                                '5',
-                                '6',
-                                '7',
-                                '8'
-                            ]
-                        ];
-                        let mode = 0;
-                        if (alpha < 3 || beta == 0) {
-                            mode = 0;
-                        } else if (alpha < 3 || beta == 0) {
-                            mode = 1;
-                        } else {
-                            mode = 2;
-                        }
-                        alert(hints[mode][anomNum]);
                     }
                 }
                 break;
