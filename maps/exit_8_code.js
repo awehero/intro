@@ -504,8 +504,10 @@ function test() {
         speed = 0.3;
     } else if (player.position._z < -153 && player.position._z > -174 && player.position._x < 60 && player.position._x > 31 && alternate == 1) {
         speed = 0.1;
-    } else {
+    } else if (alternate == 0) {
         speed = 0.25;
+    } else {
+        speed = 0.196;
     }
     if (alternate == 1) {
         steer = 0.04;
