@@ -1055,6 +1055,53 @@ function test() {
                         player.position._x = -12;
                         alpha = 0;
                         current = 0;
+                        let hints = [
+                            [
+                                '0',
+                                '1',
+                                '2',
+                                '3',
+                                '4',
+                                '5',
+                                '6',
+                                '7'
+                            ],
+                            [
+                                '0',
+                                '1',
+                                '2',
+                                '3',
+                                '4',
+                                '5',
+                                '6',
+                                '7',
+                                '8',
+                                '9',
+                                '10',
+                                '11',
+                                '12'
+                            ],
+                            [
+                                '0',
+                                '1',
+                                '2',
+                                '3',
+                                '4',
+                                '5',
+                                '6',
+                                '7',
+                                '8'
+                            ]
+                        ];
+                        let mode = 0;
+                        if (alpha < 3 || beta == 0) {
+                            mode = 0;
+                        } else if (alpha < 3 || beta == 0) {
+                            mode = 1;
+                        } else {
+                            mode = 2;
+                        }
+                        alert(hints[mode][anomNum]);
                     }
                 }
                 break;
