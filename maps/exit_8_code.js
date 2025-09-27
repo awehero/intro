@@ -512,6 +512,8 @@ function test() {
     if (alternate == 1) {
         steer = 0.04;
         a.cam_d(1.5);
+    } else if ((player.position._z < -90 && player.position._z > -150) || (player.position._z < -230 && player.position._z > -280)) {
+        steer = 0.033;
     } else {
         steer = 0.05;
     }
