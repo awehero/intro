@@ -515,7 +515,7 @@ function test() {
     }
     if (player.position._z > -10 && player.position._x > 14 && player.position._x < 16) {
         player.position._x = -500;
-        alert("At exit 0, study the scene. Later exits show the same scene with possible changes. If you spot a change, return through your entry door, and if not, go through the other. Correct choices advance you, wrong ones send you back to exit 0.");
+        alert("At exit 0, study the scene. Later exits show the same scene with possible changes. If you spot a change, return through your entry door, and if not, go through the other. Correct choices advance you, wrong ones send you back to exit 0.\nWatch the video to see a bit of the lore behind the map!\nhttps://www.youtube.com/watch?v=wnXVFE8KLo8");
     }
     if ((player.position._z < -90 && player.position._z > -150) || (player.position._z < -230 && player.position._z > -280)) {
         speed = 0.3;
