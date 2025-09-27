@@ -318,9 +318,7 @@ function resetObjects() {
     objects.train.car3wheels.forEach(obj=>{obj.position._z = -199.75});
     objects.train.engine.forEach(obj=>{obj.position._z = -199.75});
     objects.train.enginewheels.forEach(obj=>{obj.position._z = -199.75});
-
     objects.train.engine.forEach(obj=>{setColorUpdate(obj, "#00a2ff");});
-
     objects.train.rugs.forEach(obj=>{setColorUpdate(obj, "#00df03");});
     
     objects.walls.forEach(obj=>{setColorUpdate(obj, "#b3ffab");});
@@ -350,11 +348,29 @@ function resetObjects() {
     objects.shelf.blocks.forEach(obj=>{obj.isVisible = true;});
 
     objects.table.legs.forEach(obj=>{setColorUpdate(obj, "#f97c00");});
-
     objects.table.seattops.forEach(obj=>{setColorUpdate(obj, "#f97c00");});
     objects.table.seatbottoms.forEach(obj=>{setColorUpdate(obj, "#f97c00");});
 
     setColorUpdate(objects.floor, "#f2d79e");
+
+    objects.train.car1wheels.forEach(obj=>{obj.isVisible = true});
+    objects.train.car2wheels.forEach(obj=>{obj.isVisible = true});
+    objects.train.car3wheels.forEach(obj=>{obj.isVisible = true});
+    objects.train.enginewheels.forEach(obj=>{obj.isVisible = true});
+    objects.train.engine.forEach(obj=>{obj.isVisible = true});
+    objects.train.car1.isVisible = true;
+    objects.train.car2.isVisible = true;
+    objects.train.car3.isVisible = true;
+    for (key in objects.shelf) {
+        if (key.indexOf("innercube") != -1) {
+            objects.shelf[key].isVisible = true;
+            objects.shelf[key.split("innercube")[0] + "outercube"].isVisible = true;
+        }
+    }
+    objects.shelf.thecursedcrayon.isVisible = true;
+    objects.shelf.blocks.forEach(obj=>{obj.isVisible = true});
+    objects.fort.extrablocks.forEach(obj=>{obj.isVisible = true});
+    objects.kitchen.microwave.all.forEach(obj=>{obj.isVisible = true});
 
     //maybe remove later cmVtb3ZlIG9uY2UgYXBwcm92ZWQ/
     if (beta == 0 && alternate == 0) {
