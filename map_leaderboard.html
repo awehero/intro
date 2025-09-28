@@ -125,6 +125,7 @@
 				    return (map[0].indexOf(text) != -1) || (map[1].indexOf(text) != -1)
 				});
 				if (maps.length > 0) {
+					suggestions.innerHTML = '';
 					maps.forEach(map=>{
 						let suggestionItem = document.createElement("div");
 						suggestionItem.classList.add("suggestion-item");
