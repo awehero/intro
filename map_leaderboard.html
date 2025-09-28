@@ -77,7 +77,8 @@
         }
 		#suggestions {
 			position: absolute;
-		    height: 12em;
+		    max-height: 12em;
+			width: 15em;
 		    overflow: auto;
 		    background-color: white;
 		    border: 1px solid black;
@@ -122,7 +123,7 @@
 			input.addEventListener('input', function() {
 				let text = input.value.toLowerCase();
 				let maps = mapData.filter(function(map) {
-				    return (map[0].indexOf(text) != -1) || (map[1].indexOf(text) != -1)
+				    return (map[1].indexOf(text.toLowerCase()) != -1) || (map[0].toLowerCase().indexOf(text.toLowerCase()) != -1)
 				});
 				if (maps.length > 0) {
 					suggestions.innerHTML = '';
