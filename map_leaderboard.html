@@ -99,7 +99,7 @@
         <p>Start typing a map name or id and select it from the dropdown</p>
         <input type="search" id="input"></input><br>
 		<div id="suggestions"></div>
-        <button onclick="fetchLeaderboard()">Go!</button>
+        <!-- <button onclick="fetchLeaderboard()">Go!</button> -->
         
         <h2>Leaderboard:</h2>
         <div id="total_results"></div>
@@ -136,6 +136,7 @@
 						suggestionItem.id = map[1];
 						suggestionItem.addEventListener("click", function() {
 							input.value = this.id;
+							fetchLeaderboard();
 							suggestions.style.display = "none";
 						});
 						suggestions.appendChild(suggestionItem);
