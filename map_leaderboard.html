@@ -125,7 +125,7 @@
 				let maps = mapData.filter(function(map) {
 				    return (map[1].indexOf(text.toLowerCase()) != -1) || (map[0].toLowerCase().indexOf(text.toLowerCase()) != -1)
 				});
-				if (maps.length > 0) {
+				if (maps.length > 0 && text.length != 0) {
 					suggestions.innerHTML = '';
 					maps.forEach(map=>{
 						let suggestionItem = document.createElement("div");
