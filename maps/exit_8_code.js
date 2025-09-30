@@ -640,6 +640,9 @@ function test() {
         switch (current) {
             case 0:
                 if (alertCheck == 0) {
+                    if (alpha == 5 && beta == 0) {
+                        alert("Congrats, now that you've got the basics, feel free to play in a different mode or harder difficulty!");
+                    }
                     if (alpha == 10) {
                         if (beta == 0) {
                             alert("Hey. You can't keep going. At least not in easy mode...");
