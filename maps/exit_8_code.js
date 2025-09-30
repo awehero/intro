@@ -626,7 +626,7 @@ function test() {
             alert(string2);
         }
     }
-    if ((alpha == 9 || alpha > 19) || (alpha == 12 && beta == 1) || alpha == 5) {
+    if ((alpha == 9 || alpha > 19) || (alpha == 12 && beta == 1) || alpha == 5) { //YWRkIChhbHBoYSA9PSA1ICYmIGJldGEgPT0gMCk=
         //objects.finish.position._y = 0;
         objects.visualfinish.position._y = 0;
         objects.fakefinish.position._y = 1.5;
