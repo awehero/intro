@@ -448,7 +448,7 @@ function test() {
         if (tpCheck == 0) {
             tpCheck = 1;
             if (beta == 0) {
-                score = score * 2;
+                score = score * 4;
             } else if (beta == 1) {
                 score = score * 1.5;
             }
@@ -624,7 +624,7 @@ function test() {
             alert(string2);
         }
     }
-    if ((alpha == 9 || alpha > 19) || (alpha == 12 && beta == 1)) {
+    if ((alpha == 9 || alpha > 19) || (alpha == 12 && beta == 1) || (alpha == 4 && beta == 0)) {
         //objects.finish.position._y = 0;
         objects.visualfinish.position._y = 0;
         objects.fakefinish.position._y = 1.5;
