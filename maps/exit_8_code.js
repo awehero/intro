@@ -448,9 +448,11 @@ function test() {
         if (tpCheck == 0) {
             tpCheck = 1;
             if (beta == 0) {
-                score = score * 4;
+                score = score * 2 *2;
             } else if (beta == 1) {
-                score = score * 1.5;
+                score = score * 1.5 * 2;
+            } else {
+                score = score * 2
             }
         }
         player.position = objects.fakefinish.position;
