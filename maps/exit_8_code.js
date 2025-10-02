@@ -757,7 +757,7 @@ function test() {
                         anom = 1;
                     } else {
                         k = Math.round(Math.random()*15);
-                        if (k < 7) {
+                        if (k < 8) {
                             anom = 1;
                         } else {
                             anom = 0;
