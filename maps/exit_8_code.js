@@ -162,7 +162,7 @@ for (var i = 0; i < scene.meshes.length; i++) {
     if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#fcfcfc"))) {
         objects.window1 = scene.meshes[i];
     }
-    if (scene.meshes[i].position._x > 250) {
+    if (scene.meshes[i].position._x > 250 && scene.meshes[i].position._x < 270) {
         objects.breadby.push(scene.meshes[i]);
     }
     if (scene.meshes[i].position._x < -230) {
@@ -446,20 +446,19 @@ function test() {
         babylonCanvas.style.filter = "none";
     }
     if (player.intersectsMesh(objects.table.pancake, true)) {
-        /*switch (pancake) {
+        switch (pancake) {
             case 0:
                 setTimeout(function() {
-                    if (!player.intersectsMesh(objects.table.pancake, true)) {
-                        
-                    }
+                    if (!player.intersectsMesh(objects.table.pancake, true) || !alive) {
+                        pancake = 1;
+                    },100);
                 }
-                pancake = 1;
+                objects.table.pancake.material.alpha = 1;
                 break;
             case 1:
-                if
                 
-        }*/
-        console.log(2);
+                
+        }
     }
     if (player.intersectsMesh(objects.shelf.thecursedcrayon, true) && alternate == 1) {
         score = 59998;
