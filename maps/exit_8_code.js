@@ -456,8 +456,11 @@ function test() {
                 objects.table.pancake.material.alpha = 1;
                 break;
             case 1:
-                
-                
+                player.position._x = 500;
+                player.position._y = 1;
+                player.position._z = -125;
+                rotation = 0;
+                break;
         }
     }
     if (player.intersectsMesh(objects.shelf.thecursedcrayon, true) && alternate == 1) {
@@ -468,7 +471,7 @@ function test() {
         if (tpCheck == 0) {
             tpCheck = 1;
             if (beta == 0) {
-                score = score * 2// *2; //cmVtb3ZlMg==
+                score = score * 4;
             } else if (beta == 1) {
                 score = score * 1.5// *2; //YWxzbyByZW1vdmU=
             } else {
@@ -539,23 +542,28 @@ function test() {
         player.position._x = -500;
         prompt("At exit 0, study the scene. Later exits show the same scene with possible changes. If you spot a change, return through your entry door, and if not, go through the other. Correct choices advance you, wrong ones send you back to exit 0.\nWatch the video to see a bit of the lore behind the map!","https://www.youtube.com/watch?v=wnXVFE8KLo8");
     }
-    if ((player.position._z < -90 && player.position._z > -150) || (player.position._z < -230 && player.position._z > -280)) {
+    //Speed
+    if (((player.position._z < -90 && player.position._z > -150) || (player.position._z < -230 && player.position._z > -280)) && player.position._x < 100) {
         speed = 0.3;
     } else if (player.position._z < -153 && player.position._z > -174 && player.position._x < 60 && player.position._x > 31 && alternate == 1) {
         speed = 0.1;
+    } else if (player.position._z < -115 && player.position._z > -185 && player.position._x < 535 && player.position._x > 465) {
+        speed = 0.168;
     } else if (alternate == 0) {
         speed = 0.25;
     } else {
         speed = 0.196;
     }
-    if (alternate == 1) {
+    //Turning
+    if ((player.position._z < -90 && player.position._z > -150) || (player.position._z < -230 && player.position._z > -280) || (player.position._z < -115 && player.position._z > -185 && player.position._x < 535 && player.position._x > 465)) {
+        steer = 0.033;
+    } else if (alternate == 1) {
         steer = 0.04;
         a.cam_d(1.5);
-    } else if ((player.position._z < -90 && player.position._z > -150) || (player.position._z < -230 && player.position._z > -280)) {
-        steer = 0.033;
     } else {
         steer = 0.05;
     }
+    
     if (player.position._z > 8 && alternate == 0) {
         if (switchCheck == 0) {
             switchCheck = 1;
