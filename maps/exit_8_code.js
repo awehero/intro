@@ -457,7 +457,7 @@ function test() {
                 setTimeout(function() {
                     if (!player.intersectsMesh(objects.table.pancakeseat, true) || !alive) {
                         pancake = 1;
-                        alert("Want some pancakes?");
+                        alert("Come over here for some amazing pancakes!");
                     }
                 },100);
                 objects.table.pancake.material.alpha = 1;
