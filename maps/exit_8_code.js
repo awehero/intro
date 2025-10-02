@@ -448,11 +448,11 @@ function test() {
         if (tpCheck == 0) {
             tpCheck = 1;
             if (beta == 0) {
-                score = score * 2 *2; //cmVtb3ZlMg==
+                score = score * 2// *2; //cmVtb3ZlMg==
             } else if (beta == 1) {
-                score = score * 1.5 *2; //YWxzbyByZW1vdmU=
+                score = score * 1.5// *2; //YWxzbyByZW1vdmU=
             } else {
-                score = score*2 //cmVtb3Zl
+                //score = score*2 //cmVtb3Zl
             }
         }
         player.position = objects.fakefinish.position;
@@ -626,7 +626,7 @@ function test() {
             alert(string2);
         }
     }
-    if ((alpha == 9 || alpha > 19) || (alpha == 12 && beta == 1) || alpha == 5) { //YWRkIChhbHBoYSA9PSA1ICYmIGJldGEgPT0gMCk=
+    if ((alpha == 9 || alpha > 19) || (alpha == 12 && beta == 1) || (alpha == 5 && beta == 0)) { //YWRkIChhbHBoYSA9PSA1ICYmIGJldGEgPT0gMCk=
         //objects.finish.position._y = 0;
         objects.visualfinish.position._y = 0;
         objects.fakefinish.position._y = 1.5;
