@@ -495,6 +495,8 @@ function test() {
         objects.shelf.blocks.forEach(obj=>{setColorUpdate(obj, "#f4cf9c");});
         player.position._y = 100;
         alpha = 0;
+        objects.table.pancake.material.alpha = 0.001;
+        pancake = 0;
     }
     if (player.intersectsMesh(objects.mysticcube, true) && alternate == 1 && mysticCheck == 0) {
         alert("You've found the mystic cube... what does it do?");
