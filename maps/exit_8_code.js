@@ -417,6 +417,7 @@ let start = 0; //remove
 let switchCheck = 0;
 let tpCheck = 0;
 let backCheck = 0;
+let mysticCheck = 0;
 let pancake = 0;
 let pancakeTime = 0;
 if (localStorage.getItem("beb2") == null) {
@@ -427,6 +428,7 @@ if (localStorage.getItem("beb2") == null) {
 function test() {
     if (player.position._z > -5) {
         tpCheck = 0;
+        mysticCheck = 0;
         if (!(backCheck == Math.round(backCheck))) {
             backCheck += 0.5;
         }
@@ -496,8 +498,9 @@ function test() {
         player.position._y = 100;
         alpha = 0;
     }
-    if (player.intersectsMesh(objects.mysticcube, true) && alternate == 1) {
+    if (player.intersectsMesh(objects.mysticcube, true) && alternate == 1 && mysticCheck == 0) {
         alert("You've found the mystic cube... what does it do?");
+        mysticCheck = 1;
     }
     if (player.position._z < -260 && player.position._z > -300 && alternate == 1 && (backCheck == Math.round(backCheck))) {
         if (backCheck == 0) {
