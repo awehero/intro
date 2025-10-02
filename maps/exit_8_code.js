@@ -105,8 +105,6 @@ for (var i = 0; i < scene.meshes.length; i++) {
             }
         } else if (scene.meshes[i].position._y > 50) {
             objects.drawing.push(scene.meshes[i]);
-        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f7d788"))) {
-            objects.table.pancake = scene.meshes[i];
         }
     }
     if (scene.meshes[i].position._z < -187 && scene.meshes[i].position._z > -203 && scene.meshes[i].position._x < 7 && scene.meshes[i].position._x > -13) {
@@ -240,6 +238,9 @@ for (var i = 0; i < scene.meshes.length; i++) {
         if (scene.meshes[i].position._x < 41) {
             objects.fort.extrablocks.push(scene.meshes[i]);
         }
+    }
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f7d788"))) {
+        objects.table.pancake = scene.meshes[i];
     }
 }
 light.direction = new BABYLON.Vector3(0, 1, 0.2);
@@ -445,10 +446,10 @@ function test() {
         babylonCanvas.style.filter = "none";
     }
     if (player.intersectsMesh(objects.table.pancake, true)) {
-        /*switch (pancake) {
+        switch (pancake) {
             case 0:
                 setTimeout(function() {
-                    if (player.intersectsMesh(objects.table.pancake, true)) {
+                    if (!player.intersectsMesh(objects.table.pancake, true)) {
                         
                     }
                 }
@@ -457,7 +458,7 @@ function test() {
             case 1:
                 if
                 
-        }*/
+        }
     }
     if (player.intersectsMesh(objects.shelf.thecursedcrayon, true) && alternate == 1) {
         score = 59998;
