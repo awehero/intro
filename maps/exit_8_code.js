@@ -420,6 +420,7 @@ let backCheck = 0;
 let mysticCheck = 0;
 let pancake = 0;
 let pancakeTime = 0;
+setColorUpdate(objects.table.pancake, "#edbf4e");
 if (localStorage.getItem("beb2") == null) {
     localStorage.setItem("beb2", "0");
 } else {
