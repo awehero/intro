@@ -105,7 +105,7 @@ for (var i = 0; i < scene.meshes.length; i++) {
             }
         } else if (scene.meshes[i].position._y > 50) {
             objects.drawing.push(scene.meshes[i]);
-        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("##f7d788"))) {
+        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f7d788"))) {
             objects.table.pancake = scene.meshes[i];
         }
     }
@@ -414,6 +414,7 @@ let switchCheck = 0;
 let tpCheck = 0;
 let backCheck = 0;
 let pancake = 0;
+let pancakeTime = 0;
 if (localStorage.getItem("beb2") == null) {
     localStorage.setItem("beb2", "0");
 } else {
@@ -442,6 +443,21 @@ function test() {
         alpha = 0;
         current = 0;
         babylonCanvas.style.filter = "none";
+    }
+    if (player.intersectsMesh(objects.table.pancake, true)) {
+        /*switch (pancake) {
+            case 0:
+                setTimeout(function() {
+                    if (player.intersectsMesh(objects.table.pancake, true)) {
+                        
+                    }
+                }
+                pancake = 1;
+                break;
+            case 1:
+                if
+                
+        }*/
     }
     if (player.intersectsMesh(objects.shelf.thecursedcrayon, true) && alternate == 1) {
         score = 59998;
