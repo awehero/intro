@@ -105,6 +105,8 @@ for (var i = 0; i < scene.meshes.length; i++) {
             }
         } else if (scene.meshes[i].position._y > 50) {
             objects.drawing.push(scene.meshes[i]);
+        } else if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("##f7d788"))) {
+            objects.table.pancake = scene.meshes[i];
         }
     }
     if (scene.meshes[i].position._z < -187 && scene.meshes[i].position._z > -203 && scene.meshes[i].position._x < 7 && scene.meshes[i].position._x > -13) {
@@ -411,6 +413,7 @@ let start = 0; //remove
 let switchCheck = 0;
 let tpCheck = 0;
 let backCheck = 0;
+let pancake = 0;
 if (localStorage.getItem("beb2") == null) {
     localStorage.setItem("beb2", "0");
 } else {
