@@ -555,6 +555,7 @@ function test() {
         speed = 0.1;
     } else if (player.position._z < -115 && player.position._z > -185 && player.position._x < 535 && player.position._x > 465) {
         speed = 0.168;
+        a.cam_d(2.5);
     } else if (alternate == 0) {
         speed = 0.25;
     } else {
