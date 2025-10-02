@@ -446,7 +446,7 @@ function test() {
         babylonCanvas.style.filter = "none";
     }
     if (player.intersectsMesh(objects.table.pancake, true)) {
-        switch (pancake) {
+        /*switch (pancake) {
             case 0:
                 setTimeout(function() {
                     if (!player.intersectsMesh(objects.table.pancake, true)) {
@@ -458,7 +458,8 @@ function test() {
             case 1:
                 if
                 
-        }
+        }*/
+        console.log(2);
     }
     if (player.intersectsMesh(objects.shelf.thecursedcrayon, true) && alternate == 1) {
         score = 59998;
