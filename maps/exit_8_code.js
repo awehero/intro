@@ -451,8 +451,8 @@ function test() {
                 setTimeout(function() {
                     if (!player.intersectsMesh(objects.table.pancake, true) || !alive) {
                         pancake = 1;
-                    },100);
-                }
+                    }
+                },100);
                 objects.table.pancake.material.alpha = 1;
                 break;
             case 1:
