@@ -98,6 +98,9 @@ for (var i = 0; i < scene.meshes.length; i++) {
                 if (scene.meshes[i].position._z > -160) {
                     objects.table.altswitch.push(scene.meshes[i]);
                 }
+                if (scene.meshes[i].position._x > 6) {
+                    objects.table.pancakeseat = scene.meshes[i];
+                }
             } else if (Math.round(scene.meshes[i].position._y*100)/100 == 1.3) {
                 objects.table.seatbottoms.push(scene.meshes[i]);
             } else {
@@ -239,7 +242,7 @@ for (var i = 0; i < scene.meshes.length; i++) {
             objects.fort.extrablocks.push(scene.meshes[i]);
         }
     }
-    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f7d788"))) {
+    if (scene.meshes[i].material.diffuseColor.equals(BABYLON.Color3.FromHexString("#f7d788")) && scene.meshes[i].position._x < 100) {
         objects.table.pancake = scene.meshes[i];
     }
 }
@@ -445,11 +448,11 @@ function test() {
         current = 0;
         babylonCanvas.style.filter = "none";
     }
-    if (player.intersectsMesh(objects.table.pancake, true)) {
+    if (player.intersectsMesh(objects.table.pancakeseat, true)) {
         switch (pancake) {
             case 0:
                 setTimeout(function() {
-                    if (!player.intersectsMesh(objects.table.pancake, true) || !alive) {
+                    if (!player.intersectsMesh(objects.table.pancakeseat, true) || !alive) {
                         pancake = 1;
                     }
                 },100);
