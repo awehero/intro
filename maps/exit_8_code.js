@@ -461,10 +461,6 @@ function test() {
                 objects.table.pancake.material.alpha = 1;
                 break;
             case 1:
-                alert("Enjoy some fresh pancakes!");
-                pancake = 2;
-                break;
-            case 2:
                 player.position._x = 500;
                 player.position._y = 1;
                 player.position._z = -125;
