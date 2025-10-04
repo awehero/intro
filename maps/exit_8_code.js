@@ -581,7 +581,6 @@ function test() {
             let gp = prompt("0 - Alternate Gameplay\n1 - Easy\n2 - Medium\n3 - Hard");
             let options = [0, 1, 2, 3];
             if (gp in options) {
-                resetObjects();
                 switch (gp) {
                     case "0":
                         rotation = 0;
@@ -615,6 +614,7 @@ function test() {
                         player.position._y = 100;
                         break;
                 }
+                resetObjects();
             } 
         }
     } else {
