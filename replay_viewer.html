@@ -105,16 +105,17 @@
 		}
     </style>
     <body>
-        <h1>Map Leaderboard</h1>
+        <h1>Replay Viewer</h1>
         <p>Start typing a map name or map id and select it from the dropdown</p>
         <input type="search" id="input"></input><br>
-		<input id="useruuid"></input><br>
+		<p>Enter a UserUUID</p>
+		<input id="userUuid"></input><br>
 		<div id="suggestions"></div>
-        <!-- <button onclick="fetchLeaderboard()">Go!</button> -->
+        <button onclick="findReplay()">Go!</button>
         <canvas id="renderCanvas"></canvas>
         <h2>Leaderboard:</h2>
         <div id="total_results"></div>
-        <table id="outputTable">
+        <!-- <table id="outputTable">
             <thead>
                 <tr>
                     <th>Rank</th>
@@ -124,7 +125,7 @@
                 </tr>
             </thead>
             <tbody></tbody>
-        </table>
+        </table> -->
         <script>
 			const canvas = document.getElementById("renderCanvas");
             const engine = new BABYLON.Engine(canvas, true);
@@ -137,6 +138,7 @@
 			    mapData[i] = mapData[i].split("|");
 			}
 			let input = document.getElementById("input");
+			let useruuid = document.getElementById("userUuid");
 			let suggestions = document.getElementById("suggestions");
 			input.addEventListener('input', function() {
 				let text = input.value.toLowerCase();
@@ -152,7 +154,6 @@
 						suggestionItem.id = map[1];
 						suggestionItem.addEventListener("click", function() {
 							input.value = this.id;
-							fetchLeaderboard();
 							suggestions.style.display = "none";
 						});
 						suggestions.appendChild(suggestionItem);
@@ -163,7 +164,7 @@
 				}
 			});
 			
-			function fetchLeaderboard() {
+			function findReplay() {
             let map = document.getElementById("input").value.trim();
             let tableBody = document.querySelector("#outputTable tbody");
             let totalResults = document.getElementById("total_results")
@@ -205,17 +206,6 @@
                         } else if (speedrun.length-speedrun.indexOf(".") == 2) {
                             speedrun += "0";
                         }
-                        /*switch (speedrun.index(".")) {
-                            case -1:
-                                speedrun += ".00s";
-                                break;
-                            case 2:
-                                speedrun += "0s";
-                                break;
-                            case 5:
-                                speedrun += "s";
-                                break;
-                        }*/
                         tr.innerHTML = `
                             <td>#${index + 1}</td>
                             <td>${row.username}</td>
