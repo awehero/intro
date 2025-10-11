@@ -157,16 +157,16 @@
 			});
 
 			function loadMap() {
-				let map = input.value.trim();
-				fetch('https://icedodo.onionfist.com/maps/' + map + '.js', {
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/javascript',
-					}
-				})
-				.then(response => response.json())
-				.then(data => mapfile = data)
-				.catch(error => alert('Error:' + error));
+			    let map = input.value.trim();
+			    fetch('https://icedodo.onionfist.com/maps/' + map + '.js')
+			        .then(response => {
+			            if (!response.ok) throw new Error('HTTP ' + response.status);
+			            return response.text();
+			        })
+			        .then(code => {
+			            mapfile = code;
+			        })
+			        .catch(error => alert('Error: ' + error));
 			}
 			
 			function findReplay() {
