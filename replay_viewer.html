@@ -109,7 +109,7 @@
 		<p>Start typing a map name or map id and select it from the dropdown</p>
         <input type="search" id="input"></input><br>
 		<div id="suggestions"></div><br>
-		<button onclick="loadMap()">Map</button>
+		<button onclick="getMap()">Map</button>
 		
 		<p>Enter a UserUUID</p>
 		<input id="userUuid"></input><br>
@@ -156,7 +156,7 @@
 				}
 			});
 
-			function loadMap() {
+			function getMap() {
 			    let map = input.value.trim();
 			    fetch('https://icedodo.onionfist.com/maps/' + map + '.js')
 			        .then(response => {
@@ -165,8 +165,14 @@
 			        })
 			        .then(code => {
 			            mapfile = code;
+						loadMap();
 			        })
 			        .catch(error => alert('Error: ' + error));
+			}
+
+			function loadMap() {
+				mapfile = mapfile.replace(/\s+/g,"");
+				canvas.style.display = "block";
 			}
 			
 			function findReplay() {
