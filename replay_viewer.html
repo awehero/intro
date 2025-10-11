@@ -109,6 +109,7 @@
 		<p>Start typing a map name or map id and select it from the dropdown</p>
         <input type="search" id="input"></input><br>
 		<div id="suggestions"></div><br>
+		<button onclick="loadMap()">Map</button>
 		
 		<p>Enter a UserUUID</p>
 		<input id="userUuid"></input><br>
@@ -130,6 +131,7 @@
 			let useruuid = document.getElementById("userUuid");
 			let suggestions = document.getElementById("suggestions");
 			let nodes = [];
+			let mapfile = "";
 			input.addEventListener('input', function() {
 				let text = input.value.toLowerCase();
 				let maps = mapData.filter(function(map) {
@@ -153,6 +155,19 @@
 					suggestions.style.display = "none";
 				}
 			});
+
+			function loadMap() {
+				let map = input.value.trim();
+				fetch('https://icedodo.onionfist.com/maps/' + map + '.js', {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/javascript',
+					}
+				})
+				.then(response => response.json())
+				.then(data => nodes = JSON.parse(data))
+				.catch(error => alert('Error:' + error));
+			}
 			
 			function findReplay() {
             	let map = input.value.trim();
@@ -171,7 +186,7 @@
 					})
 				})
 				.then(response => response.json())
-				.then(data => nodes = JSON.parse(data))
+				.then(data => mapfile = data;)
 				.catch(error => alert('Error:' + error));
         	}
         </script>
