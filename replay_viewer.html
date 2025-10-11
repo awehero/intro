@@ -109,7 +109,6 @@
 		<p>Start typing a map name or map id and select it from the dropdown</p>
         <input type="search" id="input"></input><br>
 		<div id="suggestions"></div><br>
-		<button onclick="getMap()">Map</button>
 		
 		<p>Enter a UserUUID</p>
 		<input id="userUuid"></input><br>
@@ -146,6 +145,7 @@
 						suggestionItem.id = map[1];
 						suggestionItem.addEventListener("click", function() {
 							input.value = this.id;
+							getMap();
 							suggestions.style.display = "none";
 						});
 						suggestions.appendChild(suggestionItem);
