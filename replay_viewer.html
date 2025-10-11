@@ -166,65 +166,25 @@
 			});
 			
 			function findReplay() {
-            let map = document.getElementById("input").value.trim();
-            let tableBody = document.querySelector("#outputTable tbody");
-            let totalResults = document.getElementById("total_results")
-            tableBody.innerHTML = "";
-        
-            let data = {
-                mapId: map,
-                isSortedByCompletion: false,
-                includeBanned: false,
-                isFromEnding: false,
-                maxResults: 9999
-            };
-        
-            fetch('https://icedodo-api.onionfist.com/api/get_map_leaderboard_rows', { 
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(result => {
-                let output = result.leaderboardRows;
-                if (output && output.length > 0) {
-                   	if (output.length > 9998) {
-                        totalResults.innerHTML = `Total Results: 9999+`;
-                    } else {
-                        totalResults.innerHTML = `Total Results: ${output.length}`
-                    }
-                    output = output.sort((a, b) => {
-                        if (a.time !== b.time) {
-                            return a.time - b.time;
-                        }
-                        return b.completions - a.completions;
-                    });
-                    output.forEach((row, index) => {
-                        const tr = document.createElement("tr");
-                        let speedrun = Math.round(row.time/60*100)/100 + "";
-                        if (speedrun.indexOf(".") == -1) {
-                            speedrun += ".00";
-                        } else if (speedrun.length-speedrun.indexOf(".") == 2) {
-                            speedrun += "0";
-                        }
-                        tr.innerHTML = `
-                            <td>#${index + 1}</td>
-                            <td>${row.username}</td>
-                            <td>${speedrun}s</td>
-                            <td>${row.completions}</td>
-                        `;
-                        tableBody.appendChild(tr);
-                    });
-                } else {
-                    const tr = document.createElement("tr");
-                    tr.innerHTML = `<td colspan="4">No results found, make sure you have the correct mapid!</td>`;
-                    tableBody.appendChild(tr);
-                }
-            })
-            .catch(error => {
-                alert("Error: " + error);
-            });
-        }
+            	let map = input.value.trim();
+				let userId = useruuid.value.trim();
+            	fetch('https://icedodo-api.onionfist.com/api/get_replay_nodes', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Accept': '*/*',
+						'Accept-Encoding': 'gzip, deflate, br, zstd',
+						'Accept-Language': 'en-US,en;q=0.9'
+					},
+						body: JSON.stringify({
+						uid: userId,
+						mapId: map
+					})
+				})
+				.then(response => response.json())
+				.then(data => console.log('Replay Nodes:', JSON.stringify(data)))
+				.catch(error => console.error('Error:', error));
+        	}
         </script>
     </body>
 </html>
