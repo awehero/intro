@@ -173,6 +173,9 @@
 			function loadMap() {
 				mapfile = mapfile.replace(/\s+/g,"");
 				canvas.style.display = "block";
+				let objects = mapfile.substring(mapfile.indexOf("init"),mapfile.indexOf("post"));
+				objects = objects.substring(objects.indexOf("{")+1,objects.indexOf("}"));
+				objects = objects.split(";");
 			}
 			
 			function findReplay() {
