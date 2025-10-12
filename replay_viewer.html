@@ -184,7 +184,13 @@
 				.then(response => response.json())
 				.then(data => {
 					nodes[nodes.length] = data.replayNodes;
-					slider
+					let sliderTemp = 0;
+					for (var i = 0; i < nodes.length; i++) {
+						if (nodes[i].length > sliderTemp) {
+							sliderTemp = nodes[i].length;
+						}
+					}
+					slider.max = sliderTemp;
 				})
 				.catch(error => alert('Error:' + error));
         	}
