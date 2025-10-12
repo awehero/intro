@@ -166,7 +166,7 @@
 			            mapfile = code;
 						loadMap();
 			        })
-			        .catch(error => alert('Error: ' + error));
+			        .catch(error => console.error('Error: ' + error));
 			}
 
 			function findReplay() {
@@ -196,7 +196,7 @@
 					}
 					slider.max = sliderTemp;
 				})
-				.catch(error => alert('Error:' + error));
+				.catch(error => console.error('Error:' + error));
         	}
 			
 			slider.addEventListener('input', () => {
