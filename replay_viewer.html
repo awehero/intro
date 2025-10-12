@@ -197,6 +197,7 @@
 			
 			slider.addEventListener('input', () => {
 		    	score = slider.value;
+				moveNodes();
 		    });
 			
 			function togglePlayPause() {
@@ -209,8 +210,10 @@
 
 			setInterval(function() {
 				if (state == "play") {
-					moveNodes();
-					score++;
+					if (score <= slider.max) {
+						moveNodes();
+						score++;
+					}
 				}
 			}, 1);
 
