@@ -110,6 +110,7 @@
 		
 		<p>Enter a UserUUID</p>
 		<input id="userUuid"></input><br>
+		<div id="replays"><div><br>
 	
         <button onclick="findReplay()">Go!</button>
 		<br>
@@ -122,8 +123,10 @@
 			let input = document.getElementById("input");
 			let useruuid = document.getElementById("userUuid");
 			let suggestions = document.getElementById("suggestions");
+			let replays = document.getElementById("replays");
 			let slider = document.getElementById("slider");
 			let toggleplayer = document.getElementById("togglePlayer");
+			let replayData = "";
 			let nodes = [];
 			let state = "pause";
 			let score = 0;
@@ -161,6 +164,26 @@
 					});
 				})
 				.catch(err => console.error('Error loading script:', err));
+			
+			fetch('https://icedodo-api.onionfist.com/api/get_replay_listings', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Accept': '*/*',
+						'Accept-Encoding': 'gzip, deflate, br, zstd',
+						'Accept-Language': 'en-US,en;q=0.9'
+					},
+						body: JSON.stringify({
+							includeUid: "44f8f01d-048c-415e-9a56-bcfbeaefa076",
+							mapId: map,
+							ordering: 2
+					})
+				})
+				.then(response => response.json())
+				.then(data => {
+					replayData = data.replayListings;
+				})
+				.catch(error => console.error('Error:' + error));
 			
 			function getMap() {
 			    let map = input.value.trim();
