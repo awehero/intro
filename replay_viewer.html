@@ -210,11 +210,22 @@
 			setInterval(function() {
 				if (state == "play") {
 					moveNodes();
+					score++;
 				}
 			}, 1);
 
 			function moveNodes() {
-				
+				for (var i = 0; i < players.length; i++) {
+					players[i].position.x = nodes[i][score].px;
+					players[i].position.y = nodes[i][score].py;
+					players[i].position.z = nodes[i][score].pz;
+					players[i].rotation.x = nodes[i][score].rx;
+					players[i].rotation.y = nodes[i][score].ry;
+					players[i].rotation.z = nodes[i][score].rz;
+					players[i].scaling.x = nodes[i][score].sx;
+					players[i].scaling.y = nodes[i][score].sy;
+					players[i].scaling.z = nodes[i][score].sz;
+				}
 			}
 
 
