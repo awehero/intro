@@ -146,7 +146,7 @@
 			window.addEventListener("keyup", e => keys[e.key.toLowerCase()] = false);
 		
 			function updateFreeCamera() {
-				const speed = 0.2;
+				const speed = 0.5;
 				const rotSpeed = 0.01;
 				if (keys["w"]) { freeCamera.position.x += Math.sin(freeCamera.rotation.y) * speed; freeCamera.position.z += Math.cos(freeCamera.rotation.y) * speed; }
 				if (keys["s"]) { freeCamera.position.x -= Math.sin(freeCamera.rotation.y) * speed; freeCamera.position.z -= Math.cos(freeCamera.rotation.y) * speed; }
