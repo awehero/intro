@@ -271,6 +271,8 @@
 		    window.cam_depression = 0.3;
 			var player1 = BABYLON.MeshBuilder.CreateBox('player1', { width: 0.5, height: 0.08, depth: 0.5 }, scene);
 			players.push(player1);
+			var player2 = BABYLON.MeshBuilder.CreateBox('player2', { width: 0.5, height: 0.08, depth: 0.5 }, scene);
+			players.push(player2);
 			var activePlayer = player1;
 			function updateFollowCamera() {
 		    	const rotation_offsetted = window.rotation + window.cameraRightAngle;
