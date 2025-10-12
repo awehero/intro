@@ -111,6 +111,8 @@
         <button onclick="findReplay()">Go!</button>
 		<br>
         <canvas id="canvas"></canvas>
+		<button id="playpause" onclick="togglePlayPause()"></button>
+		<input id="slider" type="range" name="slider" min="0" max="0" value="0">
         <script>
 			var canvas = document.getElementById("canvas");
             var engine = new BABYLON.Engine(canvas, true);
@@ -202,6 +204,8 @@
 			let spheres = [];
 			let monkeys = [];
 			let mapfile = "";
+			let state = "pause";
+			let score = 0;
 			input.addEventListener('input', function() {
 				let text = input.value.toLowerCase();
 				let maps = mapData.filter(function(map) {
@@ -239,6 +243,39 @@
 						loadMap();
 			        })
 			        .catch(error => alert('Error: ' + error));
+			}
+
+			function findReplay() {
+            	let map = input.value.trim();
+				let userId = useruuid.value.trim();
+            	fetch('https://icedodo-api.onionfist.com/api/get_replay_nodes', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Accept': '*/*',
+						'Accept-Encoding': 'gzip, deflate, br, zstd',
+						'Accept-Language': 'en-US,en;q=0.9'
+					},
+						body: JSON.stringify({
+						userUuid: userId,
+						mapId: map
+					})
+				})
+				.then(response => response.json())
+				.then(data => nodes[nodes.length] = data.replayNodes)
+				.catch(error => alert('Error:' + error));
+        	}
+			let slider = document.getElementById("slider");
+			slider.addEventListener('input', () => {
+		    	score = slider.value;
+		    });
+			
+			function togglePlayPause() {
+				if (state == "pause") {
+					state = "play";
+				} else {
+					state = "pause";
+				}
 			}
 
 			function loadMap() {
@@ -330,27 +367,6 @@
 				}
 				return obj;
 			}
-			
-			function findReplay() {
-            	let map = input.value.trim();
-				let userId = useruuid.value.trim();
-            	fetch('https://icedodo-api.onionfist.com/api/get_replay_nodes', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						'Accept': '*/*',
-						'Accept-Encoding': 'gzip, deflate, br, zstd',
-						'Accept-Language': 'en-US,en;q=0.9'
-					},
-						body: JSON.stringify({
-						userUuid: userId,
-						mapId: map
-					})
-				})
-				.then(response => response.json())
-				.then(data => nodes[nodes.length] = data.replayNodes)
-				.catch(error => alert('Error:' + error));
-        	}
         </script>
     </body>
 </html>
