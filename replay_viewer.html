@@ -281,7 +281,15 @@
 		        followCamera.position.y = activePlayer.position.y + window.cam_vertical +2; //Fix later
 		        followCamera.rotation.y = Math.PI + rotation_offsetted;
 		        followCamera.rotation.x = window.cam_depression;
+				if (keys["q"]) {
+					togglePlayer();
+				}
 		    }
+			function togglePlayer() {
+				let next = players.indexOf(activePlayer) + 1;
+				if (next > players.length - 1) next = 0;
+				activePlayer = players[next];
+			}
 			var freeCamera = new BABYLON.UniversalCamera("freeCamera", new BABYLON.Vector3(0, 5, -10), scene);
 			freeCamera.rotation = new BABYLON.Vector3(0, Math.PI, 0);
 			freeCamera.position = followCamera.position;
@@ -299,8 +307,6 @@
 				if (keys["d"]) { freeCamera.position.x += Math.sin(freeCamera.rotation.y + Math.PI / 2) * speed; freeCamera.position.z += Math.cos(freeCamera.rotation.y + Math.PI / 2) * speed; }
 				if (keys["e"]) freeCamera.position.y += speed;
 				if (keys["c"]) freeCamera.position.y -= speed;
-				if (keys["arrowleft"]) freeCamera.rotation.y -= rotSpeed;
-				if (keys["arrowright"]) freeCamera.rotation.y += rotSpeed;
 				if (keys["arrowup"]) freeCamera.rotation.x -= rotSpeed;
 				if (keys["arrowdown"]) freeCamera.rotation.x += rotSpeed;
 			}
