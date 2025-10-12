@@ -145,8 +145,8 @@
 			window.addEventListener("keyup", e => keys[e.key.toLowerCase()] = false);
 		
 			function updateFreeCamera() {
-				const speed = 0.3;
-				const rotSpeed = 0.03;
+				const speed = 0.2;
+				const rotSpeed = 0.01;
 				if (keys["w"]) { freeCamera.position.x += Math.sin(freeCamera.rotation.y) * speed; freeCamera.position.z += Math.cos(freeCamera.rotation.y) * speed; }
 				if (keys["s"]) { freeCamera.position.x -= Math.sin(freeCamera.rotation.y) * speed; freeCamera.position.z -= Math.cos(freeCamera.rotation.y) * speed; }
 				if (keys["a"]) { freeCamera.position.x += Math.sin(freeCamera.rotation.y - Math.PI / 2) * speed; freeCamera.position.z += Math.cos(freeCamera.rotation.y - Math.PI / 2) * speed; }
@@ -194,7 +194,7 @@
 			let nodes = [];
 			let objects = "";
 			let planes = [];
-			let cubes = [];
+			let platforms = [];
 			let cones = [];
 			let endings = [];
 			let cylinder = [];
@@ -246,27 +246,71 @@
 				objects = mapfile.substring(mapfile.indexOf("init"),mapfile.indexOf("post"));
 				objects = objects.substring(objects.indexOf("{")+1,objects.indexOf("}"));
 				objects = objects.split(";");
-				 for (var i = 0; i < objects.length; i++) {
-				     switch (objects[i].substring(0,3)) {
-				         case 'a.p':
-				             // cubes
-				             break;
-				         case 'a.c':
-				             // cones
-				             break;
-				         case 'a.e':
-				             // endings
-				             break;
-				         case 'a.y':
-				             // cylinders
-				             break;
-				         case 'a.s':
-				             // spheres
-				             break;
-				     }
-				 }
+				for (var i = 0; i < objects.length; i++) {
+					let type = objects[i].substring(0,3);
+					objects[i] = objects[i].substring(4,objects[i].length-1);
+					objects[i] = objects[i].replace(/\[/g,"").replace(/\]/g,"");
+					objects[i] = objects[i].split(",");
+					for (var j = 0; j < objects[i].length-1; j++) {
+						objects[i][j] = parseFloat(objects[i][j]);
+					}
+					let obj = createMesh(type);
+					// add obj to scene
+				}
 			}
 			
+			function createMesh(type) {
+				 switch (type) {
+					 case 'a.p':
+						 return createObject("P",objects[i][0],objects[i][1],objects[i][2],objects[i][3],objects[i][4],objects[i][5],objects[i][6],objects[i][7],objects[i][8],objects[i][9]);
+					 case 'a.c':
+						 return createObject("C",objects[i][0],objects[i][1],objects[i][2],objects[i][3]);
+					 case 'a.e':
+						 return createObject("E",objects[i][0],objects[i][1],objects[i][2]);
+					 case 'a.y':
+						 return createObject("Y",objects[i][0],objects[i][1],objects[i][2],objects[i][3],objects[i][4],objects[i][5],objects[i][6],objects[i][7],objects[i][8],objects[i][9]);
+					 case 'a.s':
+						 return createObject("S",objects[i][0],objects[i][1],objects[i][2],objects[i][3],objects[i][4]);
+				 }
+			 }
+			
+			function createObject(shape,zero,one,two,three,four,five,six,seven,eight,nine) {
+				let obj;
+				switch (shape) {
+					case "P":
+				        obj = BABYLON.MeshBuilder.CreateBox("P"+platforms.length, { size: 1 }, scene);
+						obj.position = new BABYLON.Vector3(zero, one, two);
+						obj.rotation = new BABYLON.Vector3(three, four, five);
+						obj.scaling = new BABYLON.Vector3(six, seven, eight);
+						platforms.push(obj);
+						break;
+				    case "C":
+				        obj = BABYLON.MeshBuilder.CreateCylinder("C"+cones.length, { height: 0.5, diameterTop: 0, diameterBottom: 0.5, tessellation: 5 }, scene);
+						obj.position = new BABYLON.Vector3(zero, one, two);
+						obj.scaling.y = 1.2;
+						cones.push(obj);
+						break;
+				    case "E":
+				        obj = BABYLON.MeshBuilder.CreateCylinder("E"+endings.length, { height: 2.0, diameter: 2.0, tessellation: 8 }, scene);
+						obj.position = new BABYLON.Vector3(zero, one, two);
+						endings.push(obj);
+						break;
+				    case "Y":
+				        obj = BABYLON.MeshBuilder.CreateCylinder("Y"+cylinders.length, { height: 1.0, diameter: 1.0, tessellation: 12 }, scene);
+						obj.position = new BABYLON.Vector3(zero, one, two);
+						obj.rotation = new BABYLON.Vector3(three, four, five);
+						obj.scaling = new BABYLON.Vector3(six, seven, eight);
+						cylinders.push(obj);
+						break;
+					case "S":
+				        obj = BABYLON.MeshBuilder.CreateSphere("S"+spheres.length, { segments: 10, diameter: 1.0 }, scene);
+						obj.position = new BABYLON.Vector3(zero, one, two);
+						obj.scaling = new BABYLON.Vector3(three, three, three);
+						spheres.push(obj);
+						break;
+				}
+				return obj;
+			}
 			
 			function findReplay() {
             	let map = input.value.trim();
