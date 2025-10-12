@@ -254,12 +254,12 @@
 					for (var j = 0; j < objects[i].length-1; j++) {
 						objects[i][j] = parseFloat(objects[i][j]);
 					}
-					let obj = createMesh(type);
-					// add obj to scene
+					let obj = createMesh(type, objects, i);
+					if (obj) scene.addMesh(obj);
 				}
 			}
 			
-			function createMesh(type) {
+			function createMesh(type, objects, i) {
 				 switch (type) {
 					 case 'a.p':
 						 return createObject("P",objects[i][0],objects[i][1],objects[i][2],objects[i][3],objects[i][4],objects[i][5],objects[i][6],objects[i][7],objects[i][8],objects[i][9]);
