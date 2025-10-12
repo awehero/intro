@@ -348,7 +348,7 @@
 					})
 				})
 				.then(response => response.json())
-				.then(data => nodes[nodes.length] = data)
+				.then(data => nodes[nodes.length] = data.replayNodes)
 				.catch(error => alert('Error:' + error));
         	}
         </script>
