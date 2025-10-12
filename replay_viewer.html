@@ -117,10 +117,10 @@
 			var scene = new BABYLON.Scene(engine);
 			var followCamera = new BABYLON.UniversalCamera("followCamera", new BABYLON.Vector3(0, 5, -10), scene);
 			followCamera.fov = 1.2;
-			let currentCamera = followCamera;
+			let activeCamera = followCamera;
 			var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
 			light.specular = new BABYLON.Color3(0.95, 0.95, 0.81);
-			light.parent = currentCamera;
+			light.parent = activeCamera;
 			window.rotation = 0;
 			window.radius = 2.5;
 		    window.cameraRightAngle = 0;
@@ -139,6 +139,7 @@
 		    }
 			var freeCamera = new BABYLON.UniversalCamera("freeCamera", new BABYLON.Vector3(0, 5, -10), scene);
 			freeCamera.rotation = new BABYLON.Vector3(0, 0, 0);
+			freeCamera.position = followCamera.position;
 		
 			let keys = {};
 			window.addEventListener("keydown", e => keys[e.key.toLowerCase()] = true);
@@ -159,25 +160,25 @@
 				if (keys["arrowdown"]) freeCamera.rotation.x += rotSpeed;
 			}
 		
-			scene.activeCamera = currentCamera;
+			scene.activeCamera = activeCamera;
 			scene.activeCamera.attachControl(canvas, true);
 		
 			window.addEventListener("keydown", e => {
 				if (e.key === "Tab") {
 					e.preventDefault();
-					currentCamera.detachControl();
-					if (currentCamera === followCamera) {
-						currentCamera = freeCamera;
+					activeCamera.detachControl();
+					if (activeCamera === followCamera) {
+						activeCamera = freeCamera;
 					} else {
-						currentCamera = followCamera;
+						activeCamera = followCamera;
 					}
-					scene.activeCamera = currentCamera;
-					currentCamera.attachControl(canvas, true);
+					scene.activeCamera = activeCamera;
+					activeCamera.attachControl(canvas, true);
 				}
 			});
 			engine.runRenderLoop(() => {
-		        if (currentCamera === followCamera) updateFollowCamera();
-		        if (currentCamera === freeCamera) updateFreeCamera();
+		        if (activeCamera === followCamera) updateFollowCamera();
+		        if (activeCamera === freeCamera) updateFreeCamera();
 		        scene.render();
 		    });
 			window.addEventListener("resize", () => engine.resize());
