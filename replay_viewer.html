@@ -8,11 +8,6 @@
 	<script src="https://cdn.babylonjs.com/babylon.js"></script>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
-        table { border-collapse: collapse; width: 100%; background: #fff; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #007bff; color: white; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-		tr: { border-radius: 5px; }
         textarea { width: 100%; padding: 10px; font-family: monospace; }
         body {
             font-family: Arial, sans-serif;
@@ -140,7 +135,6 @@
 		        followCamera.position.y = activePlayer.position.y + window.cam_vertical;
 		        followCamera.rotation.y = Math.PI + rotation_offsetted;
 		        followCamera.rotation.x = window.cam_depression;
-		        light.position.copyFrom(followCamera.position);
 		    }
 			var freeCamera = new BABYLON.UniversalCamera("freeCamera", new BABYLON.Vector3(0, 5, -10), scene);
 			freeCamera.rotation = new BABYLON.Vector3(0, 0, 0);
