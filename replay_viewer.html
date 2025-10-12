@@ -253,7 +253,9 @@
 					objects[i] = objects[i].replace(/\[/g,"").replace(/\]/g,"");
 					objects[i] = objects[i].split(",");
 					for (var j = 0; j < objects[i].length-1; j++) {
-						objects[i][j] = parseFloat(objects[i][j]);
+						if (objects[i][j] == parseFloat(objects[i][j])) {
+							objects[i][j] = parseFloat(objects[i][j]);
+						}
 					}
 					let obj = createMesh(type, objects, i);
 					if (obj) scene.addMesh(obj);
