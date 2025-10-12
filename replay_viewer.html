@@ -128,11 +128,13 @@
 		    window.cam_horizontal = radius * radius;
 		    window.cam_vertical = cam_horizontal * Math.tan(radius * 1.3);
 		    window.cam_depression = 0.3;
-			 function updateFollowCamera() {
-		        const rotation_offsetted = window.rotation + window.cameraRightAngle;
-		        followCamera.position.x = player.position.x + Math.sin(rotation_offsetted) * window.cam_horizontal;
-		        followCamera.position.z = player.position.z + Math.cos(rotation_offsetted) * window.cam_horizontal;
-		        followCamera.position.y = player.position.y + window.cam_vertical;
+			var player1 = BABYLON.MeshBuilder.CreateBox('player1', { width: 0.5, height: 0.08, depth: 0.5 }, scene);
+			var activePlayer = player1;
+			function updateFollowCamera() {
+		    	const rotation_offsetted = window.rotation + window.cameraRightAngle;
+		        followCamera.position.x = activePlayer.position.x + Math.sin(rotation_offsetted) * window.cam_horizontal;
+		        followCamera.position.z = activePlayer.position.z + Math.cos(rotation_offsetted) * window.cam_horizontal;
+		        followCamera.position.y = activePlayer.position.y + window.cam_vertical;
 		        followCamera.rotation.y = Math.PI + rotation_offsetted;
 		        followCamera.rotation.x = window.cam_depression;
 		        light.position.copyFrom(followCamera.position);
