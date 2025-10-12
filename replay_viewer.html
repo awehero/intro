@@ -433,6 +433,7 @@
 						cylinders.push(obj);
 						break;
 					case "S":
+						obj = BABYLON.MeshBuilder.CreateSphere("S"+spheres.length, { segments: 10, diameter: 1.0 }, scene);
 						if (four.length == 6) {
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+four);
 						} else if (four.length > 6) {
@@ -444,7 +445,6 @@
 							}
 						}
 						obj.material = mat;
-				        obj = BABYLON.MeshBuilder.CreateSphere("S"+spheres.length, { segments: 10, diameter: 1.0 }, scene);
 						obj.position = new BABYLON.Vector3(zero, one, two);
 						obj.scaling = new BABYLON.Vector3(three, three, three);
 						spheres.push(obj);
