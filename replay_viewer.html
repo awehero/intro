@@ -229,7 +229,7 @@
 					players[i].scaling.x = nodes[i][score].sx;
 					players[i].scaling.y = nodes[i][score].sy;
 					players[i].scaling.z = nodes[i][score].sz;
-					if (currentCamera == followCamera) {
+					if (activeCamera == followCamera) {
 						rotation = nodes[players.indexOf(activePlayer)][score].r;
 					}
 				}
