@@ -293,7 +293,9 @@
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine.substring(0,6));
 							mat.alpha = parseFloat(nine.substring(7));
 						} else {
-							
+							switch (parseFloat(nine)) {
+								case -1: mat.alpha = 0; break;
+							}
 						}
 						obj.material = mat;
 						obj.position = new BABYLON.Vector3(zero, one, two);
