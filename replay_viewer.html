@@ -138,7 +138,7 @@
 		        followCamera.rotation.x = window.cam_depression;
 		    }
 			var freeCamera = new BABYLON.UniversalCamera("freeCamera", new BABYLON.Vector3(0, 5, -10), scene);
-			freeCamera.rotation = new BABYLON.Vector3(0, 0, 0);
+			freeCamera.rotation = new BABYLON.Vector3(0, Math.PI, 0);
 			freeCamera.position = followCamera.position;
 		
 			let keys = {};
