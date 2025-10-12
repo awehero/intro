@@ -277,9 +277,19 @@
 			
 			function createObject(shape,zero,one,two,three,four,five,six,seven,eight,nine) {
 				let obj;
+				let mat = new BABYLON.StandardMaterial("mat", scene);
 				switch (shape) {
 					case "P":
 				        obj = BABYLON.MeshBuilder.CreateBox("P"+platforms.length, { size: 1 }, scene);
+						if (nine.length == 6) {
+							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine);
+						} else if (nine.length > 6) {
+							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine.substring(0,6));
+							mat.alpha = parseFloat(nine.substring(7));
+						} else {
+							
+						}
+						obj.material = mat;
 						obj.position = new BABYLON.Vector3(zero, one, two);
 						obj.rotation = new BABYLON.Vector3(four, three, five);
 						obj.scaling = new BABYLON.Vector3(six, seven, eight);
