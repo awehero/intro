@@ -223,6 +223,7 @@
 
 			function moveNodes() {
 				for (var i = 0; i < players.length; i++) {
+					slider.value = score;
 					players[i].position.x = nodes[i][score].px;
 					players[i].position.y = nodes[i][score].py;
 					players[i].position.z = nodes[i][score].pz;
