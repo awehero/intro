@@ -288,7 +288,7 @@
 			
 			function loadMap() {
 				let removers = ['P','C','E','Y','S'];
-				for (var i = scene.meshes.length; i > -1; i--) {
+				for (var i = scene.meshes.length-1; i > -1; i--) {
 					if (removers.includes(scene.meshes[i].id.substring(0,1))) {
 						scene.meshes[i].dispose();
 					}
