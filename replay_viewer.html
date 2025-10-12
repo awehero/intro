@@ -202,7 +202,7 @@
         	}
 			
 			slider.addEventListener('input', () => {
-		    	score = slider.value;
+		    	score = parseFloat(slider.value);
 				moveNodes();
 		    });
 			
