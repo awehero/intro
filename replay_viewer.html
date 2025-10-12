@@ -251,6 +251,9 @@
 					let type = objects[i].substring(0,3);
 					objects[i] = objects[i].substring(4,objects[i].length-1);
 					objects[i] = objects[i].replace(/\[/g,"").replace(/\]/g,"");
+					if (objects[i].indexOf("\"") != -1) {
+						objects[i] = objects[i].substring(0,objects[i].indexOf("\"")) + objects[i].substring(objects[i].indexOf("\""),objects[i].lastIndexOf("\"")).replace(/\,/g,"?") + objects[i].substring(objects[i].lastIndexOf("\""),objects[i].length);
+					}
 					objects[i] = objects[i].split(",");
 					for (var j = 0; j < objects[i].length-1; j++) {
 						if (objects[i][j] == parseFloat(objects[i][j])) {
