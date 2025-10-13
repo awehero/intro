@@ -212,7 +212,11 @@
 				svgs[key] = await res.text();
 			}))
 			.then(() => {
-			  console.log("All SVGs loaded!");
+			  	console.log("All SVGs loaded!");
+				up.innerHTML = svgs.up;
+				down.innerHTML = svgs.down;
+				left.innerHTML = svgs.left;
+				right.innerHTML = svgs.right;
 			});
 			fetch('https://awehero.github.io/intro/minitools/mapdata.js')
 				.then(response => response.text())
