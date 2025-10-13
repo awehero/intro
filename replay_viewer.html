@@ -301,14 +301,16 @@
 					players[i].position.x = nodes[i][score].px;
 					players[i].position.y = nodes[i][score].py;
 					players[i].position.z = nodes[i][score].pz;
-					players[i].rotation.x = nodes[i][score].rx;
-					players[i].rotation.y = nodes[i][score].ry;
-					players[i].rotation.z = nodes[i][score].rz;
+					let angles = new BABYLON.Quaternion(nodes[i][score].rx,nodes[i][score].ry,nodes[i][score].rz,nodes[i][score].rw).toEulerAngles();
+					players[i].rotation.x = angles.x;
+					players[i].rotation.y = angles.y;
+					players[i].rotation.z = angles.z;
 					players[i].scaling.x = nodes[i][score].sx;
 					players[i].scaling.y = nodes[i][score].sy;
 					players[i].scaling.z = nodes[i][score].sz;
 					if (activeCamera == followCamera) {
 						rotation = nodes[players.indexOf(activePlayer)][score].r;
+						// fps.value = nodes[players.indexOf(activePlayer)][score].fps;
 					}
 				}
 			}
