@@ -266,7 +266,7 @@
 					slider.max = sliderTemp;
 					for (var i = 0; i < nodes.length; i++) {
 						while (nodes[i].length < sliderTemp) {
-							
+							nodes[i][nodes[i].length] = nodes[i][nodes[i].length - 1]
 						}
 					}
 				})
