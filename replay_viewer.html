@@ -184,6 +184,30 @@
 					.then(response => response.json())
 					.then(data => {
 						replayData = data.replayListings;
+						userUuid.addEventListener('input', function() {
+						let text = userUuid.value.toLowerCase();
+						let filterReplays = replayData.filter(function(replay) {
+						    return (replay.username.indexOf(text.toLowerCase()) != -1)
+						});
+						if (filterReplays.length > 0) {
+							replays.innerHTML = '';
+							filterReplays.forEach(replay=>{
+								let suggestionItem = document.createElement("div");
+								suggestionItem.classList.add("suggestion-item");
+								suggestionItem.textContent = replay.username;
+								suggestionItem.id = replay.username;
+								suggestionItem.addEventListener("click", function() {
+									useruuid.value = this.userUuid;
+									findReplay();
+									replays.style.display = "none";
+								});
+								replays.appendChild(suggestionItem);
+							});
+							replays.style.display = "block";
+						} else {
+							replays.style.display = "none";
+						}
+					});
 					})
 					.catch(error => console.error('Error:' + error));
 			}
