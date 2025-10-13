@@ -117,12 +117,12 @@
     <body>
         <h1>Replay Viewer</h1>
 		<p>Start typing a map name or map id and select it from the dropdown</p>
-        <input type="search" id="input"></input><br>
+        <input type="search" id="input"><br>
 		<div id="suggestions"></div><br>
 		
 		<p>Enter a UserUUID</p>
-		<input id="userUuid"></input><br>
-		<div id="replays"><div><br>
+		<input id="userUuid"><br>
+		<div id="replays"></div><br>
 	
         <button onclick="findReplay()">Go!</button>
 		<br>
@@ -197,7 +197,7 @@
 					.then(data => {
 						replayData = data.replayListings;
 						userUuid.addEventListener('input', function() {
-						let text = userUuid.value.toLowerCase();
+						let text = useruuid.value.toLowerCase();
 						let filterReplays = replayData.filter(function(replay) {
 						    return (replay.username.indexOf(text.toLowerCase()) != -1)
 						});
