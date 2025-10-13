@@ -213,13 +213,6 @@
 			}))
 			.then(() => {
 			  console.log("All SVGs loaded!");
-				let svgSize = 48;
-				for (let key in svgs) {
-					if (svgs.hasOwnProperty(key)) {
-						svgs[key] = svgs[key].replace(/16/g, svgSize);
-					}
-				}
-
 			});
 			fetch('https://awehero.github.io/intro/minitools/mapdata.js')
 				.then(response => response.text())
