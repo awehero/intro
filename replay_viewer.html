@@ -143,6 +143,7 @@
 			let nodes = [];
 			let state = "pause";
 			let score = 0;
+			let interval;
 			fetch('https://awehero.github.io/intro/minitools/mapdata.js')
 				.then(response => response.text())
 				.then(code => {
@@ -278,6 +279,7 @@
 		    	score = parseFloat(slider.value);
 				moveNodes();
 		    });
+			speed.addEventListener("input", startLoop);
 			
 			function togglePlayPause() {
 				if (state == "pause") {
@@ -287,14 +289,18 @@
 				}
 			}
 
-			setInterval(function() {
-				if (state == "play") {
-					if (score <= slider.max) {
-						moveNodes();
-						score++;
-					}
-				}
-			}, ((1000 / 60) / speed.value));
+			function startLoop() {
+			    clearInterval(interval);
+			    interval = setInterval(function() {
+			        if (state === "play") {
+			            if (score <= slider.max) {
+			                moveNodes();
+			                score++;
+			            }
+			        }
+			    }, (1000 / 60) / Number(speed.value));
+			}
+			startLoop();
 
 			function moveNodes() {
 				for (var i = 0; i < nodes.length; i++) {
