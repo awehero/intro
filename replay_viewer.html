@@ -350,6 +350,7 @@
 		        followCamera.position.y = activePlayer.position.y + window.cam_vertical +2; //Fix later
 		        followCamera.rotation.y = Math.PI + rotation_offsetted;
 		        followCamera.rotation.x = window.cam_depression;
+				followCamera.setTarget(activePlayer.position);
 		    }
 			function togglePlayer() {
 				let next = players.indexOf(activePlayer) + 1;
