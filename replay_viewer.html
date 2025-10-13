@@ -207,9 +207,7 @@
 				let svgSize = 48;
 				for (let key in svgs) {
 					if (svgs.hasOwnProperty(key)) {
-						svgs[key] = svgs[key]
-							.replace(/width=['"]\d+['"]/g, `width="${svgSize}"`)
-							.replace(/height=['"]\d+['"]/g, `height="${svgSize}"`);
+						svgs[key] = svgs[key].replace(/16/g, svgSize);
 					}
 				}
 
