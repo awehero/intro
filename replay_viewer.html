@@ -112,6 +112,18 @@
 			#slider {
 				width: 75%;
 			}
+			#inputDisplay {
+				position: absolute;
+			    height: 15%;
+			    width: 15%;
+			    border: 2px solid black;
+			    margin-top: -50%;
+			    margin-left: 5%;
+			}
+			.inputDisplayButton {
+				height: 5%;
+				width: 5%;
+			}
 	    </style>
 	</head>
     <body>
@@ -133,12 +145,12 @@
 		<button id="togglePlayer" onclick="togglePlayer()">Toggle Player</button>
 		<div id="inputDisplay">
 			<div id="inputDisplayTop">
-				<div id="up"></div>
+				<div id="up" class="inputDisplayButton"></div>
 			</div>
 			<div id="inputDisplayBottom">
-				<div id="left"></div>
-				<div id="down"></div>
-				<div id="right"></div>
+				<div id="left" class="inputDisplayButton"></div>
+				<div id="down" class="inputDisplayButton"></div>
+				<div id="right" class="inputDisplayButton"></div>
 			</div>
 		</div>
         <script>
