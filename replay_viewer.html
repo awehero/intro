@@ -474,7 +474,9 @@
 				switch (shape) {
 					case "P":
 				        obj = BABYLON.MeshBuilder.CreateBox("P"+platforms.length, { size: 1 }, scene);
-						if (nine.length == 6) {
+						if (typeof nine == 'undefined') {
+							
+						} else if (nine.length == 6) {
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine);
 						} else if (nine.length > 6) {
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine.substring(0,6));
@@ -495,7 +497,9 @@
 						obj.position = new BABYLON.Vector3(zero, one, two);
 						obj.scaling.y = 1.2;
 						cones.push(obj);
-						if (three.length == 6) {
+						if (typeof three == 'undefined') {
+							
+						} else if (three.length == 6) {
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+three);
 						} else if (three.length > 6) {
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+three.substring(0,6));
@@ -514,7 +518,9 @@
 						break;
 				    case "Y":
 				        obj = BABYLON.MeshBuilder.CreateCylinder("Y"+cylinders.length, { height: 1.0, diameter: 1.0, tessellation: 12 }, scene);
-						if (nine.length == 6) {
+						if (typeof nine == 'undefined') {
+							
+						} else if (nine.length == 6) {
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine);
 						} else if (nine.length > 6) {
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine.substring(0,6));
@@ -532,7 +538,9 @@
 						break;
 					case "S":
 						obj = BABYLON.MeshBuilder.CreateSphere("S"+spheres.length, { segments: 10, diameter: 1.0 }, scene);
-						if (four.length == 6) {
+						if (typeof four == 'undefined') {
+							
+						} else if (four.length == 6) {
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+four);
 						} else if (four.length > 6) {
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+four.substring(0,6));
