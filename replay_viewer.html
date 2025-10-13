@@ -149,6 +149,10 @@
 			let slider = document.getElementById("slider");
 			let speed = document.getElementById("speed");
 			let toggleplayer = document.getElementById("togglePlayer");
+			let up = document.getElementById("up");
+			let down = document.getElementById("down");
+			let left = document.getElementById("left");
+			let right = document.getElementById("right");
 			let replayData = "";
 			let nodes = [];
 			let state = "pause";
@@ -344,9 +348,33 @@
 					players[i].scaling.y = nodes[i][score].sy;
 					players[i].scaling.z = nodes[i][score].sz;
 					if (activeCamera == followCamera) {
-						rotation = nodes[players.indexOf(activePlayer)][score].r;
+						let playerIndex = players.indexOf(activePlayer);
+						rotation = nodes[playerIndex][score].r;
+						updateInputDisplay(playerIndex);
 						// fps.value = nodes[players.indexOf(activePlayer)][score].fps;
 					}
+				}
+			}
+			function updateInputDisplay(p) {
+				if (nodes[p][score].w) {
+					up.innerHTML = svgs.up_pressed;
+				} else {
+					up.innerHTML = svgs.up;
+				}
+				if (nodes[p][score].s) {
+					down.innerHTML = svgs.down_pressed;
+				} else {
+					down.innerHTML = svgs.down;
+				}
+				if (nodes[p][score].a) {
+					left.innerHTML = svgs.left_pressed;
+				} else {
+					left.innerHTML = svgs.left;
+				}
+				if (nodes[p][score].d) {
+					right.innerHTML = svgs.right_pressed;
+				} else {
+					right.innerHTML = svgs.right;
 				}
 			}
 
