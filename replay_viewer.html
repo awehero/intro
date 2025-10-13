@@ -144,6 +144,24 @@
 			let state = "pause";
 			let score = 0;
 			let interval;
+			const svgs = {};
+			const svgUrls = {
+				up: "https://awehero.github.io/intro/svgs/arrow-up-square.svg",
+				down: "https://awehero.github.io/intro/svgs/arrow-down-square.svg",
+				left: "https://awehero.github.io/intro/svgs/arrow-left-square.svg",
+				right: "https://awehero.github.io/intro/svgs/arrow-right-square.svg",
+				up_pressed: "https://awehero.github.io/intro/svgs/arrow-up-square-fill.svg",
+				down_pressed: "https://awehero.github.io/intro/svgs/arrow-down-square-fill.svg",
+				left_pressed: "https://awehero.github.io/intro/svgs/arrow-left-square-fill.svg",
+				right_pressed: "https://awehero.github.io/intro/svgs/arrow-right-square-fill.svg",
+			};
+			Promise.all(Object.entries(svgUrls).map(async ([key, url]) => {
+				const res = await fetch(url);
+				svgs[key] = await res.text();
+			}))
+			.then(() => {
+			  console.log("All SVGs loaded!");
+			});
 			fetch('https://awehero.github.io/intro/minitools/mapdata.js')
 				.then(response => response.text())
 				.then(code => {
