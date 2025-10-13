@@ -195,9 +195,9 @@
 								let suggestionItem = document.createElement("div");
 								suggestionItem.classList.add("suggestion-item");
 								suggestionItem.textContent = replay.username;
-								suggestionItem.id = replay.username;
+								suggestionItem.id = replay.userUuid;
 								suggestionItem.addEventListener("click", function() {
-									useruuid.value = this.userUuid;
+									useruuid.value = this.id;
 									findReplay();
 									replays.style.display = "none";
 								});
