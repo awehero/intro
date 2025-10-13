@@ -129,7 +129,7 @@
         <canvas id="canvas"></canvas>
 		<button id="playpause" onclick="togglePlayPause()"></button>
 		<input id="slider" type="range" name="slider" min="0" max="100" value="0">
-		<!-- <input id="speed" type -->
+		<input id="speed" type="range" name="speed" min="0.1" max="5" value="1">
 		<button id="togglePlayer" onclick="togglePlayer()">Toggle Player</button>
         <script>
 			let input = document.getElementById("input");
@@ -137,6 +137,7 @@
 			let suggestions = document.getElementById("suggestions");
 			let replays = document.getElementById("replays");
 			let slider = document.getElementById("slider");
+			let speed = document.getElementById("speed");
 			let toggleplayer = document.getElementById("togglePlayer");
 			let replayData = "";
 			let nodes = [];
@@ -293,7 +294,7 @@
 						score++;
 					}
 				}
-			}, 10);
+			}, ((1000 / 60) / speed.value));
 
 			function moveNodes() {
 				for (var i = 0; i < nodes.length; i++) {
