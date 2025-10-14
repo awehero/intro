@@ -92,7 +92,7 @@
 				display: none;
 				padding-left: 5px;
 	    		padding-right: 5px;
-				column-count: 5;
+				columns: 10;
     			column-gap: 5px;
 			}
 			.suggestion-item {
@@ -626,11 +626,11 @@
 						} else {
 							switch (nine) {
 								case "-1": mat.alpha = 0; break;
-								case "0": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/skins/main.png", scene); break;
-								case "0a": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/skins/main.png", scene); break;
-								case "0b": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/skins/bright.png", scene); break;
-								case "1": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/skins/pm1.png", scene); break;
-								case "2": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/skins/pm2.png", scene); break;
+								case "0": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/textures/main.png", scene); break;
+								case "0a": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/textures/main.png", scene); break;
+								case "0b": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/textures/bright.png", scene); break;
+								case "1": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/textures/pm1.png", scene); break;
+								case "2": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/textures/pm2.png", scene); break;
 							}
 						}
 						obj.material = mat;
