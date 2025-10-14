@@ -375,10 +375,10 @@
 					nodes[nodes.length] = data.replayNodes;
 					nodesList[nodesList.length] = replayData.find(rep=>rep.userUuid == userUuid.value);
 					let sliderTemp = 0;
-					for (var i = 0; i < nodes.length; i++) {
-						if (nodes[i].length > sliderTemp) {
-							sliderTemp = nodes[i].length - 1;
-						}
+					for (var i = 0; i < nodesList.length; i++) {
+					    if (nodesList[i].timeInFrames > sliderTemp) {
+					        sliderTemp = nodesList[i].timeInFrames - 1;
+					    }
 					}
 					slider.max = sliderTemp;
 					for (var i = 0; i < nodes.length; i++) {
