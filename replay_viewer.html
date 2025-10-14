@@ -317,6 +317,13 @@
 									if (this.style.backgroundColor == "lightgreen") {
 										this.style.backgroundColor = "";
 										let index = nodesList.findIndex(rep => rep.userUuid == this.id);
+										if (players[index] == activePlayer) {
+											if (players.length == 1) {
+												activePlayer = player;
+											} else {
+												togglePlayer();
+											}
+										}
 										nodes.splice(index, 1);
 										nodesList.splice(index, 1);
 										scene.meshes[scene.meshes.indexOf(players[index])].dispose()
@@ -382,6 +389,9 @@
 					mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/skins/"+skinUrl+".png", scene);
 					playernext.material = mat;
 					players.push(playernext);
+					if (activePlayer == player) {
+						activePlayer = playernext;
+					}
 					let sliderTemp = 0;
 					for (var i = 0; i < nodesList.length; i++) {
 					    if (nodesList[i].timeInFrames > sliderTemp) {
