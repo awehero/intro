@@ -624,7 +624,7 @@
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine.substring(0,6));
 							mat.alpha = parseFloat(nine.substring(7));
 						} else {
-							switch (nine) {
+							switch (String(nine)) {
 								case "-1": mat.alpha = 0; break;
 								case "0": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/textures/main.png", scene); break;
 								case "0a": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/textures/main.png", scene); break;
@@ -652,8 +652,8 @@
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+three.substring(0,6));
 							mat.alpha = parseFloat(three.substring(7));
 						} else {
-							switch (parseFloat(three)) {
-								case -1: mat.alpha = 0; break;
+							switch (String(three)) {
+								case "-1": mat.alpha = 0; break;
 							}
 						}
 						obj.material = mat;
@@ -673,8 +673,8 @@
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine.substring(0,6));
 							mat.alpha = parseFloat(nine.substring(7));
 						} else {
-							switch (parseFloat(nine)) {
-								case -1: mat.alpha = 0; break;
+							switch (String(nine)) {
+								case "-1": mat.alpha = 0; break;
 							}
 						}
 						obj.material = mat;
@@ -693,8 +693,8 @@
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+four.substring(0,6));
 							mat.alpha = parseFloat(four.substring(7));
 						} else {
-							switch (parseFloat(four)) {
-								case -1: mat.alpha = 0; break;
+							switch (String(four)) {
+								case "-1": mat.alpha = 0; break;
 							}
 						}
 						obj.material = mat;
