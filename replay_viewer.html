@@ -220,6 +220,7 @@
 			let right = document.getElementById("right");
 			let replayData = "";
 			let nodes = [];
+			let nodesList = [];
 			let state = "pause";
 			let score = 0;
 			let interval;
@@ -313,10 +314,16 @@
 									</span>`;
 								replayItem.id = replay.userUuid;
 								replayItem.addEventListener("click", function() {
-									userUuid.value = this.id;
-									useruuidContainer.style.display = "none";
-									loading.style.display = "block";
-									findReplay();
+									if (this.style.backgroundColor == "lightgreen") {
+										this.style.backgroundColor = "";
+										
+									} else {
+										userUuid.value = this.id;
+										this.style.backgroundColor = "lightgreen";
+										useruuidContainer.style.display = "none";
+										loading.style.display = "block";
+										findReplay();
+									}
 								});
 								replays.appendChild(replayItem);
 							});
@@ -364,6 +371,7 @@
 					useruuidContainer.style.display = "block";
 					loading.style.display = "none";
 					nodes[nodes.length] = data.replayNodes;
+					nodesList[nodes.length] = replayData.find(rep=>rep.userUuid == userUuid.value);
 					let sliderTemp = 0;
 					for (var i = 0; i < nodes.length; i++) {
 						if (nodes[i].length > sliderTemp) {
@@ -572,6 +580,7 @@
 					}
 				}
 				nodes = [];
+				nodesList = [];
 				mapfile = mapfile.replace(/\s+/g,"");
 				objects = mapfile.substring(mapfile.indexOf("init:"),mapfile.indexOf("post:"));
 				objects = objects.substring(objects.indexOf("{")+1,objects.indexOf("}"));
