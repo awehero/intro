@@ -314,8 +314,8 @@
 								replayItem.id = replay.userUuid;
 								replayItem.addEventListener("click", function() {
 									userUuid.value = this.id;
-									replays.style.display = "none";
-									loading.style.display = "block"
+									useruuidContainer.style.display = "none";
+									loading.style.display = "block";
 									findReplay();
 								});
 								replays.appendChild(replayItem);
@@ -361,7 +361,7 @@
 				})
 				.then(response => response.json())
 				.then(data => {
-					replays.style.display = "block";
+					useruuidContainer.style.display = "block";
 					loading.style.display = "none";
 					nodes[nodes.length] = data.replayNodes;
 					let sliderTemp = 0;
