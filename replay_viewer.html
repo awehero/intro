@@ -316,7 +316,9 @@
 								replayItem.addEventListener("click", function() {
 									if (this.style.backgroundColor == "lightgreen") {
 										this.style.backgroundColor = "";
-										
+										let index = nodesList.findIndex(rep => rep.userUuid == this.id);
+										nodes.splice(index, 1);
+										nodesList.splice(index, 1);
 									} else {
 										userUuid.value = this.id;
 										this.style.backgroundColor = "lightgreen";
