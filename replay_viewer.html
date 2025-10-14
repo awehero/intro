@@ -85,13 +85,15 @@
 			#replays {
 				position: absolute;
 			    max-height: 12em;
-				width: 15em;
+				width: 95%;
 			    overflow: auto;
 			    background-color: white;
 			    border: 1px solid black;
 				display: none;
 				padding-left: 5px;
 	    		padding-right: 5px;
+				column-count: 5;
+    			column-gap: 5px;
 			}
 			.suggestion-item {
 				font-size: 1em;
@@ -102,6 +104,17 @@
 				margin-bottom: 10px;
 			}
 			.suggestion-item:hover {
+				background-color: #f0f0f0;
+			}
+			.replay-item {
+				font-size: 0.7em;
+				cursor: pointer;
+				border: 2px solid black;
+			    border-radius: 5px;
+			    padding-left: 5px;
+				margin-bottom: 10px;
+			}
+			.replay-item:hover {
 				background-color: #f0f0f0;
 			}
 			#canvas {
@@ -117,8 +130,8 @@
 				position: absolute;
 				bottom: 2%;
 				left: 2%;
-				width: 120px;
-				height: 120px;
+				width: 15%;
+				height: 15%;
 				border: 2px solid black;
 				border-radius: 10px;
 				display: flex;
@@ -292,7 +305,7 @@
 							replays.innerHTML = '';
 							replayData.forEach(replay=>{
 								let replayItem = document.createElement("div");
-								replayItem.classList.add("suggestion-item");
+								replayItem.classList.add("replay-item");
 								replayItem.innerHTML = `
 									<span id=${replay.username}>
 										${replay.username}
