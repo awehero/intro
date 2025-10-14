@@ -108,7 +108,7 @@
 				width: 100%;
 				height: 50%;
 				touch-action: none;
-				margin-top: 10%;
+				margin-top: 5%;
 			}
 			#slider {
 				width: 75%;
@@ -288,30 +288,29 @@
 						loading.style.display = "none"
 						useruuidContainer.style.display = "block";
 						replayData = data.replayListings;
-						userUuid.addEventListener('input', function() {
-							let text = userUuid.value.toLowerCase();
-							let filterReplays = replayData.filter(function(replay) {
-							    return (replay.username.indexOf(text.toLowerCase()) != -1)
-							});
-							if (filterReplays.length > 0) {
-								replays.innerHTML = '';
-								filterReplays.forEach(replay=>{
-									let suggestionItem = document.createElement("div");
-									suggestionItem.classList.add("suggestion-item");
-									suggestionItem.textContent = replay.username;
-									suggestionItem.id = replay.userUuid;
-									suggestionItem.addEventListener("click", function() {
-										userUuid.value = this.id;
-										findReplay();
-										replays.style.display = "none";
-									});
-									replays.appendChild(suggestionItem);
+						if (replayData.length > 0) {
+							replays.innerHTML = '';
+							replayData.forEach(replay=>{
+								let replayItem = document.createElement("div");
+								replayItem.classList.add("suggestion-item");
+								replayItem.innerHTML = `
+									<span id=${replay.username}>
+										${replay.username}
+										<div value="✅">
+									</span>`;
+								replayItem.id = replay.userUuid;
+								replayItem.addEventListener("click", function() {
+									userUuid.value = this.id;
+									replays.style.display = "none";
+									loading.style.display = "block"
+									findReplay();
 								});
-								replays.style.display = "block";
-							} else {
-								replays.style.display = "none";
-							}
-						});
+								replays.appendChild(replayItem);
+							});
+							replays.style.display = "block";
+						} else {
+							replays.innerHTML = "No replays found!";
+						}
 					})
 					.catch(error => console.error('Error:' + error));
 			}
@@ -349,6 +348,8 @@
 				})
 				.then(response => response.json())
 				.then(data => {
+					replays.style.display = "block";
+					loading.style.display = "none";
 					nodes[nodes.length] = data.replayNodes;
 					let sliderTemp = 0;
 					for (var i = 0; i < nodes.length; i++) {
