@@ -153,6 +153,9 @@
 			    image-rendering: pixelated;
 			    position: absolute;
 			}
+			#useruuidContainer {
+				display: none;
+			}
 	    </style>
 	</head>
     <body>
@@ -162,9 +165,11 @@
 		<div id="suggestions"></div><br>
 		
 		<img id="loading" src="https://awehero.github.io/intro/gifs/loading.gif">
-		<p>Enter a UserUUID</p>
-		<input id="userUuid"><br>
-		<div id="replays"></div><br>
+		<div id="useruuidContainer">
+			<p>Enter a UserUUID</p>
+			<input id="userUuid"><br>
+			<div id="replays"></div><br>
+		</div>
 	
         <!-- <button onclick="findReplay()">Go!</button> -->
 		<br>
@@ -187,7 +192,9 @@
         <script>
 			let input = document.getElementById("input");
 			let userUuid = document.getElementById("userUuid");
+			let useruuidContainer = document.getElementById("useruuidContainer");
 			let suggestions = document.getElementById("suggestions");
+			let loading = document.getElementById("loading");
 			let replays = document.getElementById("replays");
 			let slider = document.getElementById("slider");
 			let speed = document.getElementById("speed");
@@ -277,6 +284,8 @@
 					})
 					.then(response => response.json())
 					.then(data => {
+						loading.style.display = "none"
+						useruuidContainer.style.display = "block";
 						replayData = data.replayListings;
 						userUuid.addEventListener('input', function() {
 							let text = userUuid.value.toLowerCase();
@@ -308,6 +317,7 @@
 			
 			function getMap() {
 			    let map = input.value.trim();
+				loading.style.display = "block";
 			    fetch('https://icedodo.onionfist.com/maps/' + map + '.js')
 			        .then(response => {
 			            if (!response.ok) throw new Error('HTTP ' + response.status);
