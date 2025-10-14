@@ -319,6 +319,8 @@
 										let index = nodesList.findIndex(rep => rep.userUuid == this.id);
 										nodes.splice(index, 1);
 										nodesList.splice(index, 1);
+										scene.meshes[scene.meshes.indexOf(players[index])].dispose()
+										players.splice(index, 1);
 									} else {
 										userUuid.value = this.id;
 										this.style.backgroundColor = "lightgreen";
@@ -374,6 +376,12 @@
 					loading.style.display = "none";
 					nodes[nodes.length] = data.replayNodes;
 					nodesList[nodesList.length] = replayData.find(rep=>rep.userUuid == userUuid.value);
+					var playernext = BABYLON.MeshBuilder.CreateBox('player' + players.length, { width: 0.5, height: 0.08, depth: 0.5 }, scene);
+					let skinUrl = skins[nodesList[players.length].skinId];
+					let mat = new BABYLON.StandardMaterial("mat", scene);
+					mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/skins/"+skinUrl+".png", scene);
+					playernext.material = mat;
+					players.push(playernext);
 					let sliderTemp = 0;
 					for (var i = 0; i < nodesList.length; i++) {
 					    if (nodesList[i].timeInFrames > sliderTemp) {
@@ -495,27 +503,9 @@
 		    window.cam_horizontal = radius * radius;
 		    window.cam_vertical = cam_horizontal * Math.tan(radius * 1.3);
 		    window.cam_depression = 0.3;
-			var player1 = BABYLON.MeshBuilder.CreateBox('player1', { width: 0.5, height: 0.08, depth: 0.5 }, scene);
-			players.push(player1);
-			var player2 = BABYLON.MeshBuilder.CreateBox('player2', { width: 0.5, height: 0.08, depth: 0.5 }, scene);
-			players.push(player2);
-			var player3 = BABYLON.MeshBuilder.CreateBox('player3', { width: 0.5, height: 0.08, depth: 0.5 }, scene);
-			players.push(player3);
-			var player4 = BABYLON.MeshBuilder.CreateBox('player4', { width: 0.5, height: 0.08, depth: 0.5 }, scene);
-			players.push(player4);
-			var player5 = BABYLON.MeshBuilder.CreateBox('player5', { width: 0.5, height: 0.08, depth: 0.5 }, scene);
-			players.push(player5);
-			var player6 = BABYLON.MeshBuilder.CreateBox('player6', { width: 0.5, height: 0.08, depth: 0.5 }, scene);
-			players.push(player6);
-			var player7 = BABYLON.MeshBuilder.CreateBox('player7', { width: 0.5, height: 0.08, depth: 0.5 }, scene);
-			players.push(player7);
-			var player8 = BABYLON.MeshBuilder.CreateBox('player8', { width: 0.5, height: 0.08, depth: 0.5 }, scene);
-			players.push(player8);
-			var player9 = BABYLON.MeshBuilder.CreateBox('player9', { width: 0.5, height: 0.08, depth: 0.5 }, scene);
-			players.push(player9);
-			var player10 = BABYLON.MeshBuilder.CreateBox('player10', { width: 0.5, height: 0.08, depth: 0.5 }, scene);
-			players.push(player10);
-			var activePlayer = player1;
+			var player = BABYLON.MeshBuilder.CreateBox('player', { width: 0.5, height: 0.08, depth: 0.5 }, scene);
+			player.isVisible = false;
+			var activePlayer = player;
 			function updateFollowCamera() {
 		    	const rotation_offsetted = window.rotation + window.cameraRightAngle;
 		        followCamera.position.x = activePlayer.position.x + Math.sin(rotation_offsetted) * window.cam_horizontal;
