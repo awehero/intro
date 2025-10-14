@@ -364,6 +364,14 @@
 			        })
 			        .then(code => {
 			            mapfile = code;
+						score = 0;
+						if (state == "play") {
+							togglePlayPause();
+						}
+						moveNodes();
+						nodes = [];
+						nodesList = [];
+						players = [];
 						loadMap();
 			        })
 			        .catch(error => console.error('Error: ' + error));
@@ -593,8 +601,6 @@
 						scene.meshes[i].dispose();
 					}
 				}
-				nodes = [];
-				nodesList = [];
 				mapfile = mapfile.replace(/\s+/g,"");
 				objects = mapfile.substring(mapfile.indexOf("init:"),mapfile.indexOf("post:"));
 				objects = objects.substring(objects.indexOf("{")+1,objects.indexOf("}"));
