@@ -170,6 +170,12 @@
 			#useruuidContainer {
 				display: none;
 			}
+			#fps {
+				position: absolute;
+				bottom: -2%;
+				left: 7%;
+				color: lightgray;
+			}
 	    </style>
 	</head>
     <body>
@@ -203,6 +209,7 @@
 				<div id="right" class="inputDisplayButton"></div>
 			</div>
 		</div>
+		<div id="fps">FPS:</div>
         <script>
 			let input = document.getElementById("input");
 			let userUuid = document.getElementById("userUuid");
@@ -218,6 +225,7 @@
 			let down = document.getElementById("down");
 			let left = document.getElementById("left");
 			let right = document.getElementById("right");
+			let fps = document.getElementById("fps");
 			let replayData = "";
 			let nodes = [];
 			let nodesList = [];
@@ -455,7 +463,7 @@
 						let playerIndex = players.indexOf(activePlayer);
 						rotation = nodes[playerIndex][score].r;
 						updateInputDisplay(playerIndex);
-						// fps.value = nodes[players.indexOf(activePlayer)][score].fps;
+						fps.innerText = `FPS: ${Math.round(nodes[playerIndex][score].fps)}`
 					}
 				}
 			}
@@ -560,8 +568,12 @@
 					activeCamera.detachControl();
 					if (activeCamera === followCamera) {
 						activeCamera = freeCamera;
+						inputDisplay.style.display = "none";
+						fps.style.display = "none";
 					} else {
 						activeCamera = followCamera;
+						inputDisplay.style.display = "flex";
+						inputDisplay.style.display = "block";
 					}
 					scene.activeCamera = activeCamera;
 					activeCamera.attachControl(canvas, true);
