@@ -628,7 +628,7 @@
 					case "P":
 				        obj = BABYLON.MeshBuilder.CreateBox("P"+platforms.length, { size: 1 }, scene);
 						if (typeof nine == 'undefined') {
-							mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/skins/main.png", scene);
+							mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/textures/main.png", scene);
 						} else if (nine.length == 6) {
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine);
 						} else if (nine.length > 6) {
