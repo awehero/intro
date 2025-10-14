@@ -438,7 +438,6 @@
 			let mapfile = "";
 			let players = [];
 			let skins = ["default","pilot","carrot","rocky","dodo","skilled","furby","doom","kazil","zhou","ye","tim","ghoul","abc","rytai","moosh","dark","awehero","jay","golden","bean","fish","thero","crazy","june","sleepy","mango","insolence","squirrel","painbumpo","modded","collab","og","ultrahard","diff1","diff2","diff3","diff4","diff5","diff6","diff7","diff8","diff9","diff10","diff11","pointsa","pointsb","pointsc","pointsd","pointse","pointsf","pointsg","percenta","percentb","percentc","percentd","percente","puzzlea","puzzleb"];
-			let 
 			var canvas = document.getElementById("canvas");
             var engine = new BABYLON.Engine(canvas, true);
 			var scene = new BABYLON.Scene(engine);
@@ -586,15 +585,20 @@
 					case "P":
 				        obj = BABYLON.MeshBuilder.CreateBox("P"+platforms.length, { size: 1 }, scene);
 						if (typeof nine == 'undefined') {
-							
+							mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/skins/main.png", scene);
 						} else if (nine.length == 6) {
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine);
 						} else if (nine.length > 6) {
 							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine.substring(0,6));
 							mat.alpha = parseFloat(nine.substring(7));
 						} else {
-							switch (parseFloat(nine)) {
-								case -1: mat.alpha = 0; break;
+							switch (nine) {
+								case "-1": mat.alpha = 0; break;
+								case "0": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/skins/main.png", scene); break;
+								case "0a": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/skins/main.png", scene); break;
+								case "0b": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/skins/bright.png", scene); break;
+								case "1": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/skins/pm1.png", scene); break;
+								case "2": mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/skins/pm2.png", scene); break;
 							}
 						}
 						obj.material = mat;
