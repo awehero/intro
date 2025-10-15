@@ -602,6 +602,108 @@
 						scene.meshes[i].dispose();
 					}
 				}
+				 let section ='';
+				if (mapfile.indexOf("reset: function") == -1) {
+				    section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset:function"));
+				} else {
+				    section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset: function"));
+				}
+				function replaceMsgWithASCII(inputASCII) {
+				    return inputASCII.replace(/a\.msg_set\("([^"]*)"\);/g, (match, p1) => {
+				        const asciiValues = Array.from(p1).map(char => char.charCodeAt(0));
+				        const asciiString = asciiValues.join('?');
+				        return `msg=${asciiString};`;
+				    });
+				}
+				section = replaceMsgWithASCII(section);
+				let sectionTwo = section.replace(/\s+/g, "")
+				                .replace(/\"/g, "")
+				                .replace(/\'/g, "")
+				                .replace(/section_update:function\(\){/g, "")
+				                .replace(/letPZ=player\.position\.z;switch\(this\.section_id\){/g, "")
+				                .replace(/if\(PZ</g, "")
+				                .replace(/this\.section_id\+=1}break;/g, "")
+				                .replace(/case/g, "")
+				                .replace(/default_speed\*/g, "")
+				                .replace(/default_steer\*/g, "")
+				                .replace(/speed=cc.get\(speed\,null\);/g, "")
+				                .replace(/steer=cc.get\(steer\,null\);/g, "")
+				                .replace(/camera.maxZ=cc.get\(camera.maxZ\,null\);/g, "")
+				                .replace(/light.intensity=cc.get\(light.intensity\,null\);/g, "")
+				                .replace(/spinlock=cc.get\(isSpinLocked\,null\);/g, "")
+				                .replace(/scene.clearColor=cc.get\(scene.clearColor\,null\);/g, "")
+				                .replace(/scene.ambientColor=cc.get\(scene.ambientColor\,null\);/g, "")
+				                .replace(/light.diffuse=cc.get\(light.diffuse\,null\);/g, "")
+				                .replace(/light.specular=cc.get\(light.specular\,null\);/g, "")
+				                .replace(/light.groundColor=cc.get\(light.groundColor\,null\);/g, "")
+				                .replace(/newBABYLON.Color3.FromHexString\(\#/g, "")
+				                .replace(/a.jh\(null\);/g, "")
+				                .replace(/a.js\(null\);/g, "")
+				                .replace(/a.g\(null,null,null\);/g, "")
+				                .replace(/a.t\(null,null,null\);/g, "")
+				                .replace(/a.d\(null,null,null\);/g, "")
+				                .replace(/a.cam_cd\(null\);/g, "")
+				                .replace(/a.cam_cr\(null\);/g, "")
+				                .replace(/a.cam_d\(null\);/g, "")
+				                .replace(/a.fov_mul2\(\);/g, "")
+				                .replace(/a.msg_del\(\);/g, "")
+				                .replace(/\*Math.PI\/180/g, "");
+				let sectionThree = sectionTwo.split(":");
+				let sectionFour = [];
+				for (var i = 1; i < sectionThree.length; i++) {
+				        sectionFour.push(sectionThree[i].substring(0,sectionThree[i].length - (i.toString().length)));
+				}
+				for (var i = 0; i < sectionFour.length; i++) {
+				    sectionFour[i] = sectionFour[i].replace(/}/g, "");
+				    if (sectionFour[i].substring(sectionFour[i].length - 1) == ';') {
+				        sectionFour[i] = sectionFour[i].substring(0,sectionFour[i].length - 1);
+				    } else if (sectionFour[i].substring(sectionFour[i].length - 2) == '\)\{') {
+				        sectionFour[i] = sectionFour[i].substring(0,sectionFour[i].length - 2);
+				    }
+				    sectionFour[i] = sectionFour[i].split(/;|\)\{/);
+				}
+				let sectionFive = [];
+				for (var i = 0; i < sectionFour.length; i++) {
+				    sectionFive[i] = [];
+				    let numSpot = 0;
+				    for (var j = 0; j < sectionFour[i].length; j++) {
+				        if (sectionFour[i][j] * 0 == 0) {
+				            numSpot = j;
+				        }
+				    }
+				    for (var j = 0; j < sectionFour[i].length; j++) {
+				        if (j < numSpot) {
+				            sectionFive[i-1].push(sectionFour[i][j]);
+				        } else {
+				            sectionFive[i].push(sectionFour[i][j]);
+				        }
+				    }
+				}
+				for (var i = 0; i < sectionFive.length / 2; i++) {
+				    let planeArray = [];
+				    planeArray.push(0);
+				    planeArray.push(0);
+				    planeArray.push(-2100);
+				    planeArray.push(0);
+				    planeArray.push(0);
+				    planeArray.push(0);
+				    planeArray.push(100000);
+				    planeArray.push(0);
+				    planeArray.push(100);
+				    planeArray.push("");
+				    planes.push(planeArray);
+				}
+				if (Math.round(sectionFive.length / 2) != sectionFive.length / 2) {
+				    alert("Invalid number of planes! Please send Awehero the data and ask him to fix the plane count!");
+				}
+				let red = '';
+				let orange = '';
+				for (var i = 0; i < sectionFive.length; i+=2) {
+				    red = Math.round(parseFloat(sectionFive[i][0]) * 10000) / 10000;
+				    orange = Math.round(parseFloat(sectionFive[i+1][0]) * 10000) / 10000;
+				    planes[i/2][1] = Math.round((((red - orange) / 2) + orange) * 100000) / 1000;
+				    planes[i/2][7] = Math.round(((red - orange) / 0.02) * 10000) / 10000;
+				}
 				mapfile = mapfile.replace(/\s+/g,"");
 				objects = mapfile.substring(mapfile.indexOf("init:"),mapfile.indexOf("post:"));
 				objects = objects.substring(objects.indexOf("{")+1,objects.indexOf("}"));
