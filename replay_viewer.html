@@ -602,6 +602,130 @@
 						scene.meshes[i].dispose();
 					}
 				}
+				let postOne = '';
+				if (mapfile.indexOf("section_id: 0") == -1) {
+					postOne = mapfile.substring(mapfile.indexOf("post"),mapfile.indexOf("section_id:0"));
+				} else {
+					postOne = mapfile.substring(mapfile.indexOf("post"),mapfile.indexOf("section_id: 0"));
+				}
+				let post = postOne.substring(postOne.indexOf("cc"));
+				post = post.replace(/\s+/g, "")
+							.replace(/"/g, "")
+							.replace(/cc\.set_monkey\(/g, "")
+							.replace(/speed,0.2\);/g, "")
+							.replace(/steer,0.03\);/g, "")
+							.replace(/\)/g, "")
+							.replace(/jumpSpeed/g, "js")
+							.replace(/jumpHeight/g, "jh")
+							.replace(/steer,default_steer\*/g, "turn,")
+							.replace(/speed,default_speed\*/g, "speed,")
+							.replace(/radius/g, "d")
+							.replace(/camera\.maxZ/g, "eye")
+							.replace(/camera\.fovmul2/g, "fov")
+							.replace(/cameraDownAngle/g, "cd")
+							.replace(/cameraRightAngle/g, "cr")
+							.replace(/\*Math\.PI\/180/g, "")
+							.replace(/light\.intensity/g, "br")
+							.replace(/scene\.clearColor,newBABYLON\.Color3\.FromHexString\(#/g, "bg,")
+							.replace(/scene\.ambientColor,newBABYLON\.Color3\.FromHexString\(#/g, "amb,")
+							.replace(/light\.groundColor,newBABYLON\.Color3\.FromHexString\(#/g, "gro,")
+							.replace(/light\.diffuse,newBABYLON\.Color3\.FromHexString\(#/g, "dif,")
+							.replace(/light\.specular,newBABYLON\.Color3\.FromHexString\(#/g, "spe,")
+							.replace(/gravity,newBABYLON\.Vector3\(/g, "gravity,")
+							.replace(/camera\.upVector,newBABYLON\.Vector3\(/g, "tilt,")
+							.replace(/player\.scaling,newBABYLON\.Vector3\(/g, "dodoScale,")
+							.replace(/isSpinLocked,true/, "sl,on")
+							.replace(/isSpinLocked,false/, "sl,off")
+							.replace(/cc.refresh\(;/g, "")
+				post = post.substring(0,post.length-3);
+				post = post.split(";");
+				for (var i=0; i < post.length; i++) {
+					if (post[i].length <= 10) {
+						post[i] = post[i].replace(/,/g, "=");
+					} else if (post[i].substring(0,4) == "grav") {
+						let gravHelp = "";
+						if (post[i].split(",")[1] != "null") {
+								gravHelp = "gx=" + post[i].split(",")[1]/-9;
+						}
+						if (post[i].split(",")[2] != "null") {
+							if (gravHelp == "") {
+								gravHelp = "gy=" + post[i].split(",")[2]/-9;
+							} else {
+								gravHelp = gravHelp + "?gy=" + post[i].split(",")[2]/-9
+							}
+						}
+						if (post[i].split(",")[3] != "null") {
+							if (gravHelp == "") {
+								gravHelp = "gz=" + post[i].split(",")[3]/-9;
+							} else {
+								gravHelp = gravHelp + "?gz=" + post[i].split(",")[3]/-9
+							}
+						}
+						post[i] = gravHelp;
+					} else if (post[i].substring(0,4) == "tilt") {
+						let tiltHelp = "";
+						if (post[i].split(",")[1] != "null") {
+								tiltHelp = "tx=" + post[i].split(",")[1];
+						}
+						if (post[i].split(",")[2] != "null") {
+							if (tiltHelp == "") {
+								tiltHelp = "ty=" + post[i].split(",")[2];
+							} else {
+								tiltHelp = tiltHelp + "?ty=" + post[i].split(",")[2]
+							}
+						}
+						if (post[i].split(",")[3] != "null") {
+							if (tiltHelp == "") {
+								tiltHelp = "tz=" + post[i].split(",")[3];
+							} else {
+								tiltHelp = tiltHelp + "?tz=" + post[i].split(",")[3]
+							}
+						}
+						post[i] = tiltHelp;
+					} else if (post[i].substring(0,4) == "dodo") {
+						let dodoHelp = "";
+						if (post[i].split(",")[1] != "null") {
+								dodoHelp = "dx=" + post[i].split(",")[1];
+						}
+						if (post[i].split(",")[2] != "null") {
+							if (dodoHelp == "") {
+								dodoHelp = "dy=" + post[i].split(",")[2];
+							} else {
+								dodoHelp = dodoHelp + "?dy=" + post[i].split(",")[2]
+							}
+						}
+						if (post[i].split(",")[3] != "null") {
+							if (dodoHelp == "") {
+								dodoHelp = "dz=" + post[i].split(",")[3];
+							} else {
+								dodoHelp = dodoHelp + "?dz=" + post[i].split(",")[3]
+							}
+						}
+						post[i] = dodoHelp;
+					}
+				}
+				let name = "";
+				for (var i = 0; i < post.length; i++) {
+					if (i != post.length - 1) {
+						name = name + post[i] + "?";
+					} else {
+						name = name + post[i];
+					}
+				}
+				if (name.length != 0) {
+					let monkeyTemp = [];
+					monkeyTemp.push(0);
+					monkeyTemp.push(1500);
+					monkeyTemp.push(1500);
+					monkeyTemp.push(0);
+					monkeyTemp.push(0);
+					monkeyTemp.push(0);
+					monkeyTemp.push(50);
+					monkeyTemp.push(50);
+					monkeyTemp.push(50);
+					monkeyTemp.push(name);
+					monkeys.push(monkeyTemp);
+				}
 				let section = "";
 				if (mapfile.indexOf("reset: function") == -1) {
 				    section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset:function"));
