@@ -520,6 +520,9 @@
 			var canvas = document.getElementById("canvas");
             var engine = new BABYLON.Engine(canvas, true);
 			var scene = new BABYLON.Scene(engine);
+			function am(id) {
+			    return scene.getMeshById(id);
+			}
 			var followCamera = new BABYLON.UniversalCamera("followCamera", new BABYLON.Vector3(0, 5, -10), scene);
 			followCamera.fov = 1.2;
 			let activeCamera = followCamera;
