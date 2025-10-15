@@ -473,6 +473,7 @@
 						updateInputDisplay(playerIndex);
 						fps.innerText = `FPS: ${Math.round(nodes[playerIndex][score].fps)}`
 					}
+					
 				}
 			}
 			function updateInputDisplay(p) {
@@ -513,6 +514,8 @@
 			let monkeys = [];
 			let mapfile = "";
 			let players = [];
+			let defaultbg = "";
+			let planezs = [];
 			let skins = ["default","pilot","carrot","rocky","dodo","skilled","furby","doom","kazil","zhou","ye","tim","ghoul","abc","rytai","moosh","dark","awehero","jay","golden","bean","fish","thero","crazy","june","sleepy","mango","insolence","squirrel","painbumpo","modded","collab","og","ultrahard","diff1","diff2","diff3","diff4","diff5","diff6","diff7","diff8","diff9","diff10","diff11","pointsa","pointsb","pointsc","pointsd","pointse","pointsf","pointsg","percenta","percentb","percentc","percentd","percente","puzzlea","puzzleb"];
 			var canvas = document.getElementById("canvas");
             var engine = new BABYLON.Engine(canvas, true);
@@ -726,6 +729,13 @@
 					monkeyTemp.push(name);
 					monkeys.push(monkeyTemp);
 				}
+				let mVars = monkeys[0][9].split("?");
+				for (var i = 0; i < mVars.length; i++) {
+				    if (mVars[i].substring(0,3) == "bg=") {
+						defaultbg = new BABYLON.Color3.FromHexString("#"+mVars[i].substring(3,9));
+				        scene.clearColor = defaultbg;
+				    }
+				}
 				let section = "";
 				if (mapfile.indexOf("reset: function") == -1) {
 				    section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset:function"));
@@ -802,6 +812,9 @@
 				            sectionFive[i].push(sectionFour[i][j]);
 				        }
 				    }
+				}
+				for (var i = 0; i < sectionFive.length; i+=2) {
+				    planezs.push([sectionFive[i][0], sectionFive[i+1][0]]);
 				}
 				for (var i = 0; i < sectionFive.length / 2; i++) {
 				    let planeArray = [];
