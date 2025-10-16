@@ -551,6 +551,11 @@
 			let defaultbg = "";
 			let planezs = [];
 			let playerzs = [];
+			let section;
+			let sectionTwo;
+			let sectionThree;
+			let sectionFour;
+			let sectionFive;
 			let skins = ["default","pilot","carrot","rocky","dodo","skilled","furby","doom","kazil","zhou","ye","tim","ghoul","abc","rytai","moosh","dark","awehero","jay","golden","bean","fish","thero","crazy","june","sleepy","mango","insolence","squirrel","painbumpo","modded","collab","og","ultrahard","diff1","diff2","diff3","diff4","diff5","diff6","diff7","diff8","diff9","diff10","diff11","pointsa","pointsb","pointsc","pointsd","pointse","pointsf","pointsg","percenta","percentb","percentc","percentd","percente","puzzlea","puzzleb"];
 			var canvas = document.getElementById("canvas");
             var engine = new BABYLON.Engine(canvas, true);
@@ -795,7 +800,7 @@
 					defaultbg = new BABYLON.Color3.FromHexString("#000000");
 					scene.clearColor = defaultbg;
 				}
-				let section = "";
+				section = "";
 				if (mapfile.indexOf("reset: function") == -1) {
 				    section = mapfile.substring(mapfile.indexOf("section_update:"),mapfile.indexOf("reset:function"));
 				} else {
@@ -809,7 +814,7 @@
 				    });
 				}
 				section = replaceMsgWithASCII(section);
-				let sectionTwo = section.replace(/\s+/g, "")
+				sectionTwo = section.replace(/\s+/g, "")
 				                .replace(/\"/g, "")
 				                .replace(/\'/g, "")
 				                .replace(/section_update:function\(\){/g, "")
@@ -841,8 +846,8 @@
 				                .replace(/a.fov_mul2\(\);/g, "")
 				                .replace(/a.msg_del\(\);/g, "")
 				                .replace(/\*Math.PI\/180/g, "");
-				let sectionThree = sectionTwo.split(":");
-				let sectionFour = [];
+				sectionThree = sectionTwo.split(":");
+				sectionFour = [];
 				for (var i = 1; i < sectionThree.length; i++) {
 					sectionFour.push(sectionThree[i].substring(0,sectionThree[i].length - (i.toString().length)));
 				}
@@ -855,7 +860,7 @@
 				    }
 				    sectionFour[i] = sectionFour[i].split(/;|\)\{/);
 				}
-				let sectionFive = [];
+				sectionFive = [];
 				for (var i = 0; i < sectionFour.length; i++) {
 				    sectionFive[i] = [];
 				    let numSpot = 0;
