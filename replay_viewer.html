@@ -507,7 +507,7 @@
 					}
 					let currentActions = actions.filter(pz=>activePlayer.position.z < pz[0] && activePlayer.position.z > pz[1]);
 					for (var i = 0; i < currentActions.length; i++) {
-						let code = currentActions[i][2].substring(6,actions[i][0][2].length-1).split(",");
+						let code = currentActions[i][2].substring(6,actions[i][2].length-1).split(",");
 						switch (currentActions[i][2].substring(0,5)) {
 							case 'a.mov': amov(code); break;
 							case 'a.rot': arot(code); break;
