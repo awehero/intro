@@ -419,15 +419,13 @@
 					loading.style.display = "none";
 					nodes[nodes.length] = data.replayNodes;
 					nodesList[nodesList.length] = replayData.find(rep=>rep.userUuid == userUuid.value);
-					let pIndex = playerzs.length - 1;
-					playerzs.push(new Array(planezs.length).fill(0));
-					for (let i = 0; i < nodes[pIndex].length; i++) {
-					    for (let j = 0; j < planezs.length; j++) {
-					        let pz = nodes[pIndex][i].pz;
-					        if (pz < planezs[j][0] && pz > planezs[j][1]) {
-					            playerzs[pIndex][j]++;
-					        }
-					    }
+					playerzs[playerzs.length] = new Array(planezs.length).fill(0);
+					for (var i = 0; i < nodes[playerzs.length-1].length; i++) {
+						for (var j = 0; j < planezs.length; j++) {
+							if (nodes[playerzs.length-1][i].pz < planezs[j][0] && nodes[playerzs.length-1][i].pz > planezs[j][1]) {
+								playerzs[playerzs.length-1][j]++;
+							}
+						}
 					}
 					var playernext = BABYLON.MeshBuilder.CreateBox('player' + players.length, { width: 0.5, height: 0.08, depth: 0.5 }, scene);
 					let skinUrl = skins[nodesList[players.length].skinId];
