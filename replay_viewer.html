@@ -218,6 +218,7 @@
 			let suggestions = document.getElementById("suggestions");
 			let loading = document.getElementById("loading");
 			let replays = document.getElementById("replays");
+			let playpause = document.getElementById("playpause");
 			let slider = document.getElementById("slider");
 			let speed = document.getElementById("speed");
 			let speedDisplay = document.getElementById("speedDisplay");
@@ -243,6 +244,8 @@
 				down_pressed: "https://awehero.github.io/intro/svgs/arrow-down-square-fill.svg",
 				left_pressed: "https://awehero.github.io/intro/svgs/arrow-left-square-fill.svg",
 				right_pressed: "https://awehero.github.io/intro/svgs/arrow-right-square-fill.svg",
+				play: "https://awehero.github.io/intro/svgs/play_circle.svg",
+				pause: "https://awehero.github.io/intro/svgs/pause_circle.svg",
 			};
 			Promise.all(Object.entries(svgUrls).map(async ([key, url]) => {
 				const res = await fetch(url);
@@ -254,6 +257,7 @@
 				down.innerHTML = svgs.down;
 				left.innerHTML = svgs.left;
 				right.innerHTML = svgs.right;
+				playpause.innerHTML = svgs.play;
 			});
 			fetch('https://awehero.github.io/intro/minitools/mapdata.js')
 				.then(response => response.text())
@@ -448,9 +452,11 @@
 						alert("You have not selected a replay to play!");
 					} else {
 						state = "play";
+						playpause.innerHTML = svgs.pause;
 					}
 				} else {
 					state = "pause";
+					playpause.innerHTML = svgs.play;
 				}
 			}
 
