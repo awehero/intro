@@ -507,9 +507,36 @@
 						updateInputDisplay(playerIndex);
 						fps.innerText = `FPS: ${Math.round(nodes[playerIndex][score].fps)}`
 					}
-					
+					let currentActions = actions.find(pz=>activePlayer.position.z < pz[0][0] && activePlayer.position.z > pz[0][1]);
+					for (var i = 0; i < currentActions.length; i++) {
+						let code = currentActions[i][2].substring(6,actions[1][0][2].length-1).split(",");
+					    switch (currentActions[i][2].substring(0,5)) {
+					        case 'a.mov': amov(code); break;
+					        case 'a.rot': arot(code); break;
+					    }
+					}
 				}
 			}
+			function am(id) {
+			    return scene.getMeshById(id);
+			}
+			function amov(code) {
+			    switch (code[1]) {
+			        case 'x': am(code[0]).position.x += code[2]; break;
+			        case 'y': am(code[0]).position.y += code[2]; break;
+			        case 'z': am(code[0]).position.z += code[2]; break;
+			    }
+			}
+			function arot(code) {
+			    const mesh = am(code[0]);
+			    if (!mesh) return;
+			    const axis = code[1];
+			    const value = Number(code[2]);
+			    if (axis === 'x') mesh.rotation.x += value;
+			    else if (axis === 'y') mesh.rotation.y += value;
+			    else if (axis === 'z') mesh.rotation.z += value;
+			}
+
 			function updateInputDisplay(p) {
 				if (nodes[p][score].w) {
 					up.innerHTML = svgs.up_pressed;
@@ -561,9 +588,6 @@
 			var canvas = document.getElementById("canvas");
             var engine = new BABYLON.Engine(canvas, true);
 			var scene = new BABYLON.Scene(engine);
-			function am(id) {
-			    return scene.getMeshById(id);
-			}
 			var followCamera = new BABYLON.UniversalCamera("followCamera", new BABYLON.Vector3(0, 5, -10), scene);
 			followCamera.fov = 1.2;
 			let activeCamera = followCamera;
