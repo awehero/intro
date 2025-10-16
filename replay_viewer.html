@@ -578,6 +578,8 @@
 			let mapfile = "";
 			let players = [];
 			let defaultbg = "";
+			let default_steer = 0.022;
+			let default_speed = 0.28;
 			let planezs = [];
 			let playerzs = [];
 			let section;
@@ -821,6 +823,12 @@
 					    if (mVars[i].substring(0,3) == "bg=") {
 							defaultbg = new BABYLON.Color3.FromHexString("#"+mVars[i].substring(3,9));
 					        scene.clearColor = defaultbg;
+					    }
+						if (mVars[i].substring(0,6) == "speed=") {
+							default_speed = mVars[i].substring(6,mVars[i].length);
+					    }
+						if (mVars[i].substring(0,6) == "steer=") {
+							default_steer = mVars[i].substring(6,mVars[i].length);
 					    }
 					}
 				} else {
