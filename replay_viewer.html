@@ -732,12 +732,17 @@
 					monkeyTemp.push(name);
 					monkeys.push(monkeyTemp);
 				}
-				let mVars = monkeys[0][9].split("?");
-				for (var i = 0; i < mVars.length; i++) {
-				    if (mVars[i].substring(0,3) == "bg=") {
-						defaultbg = new BABYLON.Color3.FromHexString("#"+mVars[i].substring(3,9));
-				        scene.clearColor = defaultbg;
-				    }
+				if (monkeys.length > 0) {
+					let mVars = monkeys[0][9].split("?");
+					for (var i = 0; i < mVars.length; i++) {
+					    if (mVars[i].substring(0,3) == "bg=") {
+							defaultbg = new BABYLON.Color3.FromHexString("#"+mVars[i].substring(3,9));
+					        scene.clearColor = defaultbg;
+					    }
+					}
+				} else {
+					defaultbg = new BABYLON.Color3.FromHexString("#000000");
+					scene.clearColor = defaultbg;
 				}
 				let section = "";
 				if (mapfile.indexOf("reset: function") == -1) {
