@@ -188,8 +188,8 @@
 		<div id="useruuidContainer">
 			<p>Select replays</p>
 			<input id="userUuid"><br>
-			<div id="replays"></div><br>
 		</div>
+		<div id="replays"></div><br>
 	
         <!-- <button onclick="findReplay()">Go!</button> -->
 		<br>
@@ -309,6 +309,7 @@
 					.then(data => {
 						loading.style.display = "none"
 						useruuidContainer.style.display = "block";
+						replays.style.display = "grid";
 						replayData = data.replayListings;
 						if (replayData.length > 0) {
 							replays.innerHTML = '';
@@ -340,6 +341,7 @@
 										userUuid.value = this.id;
 										this.style.backgroundColor = "lightgreen";
 										useruuidContainer.style.display = "none";
+										replays.style.display = "none";
 										loading.style.display = "block";
 										findReplay();
 									}
@@ -396,6 +398,7 @@
 				.then(response => response.json())
 				.then(data => {
 					useruuidContainer.style.display = "block";
+					replays.style.display = "grid";
 					loading.style.display = "none";
 					nodes[nodes.length] = data.replayNodes;
 					nodesList[nodesList.length] = replayData.find(rep=>rep.userUuid == userUuid.value);
