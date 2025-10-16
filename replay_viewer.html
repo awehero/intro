@@ -353,6 +353,7 @@
 										nodesList.splice(index, 1);
 										scene.meshes[scene.meshes.indexOf(players[index])].dispose()
 										players.splice(index, 1);
+										playerzs.splice(index, 1);
 									} else {
 										userUuid.value = this.id;
 										this.style.backgroundColor = "lightgreen";
@@ -418,6 +419,16 @@
 					loading.style.display = "none";
 					nodes[nodes.length] = data.replayNodes;
 					nodesList[nodesList.length] = replayData.find(rep=>rep.userUuid == userUuid.value);
+					let pIndex = playerzs.length - 1;
+					playerzs.push(new Array(planezs.length).fill(0));
+					for (let i = 0; i < nodes[pIndex].length; i++) {
+					    for (let j = 0; j < planezs.length; j++) {
+					        let pz = nodes[pIndex][i].pz;
+					        if (pz < planezs[j][0] && pz > planezs[j][1]) {
+					            playerzs[pIndex][j]++;
+					        }
+					    }
+					}
 					var playernext = BABYLON.MeshBuilder.CreateBox('player' + players.length, { width: 0.5, height: 0.08, depth: 0.5 }, scene);
 					let skinUrl = skins[nodesList[players.length].skinId];
 					let mat = new BABYLON.StandardMaterial("mat", scene);
@@ -863,7 +874,7 @@
 				    }
 				}
 				for (var i = 0; i < sectionFive.length; i+=2) {
-				    planezs.push([sectionFive[i][0], sectionFive[i+1][0]]);
+				    planezs.push(Number([sectionFive[i][0]), Number(sectionFive[i+1][0]]));
 				}
 				for (var i = 0; i < sectionFive.length / 2; i++) {
 				    let planeArray = [];
