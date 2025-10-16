@@ -330,6 +330,11 @@
 										if (players[index] == activePlayer) {
 											if (players.length == 1) {
 												activePlayer = player;
+												if (state == "play") {
+													togglePlayPause();
+												}
+												score = 0;
+												slider.value = 0;
 											} else {
 												togglePlayer();
 											}
@@ -439,7 +444,11 @@
 			
 			function togglePlayPause() {
 				if (state == "pause") {
-					state = "play";
+					if (players.length == 0) {
+						alert("You have not selected a replay to play!");
+					} else {
+						state = "play";
+					}
 				} else {
 					state = "pause";
 				}
