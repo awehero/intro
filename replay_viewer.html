@@ -640,6 +640,15 @@
 				cylinders = [];
 				spheres = [];
 				monkeys = [];
+				followCamera.position = new BABYLON.Vector3(0, 5, -10);
+				freeCamera.rotation = new BABYLON.Vector3(0, Math.PI, 0);
+				freeCamera.position = followCamera.position;
+				if (activeCamera == freeCamera) {
+					activeCamera = followCamera;
+					inputDisplay.style.display = "flex";
+					inputDisplay.style.display = "block";
+					fps.style.display = "block";
+				}
 				let postOne = '';
 				if (mapfile.indexOf("section_id: 0") == -1) {
 					postOne = mapfile.substring(mapfile.indexOf("post"),mapfile.indexOf("section_id:0"));
