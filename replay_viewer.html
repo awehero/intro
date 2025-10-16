@@ -843,7 +843,7 @@
 				let sectionThree = sectionTwo.split(":");
 				let sectionFour = [];
 				for (var i = 1; i < sectionThree.length; i++) {
-				        sectionFour.push(sectionThree[i].substring(0,sectionThree[i].length - (i.toString().length)));
+					sectionFour.push(sectionThree[i].substring(0,sectionThree[i].length - (i.toString().length)));
 				}
 				for (var i = 0; i < sectionFour.length; i++) {
 				    sectionFour[i] = sectionFour[i].replace(/}/g, "");
@@ -872,7 +872,7 @@
 				    }
 				}
 				for (var i = 0; i < sectionFive.length; i+=2) {
-				    planezs.push(Number([sectionFive[i][0]), Number(sectionFive[i+1][0]]));
+				    planezs.push([Number(sectionFive[i][0]), Number(sectionFive[i+1][0])]);
 				}
 				for (var i = 0; i < sectionFive.length / 2; i++) {
 				    let planeArray = [];
