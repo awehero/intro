@@ -453,7 +453,7 @@
 			function togglePlayPause() {
 				if (state == "pause") {
 					if (players.length == 0) {
-						alert("You have not selected a replay to play!");
+						alert("You must select at least one replay!");
 					} else {
 						state = "play";
 						playpause.innerHTML = svgs.pause;
