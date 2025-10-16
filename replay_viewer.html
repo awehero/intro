@@ -508,12 +508,14 @@
 						fps.innerText = `FPS: ${Math.round(nodes[playerIndex][score].fps)}`
 					}
 					let currentActions = actions.find(pz=>activePlayer.position.z < pz[0][0] && activePlayer.position.z > pz[0][1]);
-					for (var i = 0; i < currentActions.length; i++) {
-						let code = currentActions[i][2].substring(6,actions[1][0][2].length-1).split(",");
-					    switch (currentActions[i][2].substring(0,5)) {
-					        case 'a.mov': amov(code); break;
-					        case 'a.rot': arot(code); break;
-					    }
+					if (!!currentActions) {
+						for (var i = 0; i < currentActions.length; i++) {
+							let code = currentActions[i][2].substring(6,actions[1][0][2].length-1).split(",");
+						    switch (currentActions[i][2].substring(0,5)) {
+						        case 'a.mov': amov(code); break;
+						        case 'a.rot': arot(code); break;
+						    }
+						}
 					}
 				}
 			}
