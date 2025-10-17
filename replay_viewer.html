@@ -837,19 +837,22 @@
 				if (monkeys.length > 0) {
 					let mVars = monkeys[0][9].split("?");
 					if (typeof mVars.find(eff=>eff.substring(0,3) == 'bg=') != 'undefined') {
-						defaultbg = new BABYLON.Color3.FromHexString("#"+mVars[i].substring(3,9));
+						let thing = mVars.find(eff=>eff.substring(0,3) == 'bg=');
+						defaultbg = new BABYLON.Color3.FromHexString("#"+thing.substring(3,9));
 						scene.clearColor = defaultbg;
 					} else {
 						defaultbg = new BABYLON.Color3.FromHexString("#000000");
 						scene.clearColor = defaultbg;
 					}
 					if (typeof mVars.find(eff=>eff.substring(0,6) == 'speed=') != 'undefined') {
-						default_speed = mVars[i].substring(6,mVars[i].length);
+						let thing = mVars.find(eff=>eff.substring(0,6) == 'speed=');
+						default_speed = thing.substring(6,thing.length);
 					} else {
 						default_speed = 0.28;
 					}
 					if (typeof mVars.find(eff=>eff.substring(0,6) == 'steer=') != 'undefined') {
-						default_steer = mVars[i].substring(6,mVars[i].length);
+						let thing = mVars.find(eff=>eff.substring(0,6) == 'steer=');
+						default_steer = thing.substring(6,thing.length);
 					} else {
 						default_steer = 0.022;
 					}
