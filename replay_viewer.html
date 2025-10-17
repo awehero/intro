@@ -526,7 +526,7 @@
 			function am(id) {
 			    return scene.getMeshById(id);
 			}
-			function amov(code) {
+			function amov(code, cur) {
 			    const mesh = am(code[0]);
 			    if (!mesh) return;
 			    const axis = code[1];
