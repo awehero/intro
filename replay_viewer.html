@@ -514,7 +514,7 @@
 						let code = currentActions[i][2].substring(6,currentActions[i][2].length-1).split(",");
 						switch (currentActions[i][2].substring(0,5)) {
 							case 'a.mov': amov(code); break;
-							case 'a.rot': arot(code, currentActions[0][0]); break;
+							case 'a.rot': arot(code, currentActions[0]); break;
 						}
 					}
 				}
@@ -534,7 +534,7 @@
 			    if (!mesh) return;
 			    const axis = code[1];
 			    const value = Number(code[2]);
-				let realValue = (score-nodes[players.indexOf(activePlayer)].indexOf(nodes[players.indexOf(activePlayer)].find(node=>node.pz < cur)))*default_steer*value;
+				let realValue = (score-nodes[players.indexOf(activePlayer)].indexOf(nodes[players.indexOf(activePlayer)].find(node=>node.pz < cur[0])))*default_steer*value;
 			    if (axis === 'x') mesh.rotation.x = realValue;
 			    else if (axis === 'y') mesh.rotation.y = realValue;
 			    else if (axis === 'z') mesh.rotation.z = realValue;
@@ -987,7 +987,7 @@
 					if (obj) scene.addMesh(obj);
 				}
 				for (var i = 0; i < actions.length; i++) {
-				    rotations[i] = am(actions[i][2].substring(6,actions[i][2].indexOf(","))).rotation;
+				    rotations[i] = [am(actions[i][2].substring(6,actions[i][2].indexOf(","))).rotation.x, am(actions[i][2].substring(6,actions[i][2].indexOf(","))).rotation.y, am(actions[i][2].substring(6,actions[i][2].indexOf(","))).rotation.z];
 				}
 				loaded = true;
 			}
