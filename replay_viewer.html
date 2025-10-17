@@ -591,6 +591,7 @@
 			let actions = [];
 			let rotations = [];
 			let moves = [];
+			let loaded = true;
 			let skins = ["default","pilot","carrot","rocky","dodo","skilled","furby","doom","kazil","zhou","ye","tim","ghoul","abc","rytai","moosh","dark","awehero","jay","golden","bean","fish","thero","crazy","june","sleepy","mango","insolence","squirrel","painbumpo","modded","collab","og","ultrahard","diff1","diff2","diff3","diff4","diff5","diff6","diff7","diff8","diff9","diff10","diff11","pointsa","pointsb","pointsc","pointsd","pointse","pointsf","pointsg","percenta","percentb","percentc","percentd","percente","puzzlea","puzzleb"];
 			var canvas = document.getElementById("canvas");
             var engine = new BABYLON.Engine(canvas, true);
@@ -667,13 +668,16 @@
 				}
 			});
 			engine.runRenderLoop(() => {
-		        if (activeCamera === followCamera) updateFollowCamera();
-		        if (activeCamera === freeCamera) updateFreeCamera();
-		        scene.render();
+				if (loaded) {
+			        if (activeCamera === followCamera) updateFollowCamera();
+			        if (activeCamera === freeCamera) updateFreeCamera();
+			        scene.render();
+				}
 		    });
 			window.addEventListener("resize", () => engine.resize());
 			
 			function loadMap() {
+				loaded = false;
 				let removers = ['P','C','E','Y','S'];
 				for (var i = scene.meshes.length-1; i > -1; i--) {
 					if (removers.includes(scene.meshes[i].id.substring(0,1))) {
@@ -687,6 +691,7 @@
 				cylinders = [];
 				spheres = [];
 				monkeys = [];
+				rotations = [];
 				followCamera.position = new BABYLON.Vector3(0, 5, -10);
 				freeCamera.rotation = new BABYLON.Vector3(0, Math.PI, 0);
 				freeCamera.position = followCamera.position;
@@ -981,6 +986,10 @@
 					let obj = createMesh(type, objects, i);
 					if (obj) scene.addMesh(obj);
 				}
+				for (var i = 0; i < actions.length; i++) {
+				    rotations[i] = am(actions[i][2].substring(6,actions[i][2].indexOf(","))).rotation;
+				}
+				loaded = true;
 			}
 			
 			function createMesh(type, objects, i) {
