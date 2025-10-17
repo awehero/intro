@@ -535,9 +535,9 @@
 			    const axis = code[1];
 			    const value = Number(code[2]);
 				let realValue = (score-nodes[players.indexOf(activePlayer)].indexOf(nodes[players.indexOf(activePlayer)].find(node=>node.pz < cur[0])))*default_steer*value;
-			    if (axis === 'x') mesh.rotation.x = realValue;
-			    else if (axis === 'y') mesh.rotation.y = realValue;
-			    else if (axis === 'z') mesh.rotation.z = realValue;
+			    if (axis === 'x') mesh.rotation.x = realValue + rotations[actions.indexOf(cur[i])][0];
+			    else if (axis === 'y') mesh.rotation.y = realValue + rotations[actions.indexOf(cur[i])][1];
+			    else if (axis === 'z') mesh.rotation.z = realValue + rotations[actions.indexOf(cur[i])][2];
 			}
 
 			function updateInputDisplay(p) {
