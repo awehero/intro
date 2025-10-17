@@ -518,7 +518,7 @@
 				for (var j = 0; j < currentActions.length; j++) {
 					let code = currentActions[j][2].substring(6,currentActions[j][2].length-1).split(",");
 					switch (currentActions[j][2].substring(0,5)) {
-						case 'a.mov': amov(code); break;
+						case 'a.mov': amov(code, currentActions[0]); break;
 						case 'a.rot': arot(code, currentActions[0]); break;
 					}
 				}
@@ -527,11 +527,14 @@
 			    return scene.getMeshById(id);
 			}
 			function amov(code) {
-			    switch (code[1]) {
-			        case 'x': am(code[0]).position.x += code[2]; break;
-			        case 'y': am(code[0]).position.y += code[2]; break;
-			        case 'z': am(code[0]).position.z += code[2]; break;
-			    }
+			    const mesh = am(code[0]);
+			    if (!mesh) return;
+			    const axis = code[1];
+			    const value = Number(code[2]);
+				let realValue = (score-nodes[players.indexOf(activePlayer)].indexOf(nodes[players.indexOf(activePlayer)].find(node=>node.pz < cur[0])))*default_speed*value;
+			    if (axis === 'x') mesh.position.x = realValue + positions[actions.indexOf(cur)][0];
+			    else if (axis === 'y') mesh.position.y = realValue + positions[actions.indexOf(cur)][1];
+			    else if (axis === 'z') mesh.position.z = realValue + positions[actions.indexOf(cur)][2];
 			}
 			function arot(code, cur) {
 			    const mesh = am(code[0]);
@@ -593,6 +596,7 @@
 			let sectionFour;
 			let sectionFive;
 			let actions = [];
+			let positions = [];
 			let rotations = [];
 			let moves = [];
 			let loaded = true;
@@ -696,6 +700,7 @@
 				spheres = [];
 				monkeys = [];
 				rotations = [];
+				positions = [];
 				followCamera.position = new BABYLON.Vector3(0, 5, -10);
 				freeCamera.rotation = new BABYLON.Vector3(0, Math.PI, 0);
 				freeCamera.position = followCamera.position;
@@ -831,25 +836,22 @@
 				}
 				if (monkeys.length > 0) {
 					let mVars = monkeys[0][9].split("?");
-					for (var i = 0; i < mVars.length; i++) {
-					    if (mVars[i].substring(0,3) == "bg=") {
-							defaultbg = new BABYLON.Color3.FromHexString("#"+mVars[i].substring(3,9));
-					        scene.clearColor = defaultbg;
-					    } else {
-							defaultbg = new BABYLON.Color3.FromHexString("#000000");
-							scene.clearColor = defaultbg;
-						}
-						if (mVars[i].substring(0,6) == "speed=") {
-							default_speed = mVars[i].substring(6,mVars[i].length);
-					    } else {
-							default_speed = 0.28;
-						}
-						if (mVars[i].substring(0,6) == "steer=") {
-							default_steer = mVars[i].substring(6,mVars[i].length);
-					    } else {
-							default_steer = 0.022;
-						}
-						
+					if (typeof mVars.find(eff=>eff.substring(0,3) == 'bg=') != 'undefined') {
+						defaultbg = new BABYLON.Color3.FromHexString("#"+mVars[i].substring(3,9));
+						scene.clearColor = defaultbg;
+					} else {
+						defaultbg = new BABYLON.Color3.FromHexString("#000000");
+						scene.clearColor = defaultbg;
+					}
+					if (typeof mVars.find(eff=>eff.substring(0,6) == 'speed=') != 'undefined') {
+						default_speed = mVars[i].substring(6,mVars[i].length);
+					} else {
+						default_speed = 0.28;
+					}
+					if (typeof mVars.find(eff=>eff.substring(0,6) == 'steer=') != 'undefined') {
+						default_steer = mVars[i].substring(6,mVars[i].length);
+					} else {
+						default_steer = 0.022;
 					}
 				} else {
 					defaultbg = new BABYLON.Color3.FromHexString("#000000");
@@ -992,6 +994,9 @@
 				}
 				for (var i = 0; i < actions.length; i++) {
 				    rotations[i] = [am(actions[i][2].substring(6,actions[i][2].indexOf(","))).rotation.x, am(actions[i][2].substring(6,actions[i][2].indexOf(","))).rotation.y, am(actions[i][2].substring(6,actions[i][2].indexOf(","))).rotation.z];
+				}
+				for (var i = 0; i < actions.length; i++) {
+				    positions[i] = [am(actions[i][2].substring(6,actions[i][2].indexOf(","))).position.x, am(actions[i][2].substring(6,actions[i][2].indexOf(","))).position.y, am(actions[i][2].substring(6,actions[i][2].indexOf(","))).position.z];
 				}
 				loaded = true;
 			}
