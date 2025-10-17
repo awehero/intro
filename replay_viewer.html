@@ -511,7 +511,7 @@
 					}
 					let currentActions = actions.filter(pz=>activePlayer.position.z < pz[0] && activePlayer.position.z > pz[1]);
 					for (var i = 0; i < currentActions.length; i++) {
-						let code = currentActions[i][2].substring(6,actions[i][2].length-1).split(",");
+						let code = currentActions[i][2].substring(6,currentActions[i][2].length-1).split(",");
 						switch (currentActions[i][2].substring(0,5)) {
 							case 'a.mov': amov(code); break;
 							case 'a.rot': arot(code); break;
@@ -588,6 +588,8 @@
 			let sectionFour;
 			let sectionFive;
 			let actions = [];
+			let rotations = [];
+			let moves = [];
 			let skins = ["default","pilot","carrot","rocky","dodo","skilled","furby","doom","kazil","zhou","ye","tim","ghoul","abc","rytai","moosh","dark","awehero","jay","golden","bean","fish","thero","crazy","june","sleepy","mango","insolence","squirrel","painbumpo","modded","collab","og","ultrahard","diff1","diff2","diff3","diff4","diff5","diff6","diff7","diff8","diff9","diff10","diff11","pointsa","pointsb","pointsc","pointsd","pointse","pointsf","pointsg","percenta","percentb","percentc","percentd","percente","puzzlea","puzzleb"];
 			var canvas = document.getElementById("canvas");
             var engine = new BABYLON.Engine(canvas, true);
@@ -823,17 +825,27 @@
 					    if (mVars[i].substring(0,3) == "bg=") {
 							defaultbg = new BABYLON.Color3.FromHexString("#"+mVars[i].substring(3,9));
 					        scene.clearColor = defaultbg;
-					    }
+					    } else {
+							defaultbg = new BABYLON.Color3.FromHexString("#000000");
+							scene.clearColor = defaultbg;
+						}
 						if (mVars[i].substring(0,6) == "speed=") {
 							default_speed = mVars[i].substring(6,mVars[i].length);
-					    }
+					    } else {
+							default_speed = 0.28;
+						}
 						if (mVars[i].substring(0,6) == "steer=") {
 							default_steer = mVars[i].substring(6,mVars[i].length);
-					    }
+					    } else {
+							default_steer = 0.022;
+						}
+						
 					}
 				} else {
 					defaultbg = new BABYLON.Color3.FromHexString("#000000");
 					scene.clearColor = defaultbg;
+					default_steer = 0.022;
+					default_speed = 0.28;
 				}
 				section = "";
 				if (mapfile.indexOf("reset: function") == -1) {
