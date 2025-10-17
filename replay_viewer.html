@@ -514,7 +514,7 @@
 						let code = currentActions[i][2].substring(6,currentActions[i][2].length-1).split(",");
 						switch (currentActions[i][2].substring(0,5)) {
 							case 'a.mov': amov(code); break;
-							case 'a.rot': arot(code); break;
+							case 'a.rot': arot(code, currentActions[0][0]); break;
 						}
 					}
 				}
@@ -529,12 +529,12 @@
 			        case 'z': am(code[0]).position.z += code[2]; break;
 			    }
 			}
-			function arot(code) {
+			function arot(code, cur) {
 			    const mesh = am(code[0]);
 			    if (!mesh) return;
 			    const axis = code[1];
 			    const value = Number(code[2]);
-				let realValue = (score-nodes[players.indexOf(activePlayer)].indexOf(nodes[players.indexOf(activePlayer)].find(node=>node.pz < currentActions[0][0])))*default_steer*value;
+				let realValue = (score-nodes[players.indexOf(activePlayer)].indexOf(nodes[players.indexOf(activePlayer)].find(node=>node.pz < cur)))*default_steer*value;
 			    if (axis === 'x') mesh.rotation.x = realValue;
 			    else if (axis === 'y') mesh.rotation.y = realValue;
 			    else if (axis === 'z') mesh.rotation.z = realValue;
