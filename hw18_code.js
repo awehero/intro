@@ -3,7 +3,7 @@ close all
 clc
 prettyGraphs();
 
-%% Homework 8
+%% Homework 18
 % 8.1
 
 % Stress Calculations
