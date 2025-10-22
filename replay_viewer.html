@@ -432,7 +432,7 @@
 					}
 					for (var i = 0; i < playerzs.length; i++) {
 					    for (var j = 0; j < playerzs[i].length; j++) {
-					        playerzs[i][j]++;
+					        playerzs[i][j]+=2;
 					    }
 					}
 					var playernext = BABYLON.MeshBuilder.CreateBox('player' + players.length, { width: 0.5, height: 0.08, depth: 0.5 }, scene);
