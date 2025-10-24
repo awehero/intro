@@ -1,1 +1,1 @@
-
+globalThis.test = 1;
