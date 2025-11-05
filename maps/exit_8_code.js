@@ -379,7 +379,7 @@ function resetObjects() {
     objects.kitchen.microwave.all.forEach(obj=>{obj.isVisible = true});
 
     //maybe remove later cmVtb3ZlIG9uY2UgYXBwcm92ZWQ/
-    if (beta == 0 && alternate == 0) {
+    /*if (beta == 0 && alternate == 0) {
         objects.train.car1wheels.forEach(obj=>{obj.isVisible = false});
         objects.train.car2wheels.forEach(obj=>{obj.isVisible = false});
         objects.train.car3wheels.forEach(obj=>{obj.isVisible = false});
@@ -398,7 +398,7 @@ function resetObjects() {
         objects.shelf.blocks.forEach(obj=>{obj.isVisible = false});
         objects.fort.extrablocks.forEach(obj=>{obj.isVisible = false});
         objects.kitchen.microwave.all.forEach(obj=>{obj.isVisible = false});
-    }
+    }*/
     
 }
 function fixAlt() {
