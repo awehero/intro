@@ -480,7 +480,7 @@ function test() {
             if (beta == 0) {
                 score = score * 4;
             } else if (beta == 1) {
-                score = score * 1.5// *2; //YWxzbyByZW1vdmU=
+                score = score * 2// *2; //YWxzbyByZW1vdmU=
             } else {
                 //score = score*2 //cmVtb3Zl
             }
