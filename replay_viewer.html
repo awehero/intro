@@ -376,7 +376,7 @@
 			function getMap() {
 			    let map = input.value.trim();
 				loading.style.display = "block";
-			    fetch('https://icedodo.onionfist.com/maps/' + map + '.js')
+			    fetch('https://icedodo.io/maps/' + map + '.js')
 			        .then(response => {
 			            if (!response.ok) throw new Error('HTTP ' + response.status);
 			            return response.text();
