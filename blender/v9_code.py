@@ -689,10 +689,12 @@ try:
             print("Warning: URL Length exceeds 8938 characters. This may or may not cause an issue.")
 
         print("")
+        print(len(URL))
         print("MAP URL:")
         print("")
         print(URL)
         print("")
+        bpy.context.window_manager.clipboard = URL
 
 except Exception as main_e:
     print("MAIN ERROR: " + str(main_e))
