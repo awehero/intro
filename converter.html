@@ -69,6 +69,10 @@
             gap: 10px;
             margin: 10px 0;
         }
+        #mapMaker {
+            display: none;
+            margin-left: 10px;
+        }
     </style>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -99,6 +103,7 @@
     <button id="startButton" onclick="convert()">Convert!</button>
     <br><br>
     <button id="copyButton" onclick="copyLink()">Copy!</button>
+    <button id="mapMaker" onclick="openMapMaker()">Map Maker</button>
     <h2>Output:</h2>
     <div id="outputText" style="white-space: pre-wrap;"></div>
     <pre id="script" style="display: none;">
@@ -178,6 +183,7 @@ if new_script_content:
     const outputProcessText = ["Draft","Tinyurl","URL","Mapfile","Blender Data"];
     globalThis.ii = 0;
     globalThis.process = '';
+    globalThis.mapmakerurl = '';
         
     function convert() {
         ii = 0;
@@ -242,7 +248,13 @@ if new_script_content:
             convertBetween(input);
         } else {
             document.getElementById("outputText").innerText = input;
+            if (mapmakerurl != "") {
+                document.getElementById("mapMaker").style.display = "inline";
+            }
         }
+    }
+    function openMapMaker() {
+        window.open("https://awehero.github.io/intro/map_maker.html?" + mapmakerurl, "_blank");
     }
         
     function convertBetween(input) {
@@ -261,17 +273,20 @@ if new_script_content:
             tinyurlToURL(input).then(expandedUrl => {
                 input = expandedUrl;
                 ii++;
+                mapmakerurl = input;
                 continueProcess(input);
             });
         } else if (process.substring(ii,ii+1) == 'c') {
 
         } else if (process.substring(ii,ii+1) == 'd') {
+            mapmakerurl = input;
             urlToTinyurl(input).then(tinyUrl => {
                 input = tinyUrl;
                 ii++;
                 continueProcess(input);
             });
         } else if (process.substring(ii,ii+1) == 'e') {
+            mapmakerurl = input;
             let urlData = input.substring(input.indexOf("CompilerOutput=")+15);
             let requestUrl = `https://icedodo-api.onionfist.com/api/compile_long_map_url.js?longUrl=${urlData}`;
             fetch(requestUrl)
@@ -283,11 +298,13 @@ if new_script_content:
                 })
                 .catch(error => console.error('Error fetching data:', error));
         } else if (process.substring(ii,ii+1) == 'f') {
+            mapmakerurl = input;
             input = urlToBlender(input);
             ii++;
             continueProcess(input);
         } else if (process.substring(ii,ii+1) == 'g') {
             input = mapfileToUrl(input);
+            mapmakerurl = input;
             ii++;
             continueProcess(input);
         }
