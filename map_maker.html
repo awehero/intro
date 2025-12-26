@@ -222,7 +222,9 @@
             } else {
                 var texture = new THREE.TextureLoader().load(localStorage.getItem('texture'));
             }
-            setTimeout(function() {alert("New? Click the ? in the bottom left to find out how to use the map maker!");}, 100);
+            if (window.location.search == "") {
+                setTimeout(function() {alert("New? Click the ? in the bottom left to find out how to use the map maker!");}, 100);
+            }
             var material = new THREE.MeshBasicMaterial({ map: texture });
 
             let transformControls = new THREE.TransformControls(currentCamera, renderer.domElement);
@@ -1172,70 +1174,73 @@
                         if (input) {
                             var warning = prompt("Are you sure you want to load a map? This will delete everything currently on screen! (y/n)");
                             if (warning && (warning.toLowerCase() === 'y')) {
-                                removeGroup();
-                                var deleteNumber = scene.children.length;
-                                for (let i = 1; i < deleteNumber; i++) {
-                                    scene.remove(scene.children[1]);
-                                }
-                                let dollarIndex = input.indexOf('$');
-                                if (dollarIndex !== -1) {
-                                    let endIndex = dollarIndex - 1;
-                                    while (endIndex >= 0 && !/[A-G]/.test(input[endIndex])) {
-                                      endIndex--;
-                                    }
-                                    if (endIndex >= 0) {
-                                        input = input.substring(endIndex);
-                                    }
-                                }
-                                const index = input.indexOf('&');
-                                if (index !== -1) {
-                                    input = input.substring(0, index);
-                                }
-                                let objectDataArray = input.split(/(?=[A-Z])/);
-                                for (var i = 0; i < objectDataArray.length; i++) {
-                                    objectDataArray[i] = replaceASCIIWithMsg(objectDataArray[i]);
-                                }
-                                objectDataArray.forEach(objData => {
-                                    const type = objData.charAt(0);
-                                    const rest = objData.slice(1);
-                                    const [positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name] = rest.split("$");
-                                    let object;
-                                    switch (type) {
-                                            case 'A':
-                                                object = loadPlane(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
-                                                break;
-                                            case 'B':
-                                                object = loadCube(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
-                                                break;
-                                            case 'C':
-                                                object = loadCone(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
-                                                break;
-                                            case 'D':
-                                                object = loadSphere(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
-                                                break;
-                                            case 'E':
-                                                object = loadCylinder(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
-                                                break;
-                                            case 'F':
-                                                object = loadIcosahedron(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
-                                                break;
-                                            case 'G':
-                                                object = loadMonkey(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
-                                                break;
-                                            default:
-                                                console.error('Unknown object type:', type);
-                                    }
-                                    if (object) {
-                                        scene.add(object);
-                                    }
-                                });
-                                loaderFixer();
-                                closeMenu();
-                                updateObject();
-                                color();
-                                fixPlane();
+                                actualLoad(input);
                             }
                         }
+                }
+                function actualLoad(input) {
+                    removeGroup();
+                    var deleteNumber = scene.children.length;
+                    for (let i = 1; i < deleteNumber; i++) {
+                        scene.remove(scene.children[1]);
+                    }
+                    let dollarIndex = input.indexOf('$');
+                    if (dollarIndex !== -1) {
+                        let endIndex = dollarIndex - 1;
+                        while (endIndex >= 0 && !/[A-G]/.test(input[endIndex])) {
+                          endIndex--;
+                        }
+                        if (endIndex >= 0) {
+                            input = input.substring(endIndex);
+                        }
+                    }
+                    const index = input.indexOf('&');
+                    if (index !== -1) {
+                        input = input.substring(0, index);
+                    }
+                    let objectDataArray = input.split(/(?=[A-Z])/);
+                    for (var i = 0; i < objectDataArray.length; i++) {
+                        objectDataArray[i] = replaceASCIIWithMsg(objectDataArray[i]);
+                    }
+                    objectDataArray.forEach(objData => {
+                        const type = objData.charAt(0);
+                        const rest = objData.slice(1);
+                        const [positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name] = rest.split("$");
+                        let object;
+                        switch (type) {
+                                case 'A':
+                                    object = loadPlane(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                    break;
+                                case 'B':
+                                    object = loadCube(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                    break;
+                                case 'C':
+                                    object = loadCone(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                    break;
+                                case 'D':
+                                    object = loadSphere(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                    break;
+                                case 'E':
+                                    object = loadCylinder(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                    break;
+                                case 'F':
+                                    object = loadIcosahedron(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                    break;
+                                case 'G':
+                                    object = loadMonkey(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name);
+                                    break;
+                                default:
+                                    console.error('Unknown object type:', type);
+                        }
+                        if (object) {
+                            scene.add(object);
+                        }
+                    });
+                    loaderFixer();
+                    closeMenu();
+                    updateObject();
+                    color();
+                    fixPlane();
                 }
                 function loadPlane(positionX, positionY, positionZ, rotationX, rotationY, rotationZ, scaleX, scaleY, scaleZ, name) {
                     const geometry = new THREE.PlaneGeometry(1, 1); // Adjust size as needed
@@ -1471,6 +1476,9 @@
                             alert("Unable to automatically copy text: " + error);
                         });
                 });
+                if (window.location.search != "") {
+                    actualLoad(window.location.search.substring(1));
+                }
         </script>
     </body>
 </html>
