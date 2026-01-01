@@ -112,7 +112,6 @@
         <div id="test">blank</div>
         <button onclick="test()">Run</button>
         <script>
-        function test() {
             globalThis.setupBoxes = document.getElementsByClassName("setupBox");
             globalThis.words = "";
             globalThis.letters = [];
@@ -149,7 +148,6 @@
                 document.getElementById("test").innerText = JSON.stringify(allowedNext);
             }
             updateSetup();
-			}
         </script>
     </body>
 </html>
