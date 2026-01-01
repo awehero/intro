@@ -110,13 +110,14 @@
         <input class="setupBox" type="checkbox" id="r3c1"></input>
         <input class="setupBox" type="checkbox" id="r3c2"></input>
         <input class="setupBox" type="checkbox" id="r3c3"></input><br>
-
+        <div id="test"></div>
         <script>
             globalThis.setupBoxes = document.getElementsByClass("setupBox");
             globalThis.words = "";
             globalThis.letters = [];
             globalThis.letterArray = [];
             globalThis.allowedNext = [];
+            updateSetup();
             
             function updateSetup() {
                 setupBoxes = document.getElementsByClass("setupBox");
@@ -138,9 +139,14 @@
                             for (var l = 0; l < 3; l++;) {
                                 if (typeof checkedArray[i+k-1][j+l-1] != "undefined") {
                                     if (checkedArray[i+k-1][j+l-1] == true) {
-                                        allowedNext[i][j].push((i+k-1)*3
+                                        allowedNext[i][j].push((i+k-1)*3+(j+l-1));
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+                documentgetElementById("test").innerText = JSON.stringify(allowedNext);
             }
 			
         </script>
