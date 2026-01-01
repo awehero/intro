@@ -112,9 +112,23 @@
         <input class="setupBox" type="checkbox" id="r3c3"></input><br>
 
         <script>
-			let setupBoxes = document.getElementsByClass("setupBox");
+            globalThis.setupBoxes = document.getElementsByClass("setupBox");
             globalThis.words = "";
+            globalThis.letters = [];
+            globalThis.letterArray = [];
             
+            function updateSetup() {
+                setupBoxes = document.getElementsByClass("setupBox");
+                letterArray = [];
+                for (var i = 0; i < 3; i++;) {
+                    let temp = [];
+                    for (var j = 0; j < 3; j++) {
+                        temp.push(setupBoxes[(i*3)+j]);
+                    }
+                    letterArray.push(temp);
+                }
+                for 
+            }
 			
         </script>
     </body>
