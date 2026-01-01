@@ -111,7 +111,9 @@
         <input class="setupBox" type="checkbox" id="r3c2"></input>
         <input class="setupBox" type="checkbox" id="r3c3"></input><br>
         <div id="test"></div>
+        <button onclick="test()">Run</button>
         <script>
+        function test() {
             globalThis.setupBoxes = document.getElementsByClass("setupBox");
             globalThis.words = "";
             globalThis.letters = [];
@@ -148,7 +150,7 @@
                 documentgetElementById("test").innerText = JSON.stringify(allowedNext);
             }
             updateSetup();
-			
+			}
         </script>
     </body>
 </html>
