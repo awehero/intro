@@ -116,24 +116,30 @@
             globalThis.words = "";
             globalThis.letters = [];
             globalThis.letterArray = [];
+            globalThis.allowedNext = [];
             
             function updateSetup() {
                 setupBoxes = document.getElementsByClass("setupBox");
                 checkedArray = [];
+                allowedNext = [];
                 for (var i = 0; i < 3; i++;) {
                     let temp = [];
-                    for (var j = 0; j < 3; j++) {
+                    let temp2 = [];
+                    for (var j = 0; j < 3; j++;) {
                         temp.push(setupBoxes[(i*3)+j].checked);
+                        temp2.push([]);
                     }
                     checkedArray.push(temp);
+                    allowedNext.push(temp2);
                 }
                 for (var i = 0; i < 3; i++;) {
-                    for (var j = 0; j < 3; j++) {
-                        allowedNext =
+                    for (var j = 0; j < 3; j++;) {
                         for (var k = 0; k < 3; k++;) {
-                            for (var l = 0; l < 3; l++) {
-                                if (typeof checkedArray[i-1][j-1] != "undefined") {
-                                    if
+                            for (var l = 0; l < 3; l++;) {
+                                if (typeof checkedArray[i+k-1][j+l-1] != "undefined") {
+                                    if (checkedArray[i+k-1][j+l-1] == true) {
+                                        allowedNext[i][j].push((i+k-1)*3
+                                    }
                                 }
             }
 			
