@@ -117,7 +117,6 @@
             globalThis.letters = [];
             globalThis.letterArray = [];
             globalThis.allowedNext = [];
-            updateSetup();
             
             function updateSetup() {
                 setupBoxes = document.getElementsByClass("setupBox");
@@ -148,6 +147,7 @@
                 }
                 documentgetElementById("test").innerText = JSON.stringify(allowedNext);
             }
+            updateSetup();
 			
         </script>
     </body>
