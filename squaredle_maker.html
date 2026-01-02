@@ -113,7 +113,7 @@
         <button onclick="updateSetup()">Run</button>
         <script>
             globalThis.setupBoxes = document.getElementsByClassName("setupBox");
-            globalThis.words = "";
+            globalThis.words = [];
             globalThis.letters = [];
             globalThis.letterArray = [];
             globalThis.allowedNext = [];
@@ -147,7 +147,11 @@
                 }
                 document.getElementById("test").innerText = JSON.stringify(allowedNext);
             }
-            updateSetup();
+            function findWords() {
+                for (var i = 0; i < words.length; i++) {
+                    
+                }
+            }
         </script>
     </body>
 </html>
