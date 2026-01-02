@@ -148,9 +148,17 @@
                 document.getElementById("test").innerText = JSON.stringify(allowedNext);
             }
             function findWords() {
+                let letters = ["a","g","q","u","p","o","e","y","n"];
                 for (var i = 0; i < words.length; i++) {
                     let temp = [];
-                    
+                    for (var j = 0; j < words[i].length; j++) {
+                        if (words[i].substring(j,j+1) in allowedText && !temp.includes(value)) {
+                            temp.push(value);
+                            if (temp.length == words[i].length) {
+                                
+                            }
+                        }
+                    }
                 }
             }
         </script>
