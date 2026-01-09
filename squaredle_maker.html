@@ -100,6 +100,7 @@
     <body>
         <h1>Squaredle Maker</h1>
         <p>Text info instructions here</p>
+		<div id="setupContainer"></div>
         <input class="setupBox" type="checkbox" id="r1c1">
         <input class="setupBox" type="checkbox" id="r1c2">
         <input class="setupBox" type="checkbox" id="r1c3"><br>
@@ -115,7 +116,10 @@
             globalThis.setupBoxes = document.getElementsByClassName("setupBox");
 			fetch('https://awehero.github.io/intro/minitools/mapdata.js')
 				.then(response => response.text())
-				.then(code => eval(code))
+				.then(code => {
+					eval(code);
+					wordbank
+			  	})
 				.catch(err => console.error('Error loading word list:', err));
             globalThis.words = [];
             globalThis.letters = [];
