@@ -134,6 +134,7 @@
 				.then(response => response.text())
 				.then(code => {
 					eval(code);
+					globalThis.words = wordbank.filter(w=>{return w.length > 3});
 			  	})
 				.catch(err => console.error('Error loading word list:', err));
             globalThis.words = [];
