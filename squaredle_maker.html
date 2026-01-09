@@ -101,18 +101,34 @@
         <h1>Squaredle Maker</h1>
         <p>Text info instructions here</p>
 		<div id="setupContainer"></div>
-        <input class="setupBox" type="checkbox" id="r1c1">
-        <input class="setupBox" type="checkbox" id="r1c2">
-        <input class="setupBox" type="checkbox" id="r1c3"><br>
-        <input class="setupBox" type="checkbox" id="r2c1">
-        <input class="setupBox" type="checkbox" id="r2c2">
-        <input class="setupBox" type="checkbox" id="r2c3"><br>
-        <input class="setupBox" type="checkbox" id="r3c1">
-        <input class="setupBox" type="checkbox" id="r3c2">
-        <input class="setupBox" type="checkbox" id="r3c3"><br>
         <div id="test">blank</div>
         <button onclick="updateSetup()">Run</button>
         <script>
+			let elem = document.createElement("div");
+			for (let i = 0; i < 3; i++) {
+			    for (let j = 0; j < 3; j++) {
+			        let select = document.createElement("select");
+			        select.id = `r${i}c${j}`;
+			        select.className = "setupBox";
+			        select.addEventListener("input", updateSetup);
+			        let blankoption = document.createElement("option");
+			            blankoption.value = "0";
+			            blankoption.textContent = " ";
+			            blankoption.className = "letterOption";
+			            select.appendChild(blankoption);
+			        for (let k = 65; k <= 90; k++) {
+			            let option = document.createElement("option");
+			            option.value = String.fromCharCode(k);
+			            option.textContent = String.fromCharCode(k);
+			            option.className = "letterOption";
+			            select.appendChild(option);
+			        }
+			        elem.appendChild(select);
+			    }
+			    elem.appendChild(document.createElement("br"));
+			}
+			document.getElementById("setupContainer").appendChild(elem);
+
             globalThis.setupBoxes = document.getElementsByClassName("setupBox");
 			fetch('https://awehero.github.io/intro/minitools/word_bank.js')
 				.then(response => response.text())
