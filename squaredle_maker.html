@@ -114,7 +114,7 @@
         <button onclick="updateSetup()">Run</button>
         <script>
             globalThis.setupBoxes = document.getElementsByClassName("setupBox");
-			fetch('https://awehero.github.io/intro/minitools/wordbank.js')
+			fetch('https://awehero.github.io/intro/minitools/word_bank.js')
 				.then(response => response.text())
 				.then(code => {
 					eval(code);
