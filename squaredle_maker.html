@@ -114,11 +114,10 @@
         <button onclick="updateSetup()">Run</button>
         <script>
             globalThis.setupBoxes = document.getElementsByClassName("setupBox");
-			fetch('https://awehero.github.io/intro/minitools/mapdata.js')
+			fetch('https://awehero.github.io/intro/minitools/wordbank.js')
 				.then(response => response.text())
 				.then(code => {
 					eval(code);
-					wordbank
 			  	})
 				.catch(err => console.error('Error loading word list:', err));
             globalThis.words = [];
