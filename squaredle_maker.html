@@ -150,7 +150,7 @@
                     let temp = [];
                     let temp2 = [];
                     for (var j = 0; j < 3; j++) {
-                        temp.push(setupBoxes[(i*3)+j].checked);
+                        temp.push(setupBoxes[(i*3)+j].value != 0);
                         temp2.push([]);
                     }
                     checkedArray.push(temp);
