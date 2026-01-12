@@ -153,6 +153,7 @@
             globalThis.letterArray = [];
 			globalThis.allLetters = [];
             globalThis.allowedNext = [];
+			globalThis.allowedList = [];
 			globalThis.allowedLetters = [];
 			globalThis.foundWords = [];
             
@@ -187,23 +188,51 @@
             }
             function findWords() {
                 allLetters = [];
+				allowedList = [];
 				setupBoxes = document.getElementsByClassName("setupBox");
 				for (var i = 0; i < size**2; i++) {
 					allLetters.push(setupBoxes[i].value.toLowerCase());
 				}
+				for (var i = 0; i < size; i++) {
+					for (var j = 0; j < size; j++) {
+						allowedList.push(allowedNext[i][j]);
+					}
+				}
+				let tempfull = [];
+				for (var i = 0; i < size**2; i++) {
+					tempfull.push(i);
+				}
+				allowedList.push(tempfull);
                 for (var i = 0; i < words.length; i++) {
                     let temp = [];
 					let arrayTemp = [];
-					let value = Math.round((size**2)/2);
+					let value = size**2;
 					allowedLetters = allLetters;
-                    for (var j = 0; j < words[i].length; j++) {
-						arrayTemp = [];
-						for (var a0 = 0; a0 < allLetters.length; a0++) {
-							if (allLetters[a0] == words[i].substring(j,j+1)) {
-								arrayTemp.push(a0);
-							} 
+					for (var j = 0; j < words[i].length; j++) {
+						let matches = [];
+						for (var k = 0; k < size**2; k++) {
+							if (allLetters[k] == words[i].substring(j,j+1)) {
+								if (j == 0) {
+									matches.push(k);
+								} else {
+									if (!temp.includes(k))
+								}
+							}
 						}
-                        if (arrayTemp.length > 0 && words[i].substring(j,j+1) in allowedLetters && !temp.includes(value)) {
+					}
+                    for (var j = 0; j < words[i].length; j++) {
+						let allowedTemp = [];
+						if (j != 0) {
+							allowedLetters = [];
+							allowedList[value].forEach(v=>{allowedLetters.push(allLetters[v])});
+							allowedTemp = allowedList[value];
+						}
+						for (var k = 0; k < allLetters.length; k++) {
+							if (temp.includes(k)) {
+								al
+							}
+						}
+                        if (allowedLetters.includes(words[i].substring(j,j+1)) && !temp.includes(value)) {
                             temp.push(value);
                             if (temp.length == words[i].length) {
                                 foundWords.push(words[i]);
