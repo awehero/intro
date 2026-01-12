@@ -114,9 +114,10 @@
         <button onclick="findWords()">Run</button>
 		<div id="wordListContainer"></div>
         <script>
+			globalThis.size = 3;
 			let elem = document.createElement("div");
-			for (let i = 0; i < 3; i++) {
-			    for (let j = 0; j < 3; j++) {
+			for (let i = 0; i < size; i++) {
+			    for (let j = 0; j < size; j++) {
 			        let select = document.createElement("select");
 			        select.id = `r${i}c${j}`;
 			        select.className = "setupBox";
@@ -159,23 +160,23 @@
                 setupBoxes = document.getElementsByClassName("setupBox");
                 checkedArray = [];
                 allowedNext = [];
-                for (var i = 0; i < 3; i++) {
+                for (var i = 0; i < size; i++) {
                     let temp = [];
                     let temp2 = [];
-                    for (var j = 0; j < 3; j++) {
-                        temp.push(setupBoxes[(i*3)+j].value != 0);
+                    for (var j = 0; j < size; j++) {
+                        temp.push(setupBoxes[(i*size)+j].value != 0);
                         temp2.push([]);
                     }
                     checkedArray.push(temp);
                     allowedNext.push(temp2);
                 }
-                for (var i = 0; i < 3; i++) {
-                    for (var j = 0; j < 3; j++) {
-                        for (var k = 0; k < 3; k++) {
-                            for (var l = 0; l < 3; l++) {
+                for (var i = 0; i < size; i++) {
+                    for (var j = 0; j < size; j++) {
+                        for (var k = 0; k < size; k++) {
+                            for (var l = 0; l < size; l++) {
                                 if (checkedArray[i+k-1] && typeof checkedArray[i+k-1][j+l-1] != "undefined") {
                                     if (checkedArray[i+k-1][j+l-1] == true) {
-                                        allowedNext[i][j].push((i+k-1)*3+(j+l-1));
+                                        allowedNext[i][j].push((i+k-1)*size+(j+l-1));
                                     }
                                 }
                             }
@@ -187,20 +188,22 @@
             function findWords() {
                 allLetters = [];
 				setupBoxes = document.getElementsByClassName("setupBox");
-				for (var i = 0; i < allowedNext.length**2; i++) {
+				for (var i = 0; i < size**2; i++) {
 					allLetters.push(setupBoxes[i].value.toLowerCase());
 				}
                 for (var i = 0; i < words.length; i++) {
                     let temp = [];
-					let value = 5;
+					let arrayTemp = [];
+					let value = Math.round((size**2)/2);
 					allowedLetters = allLetters;
                     for (var j = 0; j < words[i].length; j++) {
+						arrayTemp = [];
 						for (var a0 = 0; a0 < allLetters.length; a0++) {
-							if (a0 == 1) {
-								console.log(2);
+							if (allLetters[a0] == words[i].substring(j,j+1)) {
+								arrayTemp.push(a0);
 							} 
 						}
-                        if (words[i].substring(j,j+1) in allowedLetters && !temp.includes(value)) {
+                        if (words[i].substring(j,j+1) in arrayTemp && words[i].substring(j,j+1) in allowedLetters && !temp.includes(value)) {
                             temp.push(value);
                             if (temp.length == words[i].length) {
                                 foundWords.push(words[i]);
