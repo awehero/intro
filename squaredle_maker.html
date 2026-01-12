@@ -208,7 +208,7 @@
 					let arrayTemp = [];
 					let value = size**2;
 					allowedLetters = allLetters;
-					for (var j = 0; j < words[i].length; j++) {
+					for (var j = 0; j < words[i].length; j) {
 						let matches = [];
 						arrayTemp = allowedList[value];
 						for (var k = 0; k < size**2; k++) {
@@ -217,6 +217,9 @@
 									matches.push(k);
 								}
 							}
+						}
+						for (var l = 0; l < matches.length; l++) {
+							checkNumber(matches[l], i, j);
 						}
 					}
       //               for (var j = 0; j < words[i].length; j++) {
@@ -240,6 +243,9 @@
       //               }
                 }
             }
+			function checkNumber(value, i, j) {
+				
+			}
         </script>
     </body>
 </html>
