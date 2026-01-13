@@ -230,8 +230,23 @@
 			            foundWords.push(words[i]);
 			        }
 			    }
-			
-			    document.getElementById("wordListContainer").innerText = foundWords.join(", ");
+				let sorted = Array.from({length: 30},()=>[])
+				for (var i = 0; i < foundWords.length; i++) {
+				    sorted[foundWords[i].length].push(foundWords[i]);
+				}
+				for (var i = 0; i < sorted.length; i++) {
+				    if (sorted[i].length != 0) {
+				        let elem = document.createElement("div");
+				        elem.id = `letters${i}`;
+				        elem.innerText = `${i} letters`;
+						elem.style.fontSize = "1.5em";
+				        document.getElementById("wordListContainer").appendChild(elem);
+				        let elemChild = document.createElement("div");
+				        elemChild.innerText = sorted[i].join("   ");
+						elemChild.style.fontSize = "1.5em";
+				        document.getElementById(`letters${i}`).appendChild(elemChild);
+				    }
+				}
 			}
         </script>
     </body>
