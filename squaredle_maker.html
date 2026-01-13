@@ -197,13 +197,13 @@
 			function canFormWord(word, letters, allowedNext) {
 			    for (let start = 0; start < letters.length; start++) {
 			        if (letters[start] === word[0]) {
-			            if (dfs(start, 0, new Set())) {
+			            if (check(start, 0, new Set())) {
 			                return true;
 			            }
 			        }
 			    }
 			    return false;
-			    function dfs(pos, index, used) {
+			    function check(pos, index, used) {
 			        if (index === word.length) return true;
 			        if (
 			            pos < 0 ||
@@ -215,7 +215,7 @@
 			        used.add(pos);
 			        let neighbors = allowedNext[Math.floor(pos / size)][pos % size];
 			        for (let next of neighbors) {
-			            if (dfs(next, index + 1, used)) {
+			            if (check(next, index + 1, used)) {
 			                return true;
 			            }
 			        }
