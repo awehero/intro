@@ -108,7 +108,7 @@
     </head>
     <body>
         <h1>Squaredle Maker</h1>
-        <p>Text info instructions here</p>
+        <p>Use the slider to change the size and select or type letters to create the board</p>
 		<div id="setupContainer"></div>
         <button onclick="findWords()">Find Words</button>
 		<div id="wordListContainer"></div>
@@ -163,6 +163,10 @@
 			globalThis.allowedLetters = [];
 			globalThis.foundWords = [];
 			setup();
+			document.getElementById("sizeSlider").onchange(()=>{
+				size = this.value;
+				
+			});
             
             function updateSetup() {
                 setupBoxes = document.getElementsByClassName("setupBox");
