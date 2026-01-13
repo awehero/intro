@@ -196,19 +196,19 @@
 			        }
 			    }
 			    return false;
-			    function dfs(pos, idx, used) {
-			        if (idx === word.length) return true;
+			    function dfs(pos, index, used) {
+			        if (index === word.length) return true;
 			        if (
 			            pos < 0 ||
 			            used.has(pos) ||
-			            letters[pos] !== word[idx]
+			            letters[pos] !== word[index]
 			        ) {
 			            return false;
 			        }
 			        used.add(pos);
 			        let neighbors = allowedNext[Math.floor(pos / size)][pos % size];
 			        for (let next of neighbors) {
-			            if (dfs(next, idx + 1, used)) {
+			            if (dfs(next, index + 1, used)) {
 			                return true;
 			            }
 			        }
