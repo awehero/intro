@@ -110,35 +110,39 @@
         <h1>Squaredle Maker</h1>
         <p>Text info instructions here</p>
 		<div id="setupContainer"></div>
-        <div id="test">blank</div>
-        <button onclick="findWords()">Run</button>
+        <button onclick="findWords()">Find Words</button>
 		<div id="wordListContainer"></div>
         <script>
-			globalThis.size = 3;
-			let elem = document.createElement("div");
-			for (let i = 0; i < size; i++) {
-			    for (let j = 0; j < size; j++) {
-			        let select = document.createElement("select");
-			        select.id = `r${i}c${j}`;
-			        select.className = "setupBox";
-			        select.addEventListener("input", updateSetup);
-			        let blankoption = document.createElement("option");
-			            blankoption.value = "0";
-			            blankoption.textContent = " ";
-			            blankoption.className = "letterOption";
-			            select.appendChild(blankoption);
-			        for (let k = 65; k <= 90; k++) {
-			            let option = document.createElement("option");
-			            option.value = String.fromCharCode(k);
-			            option.textContent = String.fromCharCode(k);
-			            option.className = "letterOption";
-			            select.appendChild(option);
-			        }
-			        elem.appendChild(select);
-			    }
-			    elem.appendChild(document.createElement("br"));
+			function setup() {
+				if (document.getElementById("board")) {
+					document.getElementById("board").remove();
+				}
+				let elem = document.createElement("div");
+				elem.id = "board";
+				for (let i = 0; i < size; i++) {
+				    for (let j = 0; j < size; j++) {
+				        let select = document.createElement("select");
+				        select.id = `r${i}c${j}`;
+				        select.className = "setupBox";
+				        select.addEventListener("input", updateSetup);
+				        let blankoption = document.createElement("option");
+				            blankoption.value = "0";
+				            blankoption.textContent = " ";
+				            blankoption.className = "letterOption";
+				            select.appendChild(blankoption);
+				        for (let k = 65; k <= 90; k++) {
+				            let option = document.createElement("option");
+				            option.value = String.fromCharCode(k);
+				            option.textContent = String.fromCharCode(k);
+				            option.className = "letterOption";
+				            select.appendChild(option);
+				        }
+				        elem.appendChild(select);
+				    }
+				    elem.appendChild(document.createElement("br"));
+				}
+				document.getElementById("setupContainer").appendChild(elem);
 			}
-			document.getElementById("setupContainer").appendChild(elem);
 
             globalThis.setupBoxes = document.getElementsByClassName("setupBox");
 			fetch('https://awehero.github.io/intro/minitools/word_bank.js')
@@ -148,6 +152,7 @@
 					globalThis.words = wordbank.filter(w=>{return w.length > 3});
 			  	})
 				.catch(err => console.error('Error loading word list:', err));
+			globalThis.size = 3;
             globalThis.words = [];
             globalThis.letters = [];
             globalThis.letterArray = [];
@@ -156,6 +161,7 @@
 			globalThis.allowedList = [];
 			globalThis.allowedLetters = [];
 			globalThis.foundWords = [];
+			setup();
             
             function updateSetup() {
                 setupBoxes = document.getElementsByClassName("setupBox");
@@ -185,7 +191,6 @@
 						}
                     }
                 }
-                document.getElementById("test").innerText = JSON.stringify(allowedNext);
             }
 			function canFormWord(word, letters, allowedNext) {
 			    for (let start = 0; start < letters.length; start++) {
