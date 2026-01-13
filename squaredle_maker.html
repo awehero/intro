@@ -173,78 +173,65 @@
                 }
                 for (var i = 0; i < size; i++) {
                     for (var j = 0; j < size; j++) {
-                        for (var k = 0; k < size; k++) {
-                            for (var l = 0; l < size; l++) {
-                                if (checkedArray[i+k-1] && typeof checkedArray[i+k-1][j+l-1] != "undefined") {
-                                    if (checkedArray[i+k-1][j+l-1] == true) {
-                                        allowedNext[i][j].push((i+k-1)*size+(j+l-1));
-                                    }
-                                }
-                            }
-                        }
+                        for (let di = -1; di <= 1; di++) {
+						    for (let dj = -1; dj <= 1; dj++) {
+						        if (di === 0 && dj === 0) continue;
+						        let ni = i + di;
+						        let nj = j + dj;
+						        if (ni >= 0 && ni < size && nj >= 0 && nj < size && checkedArray[ni][nj]) {
+						            allowedNext[i][j].push(ni * size + nj);
+						        }
+						    }
+						}
                     }
                 }
                 document.getElementById("test").innerText = JSON.stringify(allowedNext);
             }
-            function findWords() {
-                allLetters = [];
-				allowedList = [];
-				setupBoxes = document.getElementsByClassName("setupBox");
-				for (var i = 0; i < size**2; i++) {
-					allLetters.push(setupBoxes[i].value.toLowerCase());
-				}
-				for (var i = 0; i < size; i++) {
-					for (var j = 0; j < size; j++) {
-						allowedList.push(allowedNext[i][j]);
-					}
-				}
-				let tempfull = [];
-				for (var i = 0; i < size**2; i++) {
-					tempfull.push(i);
-				}
-				allowedList.push(tempfull);
-                for (var i = 0; i < words.length; i++) {
-                    let temp = [];
-					let arrayTemp = [];
-					let value = size**2;
-					allowedLetters = allLetters;
-					for (var j = 0; j < words[i].length; j) {
-						let matches = [];
-						arrayTemp = allowedList[value];
-						for (var k = 0; k < size**2; k++) {
-							if (allLetters[k] == words[i].substring(j,j+1)) {
-								if (!temp.includes(k) && arrayTemp.includes(k)) {
-									matches.push(k);
-								}
-							}
-						}
-						for (var l = 0; l < matches.length; l++) {
-							checkNumber(matches[l], i, j);
-						}
-					}
-      //               for (var j = 0; j < words[i].length; j++) {
-						// let allowedTemp = [];
-						// if (j != 0) {
-						// 	allowedLetters = [];
-						// 	allowedList[value].forEach(v=>{allowedLetters.push(allLetters[v])});
-						// 	allowedTemp = allowedList[value];
-						// }
-						// for (var k = 0; k < allLetters.length; k++) {
-						// 	if (temp.includes(k)) {
-						// 		al
-						// 	}
-						// }
-      //                   if (allowedLetters.includes(words[i].substring(j,j+1)) && !temp.includes(value)) {
-      //                       temp.push(value);
-      //                       if (temp.length == words[i].length) {
-      //                           foundWords.push(words[i]);
-      //                       }
-      //                   }
-      //               }
-                }
-            }
-			function checkNumber(value, i, j) {
-				
+			function canFormWord(word, letters, allowedNext) {
+			    for (let start = 0; start < letters.length; start++) {
+			        if (letters[start] === word[0]) {
+			            if (dfs(start, 0, new Set())) {
+			                return true;
+			            }
+			        }
+			    }
+			    return false;
+			    function dfs(pos, idx, used) {
+			        if (idx === word.length) return true;
+			        if (
+			            pos < 0 ||
+			            used.has(pos) ||
+			            letters[pos] !== word[idx]
+			        ) {
+			            return false;
+			        }
+			        used.add(pos);
+			        let neighbors = allowedNext[Math.floor(pos / size)][pos % size];
+			        for (let next of neighbors) {
+			            if (dfs(next, idx + 1, used)) {
+			                return true;
+			            }
+			        }
+			        used.delete(pos);
+			        return false;
+			    }
+			}
+			
+			function findWords() {
+			    let letters = [];
+			    let setupBoxes = document.getElementsByClassName("setupBox");
+				foundWords = [];
+			    for (let i = 0; i < size * size; i++) {
+			        letters.push(setupBoxes[i].value.toLowerCase());
+			    }
+			
+			    for (let i = 0; i < words.length; i++) {
+			        if (canFormWord(words[i], letters, allowedNext)) {
+			            foundWords.push(words[i]);
+			        }
+			    }
+			
+			    document.getElementById("wordListContainer").innerText = foundWords.join(", ");
 			}
         </script>
     </body>
