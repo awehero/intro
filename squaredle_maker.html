@@ -147,13 +147,43 @@
 			}
 
             globalThis.setupBoxes = document.getElementsByClassName("setupBox");
-			fetch('https://awehero.github.io/intro/minitools/wordbank.js')
+			fetch('https://awehero.github.io/intro/minitools/wordbank_1.js')
 				.then(response => response.text())
 				.then(code => {
 					eval(code);
-					globalThis.words = wordbank.filter(w=>{return w.length > 3});
 			  	})
 				.catch(err => console.error('Error loading word list:', err));
+			fetch('https://awehero.github.io/intro/minitools/wordbank_2.js')
+				.then(response => response.text())
+				.then(code => {
+					eval(code);
+			  	})
+				.catch(err => console.error('Error loading word list:', err));
+			fetch('https://awehero.github.io/intro/minitools/wordbank_3.js')
+				.then(response => response.text())
+				.then(code => {
+					eval(code);
+			  	})
+				.catch(err => console.error('Error loading word list:', err));
+			fetch('https://awehero.github.io/intro/minitools/wordbank_4.js')
+				.then(response => response.text())
+				.then(code => {
+					eval(code);
+			  	})
+				.catch(err => console.error('Error loading word list:', err));
+			fetch('https://awehero.github.io/intro/minitools/wordbank_5.js')
+				.then(response => response.text())
+				.then(code => {
+					eval(code);
+			  	})
+				.catch(err => console.error('Error loading word list:', err));
+			fetch('https://awehero.github.io/intro/minitools/wordbank_6.js')
+				.then(response => response.text())
+				.then(code => {
+					eval(code);
+			  	})
+				.catch(err => console.error('Error loading word list:', err));
+			globalThis.words = wordbank.filter(w=>{return w.length > 3});
 			globalThis.size = 3;
             globalThis.words = [];
             globalThis.letters = [];
