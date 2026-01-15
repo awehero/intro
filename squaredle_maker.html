@@ -201,7 +201,7 @@
 			setup();
 
 			let slider = document.getElementById("sizeSlider");
-			slider.addEventListener("oninput",()=>{
+			slider.addEventListener("input",()=>{
 			    size = Number(slider.value);
 				document.getElementById("sizeText").innerText = `Board Size (${3} x ${3})`;
 			    setup();
