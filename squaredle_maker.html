@@ -147,6 +147,7 @@
 			}
 
             globalThis.setupBoxes = document.getElementsByClassName("setupBox");
+			globalThis.wordbank = [];
 			fetch('https://awehero.github.io/intro/minitools/wordbank_1.js')
 				.then(response => response.text())
 				.then(code => {
