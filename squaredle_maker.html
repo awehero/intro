@@ -119,6 +119,7 @@
 				if (document.getElementById("board")) {
 					document.getElementById("board").remove();
 				}
+				document.getElementById("wordListContainer").innerHTML = "";
 				let elem = document.createElement("div");
 				elem.id = "board";
 				for (let i = 0; i < size; i++) {
@@ -274,6 +275,7 @@
 			function findWords() {
 			    let letters = [];
 			    let setupBoxes = document.getElementsByClassName("setupBox");
+				document.getElementById("wordListContainer").innerHTML = "";
 				foundWords = [];
 			    for (let i = 0; i < size * size; i++) {
 			        letters.push(setupBoxes[i].value.toLowerCase());
