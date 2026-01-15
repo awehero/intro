@@ -109,11 +109,11 @@
     <body>
         <h1>Squaredle Maker</h1>
         <p>Use the slider to change the size and select or type letters to create the board</p>
+		<div id="sizeText">Board Size (5 x 5)</div>
+		<input id="sizeSlider" type="range" min="3" max="10" step="1" value="5">
 		<div id="setupContainer"></div>
         <button onclick="findWords()">Find Words</button>
 		<div id="wordListContainer"></div>
-		<div id="sizeText">Board Size (3 x 3)</div>
-		<input id="sizeSlider" type="range" min="3" max="10" step="1" value="3">
         <script>
 			function setup() {
 				if (document.getElementById("board")) {
@@ -190,7 +190,7 @@
 					adjustWords();
 			  	})
 				.catch(err => console.error('Error loading word list:', err));
-			globalThis.size = 3;
+			globalThis.size = 5;
             globalThis.letters = [];
             globalThis.letterArray = [];
 			globalThis.allLetters = [];
