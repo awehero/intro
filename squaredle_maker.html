@@ -186,7 +186,6 @@
 				.catch(err => console.error('Error loading word list:', err));
 			globalThis.words = wordbank.filter(w=>{return w.length > 3});
 			globalThis.size = 3;
-            globalThis.words = [];
             globalThis.letters = [];
             globalThis.letterArray = [];
 			globalThis.allLetters = [];
@@ -195,6 +194,13 @@
 			globalThis.allowedLetters = [];
 			globalThis.foundWords = [];
 			setup();
+
+			let slider = document.getElementById("sizeSlider");
+			slider.addEventListener("oninput",()=>{
+			    let size = Number(slider.value);
+				document.getElementById("sizeText").innerText = `Board Size (${3} x ${3})`;
+			    setup();
+			});
             
             function updateSetup() {
                 setupBoxes = document.getElementsByClassName("setupBox");
