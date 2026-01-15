@@ -152,42 +152,42 @@
 				.then(response => response.text())
 				.then(code => {
 					eval(code);
-					globalThis.words = wordbank.filter(w=>{return w.length > 3});
+					adjustWords();
 			  	})
 				.catch(err => console.error('Error loading word list:', err));
 			fetch('https://awehero.github.io/intro/minitools/wordbank_2.js')
 				.then(response => response.text())
 				.then(code => {
 					eval(code);
-					globalThis.words = wordbank.filter(w=>{return w.length > 3});
+					adjustWords();
 			  	})
 				.catch(err => console.error('Error loading word list:', err));
 			fetch('https://awehero.github.io/intro/minitools/wordbank_3.js')
 				.then(response => response.text())
 				.then(code => {
 					eval(code);
-					globalThis.words = wordbank.filter(w=>{return w.length > 3});
+					adjustWords();
 			  	})
 				.catch(err => console.error('Error loading word list:', err));
 			fetch('https://awehero.github.io/intro/minitools/wordbank_4.js')
 				.then(response => response.text())
 				.then(code => {
 					eval(code);
-					globalThis.words = wordbank.filter(w=>{return w.length > 3});
+					adjustWords();
 			  	})
 				.catch(err => console.error('Error loading word list:', err));
 			fetch('https://awehero.github.io/intro/minitools/wordbank_5.js')
 				.then(response => response.text())
 				.then(code => {
 					eval(code);
-					globalThis.words = wordbank.filter(w=>{return w.length > 3});
+					adjustWords();
 			  	})
 				.catch(err => console.error('Error loading word list:', err));
 			fetch('https://awehero.github.io/intro/minitools/wordbank_6.js')
 				.then(response => response.text())
 				.then(code => {
 					eval(code);
-					globalThis.words = wordbank.filter(w=>{return w.length > 3});
+					adjustWords();
 			  	})
 				.catch(err => console.error('Error loading word list:', err));
 			globalThis.size = 3;
@@ -199,11 +199,16 @@
 			globalThis.allowedLetters = [];
 			globalThis.foundWords = [];
 			setup();
-
+			function adjustWords() {
+				globalThis.words = wordbank.filter(w=>{return w.length > 3});
+				for (var i = 0; i < words.length; i++) {
+					words[i] = words[i].toLowerCase();
+				}
+			}
 			let slider = document.getElementById("sizeSlider");
 			slider.addEventListener("input",()=>{
 			    size = Number(slider.value);
-				document.getElementById("sizeText").innerText = `Board Size (${3} x ${3})`;
+				document.getElementById("sizeText").innerText = `Board Size (${size} x ${size})`;
 			    setup();
 			});
             
