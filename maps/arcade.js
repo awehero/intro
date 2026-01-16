@@ -186,7 +186,7 @@ var map = {
                 }
                 if (PX > -801 && PX < -793) {
                     currentGame = "skeeball";
-                    tickets = games[1];
+                    let tickets = games[1] || 0;
                     bestElement.innerHTML = "Attempts: " + 10 + "<br>Tickets: " + 0 + "<br>Best: " + tickets;
                     rotation = 0;
                     currentBall = 0;
