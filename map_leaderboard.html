@@ -178,7 +178,8 @@
 			function fetchLeaderboard() {
             let map = document.getElementById("input").value.trim();
             let tableBody = document.querySelector("#outputTable tbody");
-            let totalResults = document.getElementById("total_results")
+            let totalResults = document.getElementById("total_results");
+			totalResults.innerHTML = `Total Results: Loading...`;
             tableBody.innerHTML = "";
         
             let data = {
