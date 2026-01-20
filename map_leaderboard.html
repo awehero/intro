@@ -121,6 +121,25 @@
         <script>
 			let input = document.getElementById("input");
 			let suggestions = document.getElementById("suggestions");
+			var bannedPeople = [
+			    'andreaaa',
+			    'spmuj_yram_7y',
+			    'ice_dodo',
+			    'cyphrix',
+			    'ananas_smurf',
+			    'damian01',
+			    'heil',
+			    'fi3uwf_dodoer',
+			    'toast8765',
+			    'bobtaste',
+			    'thedodoest',
+			    'lc_nickname',
+			    'hehehehahaha',
+			    '0pidity123',
+			    'wally_the_pro',
+			    'hk_9d',
+			    '91go_a1',
+			];
 			fetch('https://awehero.github.io/intro/minitools/mapdata.js')
 				.then(response => response.text())
 				.then(code => {
@@ -178,6 +197,7 @@
             .then(response => response.json())
             .then(result => {
                 let output = result.leaderboardRows;
+				output = output.filter(row => !bannedPeople.includes(row.username));
                 if (output && output.length > 0) {
                    	if (output.length > 9998) {
                         totalResults.innerHTML = `Total Results: 9999+`;
