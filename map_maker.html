@@ -414,8 +414,8 @@
                     document.getElementById('positionY').value = selectedObject.position.z;
                     document.getElementById('positionZ').value = selectedObject.position.y;
                     document.getElementById('rotationX').value = (Math.round(selectedObject.rotation.x * (180 / Math.PI) * 100)) / 100;
-                    document.getElementById('rotationY').value = (Math.round(selectedObject.rotation.y * (180 / Math.PI) * 100)) / 100;
-                    document.getElementById('rotationZ').value = (Math.round(selectedObject.rotation.z * (180 / Math.PI) * 100)) / 100;
+                    document.getElementById('rotationY').value = (Math.round(selectedObject.rotation.z * (180 / Math.PI) * 100)) / 100;
+                    document.getElementById('rotationZ').value = (Math.round(selectedObject.rotation.y * (180 / Math.PI) * 100)) / 100;
                     if (selectedObject.geometry.type == "IcosahedronGeometry") {
                         document.getElementById("scaleMenu").style.display = "none";
                         document.getElementById("radiusMenu").style.display = "block";
@@ -1047,8 +1047,8 @@
                     changeObject.position.z = parseFloat(document.getElementById('positionY').value);
                     changeObject.position.y = parseFloat(document.getElementById('positionZ').value);
                     changeObject.rotation.x = parseFloat(document.getElementById('rotationX').value) * (Math.PI / 180);
-                    changeObject.rotation.y = parseFloat(document.getElementById('rotationY').value) * (Math.PI / 180);
-                    changeObject.rotation.z = parseFloat(document.getElementById('rotationZ').value) * (Math.PI / 180);
+                    changeObject.rotation.z = parseFloat(document.getElementById('rotationY').value) * (Math.PI / 180);
+                    changeObject.rotation.y = parseFloat(document.getElementById('rotationZ').value) * (Math.PI / 180);
                     if (geometryType == "SphereGeometry" || geometryType == "OctahedronGeometry") {
                         changeObject.scale.x = 1;
                         changeObject.scale.y = 1;
@@ -1308,8 +1308,8 @@
                     object.position.z = Math.round(positionY * 1000) / 100000;
                     object.position.y = Math.round(positionZ * 1000) / 100000;
                     object.rotation.x = rotationX / 100;
-                    object.rotation.y = rotationY / 100;
-                    object.rotation.z = rotationZ / 100;
+                    object.rotation.z = rotationY / 100;
+                    object.rotation.y = rotationZ / 100;
                     if (object.geometry.type == "OctahedronGeometry") {
                         object.scale.x = 1;
                         object.scale.z = 1;
