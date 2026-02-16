@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Trimmer</title>
+    <link rel="icon" href="https://awehero.github.io/intro/awehero.png" type="image/png">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; background: #fff; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+		tr: { border-radius: 5px; }
+        textarea { width: 100%; padding: 10px; font-family: monospace; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        div {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        p {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        textarea {
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1.7em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            max-width: 100%;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #copyButton {
+            margin-top: 10px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+		#suggestions {
+			position: absolute;
+		    max-height: 12em;
+			width: 15em;
+		    overflow: auto;
+		    background-color: white;
+		    border: 1px solid black;
+			display: none;
+			padding-left: 5px;
+    		padding-right: 5px;
+		}
+		.suggestion-item {
+			font-size: 1em;
+			cursor: pointer;
+			border: 2px solid black;
+		    border-radius: 5px;
+		    padding-left: 5px;
+		}
+		.suggestion-item:hover {
+			background-color: #f0f0f0;
+		}
+    </style>
+    <body>
+        <h1>Video Trimmer</h1>
+        <p>Select a video you want to trim</p>
+        <input type="file" id="fileInput" accept="video/*">
+        <br><br>
+        
+        <video id="video" controls style="max-width:800px;"></video>
+        
+        <br><br>
+        
+        Current time: <span id="current">0</span>s
+        
+        <br><br>
+        
+        <button id="setStart">Set Start</button>
+        <button id="setEnd">Set End</button>
+        
+        <br><br>
+        
+        Start: <span id="startDisplay">0</span>s  
+        End: <span id="endDisplay">0</span>s
+        
+        <br><br>
+        
+        <button id="trim">Trim & Download</button>
+        
+        <script>
+        let video = document.getElementById("video");
+        let file;
+        
+        let start = 0;
+        let end = 0;
+        
+        fileInput.onchange = e => {
+            file = e.target.files[0];
+            video.src = URL.createObjectURL(file);
+        };
+        
+        video.ontimeupdate = () => {
+            current.textContent = video.cu
+
+    </body>
+</html>
