@@ -109,11 +109,13 @@
 		<video id="video" controls width="800"></video>
 		<br><br>
 		Start
-		<button id="setStart" onclick="setStart()">Set</button>
-		<button id="gotoStart" onclick="gotoStart()">Go to Start</button>
+		<button id="setStart" onclick="setStartF()">Set</button>
+		<button id="gotoStart" onclick="gotoStartF()">Go to Start</button>
 		End
-		<button id="setEnd" onclick="setEnd()">Set</button>
-		<button id="gotoEnd" onclick="gotoEnd()">Go to End</button>
+		<button id="setEnd" onclick="setEndF()">Set</button>
+		<button id="gotoEnd" onclick="gotoEndF()">Go to End</button>
+
+		
 		
 		<script>
 			const fileInput = document.getElementById("fileInput");
@@ -154,25 +156,48 @@
 			    }
 			});
 
-			function setStart() {
+			function setStartF() {
 				if (video.currentTime < endTime) {
 					startTime = video.currentTime;
 				}
 			}
-			function setEnd() {
+			function setEndF() {
 				if (video.currentTime > startTime) {
 					endTime = video.currentTime;
 				}
 			}
-			function gotoStart() {
+			function gotoStartF() {
 				video.currentTime = startTime;
 				video.play()
 			}
-			function gotoEnd() {
+			function gotoEndF() {
 				if (video.duration > 5) {
 					video.currentTime = endTime - 5;
 				}
 			}
+			function downloadTrimmedVideo(startTime, endTime) {
+			    if (!file) {
+			        alert("No video loaded");
+			        return;
+			    }
+			    if (endTime <= startTime) {
+			        alert("Invalid trim range");
+			        return;
+			    }
+			    const duration = video.duration;
+			    const fileSize = file.size;
+			    const startByte = Math.floor(startTime / duration * fileSize);
+			    const endByte = Math.floor(endTime / duration * fileSize);
+			    const trimmedBlob = file.slice(startByte, endByte, file.type);
+			    const url = URL.createObjectURL(trimmedBlob);
+			    const a = document.createElement("a");
+			    a.href = url;
+			    a.download = "awehero_video_trimmer.mp4";
+			    a.click();
+			
+			    URL.revokeObjectURL(url);
+			}
+
 		</script>
     </body>
 </html>
