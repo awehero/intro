@@ -132,10 +132,20 @@
         let end = 0;
         
         fileInput.onchange = e => {
-            file = e.target.files[0];
-            video.src = URL.createObjectURL(file);
-        };
-        
+		    file = e.target.files[0];
+		
+		    const url = URL.createObjectURL(file);
+		    video.src = url;
+		
+		    video.onloadeddata = () => {
+		        console.log("Video loaded");
+		    };
+		
+		    video.onerror = e => {
+		        console.log("Error loading video", e);
+		    };
+		};
+
         video.ontimeupdate = () => {
             current.textContent = video.cu
 
