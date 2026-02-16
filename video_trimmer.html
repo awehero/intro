@@ -146,6 +146,13 @@
 			        console.log("VIDEO ERROR:", e);
 			    };
 			});
+			video.addEventListener("timeupdate", () => {
+			    if (video.currentTime > endTime) {
+			        video.pause();
+			        video.currentTime = endTime;
+			    }
+			});
+
 			function setStart() {
 				if (video.currentTime < endTime) {
 					startTime = video.currentTime;
@@ -158,9 +165,12 @@
 			}
 			function gotoStart() {
 				video.currentTime = startTime;
+				video.play()
 			}
 			function gotoEnd() {
-				video.currentTime = endTime;
+				if (video.duration > 5) {
+					video.currentTime = endTime - 5;
+				}
 			}
 		</script>
     </body>
