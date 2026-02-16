@@ -126,6 +126,7 @@
 			const setEnd = document.getElementById("setEnd");
 			let startTime = 0;
 			let endTime = 0;
+			let filename = "";
 			
 			let file;
 			
@@ -135,7 +136,8 @@
 			        console.log("No file selected");
 			        return;
 			    }
-			    console.log("File selected:", file.name);
+				filename = file.name.substring(0, file.name.lastIndexOf("."));
+			    console.log("File selected:", filename);
 			    const url = URL.createObjectURL(file);
 			    video.src = url;
 			    video.load();
@@ -194,7 +196,7 @@
 			    const url = URL.createObjectURL(trimmedBlob);
 			    const a = document.createElement("a");
 			    a.href = url;
-			    a.download = "awehero_video_trimmer.mp4";
+			    a.download = filename + "_awehero_video_trimmer.mp4";
 			    a.click();
 			
 			    URL.revokeObjectURL(url);
