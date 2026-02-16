@@ -107,44 +107,61 @@
 		<br><br>
 		
 		<video id="video" controls width="800"></video>
+		Start
+		<button id="setStart" onclick="setStart()">Set</button>
+		<button id="gotoStart" onclick="gotoStart()">Go to Start</button>
+		End
+		<button id="setEnd" onclick="setEnd()">Set</button>
+		<button id="gotoEnd" onclick="gotoEnd()">Go to End</button>
 		
 		<script>
-		const fileInput = document.getElementById("fileInput");
-		const video = document.getElementById("video");
-		
-		let file;
-		
-		fileInput.addEventListener("change", function(event) {
-		
-		    file = event.target.files[0];
-		
-		    if (!file) {
-		        console.log("No file selected");
-		        return;
-		    }
-		
-		    console.log("File selected:", file.name);
-		
-		    const url = URL.createObjectURL(file);
-		
-		    video.src = url;
-		
-		    video.load();
-		
-		    video.onloadedmetadata = function() {
-		        console.log("Metadata loaded");
-		        console.log("Duration:", video.duration);
-		    };
-		
-		    video.onloadeddata = function() {
-		        console.log("Video fully ready");
-		    };
-		
-		    video.onerror = function(e) {
-		        console.log("VIDEO ERROR:", e);
-		    };
-		
-		});
+			const fileInput = document.getElementById("fileInput");
+			const video = document.getElementById("video");
+			const setStart = document.getElementById("setStart");
+			const setEnd = document.getElementById("setEnd");
+			let startTime = 0;
+			let endTime = 0;
+			
+			let file;
+			
+			fileInput.addEventListener("change", function(event) {
+			    file = event.target.files[0];
+			    if (!file) {
+			        console.log("No file selected");
+			        return;
+			    }
+			    console.log("File selected:", file.name);
+			    const url = URL.createObjectURL(file);
+			    video.src = url;
+			    video.load();
+			    video.onloadedmetadata = function() {
+			        console.log("Metadata loaded");
+			        console.log("Duration:", video.duration);
+					endTime = video.duration
+			    };
+			    video.onloadeddata = function() {
+			        console.log("Video fully ready");
+			    };
+			    video.onerror = function(e) {
+			        console.log("VIDEO ERROR:", e);
+			    };
+			});
+			function setStart() {
+				if (video.currentTime < endTime) {
+					startTime = video.currentTime;
+				}
+			}
+			function setEnd() {
+				if (video.currentTime > startTime) {
+					endTime = video.currentTime;
+				}
+			}
+			function gotoStart() {
+				video.currentTime = startTime;
+			}
+			function gotoEnd() {
+				video.currentTime = endTime;
+			}
 		</script>
     </body>
 </html>
