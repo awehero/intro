@@ -118,6 +118,8 @@
 		<button id="setEnd" onclick="setEndF()">Set</button>
 		<button id="gotoEnd" onclick="gotoEndF()">Go to End</button>
 		<p id="endLabel">0:0:0.000</p>
+		<br><br>
+		<button id="download" onclick="downloadF()">Download</button>
 
 		
 		
@@ -184,6 +186,9 @@
 					video.currentTime = endTime - 5;
 					video.play();
 				}
+			}
+			function downloadF() {
+				downloadTrimmedVideo(startTime, endTime);
 			}
 			function downloadTrimmedVideo(startTime, endTime) {
 			    if (!file) {
