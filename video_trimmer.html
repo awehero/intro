@@ -112,10 +112,12 @@
 		<h2>Start</h2><br>
 		<button id="setStart" onclick="setStartF()">Set</button>
 		<button id="gotoStart" onclick="gotoStartF()">Go to Start</button>
+		<p id="startLabel">0:0:0.000</p>
 		<br>
 		<h2>End</h2><br>
 		<button id="setEnd" onclick="setEndF()">Set</button>
 		<button id="gotoEnd" onclick="gotoEndF()">Go to End</button>
+		<p id="endLabel">0:0:0.000</p>
 
 		
 		
@@ -145,6 +147,7 @@
 			        console.log("Metadata loaded");
 			        console.log("Duration:", video.duration);
 					endTime = video.duration
+					endLabel.innerText = calculateTime(endTime);
 			    };
 			    video.onloadeddata = function() {
 			        console.log("Video fully ready");
@@ -163,11 +166,13 @@
 			function setStartF() {
 				if (video.currentTime < endTime) {
 					startTime = video.currentTime;
+					startLabel.innerText = calculateTime(startTime);
 				}
 			}
 			function setEndF() {
 				if (video.currentTime > startTime) {
 					endTime = video.currentTime;
+					endLabel.innerText = calculateTime(endTime);
 				}
 			}
 			function gotoStartF() {
@@ -201,7 +206,14 @@
 			
 			    URL.revokeObjectURL(url);
 			}
-
+			function calculateTime(s) {
+			    let h = Math.floor(s/3600);
+			    s = s - (h*3600);
+			    let m = Math.floor(s/60);
+			    s = s - (m*60);
+			    let t = h+":"+Math.floor(m)+":"+Math.floor(s*1000)/1000;
+			    return t;
+			}
 		</script>
     </body>
 </html>
