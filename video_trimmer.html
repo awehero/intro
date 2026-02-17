@@ -177,11 +177,12 @@
 			}
 			function gotoStartF() {
 				video.currentTime = startTime;
-				video.play()
+				video.play();
 			}
 			function gotoEndF() {
 				if (video.duration > 5) {
 					video.currentTime = endTime - 5;
+					video.play();
 				}
 			}
 			function downloadTrimmedVideo(startTime, endTime) {
