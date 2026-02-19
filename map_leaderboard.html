@@ -139,6 +139,31 @@
 			    'wally_the_pro',
 			    'hk_9d',
 			    '91go_a1',
+			    'goodshyguy38',
+			    '83go_r0',
+			    'greatgamvirus',
+			    'nootdapenguin',
+			    'orcalerorcala',
+			    'ytivarg_ne_4u',
+			    'egdirb_gni_cq',
+			    'yawklaw_ss_vr',
+			    'ninnips_rl',
+			    'bigguy12',
+			    '31go_3q',
+			    'paninipress',
+			    'ponyooooo',
+			    'orezbus_11',
+			    'noiprocs_b2',
+			    'zeverion',
+			    '1enoc_jg',
+			    'theory_boy',
+			    'ice_dodo_god',
+			    'ytic_5m',
+			    'trilogy',
+			    'squareball',
+			    'gardevoir',
+			    'ddeevviinn',
+				'silly_guitar',
 			];
 			fetch('https://awehero.github.io/intro/minitools/mapdata.js')
 				.then(response => response.text())
@@ -199,6 +224,7 @@
             .then(result => {
                 let output = result.leaderboardRows;
 				output = output.filter(row => !bannedPeople.includes(row.username));
+				output = output.filter(row => row.time != 9999);
                 if (output && output.length > 0) {
                    	if (output.length > 9998) {
                         totalResults.innerHTML = `Total Results: 9999+`;
