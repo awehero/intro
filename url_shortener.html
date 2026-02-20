@@ -15,10 +15,16 @@
     <button type="submit">Shorten URL</button>
   </form>
   <h2>Result:</h2>
+  <button id="copyButton" onclick="copyLink()">Copy!</button>
   <div id="lengthBefore"></div>
   <div id="lengthAfter"></div>
   <div id="result"></div>
   <script>
+    function copyLink() {
+        if (document.getElementById("outputText").innerText != '') {
+            navigator.clipboard.writeText(document.getElementById("outputText").innerText);
+        }
+    }
     function roundDollarNumbersInString(input) {
       const regex = /\$(\-?\d+(\.\d+)?)\$/g;
       let roundedString = input.replace(regex, (match, p1) => {
