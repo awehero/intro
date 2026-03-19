@@ -49,77 +49,77 @@
     }
     
     function decode_seq(seq, var_keys) {
-        const symbols = []
-        const numbers = []
-        let temp = ''
+        const symbols = [];
+        const numbers = [];
+        let temp = '';
         for (let i=0;i<seq.length;i++) {
-            const char = seq[i]
+            const char = seq[i];
             if (var_keys.includes(char)) {
                 if (temp != '') {
-                    numbers.push(temp)
-                    temp = ''
+                    numbers.push(temp);
+                    temp = '';
                 }
-                symbols.push(char)
+                symbols.push(char);
             } else {
-                temp += char
+                temp += char;
             }
         }
         if (temp != '') {
-            numbers.push(temp)
+            numbers.push(temp);
         }
         return [symbols, numbers]
     }
 
     function num_format(num) {
-        const v = (num / 100).toFixed(3+2)
+        const v = (num / 100).toFixed(3+2);
         return parseFloat(v)
     }
 
     function switch_arr(arr, a, b) {
-        const temp = arr[a]
-        arr[a] = arr[b]
-        arr[b] = temp
+        const temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
         return arr
     }
 
     function summarize_data(raw_data) {
-        const summary = []
-        const info_var_keys = Object.keys(object_type_map)
-        const info_res = decode_seq(raw_data, info_var_keys)
-        const object_types = info_res[0]
-        const object_infos = info_res[1]
+        const summary = [];
+        const info_var_keys = Object.keys(object_type_map);
+        const info_res = decode_seq(raw_data, info_var_keys);
+        const object_types = info_res[0];
+        const object_infos = info_res[1];
         for (let i=0;i<object_infos.length;i++) {
-            const object_type = object_type_map[object_types[i]]
-            const object_info= object_infos[i]
-            let pos = []
-            let rot = []
-            let siz = []
-            let additional_info = 'none'
-            const object_numbers = object_info.split('$')
+            const object_type = object_type_map[object_types[i]];
+            const object_info= object_infos[i];
+            let pos = [];
+            let rot = [];
+            let siz = [];
+            let additional_info = 'none';
+            const object_numbers = object_info.split('$');
             for (let z=0;z<10;z++) {
-                const object_number = object_numbers[z]
+                const object_number = object_numbers[z];
                 if (z<3) {
-                    pos.push(num_format(object_number))
+                    pos.push(num_format(object_number));
                 } else if (z<6) {
-                    rot.push(num_format(object_number))
+                    rot.push(num_format(object_number));
                 } else if (z<9) {
-                    siz.push(num_format(object_number) * 2)
+                    siz.push(num_format(object_number) * 2);
                 } else {
                     if (object_number != null) additional_info = object_number
                 }
             }
             // position 
-            pos = switch_arr(pos, 1,2)
+            pos = switch_arr(pos, 1,2);
 
             // rotation
-            rot = switch_arr(rot, 1,2)
-            rot = switch_arr(rot, 0,1)
-            rot[0] *= -1
-            rot[1] *= -1
-            rot[2] *= -1
+            rot = switch_arr(rot, 1,2);
+            rot = switch_arr(rot, 0,1);
+            rot[0] *= -1;
+            rot[1] *= -1;
+            rot[2] *= -1;
 
             // scale
-            siz = switch_arr(siz, 1,2)
+            siz = switch_arr(siz, 1,2);
 
             // push
             summary.push({
@@ -128,7 +128,7 @@
                 'rot': rot,
                 'siz': siz,
                 'add': additional_info
-            })
+            });
         }
         return summary
     }
