@@ -84,11 +84,11 @@
     		var buffs = [];
     		var sp = z_info.split("?");
     		if ((sp[0] != "none") && (sp[0] != "_")) {
-    			var section_id = null;
+    			var section_id = [];
     			for (var p=0;p<sp.length;p++) {
     				let sp2 = sp[p].split("=");
     				if (sp2[0] == "id") {
-    					section_id = Number(sp2[1]);
+    					section_id.push(sp2[1]);
     				} else {
     					buffs.push([sp2[0], sp2[1]]);
     				}
@@ -487,7 +487,7 @@
     		// movers
     		for (var m=0;m<movers.length;m++) {
     			let mover = movers[m];
-    			if (mover.section_id == z_section_id) {
+    			if (mover.section_id.includes(z_section_id)) {
     				for (var j=0;j<mover['buffs'].length;j++) {
     					let buff = mover['buffs'][j];
     					let jkey = buff[0];
