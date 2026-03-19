@@ -33,103 +33,555 @@
     
     function start() {
         input = document.getElementById("query").value;
-        result = summarize_data(input);
+        result = write_javascript(JSON.parse(input));
     }
     
-    const object_type_map = {
-        'A': 'Section',
-        'B': 'Platform',
-        'C': 'Cone',
-        'D': 'End',
-        'E': 'Cylinder',
-        'F': 'Sphere',
-        'G': 'Monkey',
-        'H': 'Grid',
+    function decode_ascii(x) {
+    	var arr = x.split(":");
+    	arr = arr.filter(v => v.trim().length > 0);
+    	arr = arr.map(v => String.fromCharCode(Number(v)));
+    	return arr.join("");
     }
     
-    function decode_seq(seq, var_keys) {
-        const symbols = []
-        const numbers = []
-        let temp = ''
-        for (let i=0;i<seq.length;i++) {
-            const char = seq[i]
-            if (var_keys.includes(char)) {
-                if (temp != '') {
-                    numbers.push(temp)
-                    temp = ''
-                }
-                symbols.push(char)
-            } else {
-                temp += char
-            }
-        }
-        if (temp != '') {
-            numbers.push(temp)
-        }
-        return [symbols, numbers]
-    }
-
-    function num_format(num) {
-        const v = (num / 100).toFixed(3+2)
-        return parseFloat(v)
-    }
-
-    function switch_arr(arr, a, b) {
-        const temp = arr[a]
-        arr[a] = arr[b]
-        arr[b] = temp
-        return arr
-    }
-
-    function summarize_data(raw_data) {
-        const summary = []
-        const info_var_keys = Object.keys(object_type_map)
-        const info_res = decode_seq(raw_data, info_var_keys)
-        const object_types = info_res[0]
-        const object_infos = info_res[1]
-        for (let i=0;i<object_infos.length;i++) {
-            const object_type = object_type_map[object_types[i]]
-            const object_info: string = object_infos[i]
-            let pos = []
-            let rot = []
-            let siz = []
-            let additional_info = 'none'
-            const object_numbers = object_info.split('$')
-            for (let z=0;z<10;z++) {
-                const object_number = object_numbers[z]
-                if (z<3) {
-                    pos.push(num_format(object_number))
-                } else if (z<6) {
-                    rot.push(num_format(object_number))
-                } else if (z<9) {
-                    siz.push(num_format(object_number) * 2)
-                } else {
-                    if (object_number != null) additional_info = object_number
-                }
-            }
-            // position 
-            pos = switch_arr(pos, 1,2)
-
-            // rotation
-            rot = switch_arr(rot, 1,2)
-            rot = switch_arr(rot, 0,1)
-            rot[0] *= -1
-            rot[1] *= -1
-            rot[2] *= -1
-
-            // scale
-            siz = switch_arr(siz, 1,2)
-
-            // push
-            summary.push({
-                'type': object_type,
-                'pos': pos,
-                'rot': rot,
-                'siz': siz,
-                'add': additional_info
-            })
-        }
-        return summary
+    function write_javascript(objects) {
+    	var code = `
+    	var map = {
+    		compilerVersion: 9,
+    		title: "Test Map V9",
+    		song: "env2",
+    		maker: "Ice dodo map maker",
+    		spawn: [0,0.5,0],    
+    		init: function() {`;
+    	var effects = [];
+    	var movers = [];
+    	var counter = {
+    		'Y': 0,
+    		'P': 0,
+    		'C': 0,
+    		'S': 0,
+    		'E': 0
+    	}
+    	function add_mover(obj) {
+    		// get the id
+    		var prefix;
+    		if (obj.type == "Platform") {
+    			prefix = "P";
+    		} else if (obj.type == "Cone") {
+    			prefix = "C";
+    		} else if (obj.type == "Cylinder") {
+    			prefix = "Y";
+    		} else if (obj.type == "Sphere") {
+    			prefix = "S";
+    		} else if (obj.type == "End") {
+    			prefix = "E";
+    			obj.siz = [1,1,1];
+    		}
+    		let ingame_id = prefix + counter[prefix];
+    		counter[prefix] += 1;
+    		// decode mover info
+    		let z_info = obj.add;
+    		var buffs = [];
+    		var sp = z_info.split("?");
+    		if ((sp[0] != "none") && (sp[0] != "_")) {
+    			var section_id = null;
+    			for (var p=0;p<sp.length;p++) {
+    				let sp2 = sp[p].split("=");
+    				if (sp2[0] == "id") {
+    					section_id = Number(sp2[1]);
+    				} else {
+    					buffs.push([sp2[0], sp2[1]]);
+    				}
+    			}
+    		}
+    		
+    		
+    		movers.push({
+    			'section_id': section_id,
+    			'ingame_id': ingame_id,
+    			'buffs': buffs,
+    			'obj': obj
+    		});
+    	}
+    	var monkeys = [];
+    	function add_monkey(obj) {
+    		let z_info = obj.add;
+    		var buffs = [];
+    		var sp = z_info.split("?");
+    		if (sp[0] != "none") {
+    			var section_id = null;
+    			for (var p=0;p<sp.length;p++) {
+    				let sp2 = sp[p].split("=");
+    				if (sp2[0] == "id") {
+    					section_id = Number(sp2[1]);
+    				} else {
+    					buffs.push([sp2[0], sp2[1]]);
+    				}
+    			}
+    		}
+    		monkeys.push(buffs);
+    	}
+    
+    	for (var i=0;i<objects.length;i++) {
+    		var obj = objects[i]
+    		switch(obj.type) {
+    			case "Section":
+    				effects.push(obj);
+    				break;
+    			case "Platform":
+    			case "Cone":
+    			case "Sphere":
+    			case "End":
+    			case "Cylinder":
+    				add_mover(obj);
+    				break;
+    			case "Monkey":
+    				add_monkey(obj);
+    				break;
+    			default:
+    				console.log("unknown obj.type");
+    		}
+    	}
+    
+    	for (var i=0;i<movers.length;i++) {
+    		var obj = movers[i].obj;
+    		switch(obj.type) {
+    			case "Section":
+    				break;
+    			case "Platform":
+    				// code block
+    				var param = "["+obj.pos.join(",")+"], ";
+    				param += "["+obj.rot.join(",")+"], ";
+    				param += "["+obj.siz.join(",")+"]";
+    				var imat = 1;
+    				var bounce = 0;
+    				var mass = 0;
+    				var friction = 0.6;
+    				var jump = "false";
+    				var opacity = "";
+    				var air = "false";
+    				var isKiller = "false";
+    				var isDriftOn = "false"
+    				for (var buff of movers[i].buffs) {
+    					if (buff[0] == "m") imat = buff[1];
+    					if (buff[0] == "o") opacity = ","+buff[1];
+    					if (buff[0] == "bou") bounce = buff[1];
+    					if (buff[0] == "mass") mass = buff[1];
+    					if (buff[0] == "fr") friction = buff[1];
+    					if ((buff[0] == "jump") && (buff[1] == "on")) jump = "true";
+    					if ((buff[0] == "air") && (buff[1] == "on")) air = "true";
+    					if ((buff[0] == "k") && (buff[1] == "on")) isKiller = "true";
+    					if ((buff[0] == "dr") && (buff[1] == "on")) isDriftOn = "true";
+    				}
+    				code += `a.p(${param}, "${imat}${opacity}", ${bounce}, ${mass}, ${friction}, ${jump}, ${air}, ${isKiller}, ${isDriftOn});`;
+    				break;
+    			case "Cone":
+    				// code block
+    				obj.pos[1] += 0.6;
+    				var param = "["+obj.pos.join(",")+"]";
+    				var iceparty_cone_color = true;
+    				var opacity = "";
+    				for (var buff of movers[i].buffs) {
+    					if (buff[0] == "m") {
+    						if (buff[1] == 1) {
+    							iceparty_cone_color = false;
+    						} else {
+    							iceparty_cone_color = buff[1];
+    						}
+    					}
+    					if (buff[0] == "o") {
+    						opacity = ","+buff[1];
+    					}
+    				}
+    				if ((iceparty_cone_color != true) && (iceparty_cone_color != false)) {
+    					iceparty_cone_color = `"${iceparty_cone_color}${opacity}"`;
+    				}
+    				code += "a.c("+param+", "+iceparty_cone_color+");";
+    				break;
+    			case "End":
+    				// code block
+    				var param = "["+obj.pos.join(",")+"]";
+    				code += "a.e("+param+");";
+    
+    				break;
+    			case "Cylinder":
+    				// code block
+    				var param = "["+obj.pos.join(",")+"], ";
+    				param += "["+obj.rot.join(",")+"], ";
+    				param += "["+obj.siz.join(",")+"]";
+    				var imat = 1;
+    				var bounce = 0;
+    				var mass = 0;
+    				var friction = 0.6;
+    				var opacity = "";
+    				var air = "false";
+    				var topR = 1;
+    				var isKiller = "false";
+    				var sd = 12;
+    				for (var buff of movers[i].buffs) {
+    					if (buff[0] == "m") imat = buff[1];
+    					if (buff[0] == "o") opacity = ","+buff[1];
+    					if (buff[0] == "bounce") bounce = buff[1];
+    					if (buff[0] == "mass") mass = buff[1];
+    					if (buff[0] == "friction") friction = buff[1];
+    					if ((buff[0] == "air") && (buff[1] == "on")) air = "true";
+    					if (buff[0] == "topr") topR = buff[1];
+    					if ((buff[0] == "k") && (buff[1] == "on")) isKiller = "true";
+    					if (buff[0] == "sd") sd = buff[1];
+    				}
+    				code += `a.y(${param}, "${imat}${opacity}", ${bounce}, ${mass}, ${friction}, ${air}, ${topR}, ${isKiller}, ${sd});`;
+    				break;
+    			case "Sphere":
+    				// code block
+    				var param = "["+obj.pos.join(",")+"], ";
+    				param += obj.siz[0];
+    				var imat = 1;
+    				var bounce = 0;
+    				var mass = 0;
+    				var friction = 0.6;
+    				var opacity = "";
+    				var air = "false";
+    				var isKiller = "false";
+    
+    				for (var buff of movers[i].buffs) {
+    					if (buff[0] == "m") imat = buff[1];
+    					if (buff[0] == "o") opacity = ","+buff[1];
+    					if (buff[0] == "bounce") bounce = buff[1];
+    					if (buff[0] == "mass") mass = buff[1];
+    					if (buff[0] == "friction") friction = buff[1];
+    					if ((buff[0] == "air") && (buff[1] == "on")) air = "true";
+    					if ((buff[0] == "k") && (buff[1] == "on")) isKiller = "true";
+    				}
+    				code += `a.s(${param}, "${imat}${opacity}", ${bounce}, ${mass}, ${friction}, ${air}, ${isKiller});`;
+    				break;
+    			default:
+    				// unexpected case
+    				console.log("unknown obj.type");
+    		}
+    	}
+    	code += "},post: function() {";
+    	for (var i=0;i<movers.length;i++) {
+    		let mover = movers[i];
+    		var is_dynamic = false;
+    		for (let buff of mover.buffs) {
+    			if (["mx", "my", "mz", "rx", "ry", "rz", "mass"].indexOf(buff[0]) >= 0) {
+    				is_dynamic = true;
+    				break;
+    			}
+    		}
+    		if (is_dynamic) {
+    			let ingame_id = mover['ingame_id'];
+    			code += "a.u('"+ingame_id+"');";
+    		}
+    	}
+    
+    	// monkey
+    	if (true) {
+    		var grav = {x: null, y: null, z: null};
+    		var tilt = {x: null, y: null, z: null};
+    		var dodo = {x: null, y: null, z: null}
+    		var grav_modified = false;
+    		var tilt_modified = false;
+    		var dodo_modified = false;
+    
+    		for (var i=0;i<monkeys.length;i++) {
+    			let monkey = monkeys[i];
+    			for (let buff of monkey) {
+    				const [bkey, bval] = buff;
+    				if (bkey == "gx") {
+    					grav['x'] = bval * (-9); grav_modified=true;
+    				} else if (bkey == "gy") {
+    					grav['y'] = bval * (-9); grav_modified=true;
+    				} else if (bkey == "gz") {
+    					grav['z'] = bval * (-9); grav_modified=true;
+    				} else if (bkey == "tx") {
+    					tilt['x'] = bval; tilt_modified=true;
+    				} else if (bkey == "ty") {
+    					tilt['y'] = bval; tilt_modified=true;
+    				} else if (bkey == "tz") {
+    					tilt['z'] = bval; tilt_modified=true;
+    				} else if (bkey == "dx") {
+    					dodo['x'] = bval; dodo_modified=true;
+    				} else if (bkey == "dy") {
+    					dodo['y'] = bval; dodo_modified=true;
+    				} else if (bkey == "dz") {
+    					dodo['z'] = bval; dodo_modified=true;
+    				} else if (bkey == "speed") {
+    					code += 'cc.set_monkey("speed", default_speed * '+bval+');';
+    				} else if (bkey == "turn") {
+    					code += 'cc.set_monkey("steer", default_steer * '+bval+');';
+    				} else if (bkey == "sl") {
+    					code += `cc.set_monkey("isSpinLocked", ${JSON.stringify(bval == 'on')});`;
+    				} else if (bkey == "fov") {
+    					code += 'cc.set_monkey("camera.fov mul2", '+bval+');';
+    				} else if (bkey == "msg") {
+    					code += 'a.msg_set("'+decode_ascii(bval)+'");';
+    				} else if (bkey == "br") {
+    					code += `cc.set_monkey("light.intensity", ${bval});`;
+    				} else if (bkey == "bg") {
+    					code += `cc.set_monkey("scene.clearColor", new BABYLON.Color3.FromHexString("#${bval}"));`;
+    				} else if (bkey == "amb") {
+    					code += `cc.set_monkey("scene.ambientColor", new BABYLON.Color3.FromHexString("#${bval}"));`;
+    				} else if (bkey == "dif") {
+    					code += `cc.set_monkey("light.diffuse", new BABYLON.Color3.FromHexString("#${bval}"));`;
+    				} else if (bkey == "spe") {
+    					code += `cc.set_monkey("light.specular", new BABYLON.Color3.FromHexString("#${bval}"));`;
+    				} else if (bkey == "gro") {
+    					code += `cc.set_monkey("light.groundColor", new BABYLON.Color3.FromHexString("#${bval}"));`;
+    				} else if (bkey == "d") {
+    					code += `cc.set_monkey("radius", ${bval});`;
+    				} else if (bkey == "eye") {
+    					code += `cc.set_monkey("camera.maxZ", ${bval});`;
+    				} else if (bkey == "cd") {
+    					code += `cc.set_monkey("cameraDownAngle", ${bval} * Math.PI / 180);`;
+    				} else if (bkey == "cr") {
+    					code += `cc.set_monkey("cameraRightAngle", ${bval} * Math.PI / 180);`;
+    				} else if (bkey == "js") {
+    					code += `cc.set_monkey("jumpSpeed", ${bval});`;
+    				} else if (bkey == "jh") {
+    					code += `cc.set_monkey("jumpHeight", ${bval});`;
+    				}
+    			}
+    
+    			if (grav_modified == true) {
+    				code += `cc.set_monkey("gravity", new BABYLON.Vector3(${grav['x']},${grav['y']},${grav['z']}));`;
+    			}
+    			if (tilt_modified == true) {
+    				code += `cc.set_monkey("camera.upVector", new BABYLON.Vector3(${tilt['x']},${tilt['y']},${tilt['z']}));`;
+    			}
+    			if (dodo_modified == true) {
+    				code += `cc.set_monkey("player.scaling", new BABYLON.Vector3(${dodo['x']},${dodo['y']},${dodo['z']}));`;
+    			}
+    		}
+    
+    		// default OG steer
+    		if (code.includes(`cc.set_monkey("speed"`) == false) {
+    			code += `cc.set_monkey("speed", 0.2);`;
+    		}
+    		if (code.includes(`cc.set_monkey("steer"`) == false) {
+    			code += `cc.set_monkey("steer", 0.03);`;
+    		}
+    	}
+    	code += "cc.refresh();";
+    	code += "},section_id: 0,section_update: function() {";
+    	if (effects.length > 0) {
+    		code += "      let PZ = player.position.z;      switch(this.section_id) {";
+    	}
+    	var section_id_counter = 0;
+    
+    	effects.sort(function(a, b) {
+    	  let keyA = new Date(a.pos[2]);
+    	  let keyB = new Date(b.pos[2]);
+    	  if (keyA < keyB) return 1;
+    	  if (keyA > keyB) return -1;
+    	  return 0;
+    	});
+    
+    	for (var i=0;i<effects.length;i++) {
+    		var obj = effects[i];
+    		let z_length = Math.abs(obj.siz[2]);
+    		let z_position = obj.pos[2];
+    		let z_info = obj.add;
+    		let z_section_id = null;
+    		var buffs = [];
+    		var sp = z_info.split("?");
+    		for (var p=0;p<sp.length;p++) {
+    			let sp2 = sp[p].split("=");
+    			if (sp2[0] == "id") {
+    				z_section_id = sp2[1];
+    			} else {
+    				buffs.push([sp2[0], sp2[1]]);
+    			}
+    		}
+    		// first
+    		code += "case "+section_id_counter+":"
+    		section_id_counter += 1;
+    		let z1 = z_position + z_length/2;
+    		code += "if (PZ < "+z1+") {"
+    
+    		var grav = {x: null, y: null, z: null};
+    		var tilt = {x: null, y: null, z: null};
+    		var dodo = {x: null, y: null, z: null}
+    		var cam = {radius: null, angle: null};
+    		var grav_modified = false;
+    		var tilt_modified = false;
+    		var dodo_modified = false;
+    
+    		for (var p=0;p<buffs.length;p++) {
+    			let buff = buffs[p];
+    			const [bkey, bval] = buff;
+    			if (bkey == "gx") {
+    				grav['x'] = bval; grav_modified=true;
+    			} else if (bkey == "gy") {
+    				grav['y'] = bval; grav_modified=true;
+    			} else if (bkey == "gz") {
+    				grav['z'] = bval; grav_modified=true;
+    			} else if (bkey == "tx") {
+    				tilt['x'] = bval; tilt_modified=true;
+    			} else if (bkey == "ty") {
+    				tilt['y'] = bval; tilt_modified=true;
+    			} else if (bkey == "tz") {
+    				tilt['z'] = bval; tilt_modified=true;
+    			} else if (bkey == "dx") {
+    				dodo['x'] = bval; dodo_modified=true;
+    			} else if (bkey == "dy") {
+    				dodo['y'] = bval; dodo_modified=true;
+    			} else if (bkey == "dz") {
+    				dodo['z'] = bval; dodo_modified=true;
+    			} else if (bkey == "speed") {
+    				code += 'speed = default_speed * '+bval+';'
+    			} else if (bkey == "turn") {
+    				code += 'steer = default_steer * '+bval+';';
+    			} else if (bkey == "sl") {
+    				code += `isSpinLocked = ${JSON.stringify(bval == 'on')};`
+    			} else if (bkey == "fov") {
+    				code += 'a.fov_mul2('+bval+');';
+    			} else if (bkey == "msg") {
+    				code += 'a.msg_set("'+decode_ascii(bval)+'");';
+    			} else if (bkey == "br") {
+    				code += `light.intensity = ${bval};`;
+    			} else if (bkey == "bg") {
+    				code += `scene.clearColor = new BABYLON.Color3.FromHexString("#${bval}");`;
+    			} else if (bkey == "amb") {
+    				code += `scene.ambientColor = new BABYLON.Color3.FromHexString("#${bval}");`;
+    			} else if (bkey == "dif") {
+    				code += `light.diffuse = new BABYLON.Color3.FromHexString("#${bval}");`;
+    			} else if (bkey == "spe") {
+    				code += `light.specular = new BABYLON.Color3.FromHexString("#${bval}");`;
+    			} else if (bkey == "gro") {
+    				code += `light.groundColor = new BABYLON.Color3.FromHexString("#${bval}");`;
+    			} else if (bkey == "d") {
+    				code += `a.cam_d(${bval});`;
+    			} else if (bkey == "eye") {
+    				code += `camera.maxZ = ${bval};`;
+    			} else if (bkey == "cd") {
+    				code += `a.cam_cd(${bval});`;
+    			} else if (bkey == "cr") {
+    				code += `a.cam_cr(${bval});`;
+    			} else if (bkey == "sr") {
+    				code += `rotation = ${bval} * Math.PI / 180;`;
+    			} else if (bkey == "js") {
+    				code += `a.js(${bval});`;
+    			} else if (bkey == "jh") {
+    				code += `a.jh(${bval});`;
+    			}
+    		}
+    
+    		if (grav_modified == true) {
+    			code += 'a.g('+grav['x'] + "," + grav['y'] + "," + grav['z'] +');'
+    		}
+    		if (tilt_modified == true) {
+    			code += 'a.t('+tilt['x'] + "," + tilt['y'] + "," + tilt['z'] +');'
+    		}
+    		if (dodo_modified == true) {
+    			code += 'a.d('+dodo['x'] + "," + dodo['y'] + "," + dodo['z'] +');'
+    		}
+    
+    		code += "this.section_id += 1} break;"
+    
+    		// second
+    		code += "case "+section_id_counter+":"
+    		let z2 = z_position - z_length/2;
+    		section_id_counter += 1;
+    
+    		// movers
+    		for (var m=0;m<movers.length;m++) {
+    			let mover = movers[m];
+    			if (mover.section_id == z_section_id) {
+    				for (var j=0;j<mover['buffs'].length;j++) {
+    					let buff = mover['buffs'][j];
+    					let jkey = buff[0];
+    					let jval = buff[1];
+    					if ((jkey) && (jval) && (mover['ingame_id'])) {
+    						// mov
+    						if (jkey == "mx") {
+    							code += "a.mov('"+mover['ingame_id']+"', 'x', "+jval+"  );";
+    						} else if (jkey == "my") {
+    							code += "a.mov('"+mover['ingame_id']+"', 'y', "+jval+"  );";
+    						} else if (jkey == "mz") {
+    							code += "a.mov('"+mover['ingame_id']+"', 'z', "+jval+"  );";
+    						}
+    						// rot
+    						if (jkey == "rx") {
+    							code += "a.rot('"+mover['ingame_id']+"', 'x', "+jval+"  );";
+    						} else if (jkey == "ry") {
+    							code += "a.rot('"+mover['ingame_id']+"', 'y', "+jval+"  );";
+    						} else if (jkey == "rz") {
+    							code += "a.rot('"+mover['ingame_id']+"', 'z', "+jval+"  );";
+    						}
+    					}
+    				}
+    			}
+    		}
+    		// effs
+    		code += "if (PZ < "+z2+") {"
+    		for (var p=0;p<buffs.length;p++) {
+    			let buff = buffs[p];
+    			let [bkey, bval] = buff;
+    			if (bkey == "speed") {
+    				code += 'speed = cc.get("speed", null);'
+    			} else if (bkey == "turn") {
+    				code += 'steer = cc.get("steer", null);';
+    			} else if (bkey == "sl") {
+    				code += '/* isSpinLocked = cc.get("isSpinLocked", null); */';
+    			} else if (bkey == "fov") {
+    				code += 'a.fov_mul2();';
+    			} else if (bkey == "msg") {
+    				code += 'a.msg_del();';
+    			} else if (bkey == "br") {
+    				code += `light.intensity = cc.get("light.intensity", null);`;
+    			} else if (bkey == "bg") {
+    				code += `scene.clearColor = cc.get("scene.clearColor", null);`;
+    			} else if (bkey == "amb") {
+    				code += `scene.ambientColor = cc.get("scene.ambientColor", null);`;
+    			} else if (bkey == "dif") {
+    				code += `light.diffuse = cc.get("light.diffuse", null);`;
+    			} else if (bkey == "spe") {
+    				code += `light.specular = cc.get("light.specular", null);`;
+    			} else if (bkey == "gro") {
+    				code += `light.groundColor = cc.get("light.groundColor", null);`;
+    			} else if (bkey == "d") {
+    				code += `a.cam_d(null);`;
+    			} else if (bkey == "eye") {
+    				code += `camera.maxZ = cc.get("camera.maxZ", null);`;
+    			} else if (bkey == "cd") {
+    				code += `a.cam_cd(null);`;
+    			} else if (bkey == "cr") {
+    				code += `a.cam_cr(null);`;
+    			} else if (bkey == "js") {
+    				code += `a.js(null);`;
+    			} else if (bkey == "jh") {
+    				code += `a.jh(null);`;
+    			}
+    		}
+    		if (grav_modified == true) {
+    			code += 'a.g(null, null, null);'
+    		}
+    		if (tilt_modified == true) {
+    			code += 'a.t(null, null, null);'
+    		}
+    		if (dodo_modified == true) {
+    			code += 'a.d(null, null, null);'
+    		}
+    		code += "this.section_id += 1} break;"
+    	}
+    	if (effects.length > 0) {
+    		code += "}"
+    	}
+    	code += "},";
+    	code += "reset: function() {      this.section_id = 0;";
+    	for (var i=0;i<movers.length;i++) {
+    		let mover = movers[i];
+    		let obj = mover['obj'];
+    		let ingame_id = mover['ingame_id'];
+    		var param = "["+obj.pos.join(",")+"], ";
+    		param += "["+obj.rot.join(",")+"], ";
+    		param += "["+obj.siz.join(",")+"]";
+    		code += "a.re('" + ingame_id + "', " + param + ");";
+    	}
+    	// code += "cc.refresh();";
+    	code += "},    physics_update: function() {    },    render_update: function() {    }}";
+    
+    	return code;
     }
 </script>
 </body>
