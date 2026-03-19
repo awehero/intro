@@ -34,6 +34,7 @@
     function start() {
         input = document.getElementById("query").value;
         result = summarize_data(input);
+        document.getElementById("result").innerText = JSON.stringify(result);
     }
     
     const object_type_map = {
