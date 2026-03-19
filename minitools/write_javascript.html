@@ -34,6 +34,7 @@
     function start() {
         input = document.getElementById("query").value;
         result = write_javascript(JSON.parse(input));
+        document.getElementById("result").innerText = result;
     }
     
     function decode_ascii(x) {
