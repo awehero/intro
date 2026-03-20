@@ -494,7 +494,7 @@
     					let jval = buff[1];
     					if ((jkey) && (jval) && (mover['ingame_id'])) {
                             jval = jval.replace(/selfpos/g, "a.m(`"+mover['ingame_id']+"`).position._")
-						    jval = jval.replace(/playerpos/g, "player.position._)");
+						    jval = jval.replace(/playerpos/g, "player.position._");
     						// mov
     						if (jkey == "mx") {
     							code += "a.mov('"+mover['ingame_id']+"', 'x', "+jval+"  );";
