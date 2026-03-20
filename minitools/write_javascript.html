@@ -83,8 +83,8 @@
     		let z_info = obj.add;
     		var buffs = [];
     		var sp = z_info.split("?");
+            var section_id = [];
     		if ((sp[0] != "none") && (sp[0] != "_")) {
-    			var section_id = [];
     			for (var p=0;p<sp.length;p++) {
     				let sp2 = sp[p].split("=");
     				if (sp2[0] == "id") {
