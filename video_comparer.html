@@ -103,7 +103,7 @@
         <h1>Video Trimmer</h1>
 		<div id="video1Container">
 	        <p>Select a video you want to compare</p>
-	        <input type="file" id="file1" accept="video/*">
+	        <input type="file" id="fileInput1" accept="video/*">
 			<p>Or enter a YouTube link</p>
 			<input type="text" id="link1">
 			<br><br>
@@ -125,7 +125,7 @@
 
 		<div id="video2Container">
 			<p>Select a video you want to compare</p>
-	        <input type="file" id="file2" accept="video/*">
+	        <input type="file" id="fileInput2" accept="video/*">
 			<p>Or enter a YouTube link</p>
 			<input type="text" id="link2">
 			<br><br>
@@ -147,11 +147,11 @@
 		
 		
 		<script>
-			const file1 = document.getElementById("file1");
+			const fileInput1 = document.getElementById("fileInput1");
 			const video1 = document.getElementById("video1");
 			const setStart1 = document.getElementById("setStart1");
 			const setEnd1 = document.getElementById("setEnd1");
-			const file2 = document.getElementById("file2");
+			const fileInput2 = document.getElementById("fileInput2");
 			const video2 = document.getElementById("video2");
 			const setStart2 = document.getElementById("setStart2");
 			const setEnd2 = document.getElementById("setEnd2");
@@ -165,7 +165,7 @@
 			let file1;
 			let file2;
 			
-			file1.addEventListener("change", function(event) {
+			fileInput1.addEventListener("change", function(event) {
 			    file1 = event.target.files[0];
 			    if (!file1) {
 			        console.log("No file selected");
@@ -189,7 +189,7 @@
 			        console.log("VIDEO ERROR:", e);
 			    };
 			});
-			file2.addEventListener("change", function(event) {
+			fileInput2.addEventListener("change", function(event) {
 			    file2 = event.target.files[0];
 			    if (!file2) {
 			        console.log("No file selected");
