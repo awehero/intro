@@ -122,6 +122,7 @@
 				<br><br>
 				
 				<video id="video1" controls width="90%"></video>
+				<iframe id="ytFrame1" width="90%" height="315" style="display:none;" frameborder="0" allowfullscreen></iframe>
 				<br><br>
 				
 				<h2>Start</h2>
@@ -144,6 +145,7 @@
 				<br><br>
 				
 				<video id="video2" controls width="90%"></video>
+				<iframe id="ytFrame2" width="90%" height="315" style="display:none;" frameborder="0" allowfullscreen></iframe>
 				<br><br>
 				
 				<h2>Start</h2>
@@ -169,6 +171,12 @@
 			const video2 = document.getElementById("video2");
 			const setStart2 = document.getElementById("setStart2");
 			const setEnd2 = document.getElementById("setEnd2");
+			
+			const link1 = document.getElementById("link1");
+			const link2 = document.getElementById("link2");
+			const ytFrame1 = document.getElementById("ytFrame1");
+			const ytFrame2 = document.getElementById("ytFrame2");
+			
 			let startTime1 = 0;
 			let endTime1 = 0;
 			let filename1 = "";
@@ -241,6 +249,18 @@
 			    }
 			});
 
+			link1.addEventListener("keydown", function(e) {
+				if (e.key === "Enter") {
+					loadYouTube(link1.value, video1, ytFrame1);
+				}
+			});
+			
+			link2.addEventListener("keydown", function(e) {
+				if (e.key === "Enter") {
+					loadYouTube(link2.value, video2, ytFrame2);
+				}
+			});
+
 			function setStartF1() {
 				if (video1.currentTime < endTime1) {
 					startTime1 = video1.currentTime;
@@ -284,6 +304,28 @@
 					video2.currentTime = endTime2 - 5;
 					video2.play();
 				}
+			}
+
+			function loadYouTube(input, videoEl, iframeEl) {
+			    let id = null;
+			
+			    if (input.includes("youtube.com/watch?v=")) {
+			        id = input.split("v=")[1].split("&")[0];
+			    } else if (input.includes("youtu.be/")) {
+			        id = input.split("youtu.be/")[1].split("?")[0];
+			    }
+			
+			    if (!id) {
+			        alert("Invalid YouTube URL");
+			        return;
+			    }
+			
+			    let embedURL = "https://www.youtube.com/embed/" + id;
+			
+			    iframeEl.src = embedURL;
+			
+			    iframeEl.style.display = "block";
+			    videoEl.style.display = "none";
 			}
 			
 			function calculateTime(s) {
