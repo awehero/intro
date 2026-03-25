@@ -1,1 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Comparer</title>
+    <link rel="icon" href="https://awehero.github.io/intro/awehero.png" type="image/png">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; background: #fff; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+		tr: { border-radius: 5px; }
+        textarea { width: 100%; padding: 10px; font-family: monospace; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        div {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        p {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        textarea {
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1.7em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+            max-width: 100%;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #copyButton {
+            margin-top: 10px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+		#suggestions {
+			position: absolute;
+		    max-height: 12em;
+			width: 15em;
+		    overflow: auto;
+		    background-color: white;
+		    border: 1px solid black;
+			display: none;
+			padding-left: 5px;
+    		padding-right: 5px;
+		}
+		.suggestion-item {
+			font-size: 1em;
+			cursor: pointer;
+			border: 2px solid black;
+		    border-radius: 5px;
+		    padding-left: 5px;
+		}
+		.suggestion-item:hover {
+			background-color: #f0f0f0;
+		}
+    </style>
+</head>
+    <body>
+        <h1>Video Trimmer</h1>
+        <p>Select a video you want to trim</p>
+        <input type="file" id="fileInput" accept="video/*">
 
+		<br><br>
+		
+		<video id="video" controls width="800"></video>
+		<br><br>
+		
+		<h2>Start</h2>
+		<button id="setStart" onclick="setStartF()">Set</button>
+		<button id="gotoStart" onclick="gotoStartF()">Go to Start</button>
+		<p id="startLabel">0:0:0.000</p>
+		<br>
+		<h2>End</h2>
+		<button id="setEnd" onclick="setEndF()">Set</button>
+		<button id="gotoEnd" onclick="gotoEndF()">Go to End</button>
+		<p id="endLabel">0:0:0.000</p>
+		<br><br>
+		<!-- <button id="download" onclick="downloadF()">Download</button> -->
+
+		
+		
+		<script>
+			const fileInput = document.getElementById("fileInput");
+			const video = document.getElementById("video");
+			const setStart = document.getElementById("setStart");
+			const setEnd = document.getElementById("setEnd");
+			let startTime = 0;
+			let endTime = 0;
+			let filename = "";
+			
+			let file;
+			
+			fileInput.addEventListener("change", function(event) {
+			    file = event.target.files[0];
+			    if (!file) {
+			        console.log("No file selected");
+			        return;
+			    }
+				filename = file.name.substring(0, file.name.lastIndexOf("."));
+			    console.log("File selected:", filename);
+			    const url = URL.createObjectURL(file);
+			    video.src = url;
+			    video.load();
+			    video.onloadedmetadata = function() {
+			        console.log("Metadata loaded");
+			        console.log("Duration:", video.duration);
+					endTime = video.duration
+					endLabel.innerText = calculateTime(endTime);
+			    };
+			    video.onloadeddata = function() {
+			        console.log("Video fully ready");
+			    };
+			    video.onerror = function(e) {
+			        console.log("VIDEO ERROR:", e);
+			    };
+			});
+			video.addEventListener("timeupdate", () => {
+			    if (video.currentTime > endTime) {
+			        video.pause();
+			        video.currentTime = endTime;
+			    }
+			});
+
+			function setStartF() {
+				if (video.currentTime < endTime) {
+					startTime = video.currentTime;
+					startLabel.innerText = calculateTime(startTime);
+				}
+			}
+			function setEndF() {
+				if (video.currentTime > startTime) {
+					endTime = video.currentTime;
+					endLabel.innerText = calculateTime(endTime);
+				}
+			}
+			function gotoStartF() {
+				video.currentTime = startTime;
+				video.play();
+			}
+			function gotoEndF() {
+				if (video.duration > 5) {
+					video.currentTime = endTime - 5;
+					video.play();
+				}
+			}
+			function downloadF() {
+				downloadTrimmedVideo(startTime, endTime);
+			}
+			function downloadTrimmedVideo(startTime, endTime) {
+			    if (!file) {
+			        alert("No video loaded");
+			        return;
+			    }
+			    if (endTime <= startTime) {
+			        alert("Invalid trim range");
+			        return;
+			    }
+			    const duration = video.duration;
+			    const fileSize = file.size;
+			    const startByte = Math.floor(startTime / duration * fileSize);
+			    const endByte = Math.floor(endTime / duration * fileSize);
+			    const trimmedBlob = file.slice(startByte, endByte, file.type);
+			    const url = URL.createObjectURL(trimmedBlob);
+			    const a = document.createElement("a");
+			    a.href = url;
+			    a.download = filename + "_awehero_video_trimmer.mp4";
+			    a.click();
+			
+			    URL.revokeObjectURL(url);
+			}
+			function calculateTime(s) {
+			    let h = Math.floor(s/3600);
+			    s = s - (h*3600);
+			    let m = Math.floor(s/60);
+			    s = s - (m*60);
+			    let t = h+":"+Math.floor(m)+":"+Math.floor(s*1000)/1000;
+			    return t;
+			}
+		</script>
+    </body>
+</html>
