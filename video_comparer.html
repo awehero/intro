@@ -145,11 +145,13 @@
 				const id = extractID(link1.value);
 				if (!id) return alert("Invalid YouTube URL");
 				player1 = createPlayer(1, id);
+				link1.style.display = "none";
 			});
 			link2.addEventListener("change", () => {
 				const id = extractID(link2.value);
 				if (!id) return alert("Invalid YouTube URL");
 				player2 = createPlayer(2, id);
+				link2.style.display = "none";
 			});
 
 			function getPlayer(n) {
