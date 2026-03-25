@@ -101,48 +101,50 @@
 </head>
     <body>
         <h1>Video Trimmer</h1>
-		<div id="video1Container">
-	        <p>Select a video you want to compare</p>
-	        <input type="file" id="fileInput1" accept="video/*">
-			<p>Or enter a YouTube link</p>
-			<input type="text" id="link1">
-			<br><br>
-			
-			<video id="video1" controls width="800"></video>
-			<br><br>
-			
-			<h2>Start</h2>
-			<button id="setStart1" onclick="setStartF1()">Set</button>
-			<button id="gotoStart1" onclick="gotoStartF1()">Go to Start</button>
-			<p id="startLabel1">0:0:0.000</p>
-			<br>
-			<h2>End</h2>
-			<button id="setEnd1" onclick="setEndF1()">Set</button>
-			<button id="gotoEnd1" onclick="gotoEndF1()">Go to End</button>
-			<p id="endLabel1">0:0:0.000</p>
-			<br><br>
-		</div>
-
-		<div id="video2Container">
-			<p>Select a video you want to compare</p>
-	        <input type="file" id="fileInput2" accept="video/*">
-			<p>Or enter a YouTube link</p>
-			<input type="text" id="link2">
-			<br><br>
-			
-			<video id="video2" controls width="800"></video>
-			<br><br>
-			
-			<h2>Start</h2>
-			<button id="setStart2" onclick="setStartF2()">Set</button>
-			<button id="gotoStart2" onclick="gotoStartF2()">Go to Start</button>
-			<p id="startLabel2">0:0:0.000</p>
-			<br>
-			<h2>End</h2>
-			<button id="setEnd2" onclick="setEndF2()">Set</button>
-			<button id="gotoEnd2" onclick="gotoEndF2()">Go to End</button>
-			<p id="endLabel2">0:0:0.000</p>
-			<br><br>
+		<div id="videoContainers">
+			<div id="video1Container">
+		        <p>Select a video you want to compare</p>
+		        <input type="file" id="fileInput1" accept="video/*">
+				<p>Or enter a YouTube link</p>
+				<input type="text" id="link1">
+				<br><br>
+				
+				<video id="video1" controls width="800"></video>
+				<br><br>
+				
+				<h2>Start</h2>
+				<button id="setStart1" onclick="setStartF1()">Set</button>
+				<button id="gotoStart1" onclick="gotoStartF1()">Go to Start</button>
+				<p id="startLabel1">0:0:0.000</p>
+				<br>
+				<h2>End</h2>
+				<button id="setEnd1" onclick="setEndF1()">Set</button>
+				<button id="gotoEnd1" onclick="gotoEndF1()">Go to End</button>
+				<p id="endLabel1">0:0:0.000</p>
+				<br><br>
+			</div>
+	
+			<div id="video2Container">
+				<p>Select a video you want to compare</p>
+		        <input type="file" id="fileInput2" accept="video/*">
+				<p>Or enter a YouTube link</p>
+				<input type="text" id="link2">
+				<br><br>
+				
+				<video id="video2" controls width="800"></video>
+				<br><br>
+				
+				<h2>Start</h2>
+				<button id="setStart2" onclick="setStartF2()">Set</button>
+				<button id="gotoStart2" onclick="gotoStartF2()">Go to Start</button>
+				<p id="startLabel2">0:0:0.000</p>
+				<br>
+				<h2>End</h2>
+				<button id="setEnd2" onclick="setEndF2()">Set</button>
+				<button id="gotoEnd2" onclick="gotoEndF2()">Go to End</button>
+				<p id="endLabel2">0:0:0.000</p>
+				<br><br>
+			</div>
 		</div>
 		
 		
