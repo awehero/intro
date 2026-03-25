@@ -101,117 +101,174 @@
 </head>
     <body>
         <h1>Video Trimmer</h1>
-        <p>Select a video you want to trim</p>
-        <input type="file" id="fileInput" accept="video/*">
-
+        <p>Select a video you want to compare</p>
+        <input type="file" id="file1" accept="video/*">
+		<p>Or enter a YouTube link</p>
+		<input type="text" id="link1">
 		<br><br>
 		
 		<video id="video1" controls width="800"></video>
 		<br><br>
 		
 		<h2>Start</h2>
-		<button id="setStart" onclick="setStartF()">Set</button>
-		<button id="gotoStart" onclick="gotoStartF()">Go to Start</button>
-		<p id="startLabel">0:0:0.000</p>
+		<button id="setStart1" onclick="setStartF1()">Set</button>
+		<button id="gotoStart1" onclick="gotoStartF1()">Go to Start</button>
+		<p id="startLabel1">0:0:0.000</p>
 		<br>
 		<h2>End</h2>
-		<button id="setEnd" onclick="setEndF()">Set</button>
-		<button id="gotoEnd" onclick="gotoEndF()">Go to End</button>
-		<p id="endLabel">0:0:0.000</p>
+		<button id="setEnd1" onclick="setEndF1()">Set</button>
+		<button id="gotoEnd1" onclick="gotoEndF1()">Go to End</button>
+		<p id="endLabel1">0:0:0.000</p>
 		<br><br>
-		<!-- <button id="download" onclick="downloadF()">Download</button> -->
+
+		<p>Select a video you want to compare</p>
+        <input type="file" id="file2" accept="video/*">
+		<p>Or enter a YouTube link</p>
+		<input type="text" id="link2">
+		<br><br>
+		
+		<video id="video2" controls width="800"></video>
+		<br><br>
+		
+		<h2>Start</h2>
+		<button id="setStart2" onclick="setStartF2()">Set</button>
+		<button id="gotoStart2" onclick="gotoStartF2()">Go to Start</button>
+		<p id="startLabel2">0:0:0.000</p>
+		<br>
+		<h2>End</h2>
+		<button id="setEnd2" onclick="setEndF2()">Set</button>
+		<button id="gotoEnd2" onclick="gotoEndF2()">Go to End</button>
+		<p id="endLabel2">0:0:0.000</p>
+		<br><br>
 
 		
 		
 		<script>
-			const fileInput = document.getElementById("fileInput");
-			const video = document.getElementById("video1");
-			const setStart = document.getElementById("setStart");
-			const setEnd = document.getElementById("setEnd");
-			let startTime = 0;
-			let endTime = 0;
-			let filename = "";
+			const file1 = document.getElementById("file1");
+			const video1 = document.getElementById("video1");
+			const setStart1 = document.getElementById("setStart1");
+			const setEnd1 = document.getElementById("setEnd1");
+			const file2 = document.getElementById("file2");
+			const video2 = document.getElementById("video2");
+			const setStart2 = document.getElementById("setStart2");
+			const setEnd2 = document.getElementById("setEnd2");
+			let startTime1 = 0;
+			let endTime1 = 0;
+			let filename1 = "";
+			let startTime2 = 0;
+			let endTime2 = 0;
+			let filename2 = "";
 			
-			let file;
+			let file1;
+			let file2;
 			
-			fileInput.addEventListener("change", function(event) {
-			    file = event.target.files[0];
-			    if (!file) {
+			file1.addEventListener("change", function(event) {
+			    file1 = event.target.files[0];
+			    if (!file1) {
 			        console.log("No file selected");
 			        return;
 			    }
-				filename = file.name.substring(0, file.name.lastIndexOf("."));
-			    console.log("File selected:", filename);
-			    const url = URL.createObjectURL(file);
-			    video.src = url;
-			    video.load();
-			    video.onloadedmetadata = function() {
+				filename1 = file1.name.substring(0, file1.name.lastIndexOf("."));
+			    console.log("File selected:", filename1);
+			    const url = URL.createObjectURL(file1);
+			    video1.src = url;
+			    video1.load();
+			    video1.onloadedmetadata = function() {
 			        console.log("Metadata loaded");
-			        console.log("Duration:", video.duration);
-					endTime = video.duration
-					endLabel.innerText = calculateTime(endTime);
+			        console.log("Duration:", video1.duration);
+					endTime1 = video1.duration
+					endLabel1.innerText = calculateTime(endTime1);
 			    };
-			    video.onloadeddata = function() {
+			    video1.onloadeddata = function() {
 			        console.log("Video fully ready");
 			    };
-			    video.onerror = function(e) {
+			    video1.onerror = function(e) {
 			        console.log("VIDEO ERROR:", e);
 			    };
 			});
-			video.addEventListener("timeupdate", () => {
-			    if (video.currentTime > endTime) {
-			        video.pause();
-			        video.currentTime = endTime;
+			file2.addEventListener("change", function(event) {
+			    file2 = event.target.files[0];
+			    if (!file2) {
+			        console.log("No file selected");
+			        return;
+			    }
+				filename2 = file2.name.substring(0, file2.name.lastIndexOf("."));
+			    console.log("File selected:", filename2);
+			    const url = URL.createObjectURL(file2);
+			    video2.src = url;
+			    video2.load();
+			    video2.onloadedmetadata = function() {
+			        console.log("Metadata loaded");
+			        console.log("Duration:", video2.duration);
+					endTime2 = video2.duration
+					endLabel2.innerText = calculateTime(endTime2);
+			    };
+			    video2.onloadeddata = function() {
+			        console.log("Video fully ready");
+			    };
+			    video2.onerror = function(e) {
+			        console.log("VIDEO ERROR:", e);
+			    };
+			});
+			
+			video1.addEventListener("timeupdate", () => {
+			    if (video1.currentTime > endTime1) {
+			        video1.pause();
+			        video1.currentTime = endTime1;
+			    }
+			});
+			video2.addEventListener("timeupdate", () => {
+			    if (video2.currentTime > endTime2) {
+			        video2.pause();
+			        video2.currentTime = endTime2;
 			    }
 			});
 
-			function setStartF() {
-				if (video.currentTime < endTime) {
-					startTime = video.currentTime;
-					startLabel.innerText = calculateTime(startTime);
+			function setStartF1() {
+				if (video1.currentTime < endTime1) {
+					startTime1 = video1.currentTime;
+					startLabel1.innerText = calculateTime(startTime1);
 				}
 			}
-			function setEndF() {
-				if (video.currentTime > startTime) {
-					endTime = video.currentTime;
-					endLabel.innerText = calculateTime(endTime);
+			function setEndF1() {
+				if (video1.currentTime > startTime1) {
+					endTime1 = video1.currentTime;
+					endLabel1.innerText = calculateTime(endTime1);
 				}
 			}
-			function gotoStartF() {
-				video.currentTime = startTime;
-				video.play();
+			function gotoStartF1() {
+				video1.currentTime = startTime1;
+				video1.play();
 			}
-			function gotoEndF() {
-				if (video.duration > 5) {
-					video.currentTime = endTime - 5;
-					video.play();
+			function gotoEndF1() {
+				if (video1.duration > 5) {
+					video1.currentTime = endTime1 - 5;
+					video1.play();
 				}
 			}
-			function downloadF() {
-				downloadTrimmedVideo(startTime, endTime);
+			function setStartF2() {
+				if (video2.currentTime < endTime2) {
+					startTime2 = video2.currentTime;
+					startLabel2.innerText = calculateTime(startTime2);
+				}
 			}
-			function downloadTrimmedVideo(startTime, endTime) {
-			    if (!file) {
-			        alert("No video loaded");
-			        return;
-			    }
-			    if (endTime <= startTime) {
-			        alert("Invalid trim range");
-			        return;
-			    }
-			    const duration = video.duration;
-			    const fileSize = file.size;
-			    const startByte = Math.floor(startTime / duration * fileSize);
-			    const endByte = Math.floor(endTime / duration * fileSize);
-			    const trimmedBlob = file.slice(startByte, endByte, file.type);
-			    const url = URL.createObjectURL(trimmedBlob);
-			    const a = document.createElement("a");
-			    a.href = url;
-			    a.download = filename + "_awehero_video_trimmer.mp4";
-			    a.click();
+			function setEndF2() {
+				if (video2.currentTime > startTime2) {
+					endTime2 = video2.currentTime;
+					endLabel2.innerText = calculateTime(endTime2);
+				}
+			}
+			function gotoStartF2() {
+				video2.currentTime = startTime2;
+				video2.play();
+			}
+			function gotoEndF2() {
+				if (video2.duration > 5) {
+					video2.currentTime = endTime2 - 5;
+					video2.play();
+				}
+			}
 			
-			    URL.revokeObjectURL(url);
-			}
 			function calculateTime(s) {
 			    let h = Math.floor(s/3600);
 			    s = s - (h*3600);
