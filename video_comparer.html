@@ -326,6 +326,15 @@
 			
 			    iframeEl.style.display = "block";
 			    videoEl.style.display = "none";
+			
+			    setTimeout(() => resizeIframe(iframeEl), 0);
+			}
+
+			function resizeIframe(iframe) {
+			    const width = iframe.offsetWidth;
+			    const height = width * 9 / 16;
+			
+			    iframe.style.height = height + "px";
 			}
 			
 			function calculateTime(s) {
