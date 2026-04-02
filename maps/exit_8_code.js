@@ -1,5 +1,5 @@
 globalThis.alpha = 0;
-globalThis.beta = 0;
+globalThis.beta = 2;
 globalThis.messageCheck = 0;
 globalThis.alertCheck = 0;
 globalThis.current = 0;
