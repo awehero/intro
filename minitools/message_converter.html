@@ -13,14 +13,12 @@
     <label for="inputString">Enter your message:</label><br>
     <textarea id="inputString" rows="4" cols="50"></textarea><br><br>
   </form>
-  <h2>output:</h2>
+  <h2>Output:</h2>
   <button id="copyButton" onclick="copyLink()">Copy!</button>
-  <div id="lengthBefore"></div>
-  <div id="lengthAfter"></div>
   <div id="result"></div>
   <script>
     let input = document.getElementById("inputString");
-    let output = document.getElementById("outputText");
+    let output = document.getElementById("result");
     let text = "";
     input.addEventListener('input', (event)=>{
         text = event.target.value;
