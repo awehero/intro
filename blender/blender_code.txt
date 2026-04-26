@@ -768,6 +768,10 @@ try:
         URL = URL.replace(".0$","$")
         URL = URL.replace(".0?","?")
 
+        URL = URL.replace("", "")
+        URL = URL.replace("", "")
+        URL = URL.replace("", "")
+
         print("")
         print("Objects: "+str(len(items)))
         print("Length: "+str(len(URL)))
