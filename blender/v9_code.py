@@ -8,9 +8,30 @@
 ### IMPORT LIBRARIES AND FUNCTIONS
 import bpy
 import bmesh
+import math
+import random
+import re
+
+def srgb_to_linearrgb(c):
+    if c <= 0.04045:
+        return c / 12.92
+    else:
+        return ((c + 0.055) / 1.055) ** 2.4
+
+def hex_to_rgba(hex_str):
+    hex_str = hex_str.lstrip('#')
+    r_int = int(hex_str[0:2], 16)
+    g_int = int(hex_str[2:4], 16)
+    b_int = int(hex_str[4:6], 16)
+    return (srgb_to_linearrgb(r_int/255), 
+            srgb_to_linearrgb(g_int/255), 
+            srgb_to_linearrgb(b_int/255), 
+            1.0)
+
 bpy.ops.object.select_all( action = 'SELECT' )
 bpy.ops.object.origin_set( type = 'ORIGIN_GEOMETRY' )
 bpy.ops.object.select_all( action = 'DESELECT' )
+hex_pattern = re.compile(r'#?([0-9a-fA-F]{6})')
 
 try:
     def dp(xs):
@@ -59,30 +80,30 @@ try:
                 obj.rotation_euler = [0,0,0]
         elif item['type'] == "B_Platform":
             pass;
-        elif item['type'] == "C_Cone":
-            if list(obj.scale) != [1,1,1] or list(obj.rotation_euler) != [0,0,0]:
-                print("Note: Cone has been standard-ized.")
-                obj.scale = [1,1,1]
-                obj.rotation_euler = [0,0,0]
+#        elif item['type'] == "C_Cone":
+#            if list(obj.scale) != [1,1,1] or list(obj.rotation_euler) != [0,0,0]:
+#                print("Note: Cone has been standard-ized.")
+#                obj.scale = [1,1,1]
+#                obj.rotation_euler = [0,0,0]
         elif item['type'] == "D_End":
             if list(obj.scale) != [3,3,3] or list(obj.rotation_euler) != [0,0,0]:
                 print("Note: Ending has been standard-ized.")
                 obj.scale = [3,3,3]
                 obj.rotation_euler = [0,0,0]
-        elif item['type'] == "E_Cylinder":
-            if list(obj.scale)[0] != list(obj.scale)[1]:
-                print("Note: Cylinder has been standard-ized.")
-                if float(obj.scale[0]) > float(obj.scale[1]):
-                    obj.scale[1] = obj.scale[0]
-                else:
-                    obj.scale[0] = obj.scale[1]
-        elif item['type'] == "F_Sphere":
-            if max(list(obj.scale)) != min(list(obj.scale)) or list(obj.rotation_euler) != [0,0,0]:
-                print("Note: Sphere has been standard-ized.")
-                obj.scale[0] = max(obj.scale)
-                obj.scale[1] = max(obj.scale)
-                obj.scale[2] = max(obj.scale)
-                obj.rotation_euler = [0,0,0]
+#        elif item['type'] == "E_Cylinder":
+#            if list(obj.scale)[0] != list(obj.scale)[1]:
+#                print("Note: Cylinder has been standard-ized.")
+#                if float(obj.scale[0]) > float(obj.scale[1]):
+#                    obj.scale[1] = obj.scale[0]
+#                else:
+#                    obj.scale[0] = obj.scale[1]
+#        elif item['type'] == "F_Sphere":
+#            if max(list(obj.scale)) != min(list(obj.scale)) or list(obj.rotation_euler) != [0,0,0]:
+#                print("Note: Sphere has been standard-ized.")
+#                obj.scale[0] = max(obj.scale)
+#                obj.scale[1] = max(obj.scale)
+#                obj.scale[2] = max(obj.scale)
+#                obj.rotation_euler = [0,0,0]
         elif item['type'] == "G_Monkey":
             if list(obj.scale) != [10,10,10] or list(obj.rotation_euler) != [0,0,0]:
                 print("Note: Monkey has been standard-ized.")
@@ -127,8 +148,26 @@ try:
                 item['pos'][2] += (iter_num % 8) * 0.007
                 if (item['type'] == "G_Monkey"):
                     use_arr.append([])
-        items.append(item)
+    
+        if "(skip)" not in item['name']:
+            items.append(item)
 
+        match = hex_pattern.search(obj.name)
+        if match:
+            hex_code = match.group(1)
+            rgba_color = hex_to_rgba(hex_code)
+            
+            if not obj.data.materials:
+                new_mat = bpy.data.materials.new(name=f"Mat_{hex_code}")
+                obj.data.materials.append(new_mat)
+            
+            mat = obj.active_material
+            mat.use_nodes = True
+            nodes = mat.node_tree.nodes
+            
+            bsdf = nodes.get("Principled BSDF")
+            if bsdf:
+                bsdf.inputs['Base Color'].default_value = rgba_color
 
     def positive_val(x):
         try:
@@ -182,6 +221,13 @@ try:
 
     def use_name_val(x):
         allowed_chars = list("abcdefghijklmnopqrstuvwxyz_0123456789")
+        for char in list(x):
+            if char not in allowed_chars:
+                return False
+        return True
+
+    def math_movement(x):
+        allowed_chars = list("abcdefghijklmnopqrstuvwxyzIJKLMNOPQRSTUVWXYZ`~1234567890!*()-_[]{},.<>/:; ")
         for char in list(x):
             if char not in allowed_chars:
                 return False
@@ -298,6 +344,12 @@ try:
             'val': decimal_val
         },
         {
+            'ids': ["sd"],
+            'type': ['E_Cylinder'],
+            'map': decimal_map,
+            'val': decimal_val
+        },
+        {
             'ids': ["killer", "k"],
             'type': ['B_Platform', 'E_Cylinder', 'F_Sphere'],
             'map': lambda x: x.lower(),
@@ -306,38 +358,56 @@ try:
         {
             'ids': ["movementx", "mx"],
             'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere', 'G_Monkey'],
-            'map': decimal_map,
-            'val': decimal_val
+            'map': lambda x: str(x),
+            'val': math_movement
         },
         {
             'ids': ["movementy", "my"],
             'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere', 'G_Monkey'],
-            'map': decimal_map,
-            'val': decimal_val
+            'map': lambda x: str(x),
+            'val': math_movement
         },
         {
             'ids': ["movementz", "mz"],
             'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere', 'G_Monkey'],
-            'map': decimal_map,
-            'val': decimal_val
+            'map': lambda x: str(x),
+            'val': math_movement
         },
         {
             'ids': ["rotationx", "rx"],
             'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere', 'G_Monkey'],
-            'map': decimal_map,
-            'val': decimal_val
+            'map': lambda x: str(x),
+            'val': math_movement
         },
         {
             'ids': ["rotationy", "ry"],
             'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere', 'G_Monkey'],
-            'map': decimal_map,
-            'val': decimal_val
+            'map': lambda x: str(x),
+            'val': math_movement
         },
         {
             'ids': ["rotationz", "rz"],
             'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere', 'G_Monkey'],
-            'map': decimal_map,
-            'val': decimal_val
+            'map': lambda x: str(x),
+            'val': math_movement
+        },
+        {
+            'ids': ["scalex", "sx"],
+            'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere', 'G_Monkey'],
+            'map': lambda x: str(x),
+            'val': math_movement
+        },
+        {
+            'ids': ["scaley", "sy"],
+            'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere', 'G_Monkey'],
+            'map': lambda x: str(x),
+            'val': math_movement
+        },
+        {
+            'ids': ["scalez", "sz"],
+            'type': ['B_Platform', 'E_Cylinder', 'C_Cone', 'D_End', 'F_Sphere', 'G_Monkey'],
+            'map': lambda x: str(x),
+            'val': math_movement
         },
         {
             'ids': ["bounce", "bou"],
@@ -606,7 +676,7 @@ try:
     ### FATAL ERROR CHECK
     # item count
     fatal_errors = []
-    if len(items) > 100:
+    if len(items) > 250:
         print("Warning: You have " + str(len(items)) + " / 300 objects in this map.")
     elif len(items) > 300:
         fatal_errors.append("There are too many items in this map. " + str(len(items)) + " > 300")
@@ -667,12 +737,12 @@ try:
                     solid_ids.append(obj_id)
 
     # Opacity requires Material
-    #if len(fatal_errors) == 0:
-     #   for item in items:
-     #       if "o=" in item['eff'] and "gro=" not in item['eff']:
-     #           spl = item['eff'].split("m=")
-      #          if len(spl) != 2 or len(spl[1].split(",")[0]) < 6:
-         #           fatal_errors.append("Opacity requires HEX material. Item name = " + str(item['name']));
+    if len(fatal_errors) == 0:
+        for item in items:
+            if "o=" in item['eff'] and "gro=" not in item['eff']:
+                spl = item['eff'].split("m=")
+                if len(spl) != 2 or len(spl[1].split(",")[0]) < 6:
+                    fatal_errors.append("Opacity requires HEX material. Item name = " + str(item['name']));
 
     if len(fatal_errors) > 0:
         print("")
@@ -683,16 +753,26 @@ try:
     else:
         URL = "https://icedodo.onionfist.com/creative/?CompilerVersion=v9&CompilerOutput="
         for item in items:
-            URL += item['type'][0] + "$".join(list(map(str, item['pos'] + item['rot'] + item['siz']))) + "$" + item['eff']
+            URL += (item['type'][0] + "$".join(map(lambda v: str(round(v)), item['pos'] + item['rot'] + item['siz'])) + "$" + item['eff'])
 
-        if len(URL) > 8938:
-            print("Warning: URL Length exceeds 8938 characters. This may or may not cause an issue.")
+        if len(URL) > 13000:
+            print("Warning: URL Length exceeds 13000 characters. This may or may not cause an issue.")
+
+        URL = URL.replace(".0A","A")
+        URL = URL.replace(".0B","B")
+        URL = URL.replace(".0C","C")
+        URL = URL.replace(".0D","D")
+        URL = URL.replace(".0E","E")
+        URL = URL.replace(".0F","F")
+        URL = URL.replace(".0G","G")
+        URL = URL.replace(".0$","$")
+        URL = URL.replace(".0?","?")
 
         print("")
-        print(len(URL))
-        print("MAP URL:")
+        print("Objects: "+str(len(items)))
+        print("Length: "+str(len(URL)))
         print("")
-        print(URL)
+        #print(URL)
         print("")
         bpy.context.window_manager.clipboard = URL
 
