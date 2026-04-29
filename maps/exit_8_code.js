@@ -741,7 +741,7 @@ function test() {
                     }
                     if (alpha == 21) {
                         alert("Why?");
-                        alert("Wow, you managed to get through that. I think you've earned the knowledge of the lore. https://www.youtube.com/watch?v=wnXVFE8KLo8");
+                        alert("Wow, you managed to get through that. I think you've earned a weapon to help in the fight. Message awegaming79 on Discord.");
                         player.position._y = 100;
                         alertCheck = 1;
                     }
