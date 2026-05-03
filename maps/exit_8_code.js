@@ -380,6 +380,10 @@ function resetObjects() {
     objects.fort.extrablocks.forEach(obj=>{obj.isVisible = true});
     objects.kitchen.microwave.all.forEach(obj=>{obj.isVisible = true});
 
+    if (alpha == 0) {
+        lasts = 0;
+    }
+
     //maybe remove later cmVtb3ZlIG9uY2UgYXBwcm92ZWQ/
     /*if (beta == 0 && alternate == 0) {
         objects.train.car1wheels.forEach(obj=>{obj.isVisible = false});
