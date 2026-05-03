@@ -8,6 +8,7 @@ globalThis.guess = 0;
 globalThis.anomNum = 0;
 globalThis.alternate = 0;
 globalThis.objects = [];
+globalThis.lasts = 0;
 objects.shelf = [];
 objects.shelf.blocks = [];
 objects.shelf.shelves = [];
@@ -268,6 +269,7 @@ let intervalId = setInterval(function() {
         delete globalThis.cubes;
         delete globalThis.alternate;
         delete globalThis.objects;
+        delete globalThis.lasts;
         clearInterval(intervalId);
     }
     test();
@@ -534,6 +536,7 @@ function test() {
             player.position._x = 0;
             player.position._z = -100;
             console.log(cheese);
+            lasts = 0;
         }
     }
     if (player.position._z < -110 && player.position._z > -130 && player.position._x < 13 && alternate == 0) {
@@ -762,6 +765,12 @@ function test() {
                             anom = 1;
                         } else {
                             anom = 0;
+                            lasts += 1;
+                        }
+                        if (lasts > 6) {
+                            player.position._x = 500;
+                            player.position._y = -100;
+                            alert("You were decimated with a beam of moonlight.");
                         }
                         //anom = Math.round(Math.random());
                         if (anom == 0) {
