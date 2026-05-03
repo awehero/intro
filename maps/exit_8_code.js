@@ -448,6 +448,11 @@ function test() {
     } else {
         objects.shelf.thecursedcrayon.showBoundingBox = false;
     }
+    if (score < 2000 && alpha > 3) {
+        player.position._x = 500;
+        player.position._y = -100;
+        alert("You were decimated with a beam of moonlight.");
+    }
     if (!alive) {
         alpha = 0;
         current = 0;
