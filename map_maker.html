@@ -163,20 +163,25 @@
             <div id="textureImageContainer" style="width: 20px; height: 20px;">
                 <div id="textureImage"></div>
             </div>
-            Default Camera Speed: <input type="number" id="defaultCameraSpeed" style="width: 40px;"><br><br>
-            Fast Camera Speed: <input type="number" id="fastCameraSpeed" style="width: 40px"><br><br>
-            Default Snap Value: <input type="number" id="defaultSnapValue" style="width: 40px"><br><br>
-            <button id="updateSettingsButton" onclick="updateSettings()">Save Preferences</button><br>
-            <button id="resetSettingsButton" onclick="resetSettings()">Reset Preferences</button><br><br>
-            <button id="savePreferencesButton" onclick="savePreferences()">Save Preferences to Storage</button><br>
-            <button id="resetPreferencesButton" onclick="resetPreferences()">Reset Storage Preferences</button>
+            Default Camera Speed: <input type="number" id="defaultCameraSpeed" style="width: 40px;" value="3"><br><br>
+            Fast Camera Speed: <input type="number" id="fastCameraSpeed" style="width: 40px" value="4"><br><br>
+            Default Snap Value: <input type="number" id="defaultSnapValue" style="width: 40px" value="0.25"><br><br>
+            <button id="updateSettingsButton" onclick="updateSettings()">Update Settings</button><br>
+            <button id="resetSettingsButton" onclick="resetSettings()" disabled>Reset Settings</button><br><br>
+            <button id="savePreferencesButton" onclick="savePreferences()">Save Settings to Storage</button><br>
+            <button id="resetPreferencesButton" onclick="resetPreferences()" disabled>Reset Settings in Storage</button>
             <button id="closeSettingsButton" onclick="closeSettings()">Close</button>
         </div>
          <script>
              function updateSettings() {
-                cameraSpeed = document.getElementById("defaultCameraSpeed");
-                fastCameraSpeed = localStorage.getItem("fastCameraSpeed");
-                snapValue = localStorage.getItem("snapValue");
+                cameraSpeed = document.getElementById("defaultCameraSpeed").value;
+                fastCameraSpeed = document.getElementById("fastCameraSpeed").value;
+                snapValue = document.getElementById("snapValue").value;
+             }
+             function savePreferences() {
+                localStorage.setItem("defaultCameraSpeed", document.getElementById("defaultCameraSpeed").value);
+                localStorage.setItem("fastCameraSpeed", document.getElementById("fastCameraSpeed").value);
+                localStorage.setItem("snapValue", document.getElementById("snapValue").value);
              }
              /*
              const customColorPicker = document.getElementById('customColorPicker');
@@ -559,11 +564,11 @@
                 z: 0
             };
             if (localStorage.getItem("snapValue") == null) {
-                localStorage.setItem("defaultCameraSpeed", 0.03);
+                localStorage.setItem("defaultCameraSpeed", 3);
                 localStorage.setItem("fastCameraSpeed", 4);
                 localStorage.setItem("snapValue", 0.25);
             } else {
-                cameraSpeed = localStorage.getItem("defaultCameraSpeed");
+                cameraSpeed = localStorage.getItem("defaultCameraSpeed") / 100;
                 fastCameraSpeed = localStorage.getItem("fastCameraSpeed");
                 snapValue = localStorage.getItem("snapValue");
             }
@@ -1385,6 +1390,7 @@
                                                 { search: ", j=", replace: ", jump=" },
                                                 { search: "\\[j=", replace: "[jump=" },
                                                 { search: "mat=#", replace: "m=" },
+                                                { search: "m=#", replace: "m=" },
                                                 { search: "mat=", replace: "m=" },
                                                 { search: "bg=#", replace: "bg=" },
                                                 { search: "amb=#", replace: "amb=" },
@@ -1468,6 +1474,7 @@
                 }
                 document.getElementById("getMapLinkButton").addEventListener("click", function() {
                     var mapLink = getMapLinkTest();
+                    localStorage.setItem("mapStorage", dataString);
                     navigator.clipboard.writeText(mapLink)
                         .then(function() {
                             alert("Text copied to clipboard. Your map is " + mapLink.length + " characters long!");
@@ -1478,6 +1485,10 @@
                 });
                 if (window.location.search != "") {
                     actualLoad(window.location.search.substring(1));
+                }
+                let mapLinkStored = localStorage.getItem("mapStorage");
+                if (mapLinkStored && mapLinkStored.length > 3) {
+                    actualLoad(mapLinkStored);
                 }
         </script>
     </body>
