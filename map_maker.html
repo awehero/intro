@@ -572,6 +572,10 @@
                 fastCameraSpeed = localStorage.getItem("fastCameraSpeed");
                 snapValue = localStorage.getItem("snapValue");
             }
+            if (cameraSpeed < 0.1) {
+                localStorage.setItem("defaultCameraSpeed", 3);
+                cameraSpeed = 3;
+            }
             document.addEventListener('keydown', onKeyDown);
             document.addEventListener('keyup', onKeyUp);
             function onKeyDown(event) {
