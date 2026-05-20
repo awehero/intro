@@ -1478,7 +1478,7 @@
                 }
                 document.getElementById("getMapLinkButton").addEventListener("click", function() {
                     var mapLink = getMapLinkTest();
-                    localStorage.setItem("mapStorage", dataString);
+                    localStorage.setItem("mapStorage", mapLink);
                     navigator.clipboard.writeText(mapLink)
                         .then(function() {
                             alert("Text copied to clipboard. Your map is " + mapLink.length + " characters long!");
