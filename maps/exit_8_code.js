@@ -776,7 +776,7 @@ function test() {
                             anom = 0;
                             lasts += 1;
                         }
-                        if (lasts > 6) {
+                        if (lasts > 6 && alpha < 9) {
                             player.position._x = 500;
                             player.position._y = -100;
                             alert("You were decimated with a beam of moonlight.");
