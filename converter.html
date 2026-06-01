@@ -95,7 +95,7 @@
             <option value="2">URL</option>
             <option value="3">Mapfile</option>
             <option value="4">Blender Data</option>
-            <option value="2">Map Maker</option>
+            <option value="5">Map Maker</option>
         </select>
     </div>
     <p>Enter a Draft Link, Tinyurl, URL, or Mapfile</p>
@@ -181,7 +181,7 @@ if new_script_content:
         ["gc","gd","g","","gf"]
     ];
     const inputProcessText = ["Draft","Tinyurl","URL","Mapfile"];
-    const outputProcessText = ["Draft","Tinyurl","URL","Mapfile","Blender Data"];
+    const outputProcessText = ["Draft","Tinyurl","URL","Mapfile","Blender Data","Map Maker"];
     globalThis.ii = 0;
     globalThis.process = '';
     globalThis.mapmakerurl = '';
@@ -446,8 +446,89 @@ if new_script_content:
         return mesh;
     }
 
+    function webeditorToMapfile(webeditor) {
+        eval(webeditor);
+        let mapfile = `var map = {
+            title: "Test Map",
+            song: "env2",
+            maker: "Map Maker",
+            spawn: [0, 0.5, 0],
+            init: function() {`;
+        let main = map.loaderInput;
+        for (var i = 0; i < main.inits.length; i++) {
+            let init = main.inits[i];
+            mapfile += `a.${init.fn}(${init.args.map(item=>Array.isArray(item) ? `[${item.map(num=>Math.round(num*1000)/1000).join(",")}]` : typeof item === "string" ? `"${item}"` : item).join(",")});`;
+        }
+        mapfile += `},post: function() {`;
+        let g = [null, null, null];
+        for (var i = 0; i < main.posts; i++) {
+            let post = main.posts[i];
+            if (post.fn == "u") {
+                mapfile += `a.u('${post.args[0]}');`;
+            } else if (post.fn == "mapFn") {
+                let item = posts[i].args;
+                let steerUsed = false;
+                let speedUsed = false;
+                let value = item[1];
+                switch (args[0]) {
+                    case "setDefaultTurn":
+                        steerUsed = true;
+                        mapfile += `cc.set_monkey("steer", default_spteer * ${value});`;
+                        break;
+                    case "setDefaultSpeed":
+                        speedUsed = true;
+                        mapfile += `cc.set_monkey("speed", default_speed * ${value});`;
+                        break;
+                    case "setDefaultGravityX":
+                        g[0] = value;
+                        break;
+                    case "setDefaultGravityY":
+                        g[1] = value;
+                        break;
+                    case "setDefaultGravityZ":
+                        g[2] = value;
+                        break;
+                    case "setDefaultJumpSpeed":
+                        mapfile += `cc.set_monkey("jumpSpeed", ${value});`;
+                        break;
+                    case "setDefaultJumpHeight":
+                        mapfile += `cc.set_monkey("jumpHeight", ${value});`;
+                        break;
+                    case "setDefaultPlayerSize":
+                        break;
+                    case "setDefaultHeadlampRange":
+                        type = "headlamp.range";
+                        break;
+                    case "setDefaultHeadlampIntensity":
+                        type = "headlamp.intensity";
+                        break;
+                    case "setDefaultCameraDistancePercent":
+                        break;
+                    case "setDefaultCameraVerticalPanDegrees":
+                        break;
+                    case "setDefaultHemisphericLightIntensity":
+                        break;
+                    case "setDefaultCameraHorizontalPanDegrees":
+                        break;
+                    case "refreshConstantController":
+                        break;
+                    default:
+                        alert("Invalid mapFn item in posts!");
+                }
+            } else {
+                alert("Invalid item in posts!");
+            }
+        }
+        if (g != Array(3).fill(null)) {
+            mapfile += `cc.set_monkey("gravity", new BABYLON.Vector3(${g[0]}, ${g[1]}, ${g[2]}));`;
+        }
+        mapfile += `cc.refresh();},section_id: 0,
+            section_update: function() {
+                let PZ = player.position.z;
+                switch (this.section_id) {`;
 
-        
+    }
+    
     function mapfileToUrl(mapfile) {
         let objects = [];
         let startObjects = [];
