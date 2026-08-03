@@ -842,10 +842,10 @@
 					let mVars = monkeys[0][9].split("?");
 					if (typeof mVars.find(eff=>eff.substring(0,3) == 'bg=') != 'undefined') {
 						let thing = mVars.find(eff=>eff.substring(0,3) == 'bg=');
-						defaultbg = new BABYLON.Color3.FromHexString("#"+thing.substring(3,9));
+						defaultbg = BABYLON.Color3.FromHexString("#"+thing.substring(3,9));
 						scene.clearColor = defaultbg;
 					} else {
-						defaultbg = new BABYLON.Color3.FromHexString("#000000");
+						defaultbg = BABYLON.Color3.FromHexString("#000000");
 						scene.clearColor = defaultbg;
 					}
 					if (typeof mVars.find(eff=>eff.substring(0,6) == 'speed=') != 'undefined') {
@@ -861,7 +861,7 @@
 						default_steer = 0.022;
 					}
 				} else {
-					defaultbg = new BABYLON.Color3.FromHexString("#000000");
+					defaultbg = BABYLON.Color3.FromHexString("#000000");
 					scene.clearColor = defaultbg;
 					default_steer = 0.022;
 					default_speed = 0.28;
@@ -1032,9 +1032,9 @@
 						if (typeof nine == 'undefined') {
 							mat.diffuseTexture = new BABYLON.Texture("https://awehero.github.io/intro/images/textures/main.png", scene);
 						} else if (nine.length == 6) {
-							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine);
+							mat.diffuseColor = BABYLON.Color3.FromHexString("#"+nine);
 						} else if (nine.length > 6) {
-							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine.substring(0,6));
+							mat.diffuseColor = BABYLON.Color3.FromHexString("#"+nine.substring(0,6));
 							mat.alpha = parseFloat(nine.substring(7));
 						} else {
 							switch (String(nine)) {
@@ -1088,9 +1088,9 @@
 						if (typeof three == 'undefined') {
 							mat.diffuseColor = new BABYLON.Color3(235/255, 50/255, 50/255);
 						} else if (three.length == 6) {
-							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+three);
+							mat.diffuseColor = BABYLON.Color3.FromHexString("#"+three);
 						} else if (three.length > 6) {
-							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+three.substring(0,6));
+							mat.diffuseColor = BABYLON.Color3.FromHexString("#"+three.substring(0,6));
 							mat.alpha = parseFloat(three.substring(7));
 						} else {
 							switch (String(three)) {
@@ -1121,9 +1121,9 @@
 							mat.diffuseColor = new BABYLON.Color3(1, 1, 1);
 							mat.alpha = 1;
 						} else if (nine.length == 6) {
-							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine);
+							mat.diffuseColor = BABYLON.Color3.FromHexString("#"+nine);
 						} else if (nine.length > 6) {
-							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+nine.substring(0,6));
+							mat.diffuseColor = BABYLON.Color3.FromHexString("#"+nine.substring(0,6));
 							mat.alpha = parseFloat(nine.substring(7));
 						} else {
 							switch (String(nine)) {
@@ -1174,9 +1174,9 @@
 							mat.diffuseColor = new BABYLON.Color3(40/255, 60/255, 235/255);
 							mat.alpha = 0.8;
 						} else if (four.length == 6) {
-							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+four);
+							mat.diffuseColor = BABYLON.Color3.FromHexString("#"+four);
 						} else if (four.length > 6) {
-							mat.diffuseColor = new BABYLON.Color3.FromHexString("#"+four.substring(0,6));
+							mat.diffuseColor = BABYLON.Color3.FromHexString("#"+four.substring(0,6));
 							mat.alpha = parseFloat(four.substring(7));
 						} else {
 							switch (String(four)) {
