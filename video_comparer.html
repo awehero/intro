@@ -94,6 +94,8 @@
 				<div class="controls">
 					<button onclick="setStart(1)">Set Start</button>
 					<button onclick="goStart(1)">Go Start</button>
+					<button onclick="changeTime(1, -0.1)">- 0.1s</button>
+					<button onclick="changeTime(1, 0.1)">+ 0.1s</button>
 					<div class="time" id="start1">0</div>
 					<button onclick="setEnd(1)">Set End</button>
 					<button onclick="goEnd(1)">Go End</button>
@@ -108,6 +110,8 @@
 				<div class="controls">
 					<button onclick="setStart(2)">Set Start</button>
 					<button onclick="goStart(2)">Go Start</button>
+					<button onclick="changeTime(2, -0.1)">- 0.1s</button>
+					<button onclick="changeTime(2, 0.1)">+ 0.1s</button>
 					<div class="time" id="start2">0</div>
 					<button onclick="setEnd(2)">Set End</button>
 					<button onclick="goEnd(2)">Go End</button>
@@ -168,6 +172,11 @@
 				const p = getPlayer(n);
 				end[n] = p.getCurrentTime();
 				document.getElementById("end" + n).innerText = end[n].toFixed(3);
+			}
+
+			function changeTime(n, t) {
+				const p = getPlayer(n);
+				p.seekTo(p.getCurrentTime() + t);
 			}
 
 			function goStart(n) {
