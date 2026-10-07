@@ -1196,7 +1196,7 @@
                     let dollarIndex = input.indexOf('$');
                     if (dollarIndex !== -1) {
                         let endIndex = dollarIndex - 1;
-                        while (endIndex >= 0 && !/[A-G]/.test(input[endIndex])) {
+                        while (endIndex >= 0 && !/[A-H]/.test(input[endIndex])) {
                           endIndex--;
                         }
                         if (endIndex >= 0) {
@@ -1207,7 +1207,7 @@
                     if (index !== -1) {
                         input = input.substring(0, index);
                     }
-                    let objectDataArray = input.split(/(?=[A-Z])/);
+                    let objectDataArray = input.split(/(?=[A-H])/);
                     for (var i = 0; i < objectDataArray.length; i++) {
                         objectDataArray[i] = replaceASCIIWithMsg(objectDataArray[i]);
                     }
