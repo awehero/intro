@@ -137,6 +137,7 @@
 			function extractID(url) {
 				if (url.includes("v=")) return url.split("v=")[1].split("&")[0];
 				if (url.includes("youtu.be/")) return url.split("youtu.be/")[1].split("?")[0];
+				if (url.include("youtube.com/live/")) return url.split("youtube.com/live/")[1];
 				return null;
 			}
 
